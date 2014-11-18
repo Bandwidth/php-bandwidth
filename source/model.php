@@ -26,7 +26,8 @@ final class Bridge Extends AudioMixin {
 	       'audio', 'completed_time', 'created_time', 'activated_time'
 	);
 
-        /* Data we need to consider
+        /**
+	 * Data we need to consider
          * validate  @object Bridge
          *
          */
@@ -34,7 +35,8 @@ final class Bridge Extends AudioMixin {
 		'id'
 	);
 
-	/* Bridge call CTor accept calls 
+	/**
+	 * Bridge call CTor accept calls 
 	 * as main argument
 	 * add bridge_audio from args
          *
@@ -48,7 +50,8 @@ final class Bridge Extends AudioMixin {
 		return Resolver::Find($this, $data);
 	}
 
-	/* List all the bridges
+	/**
+	 * List all the bridges
 	 * @param $page -> Catapult Page 
 	 * @param $size -> Catapult size
 	 */
@@ -61,7 +64,8 @@ final class Bridge Extends AudioMixin {
 		return new BridgeCollection(new DataPacketCollection($this->client->get($url, $data->get())));
 	}
 
-	/* get all the calls assigned to this
+	/**
+	 * get all the calls assigned to this
 	 * bridge. This will by default return
          * a collection to get the ids
 	 *
@@ -75,7 +79,8 @@ final class Bridge Extends AudioMixin {
 		return new CallCollection(new DataPacketCollection($res));
 	}
 
-	/* Get a bridge by a singular id 
+	/**
+	 * Get a bridge by a singular id 
          * 
          *
 	 * @param $bridge_id -> valid bridge id
@@ -89,7 +94,8 @@ final class Bridge Extends AudioMixin {
 		return Constructor::Make($this, $data->get());
 	}
 
-	/* Create a bridge
+	/**
+	 * Create a bridge
 	 * given a set of calls.
          * Where calls can be provided
          * as an associative array, list
@@ -110,7 +116,8 @@ final class Bridge Extends AudioMixin {
 		return Constructor::Make($this, $data->get());
 	}
 
-	/* Add another
+	/**
+	 * Add another
 	 * to a call bridge
 	 *
 	 * @param $caller -> PhoneNumber
@@ -126,7 +133,8 @@ final class Bridge Extends AudioMixin {
 		return Constructor::Make($this, $data->get());
 	}
 
-	/* Return all the call ids
+	/** 
+	 * Return all the call ids
 	 * for a given bridge
 	 */
 	public function call_ids()
@@ -139,7 +147,8 @@ final class Bridge Extends AudioMixin {
 		return $call_ids;
 	}
 
-	/* Update the bridge
+	/**
+	 * Update the bridge
 	 * with new information
 	 * @param $calls -> list of calls
 	 * @param $data -> data to pass
@@ -157,7 +166,8 @@ final class Bridge Extends AudioMixin {
 		return Constructor::Make($this, $data->get());
 	}
 
-	/* Fetch all the calls
+	/**
+	 * Fetch all the calls
 	 * from a bridge
 	 * 
 	 * @return -> list of calls
@@ -174,7 +184,8 @@ final class Bridge Extends AudioMixin {
 		return $this->calls;
 	}
 
-	/* Get the audio url for a bridge
+	/**
+	 * Get the audio url for a bridge
 	 *
 	 * @return -> fully qualified url
 	 */
@@ -183,7 +194,8 @@ final class Bridge Extends AudioMixin {
 		return URIResource::Make($this->path, array($this->id, "audio"));
 	}
 
-	/* Refresh a call bridge
+	/**
+	 * Refresh a call bridge
 	 */
 	public function refresh()
 	{
@@ -211,7 +223,8 @@ final class Call Extends AudioMixin {
 			'id', 'direction', 'from', 'to'	
 	);
 
-	/* construct the call as initiated  or new
+	/**
+	 * construct the call as initiated  or new
          * each constructor must have a way to call itself's create/1 function with the
          * arguments
 	 * @param $data -> call data
@@ -225,7 +238,8 @@ final class Call Extends AudioMixin {
 	}
 
 
-	/* Setup data for the call
+	/**
+	 * Setup data for the call
 	 * Either call with Constructor or through object
 	 * @param $data -> call data array
 	 */
@@ -239,7 +253,8 @@ final class Call Extends AudioMixin {
 		return;
 	}
 
-	/* Get a call by a specific id
+	/**
+	 * Get a call by a specific id
 	 * afterwards initialize the object
          *
 	 * @param call_id -> Id 
@@ -255,7 +270,8 @@ final class Call Extends AudioMixin {
 		return Constructor::Make($this, $call->get());	
 	}
 
-	/* List all attempted
+	/**
+	 * List all attempted
 	 * calls. 
 	 *
 	 * @param $query -> list of arguments
@@ -271,7 +287,8 @@ final class Call Extends AudioMixin {
 		return new CallCollection(new DataPacketCollection($calls));
 	}
 
-	/* Initiate a call
+	/**
+	 * Initiate a call
 	 * Afterwards return a new
 	 * object with the call details
 	 * @param $data -> polymorphic array of data satisfies input
@@ -291,9 +308,9 @@ final class Call Extends AudioMixin {
 	}
 
 
-	/* update the call
-	 * with the given
-	 * data
+	/**
+	 * update the call
+	 *
 	 * @param data -> set of data
 	 */
 	public function update($data)
@@ -307,7 +324,8 @@ final class Call Extends AudioMixin {
 		return Constructor::Make($this, $data->get());
 	}
 
-	/* Transfer a call
+	/**
+	 * Transfer a call
 	 * Call object MUST already be initialized
 	 * or created given a Legal call id
 	 * if we dont have a call id throw warning
@@ -334,7 +352,8 @@ final class Call Extends AudioMixin {
 		return Constructor::Make($this, $data->get());
 	}
 
-	/* Bridge calls
+	/**
+	 * Bridge calls
 	 * forward to object bridge
          * 
          * @param $calls -> list of calls
@@ -345,7 +364,8 @@ final class Call Extends AudioMixin {
 		return Bridge::Create($calls, $args);
 	}
 
-	/* Refresh a call id
+	/**
+	 * Refresh a call id
 	 * where the call id MUST
 	 * be initiated like transfer
          * stub to create
@@ -356,7 +376,8 @@ final class Call Extends AudioMixin {
 		$this->create(PhoneCombo::Make(new PhoneNumber($this->from), new PhoneNumber($this->to)));
 	}
 
-	/* Hangup a call
+	/**
+	 * Hangup a call
 	 *
 	 * needs a call id
 	 * @return void
@@ -372,7 +393,8 @@ final class Call Extends AudioMixin {
                 return Constructor::Make($this, $data->get());
 	}
 
-        /* Accept an incoming
+        /**
+	 * Accept an incoming
          * call.
          *
          * @return void
@@ -390,7 +412,8 @@ final class Call Extends AudioMixin {
                 return Constructor::Make($this, $data->get());
         }
 
-	/* wait for a call to go to any
+	/**
+	 * wait for a call to go to any
 	 * state other than 'started'
 	 * @timeout a default time to wait
 	 *
@@ -411,7 +434,8 @@ final class Call Extends AudioMixin {
 				break;
 	}
 
-	/* Reject an incoming call. Call id must already be passed
+	/**
+	 * Reject an incoming call. Call id must already be passed
 	 *
 	 * @return void
 	 */
@@ -465,7 +489,8 @@ final class Call Extends AudioMixin {
 		return new RecordingCollection(new DataPacketCollection($this->client->get($url)));
 	}
 
-	/* Get all transcriptions
+	/**
+	 * Get all transcriptions
 	 * for a call
 	 * @return TranscriptionCollection
 	 */
@@ -476,7 +501,9 @@ final class Call Extends AudioMixin {
 		return new TranscriptionCollection(new DataPacketCollection($this->client->get($url)));
 	}
 
-	/* Get all the events
+	/** 
+	 * Get all the events
+	 * 
 	 * for the initiated
 	 * call. 
 	 */
@@ -488,7 +515,8 @@ final class Call Extends AudioMixin {
 	}
 
 
-        /* Check whether call 
+        /**
+	 * Check whether call 
          * convenience around direction where
          * value is "in" | "out"
          */
@@ -516,7 +544,8 @@ class Gather extends GenericResource {
 	public static $needs = array(
 		"id"
 	);
-	/* CTor for gather resource. Needs call id point to the same client
+	/**
+	 * CTor for gather resource. Needs call id point to the same client
 	 * used in previous instance
 	 */
 	public function __construct($call_id=null, $client=null)
@@ -532,7 +561,8 @@ class Gather extends GenericResource {
 			$this->client = Client::get();
 	}
 
-	/* set up a gather with a given gather id
+	/**
+	 * set up a gather with a given gather id
 	 * @param $data -> data
 	 */
 	public function set_up($data)
