@@ -544,6 +544,7 @@ class Gather extends GenericResource {
 	public static $needs = array(
 		"id"
 	);
+
 	/**
 	 * CTor for gather resource. Needs call id point to the same client
 	 * used in previous instance
@@ -571,7 +572,8 @@ class Gather extends GenericResource {
 			$this->id = $data['id'];
 	}
 
-	/* Get the gather DTMF parameters and results
+	/**
+	 * Get the gather DTMF parameters and results
          *
 	 * @param gather_id
 	 * @return Gather instance
@@ -587,7 +589,8 @@ class Gather extends GenericResource {
 		return Constructor::Make($this, $data->get());
 	}
 
-	/* Create a gather  given a set of arguments  this should
+	/**
+	 * Create a gather  given a set of arguments  this should
 	 * return the same instance with an id being set
 	 *
 	 * @param $args -> gather args
@@ -606,7 +609,8 @@ class Gather extends GenericResource {
 		return Constructor::Make($this, $data->get());
 	}
 
-	/* Update the gather DTMF
+	/**
+	 * Update the gather DTMF
 	 * The only update allowed is state:completed
  	 * to stop the gather
 	 *
@@ -652,7 +656,8 @@ final class Conference extends AudioMixin {
 	}
 
 	
-	/* Setup the conference
+	/**
+	 * Setup the conference
 	 * according to provided
 	 * data['from'] or not
 	 * @param $data -> conference data
@@ -666,7 +671,8 @@ final class Conference extends AudioMixin {
 			$this->id = $data['id'];
 	}
 
-	/* Get the audio url for conference
+	/**
+	 * Get the audio url for conference
 	 *
 	 * @return -> fully qualified url
 	 */
@@ -676,7 +682,8 @@ final class Conference extends AudioMixin {
 	}
 
 
-	/* Create a conference
+	/**
+	 * Create a conference
 	 *
 	 * @param $from -> PhoneNumber
 	 * @param $args -> conference info
@@ -693,7 +700,8 @@ final class Conference extends AudioMixin {
 		return Constructor::Make($this, $data->get());
 	}
 
-	/* Get a conference by id
+	/**
+	 * Get a conference by id
 	 *
 	 * @param $id -> CatapultId
 	 */
@@ -706,8 +714,10 @@ final class Conference extends AudioMixin {
 		return Constructor::Make($this, $data->get());
 	}
 
-	/* Update the conference
+	/**
+	 * Update the conference
 	 * with new information
+	 *
 	 * @param $params -> set of arguments
 	 * @return void HTTP 201 
 	 */
@@ -722,7 +732,8 @@ final class Conference extends AudioMixin {
 		return Constructor::Make($this, $data->get());
 	}
 
-	/* Get all the members
+	/**
+	 * Get all the members
 	 * inside a conference. 
 	 * Needs to be initiated
 	 * @return ConferenceMemberCollection
@@ -737,7 +748,8 @@ final class Conference extends AudioMixin {
 		return $members;
 	}
 
-	/* Add a member inside
+	/**
+	 * Add a member inside
 	 * a conference
 	 *
 	 * @param $call_id -> Catapult id
@@ -756,8 +768,10 @@ final class Conference extends AudioMixin {
 		return $this->member($member_id);
 	}
 
-	/* point to a
+	/**
+	 * point to a
 	 * member and update
+	 *
 	 * @param params -> set of arguments with
   	 * with memberId
 	 */
@@ -770,7 +784,9 @@ final class Conference extends AudioMixin {
 		$this->client->post($url, $args->get());
 	}
 
-	/* Return a partial for
+	/**
+	 * Return a partial for
+	 *
 	 * the member selected
 	 */
 	public function member()
@@ -808,7 +824,8 @@ final class ConferenceMember extends AudioMixin {
 		return Resolver::Find($this, $data);
 	}
 
-        /* Update a given conference members
+        /**
+	 * Update a given conference members
          * with new attributes.
          *
          *
@@ -825,8 +842,10 @@ final class ConferenceMember extends AudioMixin {
                return Constructor::Make(self::__construct, $data->get()); 
         }		
 
-	/* Get a conference member
+	/**
+	 * Get a conference member
 	 * Needs to be initialized
+	 *
 	 * @param id -> valid member id | defaults to object's id
 	 */
 	public function get()
@@ -838,7 +857,8 @@ final class ConferenceMember extends AudioMixin {
 		return Constructor::Make($this, $data->get());
 	}
 
-	/* Get audio url
+	/**
+	 * Get audio url
  	 * for conference member
 	 * 
 	 */
@@ -870,7 +890,8 @@ final class Recording extends GenericResource {
 		"id"
 	);
 
-	/* CTor for recording
+	/**
+	 * CTor for recording
 	 * accept either 
  	 * an existing recording
 	 * or new
@@ -883,7 +904,8 @@ final class Recording extends GenericResource {
 		return Resolver::Find($this, $data);
 	}
 
-	/* Set up recording
+	/**
+	 * Set up recording
 	 * object
 	 * @param $data -> [Array or DataPacket]
  	 */
@@ -898,7 +920,8 @@ final class Recording extends GenericResource {
 		return Constructor::Make(self::__construct, $data);
 	}
 
-	/* List all the recordings
+	/**
+	 * List all the recordings
 	 * return as RecordingCollection
 	 * @param page -> [CatapultPage or Int]
 	 * @param size -> [CatapultSize or int]
@@ -916,7 +939,8 @@ final class Recording extends GenericResource {
 		return new RecordingCollection(new DataPacketCollection($res));
 	}
 
-	/* Get a recording by id
+	/**
+	 * Get a recording by id
 	 * 
 	 * @param $recording_id -> id
  	 *
@@ -930,7 +954,8 @@ final class Recording extends GenericResource {
 		return Constructor::Make($this, $data->get());
 	}
 
-	/* Download a media file
+	/**
+	 * Download a media file
 	 * provided the content type
 	 * on successful response of content type
 	 * header
