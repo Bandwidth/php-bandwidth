@@ -19,6 +19,7 @@ final class Client {
 	/**
 	 * Construct a client based on Credential object.
  	 * delegate to env when no args
+         * 
 	 * @param $args -> Credential | String
  	 */
 	public function __construct($args=array())
@@ -262,8 +263,8 @@ final class RESTClient {
 	 * against Catapult API.
          * 
 	 * 
-	 * @param -> url [partially qualified]
-	 * @join -> bool
+	 * @param -> url string [partially qualified]
+	 * @param -> join bool
 	 */
 	public function get($url, $params=array(), $join=TRUE)
 	{
@@ -277,7 +278,7 @@ final class RESTClient {
 	 * POST request
 	 *
 	 * @param -> url [partially qualified]
-	 * @join -> boolean
+	 * @param -> join boolean
 	 */
 	public function post($url, $data=array(), $join=FALSE)
 	{
@@ -293,6 +294,7 @@ final class RESTClient {
 	 * PUT request
 	 *
 	 * @param -> url [partially qualified]
+         * @param -> join boolean
 	 */
 	public function put($url, $data)
 	{	
@@ -304,6 +306,7 @@ final class RESTClient {
 	 * DELETE request
 	 *
 	 * @param -> url [partially qualified]
+         * @param -> join boolean
 	 */
 	public function delete($url, $data)
 	{
