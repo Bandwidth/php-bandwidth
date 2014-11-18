@@ -22,7 +22,8 @@ final class Credentials {
 		"API_TOKEN" => ""
 	);
 
-	/* All string parameters
+	/**
+	 * All string parameters
 	 * if provided use these in place of json credentials
 	 *
 	 * @param user_token: Bandwidth user id
@@ -31,23 +32,13 @@ final class Credentials {
 	 */
 	public function __construct($user_token='',
 				    $api_token='',
-				    $api_secret='') {
+				    $api_secret='') { } 
 
-		$this->is_json = true;
-
-		if ($user_token &&
-		    $api_token &&
-		    $api_secret) {
-			
-			$this->is_json = false;
-		}
-	}
 
 	/* get a key or all the config in the config */
 	public function get($key=null)
 	{
 
-		
 		if ($key == null)
  		    return json_decode(file_get_contents(__DIR__ . "/credentials.json")) :
 		      
@@ -56,7 +47,8 @@ final class Credentials {
 	}
 
 
-	/* Gets either a singular
+	/**
+	 * Gets either a singular
 	 * or array based value by
 	 * key. Where all keys are 
 	 * elements in the credentials.json
@@ -75,7 +67,8 @@ final class Credentials {
 		return $content->{$key};
 	}
 
-	/* Gets a number from the provided
+	/**
+	 * Gets a number from the provided
 	 * set in credentials.json. This
 	 * will not have any affect towards
 	 * the PhoneNumber service.
@@ -87,7 +80,8 @@ final class Credentials {
 		return $content->BANDWIDTH_VALID_NUMBERS[$idx];
 	}
 
-	/* Set a value at runtime
+	/**
+	 * Set a value at runtime
 	 *
 	 * @param key: key to set
 	 * @param val: value

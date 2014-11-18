@@ -1,8 +1,4 @@
 <?php
-/* A Wrapper around
- * trouble based scenarios
- * minimal for demo purposes
- */
 
 final class CatapultApiException extends \Exception
 {

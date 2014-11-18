@@ -7,13 +7,14 @@ namespace Catapult;
  * other utils according to their type.
  *
  *
- * Classes found:
+ * List of models:
  * @class Bridge, BridgeCollection
  * @class Call, CallCollection
  * @class Conference, ConferenceCollection
  * @class ConferenceMember,
  * @class Recording, Recording Collection
  * @class Message, MessageMulti, MessageCollection
+ * @class Gather, GatherCollection
  * @class Media
  *
  */
@@ -989,10 +990,7 @@ final class Media extends ListResource {
 		return Constructor::Make($this);
 	}
 }
-/* Demo based message
- * object. Extend Generic
- * Adapt to fit new Design 11/13/2014
- */
+
 class Message extends GenericResource {
 	public  $state;
 	public  $id;
@@ -1076,9 +1074,6 @@ class Message extends GenericResource {
 	}
 }
 
-/* PHP type implementation
- * of Python's _Multi
- */
 class MessageMulti extends Message {
 	private $path = "messages";
 
@@ -1151,19 +1146,6 @@ class MessageMulti extends Message {
 	
 		return $messages;
 	}
-
-	public function last()
-	{
-		return $this->messages[sizeof($this->messages) - 1];
-	}
-
-	public function first()
-	{
-		return $this->messages[0];
-	}
-
-	public function send_batch()
-	{ /* needs implementation */ }
 }
 
 

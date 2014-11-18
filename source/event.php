@@ -1,15 +1,6 @@
 <?php
 
 namespace Catapult;
-/* message based demonstration for catapult api in php
- */
-
-/* Event object as per Python
- * SDK. Here only for demo in test.php
- *
- * events should be syncronized
- * to reception and sending. 
- */
 
 $_events = array(
 	MessageEvent

@@ -428,42 +428,6 @@ class Constructor {
 	}
 }
 
-/* Simple memory
- * management
- * for internal
- * objects of 
- * Catapult API
- * to implement
- * Ideally used with the media object
- * 
- * Why? to prevent media files
- * from being held in memory too long
- */
-class PoolResource extends GenericResource {
-	public static $resources = array();
-
-	/* add a field in the
-	 * the pool. Keep for set
-	 * time
-	 * @param $blob -> raw data
-	 */
-	public function add($blob)
-	{
-	}
-
-	/* get a member
-	 * from the pool
-	 * if possible. 
-	 * If it is expired throw
-	 * @param $blob -> raw data
-	 */
-	public function get($blob)
-	{
-		return $this->${blob};
-	}
-
-}
-
 /* Resolve take a set of arguments
  * and figures out what to 
  * do with it. In other words
