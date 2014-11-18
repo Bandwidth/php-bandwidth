@@ -2,7 +2,8 @@
 
 namespace Catapult;
 
-/* types are a set of client side helpers
+/**
+ * types are a set of client side helpers
  * to ease the integration of warnings,
  * exceptions in a application. Unless 
  * specified these should merely serialize into
@@ -18,7 +19,8 @@ namespace Catapult;
  * @class Voice -- A valid voice in Catapult API
  */
 
-/* constructs a legal dtmf where the dtmf is a subset of the valid
+/**
+ * constructs a legal dtmf where the dtmf is a subset of the valid
  * chars: 
  *
  * Valid chars are '0123456789*#ABCD'
@@ -26,7 +28,8 @@ namespace Catapult;
  * dispatched.
  */
 final class DTMF extends Types {
-	/* Initialize the dtmf
+	/**
+	 * Initialize the dtmf
 	 * as a string
 	 * check if all characters 
 	 * are valid
@@ -66,7 +69,8 @@ final class DTMF extends Types {
 		return urlencode($this->dtmf);
 	}
 }
-/* Base Models for construction
+/**
+ * Base Models for construction
  * of RESTful properties
  * also provides some helpers
  * to validate input before
@@ -78,7 +82,9 @@ abstract class Types {
 		return self::__construct($args);
 	}
 }
-/* client side
+
+/**
+ * client side
  * validation of PhoneNumber
  * perform all validation on init
  */
@@ -105,7 +111,8 @@ final class TextMessage extends Types {
 	}
 } 
 
-/* a callback uri object
+/**
+ * a callback uri object
  * make sure uri fits in
  * compilance with RFC 3986 and
  * is properly encoded on client side
@@ -121,7 +128,8 @@ final class Callback extends Types {
 	}
 }
 
-/* unify timeouts with requests
+/**
+ * unify timeouts with requests
  * with a microsecond 
  * object. Allow init in seconds
  * or micro
@@ -142,8 +150,8 @@ final class Timeout extends Types {
 	}
 }
 
-/* A page that
- * satisfies Catapult
+/**
+ * A page that satisfies Catapult
  * api.
  */
 final class Page extends Types {
@@ -158,8 +166,8 @@ final class Page extends Types {
 	}
 }
 
-/* A size that satisfies
- * Catapult API
+/**
+ * A size that satisfies Catapult API
  * exceptions
  */
 final class Size extends Types {
@@ -178,7 +186,8 @@ final class Size extends Types {
 	}
 }
 
-/* represent a catipult
+/**
+ * represent a catipult
  * style date
  * => 2014-11-08T18:54:30Z
  */
@@ -203,7 +212,8 @@ final class Date_ extends Types {
 	}
 }
 
-/* Represent a Catapult
+/**
+ * Represent a Catapult
  * type id. Where id 
  * must be an integer and string seperated
  * by a dash. Like so:
@@ -223,8 +233,8 @@ final class Id extends Types {
 	}
 }
 
-/* A catapult audio
- * tag. 
+/**
+ * A catapult audio tag. 
  */
 final class Tag extends Types {
 	public function __construct($str)
@@ -239,7 +249,8 @@ final class Tag extends Types {
 
 }
 
-/* A class for the listed
+/**
+ * A class for the listed
  * voices in Catapult
  * list of available voices
  * defined here: https://catapult.inetwork.com/docs/api-docs/calls/
@@ -281,7 +292,8 @@ final class Voice extends Types {
 
 }
 
-/* Represent a single
+/**
+ * Represent a single
  * option in the api.
  * namespace for k,v
  * based commands that
@@ -300,7 +312,8 @@ final class Option extends Types {
 	}
 }
 
-/* A one-to-one phone number object
+/**
+ * A one-to-one phone number object
  * where the object should provide
  * from => Catapult\PhoneNumber
  * to => Catapult\PhoneNumber
@@ -315,7 +328,8 @@ final class PhoneCombo extends Types {
         }
 }
 
-/* Merge a finite amount
+/**
+ * Merge a finite amount
  * of calls into one structure
  * accepts:
  *  **args => (call,call1, .. calln)
@@ -336,7 +350,8 @@ final class CallCombo extends Types {
 	}
 }
 
-/* convinience function
+/**
+ * convinience function
  * for parameters. Serialize
  * into DataPacket on addition
  * Usage like:
@@ -392,7 +407,8 @@ final class Parameters extends Types {
 		$this->data[$key] = $args[0];
 	}
 
-	/* Serialize the
+	/**
+	 * Serialize the
 	 * object into its
 	 * datapacket reciprocal
 	 *
@@ -413,7 +429,8 @@ final class Parameters extends Types {
 	}
 }
 
-/* small logic
+/** 
+ * small logic
  * around states
  */
 final class States extends Types {
@@ -423,7 +440,8 @@ final class States extends Types {
        }
 }
 
-/* makes sure the url
+/**
+ * makes sure the url
  * is an actual
  * media url before dispatch
  */
@@ -439,7 +457,8 @@ final class MediaURL extends Types {
 	}
 }
 
-/* Minimal filehandler
+/**
+ * Minimal filehandler
  * for media types
  */
 final class FileHandler extends Types {

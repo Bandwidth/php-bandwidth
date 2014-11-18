@@ -2,7 +2,8 @@
 namespace Catapult;
 
 
-/* RESTful client for Bandwidth. These contain
+/**
+ * RESTful client for Bandwidth. These contain
  * components for all HTTP requests 
  * made with Bandwidth.
  * 
@@ -15,7 +16,8 @@ namespace Catapult;
 $CLIENT = NULL;
 
 final class Client {
-	/* Construct a client based on Credential object.
+	/**
+	 * Construct a client based on Credential object.
  	 * delegate to env when no args
 	 * @param $args -> Credential | String
  	 */
@@ -27,7 +29,8 @@ final class Client {
 			$this->make($_ENV);
 	}
 
-	/* Makes the client out of either the envorinment,
+	/**
+	 * Makes the client out of either the envorinment,
          * Credentials object or associative array
          *
          *
@@ -58,7 +61,8 @@ final class Client {
 		return ($CLIENT = new RESTClient($this->user_id, array($this->token, $this->secret)));
 	}
 
-	/* Return global object 'client'
+	/**
+	 * Return global object 'client'
          * arg can optionally be directory descriptor
 	 * where a directory is subject to ONE client
 	 * @param -> string [directory descriptor]
@@ -69,7 +73,8 @@ final class Client {
 		return $CLIENT;
 	}	
 
-	/* Reset the client
+	/**
+	 * Reset the client
 	 * @param $client_ -> RESTfulClient
 	 */
 	public function set($client_)
@@ -94,7 +99,8 @@ final class RESTClient {
                 "audio/mp3"
           );
 
-	/* CTor for RESTful
+	/**
+	 * CTor for RESTful
 	 * client default to definition
 	 * of endpoint, interop format
 	 * @param user_id -> Catapult User Id
@@ -111,7 +117,8 @@ final class RESTClient {
 		$this->options = array();
 	}
 
-	/* Set an option
+	/**
+	 * Set an option
 	 * for request
 	 *
 	 * @param $k -> string
@@ -122,7 +129,8 @@ final class RESTClient {
 		$this->options{$k} = $t;
 	}
 
-        /* Return all options assigned
+        /**
+	 * Return all options assigned
          * to element k. These are all CURL
          * properites and can be found @
          *
@@ -134,7 +142,8 @@ final class RESTClient {
 		return $this->options{$k};
 	}
 
-	/* Concatenate URL according to Catapult endpoints
+	/**
+	 * Concatenate URL according to Catapult endpoints
          *
          * In some cases we dont need to join,
          * As a result this should only provide the user id, and base string
@@ -145,7 +154,8 @@ final class RESTClient {
 		return $this->endpoint . "/v1/users/" . $this->uid . "/" . $url;
 	}
 
-	/* Handle the headers given
+	/**
+	 * Handle the headers given
 	 * successful response
          *
 	 * @param headers -> string ":" seperated headers
@@ -155,7 +165,8 @@ final class RESTClient {
 		return $headers;
 	}
 
-	/* This will try a request, when a request is returned
+	/**
+	 * This will try a request, when a request is returned
          * parse and when an empty string is encountered return headers 
          * when we have content return it as either raw or a json object -- this
          * varies with the Content-Type received in response
@@ -246,7 +257,8 @@ final class RESTClient {
 		return $res;
 	}
 
-	/* Perform get requests
+	/**
+	 * Perform get requests
 	 * against Catapult API.
          * 
 	 * 
@@ -261,7 +273,8 @@ final class RESTClient {
 		return $this->request(GET, $url, $params);
 	}
 
-	/* POST request
+	/**
+	 * POST request
 	 *
 	 * @param -> url [partially qualified]
 	 * @join -> boolean
@@ -276,7 +289,8 @@ final class RESTClient {
 		return $this->request(POST, $url, json_encode($data));
 	}
 
-	/* PUT request
+	/**
+	 * PUT request
 	 *
 	 * @param -> url [partially qualified]
 	 */
@@ -286,7 +300,8 @@ final class RESTClient {
 		return $this->request(PUT, $url, $data);
 	}
 
-	/* DELETE request
+	/**
+	 * DELETE request
 	 *
 	 * @param -> url [partially qualified]
 	 */

@@ -1,7 +1,8 @@
 <?php
 namespace Catapult;
 
-/* A collection object. All collection classes must
+/**
+ * A collection object. All collection classes must
  * inherit this. It provided methods to lookup, serialize
  * and put contents in a collection. Collections
  * can represent any extended class where
@@ -14,7 +15,8 @@ namespace Catapult;
  */
 class CollectionObject {
 
-	/* either pass in infomation as array
+	/**
+	 * either pass in infomation as array
 	 * or datapacket collection identify each element key by its id
          *
          * @param data -> initial set of data
@@ -39,7 +41,8 @@ class CollectionObject {
 		}
 	}
 
-	/* Serialize the collection object as a 
+	/**
+	 * Serialize the collection object as a 
          * JSON object.
 	 */
 	public function __toString()
@@ -47,7 +50,8 @@ class CollectionObject {
 		return Encoder::Serialize($this->data);
 	}
 
-        /* Get one item from the Collection
+        /**
+	 * Get one item from the Collection
          * if item is not initiated, initiate it
          *
          * @param id -> a valid id inside this collection
@@ -65,7 +69,8 @@ class CollectionObject {
 		return $obj->get($id);
         }
 
-	/* Before adding we must make sure the datapacket fits(schema)
+	/**
+	 * Before adding we must make sure the datapacket fits(schema)
          *
          * @param data -> data that is valid for this collection
 	 */
@@ -85,7 +90,8 @@ class CollectionObject {
               $this->data[$data1['id']] = $data1;
         }
 
-	/* get a specific entity
+	/**
+	 * get a specific entity
 	 * in the collection
          *
 	 * @param id -> id for match
@@ -116,7 +122,8 @@ class CollectionObject {
 		return new CollectionSequence($out, $this->getName());
 	}
 
-	/* slow on performance. ONLY
+	/**
+	 * slow on performance. ONLY
 	 * use if absolutely needed
 	 * this will reload each item
 	 * in a collection, individually.
@@ -132,7 +139,8 @@ class CollectionObject {
 }
 
 
-/* provide functions
+/**
+ * provide functions
  * for last/1 and first/1
  * in a collection subset
  * so example:
@@ -144,7 +152,8 @@ class CollectionObject {
  *          ->last()
  */
 class CollectionSequence extends CollectionObject {
-	/* make the data structure according
+	/**
+	 * make the data structure according
 	 * to the type of object then retrieve
          * @param data -> set of refined data
          * @param class -> class object needs to inherit
@@ -175,7 +184,8 @@ class CollectionSequence extends CollectionObject {
 
 	}
 
-        /* Usually defined in 
+        /**
+	 * Usually defined in 
          * child class. When absent
          * resort to class name
          *
@@ -185,7 +195,8 @@ class CollectionSequence extends CollectionObject {
 		return $this->class;
 	}
 
-        /* Gets the first item in the
+        /**
+	 * Gets the first item in the
          * sequence.
          */
 	public function first()
@@ -196,7 +207,8 @@ class CollectionSequence extends CollectionObject {
 		return $this->data[0];
 	}
 
-        /* get the last item in 
+        /**
+	 * get the last item in 
          * a sequence.
          */
 	public function last()
@@ -208,7 +220,8 @@ class CollectionSequence extends CollectionObject {
 	}
 }
 
-/* Represent a of GenericOptions
+/**
+ * Represent a of GenericOptions
  * packed as an array each datapacket should have its
  * Schema which is followed and
  * used through the get/add/val methods
@@ -226,11 +239,12 @@ final class DataPacket extends BaseUtilities {
 	private $dispatched = false;
 	private $schema = array();
 
-	/* A datapacket
-	 * needs to 'cast'
+	/** 
+	 * A datapacket  needs to 'cast'
 	 * to string as some paramets
 	 * maybe of Catapult
 	 * api type
+	 *
 	 * @param $args -> collection of schema data
 	 */
 	public function __construct($args)
@@ -248,7 +262,8 @@ final class DataPacket extends BaseUtilities {
 
 	}
 
-	/* Get the stored datapacket when
+	/**
+	 * Get the stored datapacket when
 	 * this is done the data is considered to be dispatched
          *
 	 * @param strict -> strict or not if it is
@@ -264,7 +279,8 @@ final class DataPacket extends BaseUtilities {
 		return $this->data;
 	}
 
-	/* Return a singular
+	/**
+	 * Return a singular
 	 * value from the data
 	 * array
 	 * @param key -> single key [schema]
@@ -281,8 +297,10 @@ final class DataPacket extends BaseUtilities {
 		return $this->data[$key];
 	}
 
-	/* Set a single key
+	/**
+	 * Set a single key
 	 * for the schema
+	 *
 	 * @param key -> key [within schema]
 	 * @param val -> val 
 	 */
@@ -304,7 +322,8 @@ final class DataPacket extends BaseUtilities {
 	}
 
 
-	/* Is the data packet empty. If it is throw warning
+	/**
+	 * Is the data packet empty. If it is throw warning
          * otherwise return false
 	 */
 	public function is_empty()
@@ -325,7 +344,8 @@ final class DataPacket extends BaseUtilities {
 	}
 
 
-	/* Ready the packet
+	/**
+	 * Ready the packet
 	 * for encoding
 	 * where encoding
 	 * should be set to the
@@ -339,7 +359,8 @@ final class DataPacket extends BaseUtilities {
 
 /* Plural form of DataPacket */
 final class DataPacketCollection {
-	/* parameter MUST be a multi dimensional
+	/**
+	 * parameter MUST be a multi dimensional
 	 * array. If it isnt return a singular
 	 * DataPacket and warn if necessary
 	 *
@@ -355,7 +376,8 @@ final class DataPacketCollection {
 			$this->data[] = new DataPacket($arg);
 	}
 
-	/* same as datapacket
+	/**
+	 * same as datapacket
 	 * traverse through all
 	 * packets and make sure
 	 * none have been fetched

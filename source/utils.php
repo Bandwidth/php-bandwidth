@@ -16,7 +16,8 @@ function is_multidimensional($array)
     return false;
 }
 
-/* Base functions
+/**
+ * Base functions
  * for dealing with
  * responses, headers
  * content and internal type
@@ -32,7 +33,8 @@ class BaseUtilities {
 	}
 }
 
-/* Helpers for the response
+/**
+ * Helpers for the response
  * provide convinience functions
  * to search headers, body, code
  * for needed information
@@ -67,7 +69,8 @@ class Locator extends BaseUtilities {
 }
 
 
-/* Given a context and command to the api
+/**
+ * Given a context and command to the api
  * take out any unneeded information
  * before passing it back for a request
  * additionally make sure all legal parameters

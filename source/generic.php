@@ -1,7 +1,8 @@
 <?php
 namespace Catapult;
 
-/* Audio mixin support through Bandwidth.com
+/**
+ * Audio mixin support through Bandwidth.com
  * Catapult API. This should provide functions
  * to stop, start, and playing given audio
  * 

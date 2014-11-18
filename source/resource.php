@@ -1,7 +1,8 @@
 <?php
 namespace Catapult;
 
-/* Generate a resource location
+/**
+ * Generate a resource location
  * for Catapult. Either initialize
  * as object or accessible by one time
  * command: Make/2
@@ -22,7 +23,8 @@ class URIResource extends BaseResource {
 		$this->extras = $extras;
 	}
 
-	/* Straight forward
+	/**
+	 * Straight forward
 	 * making of string
 	 * seperator can 
 	 * be changed for queriying
@@ -47,7 +49,8 @@ class URIResource extends BaseResource {
 		return $path;
 	}
 
-	/* Look in make for more
+	/**
+	 * Look in make for more
 	 * URIResource should
 	 * only allow its contents to be fetched
 	 * through this
@@ -58,7 +61,8 @@ class URIResource extends BaseResource {
 	}
 }
 
-/* Represent object in string
+/**
+ * Represent object in string
  * form. Where form must be compilant
  * of:
  * (CLASS)(op1,op2..op)
@@ -70,7 +74,8 @@ class StringifyResource extends BaseResource {
 		$this->options = $options;
 	}
 
-	/* Make the string
+	/**
+	 * Make the string
 	 * directly
 	 * @param $class -> __class__
 	 * @param $extras -> list of parameters to encode
@@ -86,7 +91,8 @@ class StringifyResource extends BaseResource {
 	}
 }
 
-/* Represent a stateful
+/**
+ * Represent a stateful
  * transfer as an object
  * before serializing to either
  * JSON or XML
@@ -94,7 +100,8 @@ class StringifyResource extends BaseResource {
 class RequestResource extends BaseResource {
 	private $dispatched;
 
-	/* A request resource
+	/**
+	 * A request resource
 	 * works like DataPacket
  	 * only should be initialized 
 	 * by clients and not models
@@ -104,7 +111,8 @@ class RequestResource extends BaseResource {
 	{}
 }
 
-/* Response version
+/**
+ * Response version
  * to the request
  * resource. Take
  * a raw string and represent
@@ -113,7 +121,8 @@ class RequestResource extends BaseResource {
 class ResponseResource extends BaseResource {
 	private $status;
 
-	/* Represent a raw
+	/**
+	 * Represent a raw
 	 * object as a response
 	 * check whether the response
 	 * was a success or has
@@ -133,7 +142,8 @@ class ResponseResource extends BaseResource {
 
 interface SchemaResource {}
 
-/* Lexical support
+/**
+ * Lexical support
  * for options in api
  * Each resource must be initialized
  * with {Key}, {Context}, {Required}
@@ -176,7 +186,8 @@ class OptionResource {
 }
 
 
-/* A generic resource type
+/**
+ * A generic resource type
  * extends ListResource
  * and provide basic schema
  */ 
@@ -187,7 +198,8 @@ class GenericResource extends ListResource {
 	public static $valid_opts = array(
 	);
 
-	/* return a file descriptor
+	/**
+	 * return a file descriptor
 	 * as the pointer
 	 * to the client
 	 * if not abstracted
@@ -197,7 +209,8 @@ class GenericResource extends ListResource {
 		$this->client = Client::get(__DIR__);
 	}
 
-	/* accomodate for camelcase vs underscore
+	/**
+	 * accomodate for camelcase vs underscore
 	 * @param function a underscored function
 	 * @return this->camelizedContext
 	 * ex: $call->listCalls -> $call->list_calls
@@ -228,7 +241,8 @@ class GenericResource extends ListResource {
 			return NULL;
 	}
 
-	/* default string representation
+	/**
+	 * default string representation
 	 * of object.
 	 *
 	 * @return string that represents the object
@@ -239,7 +253,8 @@ class GenericResource extends ListResource {
 	}
 
 
-        /* Default getter for key
+        /**
+	 * Default getter for key
          * this should merely try 
          * to fetch the key as a public property
          *
@@ -253,7 +268,8 @@ class GenericResource extends ListResource {
 		return $this->${key};		
 	}
 
-	/* check will retrieve latest info
+	/**
+	 * check will retrieve latest info
          * of the entity then compare a field to
          * a given value
          * ex: $call->check('state', 'active') => TRUE
@@ -271,7 +287,8 @@ class GenericResource extends ListResource {
 		return FALSE;
 	}
 
-	/* load the object with static properties
+	/**
+	 * load the object with static properties
 	 * usually done client side -- or by collections
          * already holding information on an object
          * 
@@ -283,7 +300,8 @@ class GenericResource extends ListResource {
 			$this->${k} = $prop;
 	}
 
-	/* reload the object with updated information   
+	/**
+	 * reload the object with updated information   
          * this will call the member's get function
          * and check for changes.
 	 */
@@ -292,7 +310,8 @@ class GenericResource extends ListResource {
 		return $this->get($this->id);
 	}
 
-        /* Strict set up where
+        /**
+	 * Strict set up where
          * all fields must be coherent
          * with the object's schema. 
          *
@@ -309,7 +328,8 @@ class GenericResource extends ListResource {
 	}
 }
 
-/* EnsureResource called before dispatching of 
+/**
+ * EnsureResource called before dispatching of 
  * datapackets. Make sure all parameters
  * are of correct type. where types can be: 
  *
@@ -319,7 +339,8 @@ class GenericResource extends ListResource {
  * 
  */
 class EnsureResource extends BaseResource {
-	/* Verify the input is of the correct
+	/**
+	 * Verify the input is of the correct
 	 * type. Additionally delegate to Collection if needed
          *
 	 * @param $data -> [array | multidimensional array]
@@ -342,7 +363,8 @@ class EnsureResource extends BaseResource {
 			return new DataPacketCollection($data);
 	}
 
-	/* Output version same thing should verify
+	/**
+	 * Output version same thing should verify
 	 * if its a DataPacket before sending back
          *
 	 * @param $data -> [array | multidimensional array]
@@ -352,7 +374,8 @@ class EnsureResource extends BaseResource {
 		return Input($data);
 	}
 
-	/* If a parameter is not found in the set
+	/**
+	 * If a parameter is not found in the set
 	 * throw error. Example:
          *
          * Ensure::Strict($this, "id")
@@ -371,7 +394,8 @@ class EnsureResource extends BaseResource {
 
 final class Ensure extends EnsureResource {}
 
-/* return a 
+/**
+ * return a 
  * new object given
  * context by first
  * passing it data to its internal method
@@ -384,7 +408,8 @@ final class Ensure extends EnsureResource {}
  */
 class Constructor {
 
-        /* Pass two objects, the current and new
+        /**
+	 * Pass two objects, the current and new
          * current should be a reference and determine
          * its new properties. New object
          * should be made seperate
@@ -412,7 +437,8 @@ class Constructor {
 		return $object;
 	}
 
-	/* IF we've found setup, set_up or set
+	/**
+	 * IF we've found setup, set_up or set
 	 * set the check as true
 	 * otherwise don't call
 	 * @param $object -> Resource Object
@@ -428,7 +454,8 @@ class Constructor {
 	}
 }
 
-/* Resolve take a set of arguments
+/**
+ * Resolve take a set of arguments
  * and figures out what to 
  * do with it. In other words
  * if we have an id in the parameters
@@ -447,7 +474,8 @@ class ResolverResource extends GenericResource {
 		if ($data == null)
 			return $object;
 
-		/* if we have a singleton
+		/**
+		 * if we have a singleton
 		 * treat as primary key then
 	 	 * invoke create call with
 		 * in some cases the primary method can be
