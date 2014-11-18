@@ -2,8 +2,11 @@
 
 namespace Catapult;
 
-/* Get and set the credentials
- * in the JSON file
+/* Get and set the credential in the JSON file
+ * if we cant find credentials.json
+ * @object Credentials can also
+ * be loaded by associative an array or 
+ * from the envorinment variables
  */
 final class Credentials {
 

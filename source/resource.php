@@ -369,14 +369,6 @@ class EnsureResource extends BaseResource {
 
 final class Ensure extends EnsureResource {}
 
-/* convinience to
- * get variables belonging to
- * catapult api, and in any class
- */
-class GlobalResource {
-
-}
-
 /* return a 
  * new object given
  * context by first
