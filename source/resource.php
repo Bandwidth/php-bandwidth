@@ -283,8 +283,7 @@ class GenericResource extends ListResource {
 			$this->${k} = $prop;
 	}
 
-	/* reload the
-	 * object with updated information   
+	/* reload the object with updated information   
          * this will call the member's get function
          * and check for changes.
 	 */
@@ -310,11 +309,14 @@ class GenericResource extends ListResource {
 	}
 }
 
-/* EnsureResource called
- * before dispatching of 
- * datapackets.
- * Ascertain all parameters
- * are of correct type.
+/* EnsureResource called before dispatching of 
+ * datapackets. Make sure all parameters
+ * are of correct type. where types can be: 
+ *
+ * @object Parameter, 
+ * @object DataPacket
+ * associative array
+ * 
  */
 class EnsureResource extends BaseResource {
 	/* Verify the input is of the correct

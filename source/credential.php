@@ -12,37 +12,86 @@ final class Credentials {
 
 	private $secure = array("BANDWIDTH_API_SECRET");
 
+	public static $credentials_opts = array(
+		"path" => __DIR__ . "/credentials.json"
+	);
+
+	private $credentials = array(
+		"USER_ID" => "",
+		"API_SECRET" => "",
+		"API_TOKEN" => ""
+	);
+
 	/* All string parameters
 	 * if provided use these in place of json credentials
+	 *
+	 * @param user_token: Bandwidth user id
+	 * @param api_token: API token
+	 * @param api_secret: API secret
 	 */
 	public function __construct($user_token='',
 				    $api_token='',
 				    $api_secret='') {
+
+		$this->is_json = true;
+
+		if ($user_token &&
+		    $api_token &&
+		    $api_secret) {
+			
+			$this->is_json = false;
+		}
 	}
 
 	/* get a key or all the config in the config */
 	public function get($key=null)
 	{
-		// demo settings will
-		// be relative to source
-		return $key == null ? json_decode(file_get_contents(__DIR__ . "/credentials.json")) :
-				      $this->getVal($key);
+
+		
+		if ($key == null)
+ 		    return json_decode(file_get_contents(__DIR__ . "/credentials.json")) :
+		      
+		      
+		return $this->getVal($key);
 	}
 
-	/* pluck a value */
+
+	/* Gets either a singular
+	 * or array based value by
+	 * key. Where all keys are 
+	 * elements in the credentials.json
+	 * file.
+	 *
+	 * @param key: key for element
+	 * @param show: omit with asterisks
+	 */
 	protected function getVal($key, $show=TRUE)
 	{
 		$content = json_decode(file_get_contents(__DIR__ . "/credentials.json"));
 
-		return is_array($content->{$key}) ? implode(",", $content->{$key}) : $content->{$key};
+		if (is_array($content->{$key})
+			return implode(",", $content->{$key});
+		
+		return $content->{$key};
 	}
 
+	/* Gets a number from the provided
+	 * set in credentials.json. This
+	 * will not have any affect towards
+	 * the PhoneNumber service.
+	 * 
+	 * @param idx: index of number
+	 */
         public function getNumber($idx)
 	{
 		return $content->BANDWIDTH_VALID_NUMBERS[$idx];
 	}
 
-	/* set a value */	
+	/* Set a value at runtime
+	 *
+	 * @param key: key to set
+	 * @param val: value
+	 */
 	public function set($key, $val)
 	{
 		$a = $this->get();
