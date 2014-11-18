@@ -9,7 +9,8 @@ namespace Catapult;
  */
 
 class URIResource extends BaseResource {
-	/* object form of URIResource
+	/**
+	 * Object form of URIResource
 	 * should allow to
 	 * same functionality
 	 * as Make/2 when casted to

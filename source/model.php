@@ -1,7 +1,8 @@
 <?php
 namespace Catapult;
 
-/* Below are all the models listed. These
+/**
+ * Below are all the models listed. These
  * should all perform asimilar functions
  * and be able to provide get, create and 
  * other utils according to their type.
@@ -982,7 +983,9 @@ final class Recording extends GenericResource {
  */
 final class Media extends ListResource {
 	private $path = "media";
-	/* Construct a media object
+
+	/**
+	 * Construct a media object
 	 * where data must be a blob
 	 * in binary. Store in memory until
 	 * store/1 is called
@@ -995,8 +998,13 @@ final class Media extends ListResource {
 		return Resolver::Find($this, $data);
 	}
 
-	public function create()
-	{ /* stub */}
+	/**
+	 * Stub for upload
+	 */
+	public function create($args)
+	{ 
+		return $this->upload($args);
+	}
 
 	public function list_media()
 	{
@@ -1016,8 +1024,10 @@ final class Media extends ListResource {
 		return $this->client->put($url, $file);
 	}
 
-	/* Store media as file 
+	/**
+	 * Store media as file 
 	 * on the fs
+	 *
 	 * @param $filename -> full file name
          * @param $extention -> extention to save in 
 	 */
@@ -1026,7 +1036,8 @@ final class Media extends ListResource {
 		return FileHandler::save($filename, $this->data);
 	}
 
-	/* get a media
+	/**
+	 * get a media
 	 * file by its id
 	 * @param mediaid full id
 	 */
@@ -1039,7 +1050,8 @@ final class Media extends ListResource {
 		return Constructor::Make($this);
 	}
 
-	/* delete a media
+	/**
+	 * delete a media
 	 * file
          * @param mediaid
 	 */
@@ -1072,7 +1084,8 @@ class Message extends GenericResource {
         );
 
 
-	/* CTor to message object
+	/**
+	 * CTor to message object
 	 * inherit base provide all implementation here.
          * @args -> argument object
 	 */
@@ -1083,7 +1096,8 @@ class Message extends GenericResource {
 		return Resolver::Find($this, $data);
 	}
 	
-	/* Where parameters
+	/**
+	 * Where parameters
 	 * are as follows
 	 * @param sender -> PhoneNumber or string
 	 * @param receiver -> PhoneNumber or string 
@@ -1099,7 +1113,8 @@ class Message extends GenericResource {
 	}
 
 
-	/* Get message by id
+	/**
+	 * Get message by id
 	 * @param message_id -> string
 	 */
 	public function get($message_id)
@@ -1117,7 +1132,8 @@ class Message extends GenericResource {
 		return $this->send($args);
 	}
 
-	/* Send message with
+	/**
+	 * Send message with
 	 * additional parameters
          * important rewrite in place of
          * more polymorphic style. 
@@ -1153,7 +1169,8 @@ class MessageMulti extends Message {
 		$this->done = FALSE;
 	}
 
-	/* push a message to
+	/**
+	 * push a message to
 	 * the queue
 	 * @all params -> $string to objects according to api.
 	 */
@@ -1196,7 +1213,8 @@ class MessageMulti extends Message {
 		return $smsgs;
 	}
 
-	/* multiform send
+	/**
+	 * multiform send
 	 * messages output should
 	 * satisfy array
 	 */
@@ -1219,7 +1237,8 @@ final class RecordingCollection extends CollectionObject {
 	}
 }
 
-/* Message container for
+/**
+ * Message container for
  * multiple returned output
  */
 class MessageCollection extends CollectionObject {
