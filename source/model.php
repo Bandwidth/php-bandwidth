@@ -449,7 +449,8 @@ final class Call Extends AudioMixin {
                 return Constructor::Make($this, $data->get());
 	}
 
-	/* Sends a string of characters as DTMF on the given call_id
+	/**
+	 * Sends a string of characters as DTMF on the given call_id
          * Valid chars are '0123456789*#ABCD'
 	 *
 	 * @param $dtmf -> {} 
@@ -467,9 +468,10 @@ final class Call Extends AudioMixin {
 		$this->client->post($url, $data->get());
 	}
 
-	/* Forward to
-	 * gather
+	/**
+	 * Forward to gather
 	 * object and return
+	 *
 	 * @return Gather object with loaded call id and client
  	 */
 	public function gather()
@@ -628,7 +630,8 @@ class Gather extends GenericResource {
 	}
 }
 
-/* Conference class
+/**
+ * Conference class
  * methods for creating, updating
  * and deleting a conference. Implementation
  * like Python Version.
@@ -810,7 +813,8 @@ final class ConferenceMember extends AudioMixin {
 
 	public static $primary_method = "get";
 
-	/* CTor for conference memebrs 
+	/**
+	 * CTor for conference memebrs 
 	 * NEEDS conference id
 	 *
 	 * @param $conf_id -> conf_id
@@ -868,13 +872,15 @@ final class ConferenceMember extends AudioMixin {
 	}
 }
 
-/* Plural form of 
+/**
+ * Plural form of 
  * conference members
  *
  */
 final class ConferenceMemberCollection {
 
-	/* Plural form
+	/**
+	 * Plural form
 	 * of conference
 	 * members
 	 * @param $data -> raw member objects
@@ -969,7 +975,8 @@ final class Recording extends GenericResource {
 }
 
 
-/* Pointer to Catapult
+/**
+ * Pointer to Catapult
  * media. Should be used
  * in conjuction with PoolResource
  */
