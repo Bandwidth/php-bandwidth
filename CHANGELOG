@@ -1,0 +1,19 @@
+0.1.0
+----------------------------------
+
+Message demos. With exception based
+unit tests. 
+
+0.2.0
+--------------------------------
+
+Integration of Models, Types, Constants and
+collections. Extensions of RESTful client, client
+and credential object.
+
+
+0.2.1
+------------------------------
+
+Unit tests for Calls, conferencing with mock 
+based testing
