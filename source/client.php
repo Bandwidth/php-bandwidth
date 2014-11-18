@@ -1,5 +1,5 @@
 <?php
-namespace Bandwidth\Catapult;
+namespace Catapult;
 
 
 /* RESTful client for Bandwidth. These contain
