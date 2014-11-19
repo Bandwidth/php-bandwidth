@@ -3,11 +3,30 @@ require_once('../source/Catapult.php');
 
 // below is a sample call
 // using Catapult's call feature
+// IMPORTANT: edit credentials.json
+// with your information
+// or comment out below /w your keys
+//
+$cred = new Catapult\Credentials('USER_ID', 'API_TOKEN', 'API_SECRET');
+//$cred = new Catapult\Credentials;
+// dont forget to comment out the implicit version if using assoc array
 
-$call = new Catapult\Call(array(
-	"from" => "__NUMBER__",
-	"to" => "__TO__"
-));
+$client = new Catapult\Client($cred);
 
-$call->wait();
+
+try {
+	$call = new Catapult\Call(array(
+		"from" => $argv[1],
+		"to" => $argv[2] 
+	));
+
+	$call->wait();
+
+	$call->hangup();
+
+	printf("We called your number: %s and closed the connection gracefully.", $argv[2]);
+
+} catch (\CatapultApiException $e) {
+	echo var_dump($e);	
+}
 ?>

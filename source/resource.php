@@ -282,7 +282,7 @@ class GenericResource extends ListResource {
 	{
 		$this->get($this->id);
 
-		if ($this->${k} == $v)
+		if ($this->$k == $v)
 			return TRUE;
 
 		return FALSE;
@@ -351,7 +351,7 @@ class EnsureResource extends BaseResource {
 		if ($data instanceof Parameters || $data instanceof CollectionObject)
 			return new DataPacket($data);
 
-		if (is_array($data) && is_multidimensional($data) && is_array($data[0]) && sizeof($data) == 1)
+		if (isset($data[0]) && is_array($data) && is_multidimensional($data) && is_array($data[0]) && sizeof($data) == 1)
 			return new DataPacket($data[0]);
 
 		if (!(is_array($data) || $data instanceof \stdClass))
@@ -418,7 +418,7 @@ class Constructor {
 	public function Make(&$object, $data=array())
 	{
                 foreach ($data as $k => $d) {
-                       $object->${k} = $d;
+                       $object->$k = $d;
                        $this->checked = true;
                 }
 			
@@ -431,7 +431,7 @@ class Constructor {
 	         */
 
 		foreach ($object::$needs as $field)
-			if (!($object->${field} != null || isset($object->${field}))) {
+			if (isset($object->{$field}) && (!($object->{$field} != null || isset($object->{$field})))) {
 				$object = $object->get($object->id);
 			}
 

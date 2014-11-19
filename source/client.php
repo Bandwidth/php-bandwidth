@@ -226,14 +226,15 @@ final class RESTClient {
 		foreach ($lines as $l) {
 			$h = explode(": ", $l, 2); 
 
-			$headers[$h[0]] = trim(str_replace("\r\n", "", str_replace("\n", "", $h[1]))); 
+			if (isset($h[1]))
+				$headers[$h[0]] = trim(str_replace("\r\n", "", str_replace("\n", "", $h[1]))); 
 		}
 
 		/* add support for header only responses where information is only found in "location" */
 
 		/* in some cases we need the raw content (Media Files) */
 
-		if (in_array($headers['Content-Type'], self::$media_formats)) 
+		if (isset($headers['Content-Type']) && in_array($headers['Content-Type'], self::$media_formats)) 
 			return $raw;
 
 
@@ -271,7 +272,7 @@ final class RESTClient {
 		if ($join)
 			$url = $this->join($url);
 
-		return $this->request(GET, $url, $params);
+		return $this->request(API::API_METHOD_GET, $url, $params);
 	}
 
 	/**
@@ -287,7 +288,7 @@ final class RESTClient {
 		$this->set_option('auth', TRUE);
 		$this->set_option('headers', TRUE);
 
-		return $this->request(POST, $url, json_encode($data));
+		return $this->request(API::API_METHOD_POST, $url, json_encode($data));
 	}
 
 	/**
@@ -299,7 +300,7 @@ final class RESTClient {
 	public function put($url, $data)
 	{	
 		$url = $this->join($url);
-		return $this->request(PUT, $url, $data);
+		return $this->request(API::API_METHOD_PUT, $url, $data);
 	}
 
 	/**
@@ -311,7 +312,7 @@ final class RESTClient {
 	public function delete($url, $data)
 	{
 		$url = $this->join($url);
-		return $this->request(DELETE, $url, $data);
+		return $this->request(API::API_METHOD_DEL, $url, $data);
 	}
 	
 }

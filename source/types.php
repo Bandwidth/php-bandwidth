@@ -93,6 +93,12 @@ final class PhoneNumber extends Types {
 	{
 		$this->number = $number;
 	}
+
+	public function Make($args)
+	{
+		return;
+	}
+
 	public function __toString()
 	{
 		return (string) $this->number;
@@ -335,7 +341,7 @@ final class PhoneCombo extends Types {
  *  **args => (call,call1, .. calln)
  */
 final class CallCombo extends Types {
-	public function Make(/* polymorphic */)
+	public function Make($args /* polymorphic */)
 	{
 		$calls = func_get_args();
 

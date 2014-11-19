@@ -210,7 +210,6 @@ final class Bridge Extends AudioMixin {
 
 final class Call Extends AudioMixin {
 	private $path = "calls";
-	private $states = CALL_STATES;
 
         public static $primary_id = "call_id";
 	public static $primary_method = "get";
@@ -697,7 +696,6 @@ final class Conference extends AudioMixin {
 		$data = Ensure::Input($args);
 
 		$this->id = Locator::find($this->client->post($this->path, $data->get()));
-		$this->from = $from;
 	
 		$data->add("id", $this->id);	
 
@@ -1152,7 +1150,7 @@ class Message extends GenericResource {
 	}
 }
 
-class MessageMulti extends Message {
+class MessageMulti extends GenericResource {
 	private $path = "messages";
 
 	public function __construct($messages=array())

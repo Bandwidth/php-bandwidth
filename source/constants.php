@@ -4,15 +4,26 @@ namespace Catapult;
 define('__DEFAULT_SENDER__', '+14244443192');
 define('__DEFAULT_RECEIVER__', '+14244443192');
 
+
+/* do NOT change these. These will be exchanged at runtime */
 interface API {
 	const API_ENDPOINT = "https://api.catapult.inetwork.com";
 	const APPLICATION_JSON = "application/json"; 
-}
-
-interface EXCEPTIONS {
-	const API_USER = "api";
+	const API_METHOD_POST = "POST";
+	const API_METHOD_DEL = "DELETE";
+	const API_METHOD_PUT = "PUT";
+	const API_METHOD_GET = "GET";
+	const API_BANDWIDTH_USER_ID = "BANDWIDTH_USER_ID";
+	const API_BANDWIDTH_TOKEN = "BANDWIDTH_API_TOKEN";
+	const API_BANDWIDTH_SECRET = "BANDWIDTH_API_SECRET";
+	const API_BANDWIDTH_VALID_NUMBERS = "BANDWIDTH_API_VALID_NUMBERS";
 	const SDK_VERSION = "0.1";
 	const SDK_USER_AGENT = "catapult-sdk-php";
+}
+
+/* a set of exceptions we need to handle */
+interface EXCEPTIONS {
+	const API_USER = "api";
 	const RECIPIENT_COUNT_LIMIT = 1000;
 	const DEFAULT_TIME_ZONE = "UTC";
 	//Common Exception Messages

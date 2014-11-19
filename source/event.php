@@ -3,7 +3,6 @@
 namespace Catapult;
 
 $_events = array(
-	MessageEvent
 );
 
 class EventType extends Event {

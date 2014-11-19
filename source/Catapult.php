@@ -9,6 +9,8 @@
  */
 namespace Catapult;
 
+error_reporting(E_ALL ^ E_STRICT);
+
 $files = array("constants", "utils", "states", "exception", "collections", "resource", "generic", "types", "model", "credential", "client", "event");
 foreach ($files as $f)
 	require_once(realpath(__DIR__ . "/$f.php"));
