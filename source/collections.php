@@ -29,8 +29,12 @@ class CollectionObject {
 			$data = $data->get();
 
                         foreach($data as $d) {
-                              if (!(in_array("id", array_keys($d))))
-                                    throw new \CatipultApiException(EXCEPTIONS::EXCEPTION_OBJECT_ID_PROVIDED);
+			      /* can we find an id? */
+			      if (!(array_key_exists("id", $d)))
+			           $d['id'] = Locator::Find(array("Location" => $d['location']));
+			
+                              if (!(in_array("id", array_keys($d)) && in_array("number", array_keys($d))))
+                                    throw new \CatapultApiException(EXCEPTIONS::EXCEPTION_OBJECT_ID_NOT_PROVIDED);
 
                               $this->data[$d{'id'}] = $d;
                         }

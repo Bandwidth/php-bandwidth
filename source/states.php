@@ -34,4 +34,11 @@ interface GATHER_STATES {
 	const completed = "COMPLETED";
 	const started = "STARTED";
 }
+
+interface NUMBER_STATES {
+	const enabled = "ENABLED";
+	const released = "RELEASED";
+	const available = "AVAILABLE";
+}
+
 ?>

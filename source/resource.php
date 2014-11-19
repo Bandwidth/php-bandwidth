@@ -237,7 +237,7 @@ class GenericResource extends ListResource {
 
 
 		if (method_exists($this, $glue))
-			return $this->${glue}($args);
+			return $this->{$glue}($args);
 		else
 			return NULL;
 	}
@@ -298,7 +298,7 @@ class GenericResource extends ListResource {
 	public function load($props)
 	{
 		foreach ($props as $k => $prop)
-			$this->${k} = $prop;
+			$this->{$k} = $prop;
 	}
 
 	/**
@@ -452,6 +452,17 @@ class Constructor {
 		$this->checked = true;
 
 		return $object;
+	}
+
+	/* Constructor's find will merely
+	 * check if this class is available
+	 * if it return. Otherwise throw warning
+	 * 
+	 * @param class: Catapult namespace class
+	 */
+	public function find($class)
+	{
+		return $class;
 	}
 }
 

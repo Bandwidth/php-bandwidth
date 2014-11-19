@@ -150,9 +150,12 @@ final class RESTClient {
          * As a result this should only provide the user id, and base string
          * @param url: partial url
 	 */
-	private function join($url)
+	private function join($url, $users=TRUE)
 	{
-		return $this->endpoint . "/v1/users/" . $this->uid . "/" . $url;
+		if ($users)
+			return $this->endpoint . "/v1/users/" . $this->uid . "/" . $url;
+
+		return $this->endpoint . "/v1/". $url; 
 	}
 
 	/**
@@ -174,23 +177,28 @@ final class RESTClient {
          *
 	 * @method -> STRING [GET, POST, PUT (to implement)]
 	 * @data -> array [string k,v only]
+         * @mixed -> whether to use GET parameters in place of POST or not
          * @returns -> headers | json content | raw content
 	 */
-	private function request($method, $url, $data=array(), $decode=FALSE)
+	private function request($method, $url, $data=array(), $mixed=FALSE, $decode=FALSE)
 	{
 		$this->hndl = curl_init();
 		curl_setopt($this->hndl, CURLOPT_SSL_VERIFYPEER, 1);
 		curl_setopt($this->hndl, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($this->hndl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 		curl_setopt($this->hndl, CURLOPT_HEADER, TRUE);
-
+		
 
 		if ($method == "POST") { 
+			if (!is_string($data))
+				$pure = json_encode($data);
+			else
+				$pure = $data;
 
-			curl_setopt($this->hndl, CURLOPT_POSTFIELDS, (string) $data);
+			curl_setopt($this->hndl, CURLOPT_POSTFIELDS, (string) $pure);
 			curl_setopt($this->hndl, CURLOPT_HTTPHEADER, array(
 				'Content-Type: ' . $this->interop,
-				'Content-Length: ' . strlen((string) $data)
+				'Content-Length: ' . strlen((string) $pure)
 			));
 
 		} else if ($method == "PUT") {
@@ -204,12 +212,14 @@ final class RESTClient {
 
 		} else if ($method == "DELETE") {
 			curl_setopt($this->hndl, CURLOPT_CUSTOMREQUEST, "DELETE");
-		} else {
+		}
+
+		/* branch seperatly as POST may need GET parameters */
+		if ($method == "GET" || $mixed) {
 		        $params = "?" . http_build_query($data);
 			$url .= $params;
 		}
 
-			
 		curl_setopt($this->hndl, CURLOPT_URL, $url);
 
                 /* setup auth */
@@ -218,6 +228,7 @@ final class RESTClient {
 		$hlen = curl_getinfo($this->hndl, CURLINFO_HEADER_SIZE);
 		$header =substr($raw, 0, $hlen);
 		$content = json_decode(substr($raw, $hlen));
+		$headers = array();
 
 		/* take the headers out */
 		/* if we're let with nothing. return headers and dont encode */
@@ -267,10 +278,12 @@ final class RESTClient {
 	 * @param -> url string [partially qualified]
 	 * @param -> join bool
 	 */
-	public function get($url, $params=array(), $join=TRUE)
+	public function get($url, $params=array(), $join=TRUE, $users=TRUE)
 	{
-		if ($join)
+		if ($join && $users)
 			$url = $this->join($url);
+		if ($join && !$users)
+			$url = $this->join($url, FALSE);
 
 		return $this->request(API::API_METHOD_GET, $url, $params);
 	}
@@ -281,14 +294,21 @@ final class RESTClient {
 	 * @param -> url [partially qualified]
 	 * @param -> join boolean
 	 */
-	public function post($url, $data=array(), $join=FALSE)
+	public function post($url, $data=array(), $join=TRUE, $users=TRUE, $mixed=FALSE)
 	{
-		$url = $this->join($url);	
+		if ($join && $users)
+			$url = $this->join($url);
+		if ($join && !$users)
+			$url = $this->join($url, FALSE);
 
 		$this->set_option('auth', TRUE);
 		$this->set_option('headers', TRUE);
 
-		return $this->request(API::API_METHOD_POST, $url, json_encode($data));
+		if ($mixed)
+			return $this->request(API::API_METHOD_POST, $url, $data, $mixed);
+
+		return $this->request(API::API_METHOD_POST, $url, json_encode($data), $mixed);
+
 	}
 
 	/**

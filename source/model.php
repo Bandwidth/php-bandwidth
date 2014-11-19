@@ -16,6 +16,10 @@ namespace Catapult;
  * @class Recording, Recording Collection
  * @class Message, MessageMulti, MessageCollection
  * @class Gather, GatherCollection
+ * @class PhoneNumbers, PhoneNumbersCollection
+ * @class Application, ApplicationCollection
+ * @class UserError, UserErrorCollection
+ * @class NumberInfo
  * @class Media
  *
  */
@@ -878,6 +882,10 @@ final class ConferenceMember extends AudioMixin {
  */
 final class ConferenceMemberCollection {
 
+	public function getName()
+	{
+		return "ConferenceMember";
+	}
 	/**
 	 * Plural form
 	 * of conference
@@ -1004,6 +1012,11 @@ final class Media extends ListResource {
 		return $this->upload($args);
 	}
 
+	/**
+ 	 * lists all the media
+	 * for the user
+	 *
+         */
 	public function list_media()
 	{
 		$url = URIResource::Make($this->path);
@@ -1011,6 +1024,12 @@ final class Media extends ListResource {
 		return new MediaCollection(new DataPacketCollection($this->client->get($url)));
 	}
 
+	/**
+	 * Upload new
+	 * media.
+	 * @param args
+	 * must contain fileName and file(path to file)
+	 */
 	public function upload($args)
 	{
 		$args = Ensure::Input($args);
@@ -1260,6 +1279,13 @@ final class EventCollection extends CollectionObject  {
 	}
 }
 
+final class PhoneNumbersCollection extends CollectionObject {
+	public function getName()
+	{
+		return "PhoneNumbers";
+	}
+}
+
 final class TranscriptionCollection extends CollectionObject {
 	public function getName()
 	{
@@ -1274,40 +1300,503 @@ final class CallCollection extends CollectionObject {
 	}
 }
 
-
-final class Applications {
-
+final class UserErrorCollection extends CollectionObject {
+	public function getName()
+	{
+		return "UserError";
+	}
 }
 
-final class AvailableNumbers {
-
+final class ApplicationCollection extends CollectionObject {
+	public function getName()
+	{
+		return "Application";
+	}
 }
 
-final class Account {
 
+final class Application extends GenericResource {
+
+	private $path = "applications";
+
+	public static $fields = array(
+	       'id', 'name',
+               'incoming_call_url',
+               'incoming_call_url_callback_timeout',
+               'incoming_call_fallback_url',
+               'incoming_sms_url',
+               'incoming_sms_url_callback_timeout',
+               'incoming_sms_fallback_url',
+               'callback_http_method', 'auto_answer'
+	);
+
+	public static $needs = array(
+		"id", "name"
+	);
+
+	/**
+         * Construct the given 
+	 * application
+	 */
+	public function __construct($data=null)
+	{
+		$this->client = Client::get();
+
+		return Resolver::Find($this, $data);
+	}
+
+	/* Creates a new application
+	 * with the provided set of data
+	 * the parameters for data being: (borrowed from python models.py)
+ 	 *
+	 * @param data:
+		:name: A name you choose for this application
+		:incoming_call_url: A URL where call events will be sent for an inbound call
+		:incoming_call_url_callback_timeout: Determine how long should the platform wait for incomingCallUrl's response
+		    before timing out in milliseconds.
+		:incoming_call_fallback_url: The URL used to send the callback event if the request to incomingCallUrl fails.
+		:incoming_sms_url: A URL where message events will be sent for an inbound SMS message.
+		:incoming_sms_url_callback_timeout: Determine how long should the platform wait for incomingSmsUrl's response
+		    before timing out in milliseconds.
+		:incoming_sms_fallback_url: The URL used to send the callback event if the request to incomingSmsUrl fails.
+		:callback_http_method: Determine if the callback event should be sent via HTTP GET or HTTP POST.
+		    (If not set the default is HTTP POST).
+		:auto_answer: Determines whether or not an incoming call should be automatically answered.
+		    Default value is 'true'.
+ 	 */
+	public function create($data)
+	{
+		$data = Ensure::Input($data);
+		$url = URIResource::Make($this->path);
+	
+		$app_id = Locator::Find($this->client->post($url, $data->get()));
+
+		$data->add("id", $app_id);
+
+		return Constructor::Make($this, $data->get());
+	}
+
+	/**
+         * list all your applications
+         * @param data. array with page, and size
+         */
+	public function list_applications($data)
+	{
+		$data = Ensure::Input($data);
+		$url = URIResource::Make($this->path);
+		$data = $this->client->get($url, $data->get());
+
+		return new ApplicationCollection(new DataPacketCollection($data));
+	}
+
+
+	/**
+         * get an application by its id
+	 *
+	 * @param id: full id of application
+	 */
+	public function get($id)
+	{
+		$url = URIResource::Make($this->path, array($id));
+
+		$data = $this->client->get($url);
+
+		return Constructor::Make($this, $data->get());	
+	}
+
+	/**
+	 * Patch the given
+	 * application with new information
+	 * same as update/1
+         * @param data: set of application data
+	 */
+	public function patch($data)
+	{
+		$data = Ensure::Input($data);
+		$url = URIResource::Make($this->path, array($this->id));
+		
+		$this->client->post($url, $data->get());
+
+		return Constructor::Make($this, $data->get());
+	}
+
+	/**
+	 * Delete the application
+	 *
+	 * @param optional by uninitialized id
+	 */
+	public function delete($id)
+	{
+		$url = URIResource::Make($this->path, array($this->id));
+
+		$this->client->delete($url);
+
+		return Constructor::Make($this, $data->get());
+	}
+} 
+
+final class Account extends GenericResource {
+	private $path = "account";
+	public static $fields = array(
+		"balance", "account_type"
+	);
+
+	public static $needs = array(
+		"balance", "account_type"
+	);
+
+	public function __construct()
+	{
+		$this->client = Client::Get();
+	}
+
+	/**
+	 * Get an account
+	 */
+	public function get()
+	{
+		$data = new DataPacket($this->client->get($url));
+
+		return Constructor::Make($this, $data->get());
+	}
+
+	/**
+	 * get all the transactions
+	 * from an account. Where
+	 * the query can contain
+	 * max_items, to_date, type, page, size
+	 * 
+	 * @param query: list of options
+	 */
+	public function get_transactions($query)
+	{
+		$data = Ensure::Input($query);
+		$url = URIResource::Make($this->path, array("transactions"));
+
+		$data = $this->client->get($url, $data->get());
+
+		return new TransactionsCollection(new DataPacketCollection($data));
+	}
 }
 
 /* Class to get, allocate
  * phone numbers
  *
  */
-final class PhoneNumbers {
+final class PhoneNumbers extends GenericResource {
+	private $path = "phoneNumbers";
+	private $availablePath = "availableNumbers";
 
+	public static $fields = array(
+		'id', 'application', 'number', 'national_number',
+		 'name', 'created_time', 'city', 'state', 'price',
+		 'number_state', 'fallback_number', 'pattern_match', 'lata', 'rate_center'
+	);
+
+	public static $needs = array(
+		'id', 'number', 'name'
+	);
+
+	public function __construct($data=null)
+	{
+		$this->client = Client::Get();
+
+		return Resolver::Find($this, $data);
+	}
+
+	/**
+	 * get your listed
+	 * numbers.
+	 * @param args: set of sizing options
+	 */
+	public function list_numbers($args)
+	{
+		$data = Ensure::Input($args);
+
+		$url = URIResource::Make($this->path);
+
+		$res = $this->client->get($url, $data->get());
+
+		return new PhoneNumbersCollection(new DataPacketCollection($res));	
+	}
+
+	/**
+	 * get a valid number
+	 * by id
+	 */
+	public function get($id)
+	{
+		$url = URIResource::Make($this->path, array($id));	
+
+		$data = $this->client->get($url);
+
+		return Constructor::Make($this, $data->get());
+	}
+
+	/**
+	 * Get the information
+	 * for a given number
+	 * @param valid number
+	 */
+	public function get_number_info($number)
+	{
+		return $this->get($number);
+	}
+
+	/**
+         * Make the needed changes to 
+	 * the PhoneNumber. Where
+	 * set of params can be:
+	 * application, 
+	 * fallback_number,
+	 *  
+	 * @param data: set of valid patching options
+	 */
+	public function patch($data)
+	{
+		$app = $data['application'];
+		if ($app instanceof Application)
+			$data['application'] = $app->id; 
+
+		$data = Ensure::Input($data);
+		$url = URIResource::Make($this->path, array($this->id));
+	
+		$this->client->post($url, $data->get());	
+
+		return Constructor::Make($this, $data->get());
+	}
+
+	/* Deletes an allocated
+	 * number. this cannot be undone
+	 * 
+	 * @param id in place of initialized
+	 */
+	public function delete()
+	{
+		$url = URIResource::Make($this->path, array($this->id)); 
+
+		return $this->client->delete($url);
+	}
+
+	/**
+	 * stub for allocate 
+         * get new numbers
+	 * @param args: see allocate
+	 */
+	public function create($args)
+	{
+		return $this->allocate($args);
+	}
+
+	/**
+	 * allocate a new number
+	 * number must be available
+	 * or warning will be thrown
+	 * @param args
+	 *   number, 
+	 *   application (one you want to associate this number with)
+	 *   fallback a fallback option if this isnt available
+	 */
+	public function allocate($args)
+	{
+		$data = Ensure::Input($args);
+
+		$url = URIResource::Make($this->path);
+
+		$id = Locator::Find($this->client->post($url, $data->get()));
+	
+		$data->add("id", $id);
+
+		return Constructor::Make($this, $data->get());
+	}
+
+	/** validate params for availabe local number
+	 * search. Rules:
+	 * 1) state, zip and areaCode are mutually exclusive use only one of them per
+	 *    request
+	 * 2) localNumber and inLocalCallingArea only applies for searching and  order
+	 *    numbers in specific areaCode
+         *
+         * @param args: set of arguments with above constraints
+	 */
+	public function validate_search_query($args)
+	{
+		if (array_key_exists("zip", $args) && !(array_key_exists("state", $args) || array_key_exists("areaCode", $args)))
+			return;
+
+		if (array_key_exists("state", $args) && !(array_key_exists("zip", $args) || array_key_exists("areaCode", $args)))
+			return;
+
+		if (array_key_exists("areaCode", $args) && !(array_key_exists("zip", $args) || array_key_exists("state", $args)))
+			return;
+
+		if (!(array_key_exists("areaCode", $args) && array_key_exists("zip", $args) && array_key_exists("state", $args)))
+			throw new \CatapultApiException("state, zip and areaCode are mutually exclusive, you may use only one of them per request");
+		if (!(array_key_exists("areaCode")))
+			throw new \CatapultApiException("localNumber and inLocalCallingArea only applies '
+                             'for searching numbers in specific areaCode'");
+	}
+
+	/**
+	 * List the local numbers
+	 * according to the provided numbers
+	 * 
+	 * @param params
+	 */
+	public function list_local($params)
+	{
+		$data = Ensure::Input($params);
+
+		$url = URIResource::Make($this->availablePath, array("local"));
+
+		$data = $this->client->get($url, $data->get(), true, false);
+
+		return new PhoneNumbersCollection(new DataPacketCollection($data));
+	}
+
+	/**
+	 * List toll free numbers
+	 * according to the provided parameters
+	 *
+	 * @param set of toll free parameters
+	 */
+	public function list_toll_free($params)
+	{
+		$data = Ensure::Input($params);
+
+		$url = URIResource::Make($this->availablePath, array("tollFree"));
+
+		$data = $this->client->get($url, $data->get(), true, false);
+
+		return new PhoneNumbersCollection(new DataPacketCollection($data));
+	}
+
+	/**
+	 * Allocate numbers in batch
+	 * where numbers must be local
+         *
+         * notes:
+	 * 1. state, zip and area_code are mutually exclusive,
+         *   you may use only one of them per calling list_local.
+	 * 2. local_number and in_local_calling_area only applies
+         *    for searching numbers in specific area_code.
+	 * @param params
+	 */
+	public function batch_allocate_local($params)
+	{
+		$this->validate_search_query($params);
+
+		$args = Ensure::Input($params);
+
+		$url = URIResource::Make($this->availablePath, array("local"));
+
+		$data = $this->client->post($url, $args->get(), true, false, true /* mixed uses GET parameters */);
+
+		return new PhoneNumbersCollection(new DataPacketCollection($data));
+	}
+
+	/**
+	 * TollFree version batch allocation
+	 *
+	 * @param params
+	 */
+	public function batch_allocate_tollfree($params)
+	{
+		$url = URIResource::Make($this->availablePath, array("tollFree"));	
+		
+		$args = Ensure::Input($params);
+
+		$data = $this->client->post($url, $args->get(), true, false, true /* mixed use GET parameters */);
+
+		return new PhoneNumbersCollection(new DataPacketCollection($data));
+	}
 }
 
-/* Retrieve information
- * on a number
- *
+/**
+ * This resource provides a CNAM number info. CNAM is an acronym which stands for Caller ID Name.
+ * CNAM can be used to display the calling party's name alongside the phone number, to help users easily
+ * identify a caller. CNAM API allows the user to get the CNAM information of a particular number
  */
-final class NumberInfo {
-	
+final class NumberInfo extends GenericResource {
+	private $path = "phoneNumbers/numberInfo";	
+
+	public static $fields = array(
+		'name', 'number', 'created', 'updated'
+	);
+
+	public static $needs = array(
+		'name', 'number'	
+	);
+
+	public function __construct($data)
+	{
+		$this->client = Client::Get();
+
+		return Resolver::Find($data);
+	}
+
+	public function get($number)
+	{
+		$url = URIResource::Make($this->path, array($number));
+
+		$data = $this->client->get($url, array(), false, false);
+
+		return Constructor::Make($this, $data);
+	}
 }
 
 /* errors for application
  *
+ * when using the API you will be warned
+ * of errors with the HTTP calls, and client
+ * side warnings. This class will contain a historic
+ * list of events, warnings and errors 
  */
-final class Errors {
+final class UserError extends GenericResource {
+	private $path = "errors";
+	public static $fields = array(
+		'id', 'time', 'category', 'code', 'message', 'details', 'version', 'user'
+	);
+	public static $needs = array(
+		'id', 'code', 'message'
+	);
+	public function __construct($data=null)
+	{
+		$this->client = Client::Get();
 
+		return Resolver::Find($this, $data);
+	}
+
+	/**
+	 * List all the errors
+	 * as per the query
+	 *
+	 * @param query
+	 */
+	public function list_errors($query)
+	{
+		$data = Ensure::Input($query);
+		$url = URIResource::Make($this->path);
+
+		$data = $this->client->get($url, $data->get());
+
+		return new UserErrorCollection(new DataPacketCollection($data));
+	}
+
+	/**
+	 * get an error by its 
+	 * id
+	 * 
+	 * @param id: real id for error
+	 */
+	public function get($id)
+	{
+		$url = URIResource::Make($this->path, array($id));
+
+		$data = $this->client->get($query);
+
+		return Constructor::Make($this, $data);
+	}
 }
 
 
