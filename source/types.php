@@ -184,6 +184,8 @@ final class Size extends Types {
 
 		if ($size < DEFAULTS::SIZE_MIN)
 			Throw new \CatapultApiException("Size too small");
+
+		$this->size = $size;
 	}
 	
 	public function __toString()
@@ -267,28 +269,32 @@ final class Tag extends Types {
  */
 final class Voice extends Types {
 	public static $available_voices = array(
-		"Jorge",
-		"Kate",
-		"Susan",
-		"Julie",
-		"Dave",
-		"Paul",
-		"Bridget",
-		"Violeta",
-		"Jolie",
-		"Bernard",
-		"Katrin",
-		"Stefan",
-		"Paola",
-		"Luca",
+		"Jorge" => "male",
+		"Kate" => "female",
+		"Susan" => "female",
+		"Julie" => "female",
+		"Dave" => "male",
+		"Paul" => "male",
+		"Bridget" => "male",
+		"Violeta" => "female",
+		"Jolie" => "female",
+		"Bernard" => "male",
+		"Katrin" => "female",
+		"Stefan" => "male",
+		"Paola" => "male",
+		"Luca" => "male"
 	);
+
+	public $gender = "male";
+
 	public function __construct($voice)
 	{
-		if (!(in_array($voice, self::$available_voices)))
+		if (!(in_array($voice, array_keys(self::$available_voices))))
 			throw new \CatapultApiException("Voice unrecognized");
 
 
 		$this->voice = $voice;
+		$this->gender = self::$available_voices[$voice];
 	}
 
 	public function __toString()
@@ -325,7 +331,7 @@ final class Option extends Types {
  * to => Catapult\PhoneNumber
  */
 final class PhoneCombo extends Types {
-        public function Make(PhoneNumber $sender, PhoneNumber $receiver)
+        public function Make($sender, $receiver)
         {
                    return array(
                         "from" => (string) $sender,
@@ -349,7 +355,10 @@ final class CallCombo extends Types {
 
 		foreach ($calls as $call) {
 
-			$call_ids[] = $call->id;
+			if (is_object($call))
+				$call_ids[] = $call->id;
+			else 
+				$call_ids[] = $call;
 		}
 
 		return $call_ids;
@@ -534,7 +543,7 @@ final class Sentence extends Types {
 
 	public function __toString()
 	{
-		return $this->Make($this->sentence);
+		return $this->Make($this->sentence, TRUE);
 	}
 }
 

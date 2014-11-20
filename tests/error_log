@@ -1,0 +1,257 @@
+[20-Nov-2014 20:39:57 UTC] PHP Parse error:  syntax error, unexpected '2' (T_LNUMBER) in /php-bandwidth/tests/unit-types.php on line 113
+[20-Nov-2014 20:40:11 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:40:11 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:40:11 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:40:11 UTC] PHP Notice:  Undefined property: Catapult\Size::$size in /php-bandwidth/source/types.php on line 191
+[20-Nov-2014 20:40:58 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:40:58 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:40:58 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:40:58 UTC] PHP Notice:  Undefined property: Catapult\Size::$size in /php-bandwidth/source/types.php on line 191
+[20-Nov-2014 20:41:13 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:41:13 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:41:13 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:41:13 UTC] PHP Notice:  Undefined property: Catapult\Size::$size in /php-bandwidth/source/types.php on line 191
+[20-Nov-2014 20:41:54 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:41:54 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:41:54 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:43:12 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:43:12 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:43:12 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:43:33 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:43:33 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:43:33 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:43:33 UTC] PHP Fatal error:  Call to undefined method Catapult\Media::listMedia() in /php-bandwidth/tests/unit-media.php on line 46
+[20-Nov-2014 20:44:20 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:44:20 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:44:20 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:44:21 UTC] PHP Fatal error:  Class 'Catapult\MediaCollection' not found in /php-bandwidth/source/model.php on line 1032
+[20-Nov-2014 20:45:37 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:45:37 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:45:37 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:46:02 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:46:02 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:46:02 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:46:02 UTC] PHP Fatal error:  Class 'Catpult\Gather' not found in /php-bandwidth/tests/unit-gather.php on line 37
+[20-Nov-2014 20:46:18 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:46:18 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:46:18 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:46:35 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:46:35 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:46:35 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:46:35 UTC] PHP Fatal error:  Class 'Ensure' not found in /php-bandwidth/tests/unit-core.php on line 27
+[20-Nov-2014 20:47:00 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:47:00 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:47:00 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:47:00 UTC] PHP Fatal error:  Cannot pass parameter 1 by reference in /php-bandwidth/tests/unit-core.php on line 27
+[20-Nov-2014 20:47:34 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:47:34 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:47:34 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:47:34 UTC] PHP Fatal error:  Call to undefined method CoreTest::assertIsInstance() in /php-bandwidth/tests/unit-core.php on line 30
+[20-Nov-2014 20:47:50 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:47:50 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:47:50 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:48:11 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:48:11 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:48:11 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:48:11 UTC] PHP Fatal error:  Class 'Catapult\Accounts' not found in /php-bandwidth/tests/unit-account.php on line 22
+[20-Nov-2014 20:48:28 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:48:28 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:48:28 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:48:28 UTC] PHP Warning:  Uncaught Undefined variable: accounts
+
+/php-bandwidth/tests/unit-account.php:24
+
+  thrown in /php-bandwidth/tests/unit-account.php on line 24
+[20-Nov-2014 20:48:28 UTC] PHP Fatal error:  Call to a member function getTransactions() on a non-object in /php-bandwidth/tests/unit-account.php on line 24
+[20-Nov-2014 20:48:55 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:48:55 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:48:55 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:50:19 UTC] PHP Parse error:  syntax error, unexpected '$this' (T_VARIABLE) in /php-bandwidth/tests/unit-client.php on line 23
+[20-Nov-2014 20:50:33 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:50:33 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:50:33 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:50:33 UTC] PHP Warning:  Uncaught Undefined variable: client
+
+/php-bandwidth/tests/unit-client.php:21
+
+  thrown in /php-bandwidth/tests/unit-client.php on line 21
+[20-Nov-2014 20:50:33 UTC] PHP Fatal error:  Call to a member function get() on a non-object in /php-bandwidth/tests/unit-client.php on line 21
+[20-Nov-2014 20:51:28 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:51:28 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:51:28 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:51:28 UTC] PHP Fatal error:  Class 'Client' not found in /php-bandwidth/tests/unit-client.php on line 21
+[20-Nov-2014 20:52:19 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:52:19 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:52:19 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:52:50 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:52:50 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:52:50 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:52:50 UTC] PHP Warning:  Uncaught Undefined variable: client
+
+/php-bandwidth/source/model.php:97
+/php-bandwidth/tests/unit-bridge.php:61
+
+  thrown in /php-bandwidth/source/model.php on line 97
+[20-Nov-2014 20:52:50 UTC] PHP Fatal error:  Call to a member function get() on a non-object in /php-bandwidth/source/model.php on line 97
+[20-Nov-2014 20:53:02 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:53:02 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:53:02 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:53:02 UTC] PHP Warning:  Uncaught Undefined variable: client
+
+/php-bandwidth/source/model.php:97
+/php-bandwidth/tests/unit-bridge.php:61
+
+  thrown in /php-bandwidth/source/model.php on line 97
+[20-Nov-2014 20:53:02 UTC] PHP Fatal error:  Call to a member function get() on a non-object in /php-bandwidth/source/model.php on line 97
+[20-Nov-2014 20:53:38 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:53:38 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:53:38 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:53:54 UTC] PHP Parse error:  syntax error, unexpected '$params' (T_VARIABLE) in /php-bandwidth/tests/unit-phonenumbers.php on line 89
+[20-Nov-2014 20:54:25 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:54:25 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:54:25 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:54:25 UTC] PHP Fatal error:  Call to undefined method PhoneNumbersTest::assertIsInstance() in /php-bandwidth/tests/unit-phonenumbers.php on line 93
+[20-Nov-2014 20:55:02 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:55:02 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:55:02 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:55:45 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:55:45 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:55:45 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:58:40 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:58:40 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:58:40 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:59:31 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:59:31 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:59:31 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:59:53 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:59:53 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 20:59:53 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:02:15 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:02:15 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:02:15 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:02:16 UTC] PHP Fatal error:  Call to a member function get() on a non-object in /php-bandwidth/source/model.php on line 1404
+[20-Nov-2014 21:02:36 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:02:36 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:02:36 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:03:05 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:03:05 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:03:05 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:03:05 UTC] PHP Fatal error:  Class 'Catapult\TransactionsCollection' not found in /php-bandwidth/source/model.php on line 1503
+[20-Nov-2014 21:04:12 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:04:12 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:04:12 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:04:12 UTC] PHP Fatal error:  Class 'Catapult\TransactionsCollection' not found in /php-bandwidth/source/model.php on line 1510
+[20-Nov-2014 21:04:31 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:04:31 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:04:31 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:05:37 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:05:37 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:05:37 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:06:05 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:06:05 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:06:05 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:06:08 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:06:08 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:06:08 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:07:09 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:07:09 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:07:09 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:07:36 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:07:36 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:07:36 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:08:00 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:08:00 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:08:00 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:08:26 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:08:26 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:08:26 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:08:51 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:08:51 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:08:51 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:09:27 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:09:27 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:09:27 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:10:38 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:10:38 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:10:38 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:10:58 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:10:58 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:10:58 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:11:14 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:11:14 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:11:14 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:11:52 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:11:52 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:11:52 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:12:15 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:12:15 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:12:15 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:12:31 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:12:31 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:12:31 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:13:00 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:13:00 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:13:00 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:13:50 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:13:50 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:13:50 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:14:50 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:14:50 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:14:50 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:15:51 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:15:51 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:15:51 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:16:40 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:16:40 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:16:40 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:17:08 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:17:08 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:17:08 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:18:24 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:18:24 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:18:24 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:19:54 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:19:54 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:19:54 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:20:40 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:20:40 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:20:40 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:21:35 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:21:35 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:21:35 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:22:38 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:22:38 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:22:38 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:22:39 UTC] PHP Fatal error:  Cannot access private property Catapult\Recording::$primary_method in /php-bandwidth/source/resource.php on line 500
+[20-Nov-2014 21:22:54 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:22:54 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:22:54 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:23:34 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:23:34 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:23:34 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:23:51 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:23:51 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:23:51 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:24:51 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:24:51 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:24:51 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:25:46 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:25:46 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:25:46 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:26:54 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:26:54 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:26:54 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:32:37 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:32:37 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:32:37 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:57:05 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:57:05 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:57:05 UTC] PHP Notice:  Undefined property: Catapult\Credentials::$credentials in /php-bandwidth/source/credential.php on line 113
+[20-Nov-2014 21:59:35 UTC] PHP Fatal error:  Call to undefined method stdClass::get() in /php-bandwidth/source/model.php on line 1431
+[20-Nov-2014 22:18:27 UTC] PHP Fatal error:  Call to undefined method stdClass::get() in /php-bandwidth/source/model.php on line 1583
+[20-Nov-2014 22:20:08 UTC] PHP Fatal error:  Class 'Catapult\Transaction' not found in /php-bandwidth/source/collections.php on line 102
+[20-Nov-2014 22:26:59 UTC] PHP Parse error:  syntax error, unexpected '"Dave"' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in /php-bandwidth/source/types.php on line 276
+[20-Nov-2014 22:27:08 UTC] PHP Parse error:  syntax error, unexpected '"Violeta"' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in /php-bandwidth/source/types.php on line 279
+[20-Nov-2014 22:27:21 UTC] PHP Parse error:  syntax error, unexpected '"Violeta"' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in /php-bandwidth/source/types.php on line 279
+[20-Nov-2014 22:27:33 UTC] PHP Parse error:  syntax error, unexpected '}' in /php-bandwidth/source/types.php on line 298
+[20-Nov-2014 22:30:11 UTC] PHP Parse error:  syntax error, unexpected 'functi' (T_STRING), expecting variable (T_VARIABLE) in /php-bandwidth/source/types.php on line 334

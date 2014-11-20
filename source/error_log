@@ -3855,3 +3855,30 @@
 [19-Nov-2014 23:13:25 UTC] PHP Warning:  preg_match(): No ending delimiter '/' found in /php-bandwidth/source/utils.php on line 152
 [19-Nov-2014 23:13:25 UTC] PHP Warning:  preg_match(): No ending delimiter '/' found in /php-bandwidth/source/utils.php on line 152
 [19-Nov-2014 23:15:30 UTC] PHP Notice:  Undefined variable: events in /php-bandwidth/source/event.php on line 95
+[20-Nov-2014 21:28:09 UTC] PHP Notice:  Undefined variable: recordings in /php-bandwidth/source/test.php on line 12
+[20-Nov-2014 21:28:09 UTC] PHP Fatal error:  Call to a member function list_recordings() on a non-object in /php-bandwidth/source/test.php on line 12
+[20-Nov-2014 21:28:22 UTC] PHP Fatal error:  Class 'Catapult\Recordings' not found in /php-bandwidth/source/test.php on line 11
+[20-Nov-2014 21:39:43 UTC] PHP Notice:  Undefined offset: 17 in /php-bandwidth/source/collections.php on line 72
+[20-Nov-2014 21:40:26 UTC] PHP Notice:  Undefined offset: 17 in /php-bandwidth/source/collections.php on line 73
+[20-Nov-2014 21:40:37 UTC] PHP Notice:  Undefined offset: 17 in /php-bandwidth/source/collections.php on line 73
+[20-Nov-2014 21:42:02 UTC] PHP Notice:  Use of undefined constant cname - assumed 'cname' in /php-bandwidth/source/collections.php on line 102
+[20-Nov-2014 21:42:03 UTC] PHP Notice:  Use of undefined constant cname - assumed 'cname' in /php-bandwidth/source/collections.php on line 102
+[20-Nov-2014 21:42:03 UTC] PHP Notice:  Use of undefined constant cname - assumed 'cname' in /php-bandwidth/source/collections.php on line 102
+[20-Nov-2014 21:42:03 UTC] PHP Notice:  Use of undefined constant cname - assumed 'cname' in /php-bandwidth/source/collections.php on line 102
+[20-Nov-2014 21:42:03 UTC] PHP Notice:  Use of undefined constant cname - assumed 'cname' in /php-bandwidth/source/collections.php on line 102
+[20-Nov-2014 21:42:03 UTC] PHP Notice:  Use of undefined constant cname - assumed 'cname' in /php-bandwidth/source/collections.php on line 102
+[20-Nov-2014 21:42:03 UTC] PHP Notice:  Use of undefined constant cname - assumed 'cname' in /php-bandwidth/source/collections.php on line 102
+[20-Nov-2014 21:42:04 UTC] PHP Notice:  Use of undefined constant cname - assumed 'cname' in /php-bandwidth/source/collections.php on line 102
+[20-Nov-2014 21:42:04 UTC] PHP Notice:  Use of undefined constant cname - assumed 'cname' in /php-bandwidth/source/collections.php on line 102
+[20-Nov-2014 21:42:04 UTC] PHP Notice:  Use of undefined constant cname - assumed 'cname' in /php-bandwidth/source/collections.php on line 102
+[20-Nov-2014 21:42:04 UTC] PHP Notice:  Use of undefined constant cname - assumed 'cname' in /php-bandwidth/source/collections.php on line 102
+[20-Nov-2014 21:43:38 UTC] PHP Notice:  Undefined property: Catapult\Media::$primary_method in /php-bandwidth/source/resource.php on line 500
+[20-Nov-2014 21:43:38 UTC] PHP Notice:  Undefined property: Catapult\Media::$primary_init in /php-bandwidth/source/resource.php on line 502
+[20-Nov-2014 21:43:38 UTC] PHP Notice:  Undefined index: mediaName in /php-bandwidth/source/model.php on line 1049
+[20-Nov-2014 21:43:38 UTC] PHP Notice:  Undefined index: file in /php-bandwidth/source/model.php on line 1050
+[20-Nov-2014 21:43:38 UTC] PHP Fatal error:  Class 'CatipultApiException' not found in /php-bandwidth/source/types.php on line 557
+[20-Nov-2014 21:44:35 UTC] PHP Notice:  Undefined property: Catapult\Media::$id in /php-bandwidth/source/model.php on line 1076
+[20-Nov-2014 21:45:16 UTC] PHP Notice:  Undefined property: Catapult\Media::$id in /php-bandwidth/source/model.php on line 1076
+[20-Nov-2014 21:53:39 UTC] PHP Parse error:  syntax error, unexpected ';' in /php-bandwidth/source/collections.php on line 117
+[20-Nov-2014 21:54:01 UTC] PHP Notice:  Undefined property: Catapult\Media::$id in /php-bandwidth/source/model.php on line 1076
+[20-Nov-2014 21:54:31 UTC] PHP Notice:  Undefined property: Catapult\Media::$id in /php-bandwidth/source/model.php on line 1076

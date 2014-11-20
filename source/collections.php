@@ -24,19 +24,28 @@ class CollectionObject {
 	public function __construct($data)
 	{
 		$this->data = array();
+		$this->order = array();
 
 		if ($data instanceof DataPacketCollection) {
 			$data = $data->get();
+			$cnt = 0;
 
                         foreach($data as $d) {
 			      /* can we find an id? */
 			      if (!(array_key_exists("id", $d)))
 			           $d['id'] = Locator::Find(array("Location" => $d['location']));
 			
-                              if (!(in_array("id", array_keys($d)) && in_array("number", array_keys($d))))
+                              if (!(in_array("id", array_keys($d))))
                                     throw new \CatapultApiException(EXCEPTIONS::EXCEPTION_OBJECT_ID_NOT_PROVIDED);
 
-                              $this->data[$d{'id'}] = $d;
+
+			      /** is it a quiet load or do we initialize the object **/
+			      /** if loading is not optimal, find better approach **/	
+                              $this->data[$d{'id'}] = $this->get($d{'id'});
+                              //$this->data[$d{'id'}] = $d;
+			      $this->order[$cnt] = $d{'id'};
+
+			      $cnt ++;
                         }
 		} else {
 			foreach ($data as $d) {
@@ -54,6 +63,28 @@ class CollectionObject {
 		return Encoder::Serialize($this->data);
 	}
 
+	/**
+ 	 * get the last item within
+	 * a set
+	 *
+	 * 
+	 */
+	public function last()
+	{
+		return $this->data[$this->order[sizeof($this->order) - 1]];
+	}
+
+	/**
+	 * get the first item
+	 * within a set
+	 *
+	 */
+	public function first()
+	{
+		return $this->data[$this->order[0]];
+	}
+	
+
         /**
 	 * Get one item from the Collection
          * if item is not initiated, initiate it
@@ -68,30 +99,33 @@ class CollectionObject {
 
 		$cname = "Catapult\\" . $this->getName();
 
-		$obj = new ${cname};
+		$obj = new $cname;
 
 		return $obj->get($id);
         }
 
 	/**
 	 * Before adding we must make sure the datapacket fits(schema)
+         * support two fold init where
+         * data can either be the initialized object
+         * or raw array
          *
          * @param data -> data that is valid for this collection
 	 */
         public function add($data)
         {
-	      $schema = array_keys($this->data[0]);
-              $schema1 = array_keys($data);
+	      $schema = array_keys(get_object_vars(($this->data[0])));
+              $schema1 = is_array($data) ? array_keys($data) : array_keys(get_object_vars($data));
 
 	      foreach ($schema as $s) 
 		if (!(in_array($s, $schema1)))
 			throw new \CatapultApiException(EXCEPTIONS::WRONG_DATA_PACKET . $this->name());
 
 
-              $data = Ensure::Input($data);
-	      $data1 = $data->get();
-
-              $this->data[$data1['id']] = $data1;
+              if (is_object($data))
+		     $this->data[$data1->id] = $data1;
+	      else
+         	     $this->data[$data1['id']] = $this->get($data1['id']);
         }
 
 	/**
@@ -137,8 +171,8 @@ class CollectionObject {
 	 */
 	public function reload()
 	{
-                  foreach ($this->data as $item)
-                       $item->reload();
+                  foreach ($this->data as $idx => $item)
+                       $this->data[$idx] = $item->reload();
 	}
 }
 

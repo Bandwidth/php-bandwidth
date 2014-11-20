@@ -531,11 +531,19 @@ final class Call Extends AudioMixin {
 		return ($this->direction == "in");
 	}
 
+	/**
+	 * opposite of is_incoming/1
+	 * no need to create its own version
+	 */
 	public function is_outgoing()
 	{
 		return !($this->is_incoming());
 	}
 
+	/**
+	 * overloads existing
+	 * get_audio_url/1
+	 */
 	public function get_audio_url()
 	{
 		return URIResource::Make($this->path, array($this->call_id, "audio"));
@@ -899,6 +907,9 @@ final class ConferenceMemberCollection {
 final class Recording extends GenericResource {
 
 	private $path = "recordings";
+	public  $primary_method = "get";
+
+
 	public static $needs = array(
 		"id"
 	);
@@ -987,8 +998,10 @@ final class Recording extends GenericResource {
  * media. Should be used
  * in conjuction with PoolResource
  */
-final class Media extends ListResource {
+final class Media extends GenericResource {
 	private $path = "media";
+	public $primary_method = "get";
+	public $primary_init = "get";
 
 	/**
 	 * Construct a media object
@@ -1293,6 +1306,13 @@ final class TranscriptionCollection extends CollectionObject {
 	}
 }
 
+final class TransactionCollection extends CollectionObject {
+	public function getName()
+	{
+		return "Transaction";
+	}
+}
+
 final class CallCollection extends CollectionObject { 
 	public function getName()
 	{
@@ -1307,6 +1327,20 @@ final class UserErrorCollection extends CollectionObject {
 	}
 }
 
+final class MediaCollection extends CollectionObject {
+	public function getName()
+	{
+		return "Media";
+	}
+}
+
+final class GatherCollection extends CollectionObject {
+	public function getName()
+	{
+		return "Gather";
+	}
+}
+
 final class ApplicationCollection extends CollectionObject {
 	public function getName()
 	{
@@ -1314,6 +1348,18 @@ final class ApplicationCollection extends CollectionObject {
 	}
 }
 
+final class Transaction extends GenericResource {
+	public $fields = array(
+		"id"
+	);
+
+	public function __construct($data=null)
+	{
+		$client = Client::get();
+
+		return Resolver::Find($this, $data);
+	}
+}
 
 final class Application extends GenericResource {
 
@@ -1399,9 +1445,19 @@ final class Application extends GenericResource {
 	{
 		$url = URIResource::Make($this->path, array($id));
 
-		$data = $this->client->get($url);
+		$data = new DataPacket($this->client->get($url));
 
 		return Constructor::Make($this, $data->get());	
+	}
+
+	/**
+	 * stub for patch.
+	 *
+	 * @args: see patch/1
+	 */
+	public function update($args)
+	{
+		return $this->patch($args);
 	}
 
 	/**
@@ -1448,6 +1504,10 @@ final class Account extends GenericResource {
 	public function __construct()
 	{
 		$this->client = Client::Get();
+
+		/** directly get the account no further action needed **/
+
+		return $this->get();
 	}
 
 	/**
@@ -1455,6 +1515,8 @@ final class Account extends GenericResource {
 	 */
 	public function get()
 	{
+		$url = URIResource::Make($this->path);
+
 		$data = new DataPacket($this->client->get($url));
 
 		return Constructor::Make($this, $data->get());
@@ -1475,7 +1537,7 @@ final class Account extends GenericResource {
 
 		$data = $this->client->get($url, $data->get());
 
-		return new TransactionsCollection(new DataPacketCollection($data));
+		return new TransactionCollection(new DataPacketCollection($data));
 	}
 }
 
@@ -1530,7 +1592,7 @@ final class PhoneNumbers extends GenericResource {
 
 		$data = $this->client->get($url);
 
-		return Constructor::Make($this, $data->get());
+		return Constructor::Make($this, $data);
 	}
 
 	/**
@@ -1728,18 +1790,18 @@ final class NumberInfo extends GenericResource {
 		'name', 'number'	
 	);
 
-	public function __construct($data)
+	public function __construct($data=null)
 	{
 		$this->client = Client::Get();
 
-		return Resolver::Find($data);
+		return Resolver::Find($this, $data);
 	}
 
 	public function get($number)
 	{
 		$url = URIResource::Make($this->path, array($number));
 
-		$data = $this->client->get($url, array(), false, false);
+		$data = $this->client->get($url, array(), true, false);
 
 		return Constructor::Make($this, $data);
 	}
@@ -1793,7 +1855,7 @@ final class UserError extends GenericResource {
 	{
 		$url = URIResource::Make($this->path, array($id));
 
-		$data = $this->client->get($query);
+		$data = $this->client->get($id);
 
 		return Constructor::Make($this, $data);
 	}

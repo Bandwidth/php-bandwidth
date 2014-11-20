@@ -1,9 +1,17 @@
 <?php
 namespace Catapult;
 
+
+/** these will be used across the unit tests, they have no meaning in the api **/
 define('__DEFAULT_SENDER__', '+14244443192');
 define('__DEFAULT_RECEIVER__', '+14244443192');
+define('__DEFAULT_URL__', 'http://bandwidth.com/');
+define('__APPLICATION_UNIT_TEST__', 'UNIT TEST APPLICATION');
 
+/** runtime settings for debug / production release **/
+interface API_MODE {
+	const API_IN_DEBUG_MODE = 1;
+}
 
 /* do NOT change these. These will be exchanged at runtime */
 interface API {
@@ -52,6 +60,7 @@ interface WARNINGS {
 	const WARNING_PARAMETER_TEXT_MESSAGE = "Warning: Text message you entered was too long..";
 }
 
+/** defaults used in place of custom parameters **/
 interface DEFAULTS {
 	const PAGE_SIZE = 0;
 	const SIZE = 25;
@@ -61,8 +70,12 @@ interface DEFAULTS {
 	const ENDPOINT_SEP = "/";
 }
 
+/** paths for api endpoints **/
 interface PATHS {
 	const PATH_TO_MESSAGES = "messages";
 	const PATH_TO_CALLS = "calls";
+	const PATH_TO_APPLICATION = "";
+	const PATH_TO_CONFERENCE = "";
+	const PATH_TO_RECORDINGS = "";
 }
 ?>

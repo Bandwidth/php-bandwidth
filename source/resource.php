@@ -194,6 +194,9 @@ class OptionResource {
  */ 
 class GenericResource extends ListResource { 
 
+
+	private $primary_method = "get";
+
 	public $lastUpdate;
 
 	public static $valid_opts = array(

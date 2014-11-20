@@ -363,6 +363,15 @@ class CallTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals($gather->state, Catapult\GATHER_STATES::completed);
 	}
+
+	public function testSIPCall()
+	{
+		$call = new Catapult\Call;
+		$params = new Catapult\Parameters;
+		$call->setFrom(new Catapult\PhoneNumber(__DEFAULT_SENDER__));
+		$call->setTo(new Catapult\SIP(__DEFAULT_SIP___));
+		$call->create($params);
+	}
 	
 	public function testBridge()
 	{
@@ -386,7 +395,7 @@ class CallTest extends PHPUnit_Framework_TestCase {
 		$bridge = new Catapult\Bridge;	
 
 		$bridge->create(array(
-			"callIds" => Catapult\CallCombo::($call, $call1)
+			"callIds" => Catapult\CallCombo::Make($call, $call1)
 		));
 	}
 

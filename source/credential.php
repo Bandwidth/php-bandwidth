@@ -56,6 +56,9 @@ final class Credentials {
 		"path" => "/credentials.json"
 	);
 
+	/** set the credentials incase we need JSON **/
+	private $credentials = null;
+
 	/**
 	 * All string parameters
 	 * if provided use these in place of json credentials
