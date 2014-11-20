@@ -17,3 +17,11 @@ and credential object.
 
 Unit tests for Calls, conferencing with mock 
 based testing
+
+0.2.5
+------------------------------
+
+Updates in models, unit tests
+Support for application, usererror, and recordings
+Changes to base objects and rewrite of
+events
