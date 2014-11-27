@@ -284,9 +284,9 @@ final class Call Extends AudioMixin {
 	{
 		$data = Ensure::Input($query);
 
-		if (!($data->has("size"))
+		if (!($data->has("size")))
 			$data->add("size", DEFAULTS::SIZE);			
-		if (!($data->has("page"))
+		if (!($data->has("page")))
 			$data->add("page", DEFAULTS::PAGE);			
 
 
@@ -960,9 +960,9 @@ final class Recording extends GenericResource {
 	{
 		$data = Ensure::Input($args);
 
-		if (!($data->has("size"))
+		if (!($data->has("size")))
 			$data->add("size", DEFAULTS::SIZE);			
-		if (!($data->has("page"))
+		if (!($data->has("page")))
 			$data->add("page", DEFAULTS::PAGE);			
 
 
@@ -1147,9 +1147,9 @@ class Message extends GenericResource {
 	public function list_messages($args = array() /* polymorphic. **args */)
 	{
 		$args = Ensure::Input($args);
-		if (!($args->has("size"))
+		if (!($args->has("size")))
 			$args->add("size", DEFAULTS::SIZE);
-		if (!($args->has("page"))
+		if (!($args->has("page")))
 			$args->add("page", DEFAULTS::SIZE);
 
 
@@ -1447,7 +1447,7 @@ final class Application extends GenericResource {
 		$data = Ensure::Input($data);
 		if (!($data->has("size")))
 			$data->add("size", DEFAULTS::SIZE);		
-		if (!($data->has("page"))
+		if (!($data->has("page")))
 			$data->add("page", DEFAULTS::PAGE);
 
 		$url = URIResource::Make($this->path);
@@ -1595,9 +1595,9 @@ final class PhoneNumbers extends GenericResource {
 	public function list_numbers($args)
 	{
 		$data = Ensure::Input($args);
-		if (!($data->has("size"))
+		if (!($data->has("size")))
 			$data->add("size", DEFAULTS::SIZE);
-		if (!($data->has("page"))
+		if (!($data->has("page")))
 			$data->add("page", DEFAULTS::PAGE);
 
 		$url = URIResource::Make($this->path);
@@ -1734,9 +1734,9 @@ final class PhoneNumbers extends GenericResource {
 	{
 		$data = Ensure::Input($params);
 
-		if (!($data->has("size"))
+		if (!($data->has("size")))
 			$data->add("size", DEFAULTS::SIZE);
-		if (!($data->has("page"))
+		if (!($data->has("page")))
 			$data->add("page", DEFAULTS::PAGE);
 
 		$url = URIResource::Make($this->availablePath, array("local"));
@@ -1756,9 +1756,9 @@ final class PhoneNumbers extends GenericResource {
 	{
 		$data = Ensure::Input($params);
 
-		if (!($data->has("size"))
+		if (!($data->has("size")))
 			$data->add("size", DEFAULTS::SIZE);
-		if (!($data->has("page"))
+		if (!($data->has("page")))
 			$data->add("page", DEFAULTS::PAGE);
 
 
@@ -1875,9 +1875,9 @@ final class UserError extends GenericResource {
 	{
 		$data = Ensure::Input($query);
 
-		if (!($data->has("size"))
+		if (!($data->has("size")))
 			$data->add("size", DEFAULTS::SIZE);
-		if (!($data->has("page"))
+		if (!($data->has("page")))
 			$data->add("page", DEFAULTS::PAGE);
 
 		$url = URIResource::Make($this->path);
