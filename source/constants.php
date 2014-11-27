@@ -62,8 +62,8 @@ interface WARNINGS {
 
 /** defaults used in place of custom parameters **/
 interface DEFAULTS {
-	const PAGE_SIZE = 0;
-	const SIZE = 25;
+	const PAGE = 0;
+	const SIZE = 1000;
 	const SIZE_MAX = 1000;
 	const SIZE_MIN = 0;
 	const EXTENSION = ".mp3";

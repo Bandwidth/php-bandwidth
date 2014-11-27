@@ -317,6 +317,12 @@ final class DataPacket extends BaseUtilities {
 		return $this->data;
 	}
 
+	/** we need this since get only can be called once */
+	public function has($key)
+	{
+		return isset($this->data[$key]) ? TRUE : FALSE;
+	}
+
 	/**
 	 * Return a singular
 	 * value from the data
