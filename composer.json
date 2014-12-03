@@ -5,6 +5,12 @@
     "keywords": ["bandwidth","catapult","sdk","php"],
     "homepage": "http://github.com/nadirhamid/php-bandwidth-sdk",
     "license": "MIT",
+    "repositories": [
+	{
+	   "type": "vcs",
+	   "url": "https://github.com/bandwidthcom/php-bandwidth"
+	}
+    ],
     "authors": [
         {
             "name": "Nadir Hamid",
@@ -14,7 +20,8 @@
     ],
     "require": {
         "php": ">=5.2.0",
-	"phpunit/phpunit": "3.7.*"
+	"phpunit/phpunit": "3.7.*",
+	"bandwidth/catapult-php-sdk": "dev-master"
     },
     "autoload": {
 	"classmap": [

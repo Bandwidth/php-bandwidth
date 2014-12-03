@@ -7,7 +7,7 @@ try {
 
 	echo "It worked -- Bandwidth/Catapult can now be loaded with composer..";
 } catch (Exception $e) {
-	echo "It does not work.";
+	echo "It does not work. Please make sure coposer is installed and you've ran composer install bandwidth/catapult";
 }
 
 

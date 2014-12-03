@@ -230,14 +230,13 @@ class GenericResource extends ListResource {
 			$glue .= $m[1];	
 
 		$m = array();
-		preg_match_all("/([A-Z][a-z]+)+/", $function, $m);		
+		preg_match_all("/[A-Z]{1,}[a-z]+/", $function, $m);		
 
 		if (sizeof($m) > 0) {
-			foreach ($m[1] as $m1) {
+			foreach ($m[0] as $m1) {
 				$glue .= "_" . strtolower($m1);
 			}
 		}
-
 
 		if (method_exists($this, $glue))
 			return $this->{$glue}($args);

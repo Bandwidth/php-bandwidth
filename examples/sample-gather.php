@@ -29,7 +29,9 @@ try {
 	$gather = new Catapult\Gather($call->id);
 
 	$gather->create(array(
-		"maxDigits" => 10
+		"maxDigits" => 10, 
+		"terminatingDigits" => '#', 
+		"prompt" => array('sentence' => 'Please enter your 5 digit code')
 	));
 
 	$call->speakSentence(array(

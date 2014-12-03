@@ -256,8 +256,6 @@ final class RESTClient {
 
 		$code = (int) curl_getinfo($this->hndl, CURLINFO_HTTP_CODE);
 
-		echo var_dump($raw);
-
 		if (curl_errno($this->hndl) != 0)
 			throw new \CatapultApiException("Request was unproperly configured");
 

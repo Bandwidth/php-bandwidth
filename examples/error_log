@@ -9,3 +9,21 @@
 [26-Nov-2014 20:35:43 America/Chicago] PHP Strict Standards:  Non-static method Catapult\EnsureResource::Input() should not be called statically, assuming $this from incompatible context in /home/qbooksco/php-bandwidth/source/model.php on line 309
 [26-Nov-2014 20:35:43 America/Chicago] PHP Strict Standards:  Non-static method Catapult\URIResource::Make() should not be called statically, assuming $this from incompatible context in /home/qbooksco/php-bandwidth/source/model.php on line 310
 [26-Nov-2014 20:35:43 America/Chicago] PHP Strict Standards:  Non-static method Catapult\Locator::find() should not be called statically, assuming $this from incompatible context in /home/qbooksco/php-bandwidth/source/model.php on line 312
+[03-Dec-2014 17:40:51 UTC] PHP Fatal error:  Undefined class constant 'WRONG_PARAMETERS' in /root/php-bandwidth/source/resource.php on line 361
+[03-Dec-2014 17:44:44 UTC] PHP Notice:  Undefined property: Catapult\Media::$id in /root/php-bandwidth/source/model.php on line 1085
+[03-Dec-2014 17:48:57 UTC] PHP Notice:  Undefined property: Catapult\Media::$id in /root/php-bandwidth/source/model.php on line 1085
+[03-Dec-2014 17:54:44 UTC] PHP Notice:  Undefined property: Catapult\Media::$id in /root/php-bandwidth/source/model.php on line 1085
+[03-Dec-2014 17:56:17 UTC] PHP Notice:  Undefined property: Catapult\Media::$id in /root/php-bandwidth/source/model.php on line 1085
+[03-Dec-2014 17:56:36 UTC] PHP Notice:  Undefined property: Catapult\Media::$id in /root/php-bandwidth/source/model.php on line 1085
+[03-Dec-2014 18:01:04 UTC] PHP Notice:  Undefined property: Catapult\Media::$id in /root/php-bandwidth/examples/sample-recording.php on line 29
+[03-Dec-2014 18:02:47 UTC] PHP Fatal error:  Call to a member function store() on a non-object in /root/php-bandwidth/examples/sample-recording-with-media.php on line 36
+[03-Dec-2014 18:04:34 UTC] PHP Fatal error:  Call to a member function store() on a non-object in /root/php-bandwidth/examples/sample-recording-with-media.php on line 36
+[03-Dec-2014 18:05:28 UTC] PHP Fatal error:  Call to a member function store() on a non-object in /root/php-bandwidth/examples/sample-recording-with-media.php on line 36
+[03-Dec-2014 18:07:39 UTC] PHP Fatal error:  Call to a member function store() on a non-object in /root/php-bandwidth/examples/sample-recording-with-media.php on line 36
+[03-Dec-2014 18:08:15 UTC] PHP Warning:  Invalid argument supplied for foreach() in /root/php-bandwidth/source/resource.php on line 238
+[03-Dec-2014 18:08:15 UTC] PHP Fatal error:  Call to a member function last() on a non-object in /root/php-bandwidth/examples/sample-recording-with-media.php on line 23
+[03-Dec-2014 18:08:29 UTC] PHP Fatal error:  Call to a member function last() on a non-object in /root/php-bandwidth/examples/sample-recording-with-media.php on line 23
+[03-Dec-2014 18:08:42 UTC] PHP Fatal error:  Call to a member function last() on a non-object in /root/php-bandwidth/examples/sample-recording-with-media.php on line 23
+[03-Dec-2014 18:09:06 UTC] PHP Fatal error:  Call to a member function last() on a non-object in /root/php-bandwidth/examples/sample-recording-with-media.php on line 23
+[03-Dec-2014 18:09:39 UTC] PHP Fatal error:  Call to a member function last() on a non-object in /root/php-bandwidth/examples/sample-recording-with-media.php on line 23
+[03-Dec-2014 18:09:54 UTC] PHP Fatal error:  Call to a member function store() on a non-object in /root/php-bandwidth/examples/sample-recording-with-media.php on line 36

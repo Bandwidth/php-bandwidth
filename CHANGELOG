@@ -25,3 +25,13 @@ Updates in models, unit tests
 Support for application, usererror, and recordings
 Changes to base objects and rewrite of
 events
+
+0.2.6
+-----------------------------
+
+New recording example
+Minor fixes in resource.php (camelcase typed function handling)
+       - i.e: support for using getMediaFile in place of get_media_file
+Added to Composer's Packagist.
+Include now using
+composer require "bandwidth/catapult-php-sdk"

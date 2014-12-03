@@ -11,6 +11,10 @@ $cred = new Catapult\Credentials('USER_ID', 'API_TOKEN', 'API_SECRET');
 //$cred = new Catapult\Credentials;
 // dont forget to comment out the implicit version if using assoc array
 
+// this example is cli based
+// use like:
+// php ./sample-message.php "+from" "+to" "message"
+
 $client = new Catapult\Client($cred);
 
 

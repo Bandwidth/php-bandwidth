@@ -956,7 +956,7 @@ final class Recording extends GenericResource {
 	 * @param page -> [CatapultPage or Int]
 	 * @param size -> [CatapultSize or int]
  	 */
-	public function list_recordings($page=0, $size=1000)
+	public function list_recordings($args)
 	{
 		$data = Ensure::Input($args);
 
@@ -964,7 +964,6 @@ final class Recording extends GenericResource {
 			$data->add("size", DEFAULTS::SIZE);			
 		if (!($data->has("page")))
 			$data->add("page", DEFAULTS::PAGE);			
-
 
 		$url = URIResource::Make($this->path);
 		
@@ -1018,13 +1017,21 @@ final class Media extends GenericResource {
 	 * where data must be a blob
 	 * in binary. Store in memory until
 	 * store/1 is called
+	 * if data is passed use this as object
+	 * otherwise initialize from passed id
+         *
+	 * @param data -> data blob
+	 * @param id -> media id
 	 */
 	public function __construct($data=null, $id=null)
 	{
 		$this->data = $data;
+
 		$this->client = Client::Get();
 
-		return Resolver::Find($this, $data);
+		if ($id) $this->id = $id;
+
+		if ($data == null) return Resolver::Find($this, $data);
 	}
 
 	/**
