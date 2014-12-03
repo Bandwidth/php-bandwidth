@@ -7,7 +7,7 @@ require_once('../source/Catapult.php');
 // with your information
 // or comment out below /w your keys
 //
-$cred = new Catapult\Credentials('u-mmuxnl7o2u2ijsdg2hrwdsq', 't-6fazqwatb5dvfyc6myihzdq', '6xycw6e25w6tltw3nvhkgj7tukreq6d63w4mazq');
+$cred = new Catapult\Credentials('USER_ID', 'API_TOKEN', 'API_SECRET');
 //$cred = new Catapult\Credentials;
 // dont forget to comment out the implicit version if using assoc array
 
