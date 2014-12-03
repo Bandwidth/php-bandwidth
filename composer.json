@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Bandwidth's Catapult SDK for PHP",
     "keywords": ["bandwidth","catapult","sdk","php"],
-    "homepage": "http://github.com/nadirhamid/php-bandwidth-sdk",
+    "homepage": "http://github.com/bandwidthcom/php-bandwidth-sdk",
     "license": "MIT",
     "repositories": [
 	{
