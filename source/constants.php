@@ -78,4 +78,5 @@ interface PATHS {
 	const PATH_TO_CONFERENCE = "";
 	const PATH_TO_RECORDINGS = "";
 }
+
 ?>

@@ -21,8 +21,8 @@ try {
 	$call = new Catapult\Call;
 
 	$call->create(array(
-		"from" => $argv[1],
-		"to" => $argv[2],
+		"from" => new Catapult\PhoneNumber($argv[1]),
+		"to" => new Catapult\PhoneNumber($argv[2]),
 		"conferenceId" => $conference->id
 	));
 

@@ -1,0 +1,4 @@
+[03-Dec-2014 19:10:16 UTC] PHP Strict Standards:  Declaration of Catapult\PhoneCombo::Make() should be compatible with Catapult\Types::Make($args) in /php-bandwidth/source/types.php on line 347
+[03-Dec-2014 19:12:15 UTC] PHP Strict Standards:  Declaration of Catapult\PhoneCombo::Make() should be compatible with Catapult\Types::Make($args) in /php-bandwidth/source/types.php on line 347
+[03-Dec-2014 19:13:19 UTC] PHP Strict Standards:  Declaration of Catapult\PhoneCombo::Make() should be compatible with Catapult\Types::Make($args) in /php-bandwidth/source/types.php on line 347
+[03-Dec-2014 19:13:37 UTC] PHP Strict Standards:  Declaration of Catapult\PhoneCombo::Make() should be compatible with Catapult\Types::Make($args) in /php-bandwidth/source/types.php on line 347

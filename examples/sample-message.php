@@ -20,9 +20,9 @@ $client = new Catapult\Client($cred);
 
 try {
 	$message = new Catapult\Message(array(
-		"from" => $argv[1],
-		"to" => $argv[2], 
-		"text" => $argv[3]
+		"from" => new Catapult\PhoneNumber($argv[1]),
+		"to" => new Catapult\PhoneNumber($argv[2]), 
+		"text" => new Catapult\TextMessage($argv[3])
 	));
 
 	printf("We've messaged number: %s, said, %s!", $argv[2], $argv[3]);
