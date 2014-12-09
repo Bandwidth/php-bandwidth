@@ -1,3 +1,0 @@
-[03-Dec-2014 19:22:23 UTC] PHP Strict Standards:  Declaration of Catapult\PhoneCombo::Make() should be compatible with Catapult\Types::Make($args) in /php-bandwidth/source/types.php on line 374
-[03-Dec-2014 19:23:09 UTC] PHP Warning:  require_once(Catapult): failed to open stream: No such file or directory in /php-bandwidth/source/test.php on line 2
-[03-Dec-2014 19:23:09 UTC] PHP Fatal error:  require_once(): Failed opening required 'Catapult' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /php-bandwidth/source/test.php on line 2

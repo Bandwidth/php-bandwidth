@@ -137,6 +137,23 @@ class CallEvent extends EventType {
 	}	
 }
 
+class ConferenceEventMixin extends CallEvent {
+	public function __construct()
+	{
+		return new Conference($this->conference_id);
+	}
+}
+
+
+final class MessageEvent extends EventType {
+	public function __construct()
+	{
+		return new Message($this->message_id);
+	}
+}
+
+
+
 /**
  * Defines a set of extensions
  * that are used throughout
@@ -186,14 +203,6 @@ final class RecordingCallEvent extends CallEvent {
 
 }
 
-class ConferenceEventMixin extends CallEvent {
-	public function __construct()
-	{
-		return new Conference($this->conference_id);
-	}
-}
-
-
 final class ConferenceEvent extends ConferenceEventMixin {
 
 }
@@ -208,14 +217,6 @@ final class ConferencePlaybackEvent extends ConferenceEventMixin {
 
 final class ConferenceSpeakEvent extends ConferenceEventMixin {
 
-}
-
-
-final class MessageEvent extends EventType {
-	public function __construct()
-	{
-		return new Message($this->message_id);
-	}
 }
 
 ?>
