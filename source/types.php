@@ -77,10 +77,6 @@ final class DTMF extends Types {
  * dispatch
  */
 abstract class Types {
-	public function Make($args /* polymorphic */)
-	{
-		return self::__construct($args);
-	}
 }
 
 /**
@@ -95,7 +91,7 @@ final class PhoneNumber extends Types {
 		preg_match("/^([0-9\(\)\/\+ \-]*)$/", $number, $m);
 
 		if (!(sizeof($m) > 0))
-			throw new \CatapultApiException("Invalid phone number inputted: " . $number);
+			throw new \CatapultApiException("Invalid phone number inputed: " . $number);
 		
 		$this->number = $number;
 	}
@@ -112,9 +108,14 @@ final class PhoneNumber extends Types {
 }
 
 /* Aux functions to make sure text fits */
+/** warn by default, when off take out the extranous text pieces **/
 final class TextMessage extends Types {
-	public function __construct($message='')
+	public function __construct($message='', $warn=TRUE)
 	{
+		if ($warn && strlen($message) > 160)
+			throw new \CatapultApiException("Text message was too long. use: warn[FALSE] to omit. Text: " . $message);
+			
+
 		$this->message = $message;
 	}
 	public function __toString()
@@ -186,10 +187,10 @@ final class Size extends Types {
 	public function __construct($size=DEFAULTS::SIZE)
 	{
 		if ($size > DEFAULTS::SIZE_MAX)
-			Throw new \CatapultApiException("Size too large");
+			Throw new \CatapultApiException("Size too large. Size was: " . $size);
 
 		if ($size < DEFAULTS::SIZE_MIN)
-			Throw new \CatapultApiException("Size too small");
+			Throw new \CatapultApiException("Size too small. Size was: " . $size);
 
 		$this->size = $size;
 	}
@@ -598,18 +599,48 @@ final class Sentence extends Types {
  * for media types
  */
 final class FileHandler extends Types {
-	public function save($as=null, $contents)
+	public static function save($as=null, $contents)
 	{
-		$this->as = $as;
+		if (!self::try_directory($as))
+			return -1;
+
 
 		return file_put_contents(realpath($as) . $as, $contents);
 	}	
-	public function read($filename)
+	public static function read($filename)
 	{
 		if (!(is_file(realpath($filename))))
 			throw new \CatipultApiException("File does not exist");
 
 		return file_get_contents(realpath($filename));
+	}
+
+	/**
+	 * make a directory
+	 * if needed 
+         * @param fully qualified path
+	 */
+	public static function try_directory($file)
+	{
+		$matches = array();
+		preg_match("/(.*\/).*$/", $file, $matches);
+		
+		try {
+			if (sizeof($matches) >= 1) {
+				$folder = $matches[1];
+
+				if (!(is_dir($folder))) {
+					mkdir($folder);
+					return 1;
+				}
+			}
+		} catch (Exception $e) {
+			/** do not handle this exception it is low level and will be warned by the caller **/
+
+			return -1;
+		}
+
+		return 1;
 	}
 
 	public function __toString()

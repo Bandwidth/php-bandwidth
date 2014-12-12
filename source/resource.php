@@ -32,7 +32,7 @@ class URIResource extends BaseResource {
 	 * @param $path -> partial path
 	 * @param $extras -> extra endpoints
 	 */
-	public function Make($path, $extras=array(), $sep="/")
+	public static function Make($path, $extras=array(), $sep="/")
 	{
 		$ext = "";
 
@@ -348,7 +348,7 @@ class EnsureResource extends BaseResource {
          *
 	 * @param $data -> [array | multidimensional array]
 	 */
-	public function Input(&$data)
+	public static function Input(&$data)
 	{
 		if ($data instanceof Parameters || $data instanceof CollectionObject)
 			return new DataPacket($data);
@@ -372,7 +372,7 @@ class EnsureResource extends BaseResource {
          *
 	 * @param $data -> [array | multidimensional array]
 	 */
-	public function Output($data)
+	public static function Output($data)
 	{
 		return Input($data);
 	}
@@ -385,7 +385,7 @@ class EnsureResource extends BaseResource {
 	 * @param $data -> set of schema data
 	 * @param $key -> key that 'NEEDS' to exist
 	 */
-	public function Strict(&$data, $key)
+	public static function Strict(&$data, $key)
 	{
 		if ($data instanceof DataPacket)
 			$data = $data->get();
@@ -417,14 +417,14 @@ class Constructor {
          * its new properties. New object
          * should be made seperate
          */
-	public function Make(&$object, $data=array())
+	public static function Make(&$object, $data=array())
 	{
                 foreach ($data as $k => $d) {
                        $object->$k = $d;
-                       $this->checked = true;
+                       $checked = true;
                 }
 			
-		if (!$this->checked)
+		if (!$checked)
 			Throw new \CatapultApiException(EXCEPTIONS::EXCEPTION_OBJECT_DATA . $object->__CLASS__);	
 
 		/* get the full
@@ -482,7 +482,7 @@ class ResolverResource extends GenericResource {
 	{
 	}
 
-	public function Find(&$object, $data)
+	public static function Find(&$object, $data)
 	{
 		/* if the data is null or its a quiet load return */
 		if ($data == null)

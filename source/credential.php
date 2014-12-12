@@ -14,6 +14,7 @@ final class CredentialsUser {
 		API::API_BANDWIDTH_USER_ID,
 		API::API_BANDWIDTH_TOKEN,
 		API::API_BANDWIDTH_SECRET,
+		API::API_BANDWIDTH_APPLICATION_ID,
 		API::API_BANDWIDTH_VALID_NUMBERS
 	);
 
@@ -28,12 +29,19 @@ final class CredentialsUser {
 	{
 		$cnt = 0;
 		$args = func_get_args();
+		$found = array();
 
 		foreach ($args as $arg) {
-			$k = self::$order[$cnt];
+			$found[] = $k = self::$order[$cnt];
 			$this->$k = $arg;
 
 			$cnt ++;
+		}
+
+		foreach (self::$order as $key) {
+			if (!(array_key_exists($key, $found)))
+				$this->$key = "";
+
 		}
 	}
 }
@@ -74,6 +82,8 @@ final class Credentials {
 		/* only consider parameter init if all provided */
 		if ($user_token && $api_token && $api_secret)
 			$this->credentials = new CredentialsUser($user_token, $api_token, $api_secret);
+		else
+			$this->credentials = file_get_contents(__DIR__ . "/credentials.json");
 	} 
 
 
@@ -135,6 +145,17 @@ final class Credentials {
         public function getNumber($idx)
 	{
 		return $content->BANDWIDTH_VALID_NUMBERS[$idx];
+	}
+
+	/**
+	 * Shortcut. Get the first app
+	 * id. Usage
+	 *
+	 * @param idx: index of app
+	 */
+	public function getApplicationId($idx=0)
+	{
+		return $content->BANDWIDTH_APPLICATION_ID;
 	}
 
 	/**

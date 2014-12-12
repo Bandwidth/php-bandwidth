@@ -46,10 +46,12 @@ final class Client {
 			$this->user_id = $ctx['BANDWIDTH_USER_ID'];
 			$this->token = $ctx['BANDWIDTH_API_TOKEN'];
 			$this->secret = $ctx['BANDWIDTH_API_SECRET'];
+			$this->application_id = $ctx->get('BANDWIDTH_APPLICATION_ID');
 		} else {
 			$this->user_id = $ctx->get('BANDWIDTH_USER_ID');
 			$this->token = $ctx->get('BANDWIDTH_API_TOKEN');
 			$this->secret = $ctx->get('BANDWIDTH_API_SECRET');
+			$this->application_id = $ctx->get('BANDWIDTH_APPLICATION_ID');
 		}
 
 		if (!isset($this->user_id)
@@ -59,7 +61,7 @@ final class Client {
 
 		$this->started = TRUE;
 
-		return ($CLIENT = new RESTClient($this->user_id, array($this->token, $this->secret)));
+		return ($CLIENT = new RESTClient($this->user_id, array($this->token, $this->secret), $this->application_id));
 	}
 
 	/**
@@ -68,7 +70,7 @@ final class Client {
 	 * where a directory is subject to ONE client
 	 * @param -> string [directory descriptor]
 	 */
-	public function get($descriptor=__FILE__)
+	public static function get($descriptor=__FILE__)
 	{
 		global $CLIENT;
 		return $CLIENT;
@@ -91,7 +93,7 @@ final class RESTClient {
 	    CURLOPT_CONNECTTIMEOUT => 10,
 	    CURLOPT_RETURNTRANSFER => true,
 	    CURLOPT_TIMEOUT        => 60,
-	    CURLOPT_USERAGENT      => 'catipult-php-demo.0.1'
+	    CURLOPT_USERAGENT      => 'catipult-php-sdk.5.0'
 	  );
 
           /* media types we need to handle */
@@ -105,14 +107,16 @@ final class RESTClient {
 	 * client default to definition
 	 * of endpoint, interop format
 	 * @param user_id -> Catapult User Id
+	 * @param app_id -> Primary app id
 	 * @param auth -> API Credentials
 	 * @param endpoint -> Catapult endpoint
 	 */
-	public function __construct($user_id='', $auth=array(), $endpoint=API::API_ENDPOINT, $interop=API::APPLICATION_JSON)
+	public function __construct($user_id='', $auth=array(), $app_id=API::API_DEFAULT_APPLICATION, $endpoint=API::API_ENDPOINT, $interop=API::APPLICATION_JSON)
 	{
 		$this->endpoint = $endpoint;
 		$this->interop = $interop; 
 		$this->uid = $user_id;
+		$this->application_id = $app_id;
 		$this->auth = $auth;
 		$this->timeout = 60;
 		$this->options = array();

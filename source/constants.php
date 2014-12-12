@@ -6,6 +6,9 @@ namespace Catapult;
 define('__DEFAULT_SENDER__', '+14244443192');
 define('__DEFAULT_RECEIVER__', '+14244443192');
 define('__DEFAULT_URL__', 'http://bandwidth.com/');
+define('__DEFAULT_LOG_PREFIX__', 'catapult_');
+define('__DEFAULT_LOG_PATH__', __DIR__ . "/logs");
+define('__DEFAULT_LOG_USER_PATH__', getcwd() . "/logs");
 define('__APPLICATION_UNIT_TEST__', 'UNIT TEST APPLICATION');
 
 /** runtime settings for debug / production release **/
@@ -24,7 +27,9 @@ interface API {
 	const API_BANDWIDTH_USER_ID = "BANDWIDTH_USER_ID";
 	const API_BANDWIDTH_TOKEN = "BANDWIDTH_API_TOKEN";
 	const API_BANDWIDTH_SECRET = "BANDWIDTH_API_SECRET";
+	const API_BANDWIDTH_APPLICATION_ID = "BANDWIDTH_APPLICATION_ID";
 	const API_BANDWIDTH_VALID_NUMBERS = "BANDWIDTH_API_VALID_NUMBERS";
+	const API_DEFAULT_APPLICATION = "APP-XX";
 	const SDK_VERSION = "0.1";
 	const SDK_USER_AGENT = "catapult-sdk-php";
 }
@@ -74,9 +79,9 @@ interface DEFAULTS {
 interface PATHS {
 	const PATH_TO_MESSAGES = "messages";
 	const PATH_TO_CALLS = "calls";
-	const PATH_TO_APPLICATION = "";
-	const PATH_TO_CONFERENCE = "";
-	const PATH_TO_RECORDINGS = "";
+	const PATH_TO_APPLICATION = "application";
+	const PATH_TO_CONFERENCE = "conference";
+	const PATH_TO_RECORDINGS = "recordings";
 }
 
 ?>

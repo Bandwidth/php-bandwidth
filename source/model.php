@@ -869,7 +869,7 @@ final class ConferenceMember extends AudioMixin {
 	 *
 	 * @param id -> valid member id | defaults to object's id
 	 */
-	public function get()
+	public function get($id=null)
 	{
 		$url = URIResource::Make($this->path, $this->id);
 
@@ -1075,11 +1075,14 @@ final class Media extends GenericResource {
 	 * Store media as file 
 	 * on the fs
 	 *
+         * By default create a directory if not
+         * currently available
+         *
 	 * @param $filename -> full file name
          * @param $extention -> extention to save in 
 	 */
 	public function store($filename, $filext=DEFAULTS::EXTENSION)
-	{
+	{	
 		return FileHandler::save($filename, $this->data);
 	}
 
@@ -1541,7 +1544,7 @@ final class Account extends GenericResource {
 	/**
 	 * Get an account
 	 */
-	public function get()
+	public function get($id=null)
 	{
 		$url = URIResource::Make($this->path);
 
