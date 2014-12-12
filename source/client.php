@@ -105,7 +105,7 @@ final class RESTClient {
           public static $standard_opts = array(
 		"ssl" => TRUE,
 		"ssl_key" => FALSE,
-		"verify" => TRUE 
+		"verify" =>FALSE 
 	  );
 
 	/**
@@ -196,7 +196,7 @@ final class RESTClient {
 	 *
 	 * @param verify: TRUE|FALSE
  	 */
-	public static function verify($verify)
+	public static function verify($verify=TRUE)
 	{
 		self::$standard_opts['verify'] = $verify;
 	}
