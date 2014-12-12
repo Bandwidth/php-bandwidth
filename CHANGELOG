@@ -16,3 +16,17 @@ Continuing from 0.5.0
   Catapult uses reporting mode ERROR_STRICT ^ CRITICAL.
   this is only visible in the API and not externally. I.e scripts
   using it.
+
+0.5.1
+---------------------------------------------------
+
+- Full SSL support in RESTful client. Ability to use
+  identity keys when authenticating with Catapult. Usage:
+  BEFORE initiating a client object:
+
+  Catapult\RESTClient::sslKey("mykey.pem");
+
+  fully turning ssl checks off (not recommended, only do if unable to sign certificate):
+  Catapult\RESTClient::verify(FALSE);
+
+- Fixes to log for Windows, Local machine setup fixes, with CURL

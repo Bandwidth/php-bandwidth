@@ -7,8 +7,8 @@ define('__DEFAULT_SENDER__', '+14244443192');
 define('__DEFAULT_RECEIVER__', '+14244443192');
 define('__DEFAULT_URL__', 'http://bandwidth.com/');
 define('__DEFAULT_LOG_PREFIX__', 'catapult_');
-define('__DEFAULT_LOG_PATH__', __DIR__ . "/logs");
-define('__DEFAULT_LOG_USER_PATH__', getcwd() . "/logs");
+define('__DEFAULT_LOG_PATH__', __DIR__ . DIRECTORY_SEPARATOR . "logs");
+define('__DEFAULT_LOG_USER_PATH__', getcwd() . DIRECTORY_SEPARATOR . "logs");
 define('__APPLICATION_UNIT_TEST__', 'UNIT TEST APPLICATION');
 
 /** runtime settings for debug / production release **/

@@ -11,6 +11,9 @@ $cred = new Catapult\Credentials('BANDWIDTH_USER_ID', 'BANDWIDTH_API_TOKEN', 'BA
 //$cred = new Catapult\Credentials;
 // dont forget to comment out the implicit version if using assoc array
 
+Catapult\RESTClient::SSLKey("key.pem");
+
+
 $client = new Catapult\Client($cred);
 
 

@@ -92,9 +92,9 @@ final class Log {
 				mkdir(self::$logger_opts['path']);
 
 			if (($pfile = self::find()))
-				$file = realpath(self::$logger_opts['path']) . "/" . $pfile;
+				$file = realpath(self::$logger_opts['path']) . DIRECTORY_SEPARATOR  . $pfile;
 			else 
-				$file = realpath(self::$logger_opts['path']) . "/" . __DEFAULT_LOG_PREFIX__ . $date_of_log->format("Y-M-D-h:i:s") . ".log";
+				$file = realpath(self::$logger_opts['path']) . DIRECTORY_SEPARATOR  . __DEFAULT_LOG_PREFIX__ . $date_of_log->format("Y-M-D-h-i-s") . ".log";
 
 			self::$log_file = fopen($file, self::$logger_opts['mode']);
 

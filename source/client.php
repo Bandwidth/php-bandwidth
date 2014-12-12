@@ -101,6 +101,12 @@ final class RESTClient {
 		"audio/wav",
                 "audio/mp3"
           );
+	
+          public static $standard_opts = array(
+		"ssl" => TRUE,
+		"ssl_key" => FALSE,
+		"verify" => TRUE 
+	  );
 
 	/**
 	 * CTor for RESTful
@@ -120,6 +126,10 @@ final class RESTClient {
 		$this->auth = $auth;
 		$this->timeout = 60;
 		$this->options = array();
+
+		/** if ssl is off, replace https with http **/
+		if (!(self::$standard_opts['ssl']))
+			$this->endpoint = preg_replace("/https/","http",$this->endpoint);
 	}
 
 	/**
@@ -145,6 +155,50 @@ final class RESTClient {
 	protected function options($k)
 	{
 		return $this->options{$k};
+	}
+
+
+	/**
+	 * Whether to use
+	 * ssl or not. To extend
+	 * support of SSL you can use
+         * a private key file which will
+	 * be used in conjuction with the RESTclient.
+         * Catapult\RESTClient::ssl(TRUE)
+         * Catapult\RESTClient::ssl_key("./path_to_key");
+         *
+         * To turn off (use no ssl):
+         * Catapult\RESTClient::ssl(FALSE);
+	 *	
+	 * @param on: TRUE|FALSE
+	 */
+	public static function ssl($on=TRUE)
+	{
+		self::$standard_opts['ssl'] = $on;		
+	}
+
+	/**
+	 * Set the SSL key file
+	 * used in CURL requests.
+	 * 
+	 * @param file: partial or fully qualified file path
+	 */
+	public static function sslKey($file)
+	{
+		self::$standard_opts['ssl_key'] = realpath($file);
+	}
+
+	/**
+         * Do we need to verify
+	 * this SSL request? By default
+	 * we only do if there is a key
+	 * provided. If not, no
+	 *
+	 * @param verify: TRUE|FALSE
+ 	 */
+	public static function verify($verify)
+	{
+		self::$standard_opts['verify'] = $verify;
 	}
 
 	/**
@@ -187,11 +241,20 @@ final class RESTClient {
 	private function request($method, $url, $data=array(), $mixed=FALSE, $decode=FALSE)
 	{
 		$this->hndl = curl_init();
-		curl_setopt($this->hndl, CURLOPT_SSL_VERIFYPEER, 1);
+		curl_setopt($this->hndl, CURLOPT_SSL_VERIFYPEER, self::$standard_opts['verify']);
 		curl_setopt($this->hndl, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($this->hndl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 		curl_setopt($this->hndl, CURLOPT_HEADER, TRUE);
-		
+
+		if (self::$standard_opts['ssl'])	
+			curl_setopt($this->hndl, CURLOPT_SSL_VERIFYPEER, 1);
+
+		/** if we're using an ssl key include it. **/	
+		/** also verify the host in addition to the peer **/
+		if (self::$standard_opts['ssl_key'] && self::$standard_opts['ssl']) {
+			curl_setopt($this->hndl, CURLOPT_CAINFO, self::$standard_opts['ssl_key']);
+			curl_setopt($this->hndl, CURLOPT_VERIFYHOST, self::$standard_opts['verify']);
+		}
 
 		if ($method == "POST") { 
 			if (!is_string($data))
@@ -235,8 +298,7 @@ final class RESTClient {
 		$headers = array();
 
 		/* take the headers out */
-		/* if we're let with nothing. return headers and dont encode */
-
+		/* if we're left with nothing. return headers and dont encode */
 		$lines = explode("\n", $header);
 		foreach ($lines as $l) {
 			$h = explode(": ", $l, 2); 
