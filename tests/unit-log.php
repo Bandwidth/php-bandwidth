@@ -54,4 +54,5 @@ class LogTest extends PHPUnit_Framework_TestCase {
 	{
 		Catapult\Log::close();	
 	}
+}
 ?>
