@@ -62,7 +62,7 @@ class Locator extends BaseUtilities {
          * entity
 	 * @param $headers -> string based header string
  	 */
-	public function find($headers,$id=true)
+	public static function find($headers,$id=true)
 	{
 		$header = parent::find($headers, "Location");
 
