@@ -9,12 +9,14 @@ require_once('../source/Catapult.php');
 // with your information
 // or comment out below /w your keys
 //
-$cred = new Catapult\Credentials('USER_ID', 'API_TOKEN', 'API_SECRET');
+$cred = new Catapult\Credentials('BANDWIDTH_USER_ID', 'BANDWITH_API_TOKEN', 'BANDWIDTH_API_SECRET');
 //$cred = new Catapult\Credentials;
 // dont forget to comment out the implicit version if using assoc array
 
 $client = new Catapult\Client($cred);
 
+if (!(isset($argv[1]) || isset($argv[2])))
+	die ("\nPlease provide command line input like: \n php ./sample-gather.php 'from' 'to' 'five_digit_code'\n\n");
 
 try {
 	$call = new Catapult\Call;

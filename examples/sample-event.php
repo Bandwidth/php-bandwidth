@@ -15,7 +15,7 @@ require_once('../source/Catapult.php');
 // https://catapult.inetwork.com/pages/catapult.jsf
 // (Callback HTTP URL)
 //
-$cred = new Catapult\Credentials('USER_ID', 'API_TOKEN', 'API_SECRET');
+$cred = new Catapult\Credentials('BANDWIDTH_USER_ID', 'BANDWIDTH_API_TOKEN', 'BANDWIDTH_API_SECRET');
 //$cred = new Catapult\Credentials;
 // dont forget to comment out the implicit version if using assoc array
 
