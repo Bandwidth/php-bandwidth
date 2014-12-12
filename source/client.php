@@ -246,14 +246,12 @@ final class RESTClient {
 		curl_setopt($this->hndl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 		curl_setopt($this->hndl, CURLOPT_HEADER, TRUE);
 
-		if (self::$standard_opts['ssl'])	
-			curl_setopt($this->hndl, CURLOPT_SSL_VERIFYPEER, 1);
-
 		/** if we're using an ssl key include it. **/	
 		/** also verify the host in addition to the peer **/
 		if (self::$standard_opts['ssl_key'] && self::$standard_opts['ssl']) {
 			curl_setopt($this->hndl, CURLOPT_CAINFO, self::$standard_opts['ssl_key']);
-			curl_setopt($this->hndl, CURLOPT_VERIFYHOST, self::$standard_opts['verify']);
+			curl_setopt($this->hndl, CURLOPT_SSL_VERIFYPEER, 1);
+			curl_setopt($this->hndl, CURLOPT_VERIFYHOST, 2);
 		}
 
 		if ($method == "POST") { 
