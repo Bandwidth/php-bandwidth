@@ -34,7 +34,7 @@ function camelcase($array)
  * handling
  */
 class BaseUtilities { 
-	public function find($headers, $term)
+	public static function find($headers, $term)
 	{
 		if (!(isset($headers[$term])))
 			throw new \CatapultApiException("No header found as $term:");
