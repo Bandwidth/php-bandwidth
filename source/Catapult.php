@@ -25,6 +25,21 @@ error_reporting(E_ALL ^ E_STRICT);
  */
 date_default_timezone_set('UTC');
 
+$phpver = explode('.', phpversion());
+
+if (!($phpver[0] == '5' && $phpver[1] >= 3)) {
+	// PHP not above or equal 5.3.0
+	// We need this for namespaces
+	// todo: implement '\' namespaces as '_' for
+	// legacy versions
+	Throw new \Exception("Catapult API supports PHP >= 5.3.0");
+}
+
+if (!(function_exists('curl_version'))) {
+	//no curl support
+	Throw new \Exception("Catapult needs libCURL..");
+}
+
 $files = array("constants", "utils", "client", "states", "log", "exception", "collections", "resource", "generic", "types", "model", "credential", "client", "event");
 foreach ($files as $f)
 	require_once(realpath(__DIR__ . "/$f.php"));
