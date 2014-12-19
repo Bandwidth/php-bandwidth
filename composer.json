@@ -2,8 +2,9 @@
     "name": "bandwidth/catapult",
     "type": "library",
     "description": "Bandwidth's Catapult SDK for PHP",
+    "version": "0.5.0",
     "keywords": ["bandwidth","catapult","sdk","php"],
-    "homepage": "http://github.com/bandwidthcom/php-bandwidth-sdk",
+    "homepage": "http://github.com/bandwidthcom/php-bandwidth",
     "license": "MIT",
     "repositories": [
 	{
@@ -19,12 +20,12 @@
         }
     ],
     "require": {
-        "php": ">=5.2.0",
+        "php": ">=5.3.0",
 	"ext-curl": "*",
 	"ext-json": "*"
     },
     "require-dev": {
-        "php": ">=5.2.0",
+        "php": ">=5.3.0",
 	"ext-curl": "*",
 	"ext-json": "*"
     },
