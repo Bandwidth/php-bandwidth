@@ -427,59 +427,5 @@
             "testing",
             "xunit"
         ]
-    },
-    {
-        "name": "bandwidth/catapult-php-sdk",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/bandwidthcom/php-bandwidth.git",
-            "reference": "0c9fa1cfdf2369238f9ab5d08c921e68b2af49b0"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/bandwidthcom/php-bandwidth/zipball/0c9fa1cfdf2369238f9ab5d08c921e68b2af49b0",
-            "reference": "0c9fa1cfdf2369238f9ab5d08c921e68b2af49b0",
-            "shasum": ""
-        },
-        "require": {
-            "ext-curl": "*",
-            "ext-json": "*",
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "ext-curl": "*",
-            "ext-json": "*",
-            "php": ">=5.3.0",
-            "phpunit/phpunit": "3.7.*"
-        },
-        "time": "2014-12-19 17:48:50",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "classmap": [
-                "source/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Nadir Hamid",
-                "email": "matrix.nad@gmail.com",
-                "role": "Developer"
-            }
-        ],
-        "description": "Bandwidth's Catapult SDK for PHP",
-        "homepage": "http://github.com/bandwidthcom/php-bandwidth",
-        "keywords": [
-            "bandwidth",
-            "catapult",
-            "php",
-            "sdk"
-        ]
     }
 ]
