@@ -4,9 +4,60 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "15f4ad6974e91be163066f10c11265c6",
-    "packages": [],
-    "packages-dev": [
+    "hash": "97c535dc329a2b86dfe6c3c302406328",
+    "packages": [
+        {
+            "name": "bandwidth/catapult",
+            "version": "0.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bandwidthcom/php-bandwidth.git",
+                "reference": "240c9a7acbd5faaf13a3ed0447be7e21efbb712c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bandwidthcom/php-bandwidth/zipball/240c9a7acbd5faaf13a3ed0447be7e21efbb712c",
+                "reference": "240c9a7acbd5faaf13a3ed0447be7e21efbb712c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.3.0",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "source/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nadir Hamid",
+                    "email": "matrix.nad@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Bandwidth's Catapult SDK for PHP",
+            "homepage": "http://github.com/bandwidthcom/php-bandwidth",
+            "keywords": [
+                "bandwidth",
+                "catapult",
+                "php",
+                "sdk"
+            ],
+            "time": "2014-12-19 18:44:21"
+        },
         {
             "name": "phpunit/php-code-coverage",
             "version": "1.2.18",
@@ -421,19 +472,12 @@
             "time": "2014-12-02 20:19:20"
         }
     ],
+    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {
-        "ext-curl": "*",
-        "ext-json": "*",
-        "php": ">=5.3.0"
-    },
-    "platform-dev": {
-        "ext-curl": "*",
-        "ext-json": "*",
-        "php": ">=5.3.0"
-    }
+    "platform": [],
+    "platform-dev": []
 }
