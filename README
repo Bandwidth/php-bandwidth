@@ -9,7 +9,7 @@ to install, with composer
 composer require bandwidth/catapult
 
 
-if you cloned the repository, use:
+when cloning the repository, you can use:
 
 composer update
 
