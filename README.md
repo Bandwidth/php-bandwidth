@@ -6,14 +6,31 @@ Installing:
 
 to install, with composer
 
-composer require bandwidth/catapult-php-sdk
+composer require bandwidth/catapult
 
 OR after cloning:
 
 composer update
 
 
+Always getting a stable copy
+---------------------------------------------------------------
+
+As we test newer releases, functionality may not always
+be identical to a major release, to obtain the mininum stable (currently 0.5.1)
+use:
+
+composer require bandwidth/catapult:0.5.1
+
+
+
+API keys
+---------------------------------------------------------------
+
+
 REMEMBER to configure "source/credentials.json" keys with your own.
+You should always set r/w to this file safe incase of using over
+a web server.
 
 
 Running unit tests.
