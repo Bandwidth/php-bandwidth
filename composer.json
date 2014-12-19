@@ -21,7 +21,9 @@
     "require": {
 	"ext-curl": "*",
 	"ext-json": "*",
-	"php": ">=5.3.0"
+	"php": ">=5.3.0",
+        "bandwidth/catapult-php-sdk": "dev-master",
+        "bandwidth/catapult": "dev-master"
     },
     "require-dev": {
 	"ext-curl": "*",

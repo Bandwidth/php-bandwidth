@@ -6,7 +6,12 @@ Installing:
 
 to install, with composer
 
-composer require bandwidth/catapult-php-sdk
+composer require bandwidth/catapult-php-sdk:dev-master
+
+
+or (if you cloned the SDK), use
+
+composer update
 
 
 REMEMBER to configure "source/credentials.json" keys with your own.
