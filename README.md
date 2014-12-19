@@ -6,10 +6,9 @@ Installing:
 
 to install, with composer
 
-composer require bandwidth/catapult-php-sdk:dev-master
+composer require bandwidth/catapult-php-sdk
 
-
-or (if you cloned the SDK), use
+OR after cloning:
 
 composer update
 
