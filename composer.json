@@ -30,5 +30,6 @@
 	"classmap": [
 		"source/"
 	]
-    }
+    },
+    "minunum-stability": "dev"
 }
