@@ -1,5 +1,5 @@
 {
-    "name": "bandwidth/catapult-php-sdk",
+    "name": "bandwidth/catapult",
     "type": "library",
     "description": "Bandwidth's Catapult SDK for PHP",
     "keywords": ["bandwidth","catapult","sdk","php"],
@@ -20,8 +20,11 @@
     ],
     "require": {
         "php": ">=5.2.0",
-	"phpunit/phpunit": "3.7.*",
-	"bandwidth/catapult-php-sdk": "dev-master"
+	"ext-curl": "*",
+	"ext-json": "*"
+    },
+    "require-dev": {
+	"phpunit/phpunit": "3.7.*"
     },
     "autoload": {
 	"classmap": [
