@@ -9,6 +9,11 @@ to install, with composer
 composer require bandwidth/catapult
 
 
+if you cloned the repository, use:
+
+composer update
+
+
 REMEMBER to configure "source/credentials.json" keys with your own.
 
 
