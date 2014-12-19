@@ -39,7 +39,7 @@ final class CredentialsUser {
 		}
 
 		foreach (self::$order as $key) {
-			if (!(array_key_exists($key, $found)))
+			if (!(in_array($key, $found)))
 				$this->$key = "";
 
 		}
