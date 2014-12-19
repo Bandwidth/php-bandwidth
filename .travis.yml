@@ -5,8 +5,5 @@ php:
   - 5.4
   - 5.5
 
-before_install:
-  - rm ./composer.json
-
-install:
-  - composer require bandwidth/catapult
+script:
+  - ./.travis-build.sh
