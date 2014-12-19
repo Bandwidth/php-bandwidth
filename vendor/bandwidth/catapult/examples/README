@@ -1,0 +1,21 @@
+Examples:
+
+Note: you have edit your credentials before using these. 
+You can either do this in the PHP file. Or edit credentials.json.
+
+
+Running
+------------------------------------------------------------
+
+These examples should be ran from a command line. Like so:
+
+
+php ./sample-call.php "+12135147675" "+12135147675"
+
+or
+
+php ./sample-conference.php "+12135147675" "+12135147675"
+
+or 
+
+php ./sample-message.php "+FROMNUMBER" "+TONUMBER" "message"

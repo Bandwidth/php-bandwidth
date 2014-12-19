@@ -1,0 +1,14 @@
+language: php
+
+php:
+  - 5.0
+  - 5.1 
+  - 5.2 
+
+before_install:
+  - curl -sS http://getcomposer.org/installer | php 
+  - composer require bandwidth/catapult
+  - composer require phpunit
+
+install:
+  - phpunit --boostrap "./source/Catapult.php"

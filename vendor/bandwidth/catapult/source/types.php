@@ -1,0 +1,652 @@
+<?php
+
+namespace Catapult;
+
+/**
+ * types are a set of client side helpers
+ * to ease the integration of warnings,
+ * exceptions in a application. Unless 
+ * specified these should merely serialize into
+ * a string with __toString
+ *
+ * provides:
+ * @class DTMF -- Generate valid DTMF's
+ * @class TextMessage -- A valid textmessage in length and
+ * only containts printable characters
+ * @class PhoneNumber -- Valid phone numbers
+ * @class CallBackURL -- A URL that is encoded with RFC 3896
+ * @class ID -- a Catapult id where the prefix specified its type
+ * @class Voice -- A valid voice in Catapult API
+ */
+
+/**
+ * constructs a legal dtmf where the dtmf is a subset of the valid
+ * chars: 
+ *
+ * Valid chars are '0123456789*#ABCD'
+ * DTMFs need to url encoded before being
+ * dispatched.
+ */
+final class DTMF extends Types {
+	/**
+	 * Initialize the dtmf
+	 * as a string
+	 * check if all characters 
+	 * are valid
+	 */
+	public static $valid = array(
+		"0",
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"8",
+		"9",
+		"#",
+		"A",
+		"B",
+		"C",
+		"D",
+		"#",
+		"@"
+	);
+
+	public function __construct($dtmf='')
+	{
+		foreach (str_split($dtmf) as $c)
+			if (!(in_array($c, self::$valid)))
+				throw new \CatapultApiException("Invalid DTMF valid characters: " . implode(',', self::$valid));
+
+		$this->dtmf = $dtmf;
+			
+	}
+
+	/* DTMF needs to be urlencoded */
+	public function __toString()
+	{
+		return urlencode($this->dtmf);
+	}
+}
+/**
+ * Base Models for construction
+ * of RESTful properties
+ * also provides some helpers
+ * to validate input before
+ * dispatch
+ */
+abstract class Types {
+}
+
+/**
+ * client side
+ * validation of PhoneNumber
+ * perform all validation on init
+ */
+final class PhoneNumber extends Types {
+	public function __construct($number)
+	{
+		$m = array();
+		preg_match("/^([0-9\(\)\/\+ \-]*)$/", $number, $m);
+
+		if (!(sizeof($m) > 0))
+			throw new \CatapultApiException("Invalid phone number inputed: " . $number);
+		
+		$this->number = $number;
+	}
+
+	public function Make($args)
+	{
+		return;
+	}
+
+	public function __toString()
+	{
+		return (string) $this->number;
+	}
+}
+
+/* Aux functions to make sure text fits */
+/** warn by default, when off take out the extranous text pieces **/
+final class TextMessage extends Types {
+	public function __construct($message='', $warn=TRUE)
+	{
+		if ($warn && strlen($message) > 160)
+			throw new \CatapultApiException("Text message was too long. use: warn[FALSE] to omit. Text: " . $message);
+			
+
+		$this->message = $message;
+	}
+	public function __toString()
+	{
+		return strlen($this->message) >= 160 ? (substr($this->message, 0, 157) . "...") : $this->message;
+	}
+} 
+
+/**
+ * a callback uri object
+ * make sure uri fits in
+ * compilance with RFC 3986 and
+ * is properly encoded on client side
+ */
+final class Callback extends Types {
+	public function __construct($callback='')
+	{
+		$this->callback = $callback;
+	}
+	public function __toString()
+	{
+		return urlencode($this->callback);
+	}
+}
+
+/**
+ * unify timeouts with requests
+ * with a microsecond 
+ * object. Allow init in seconds
+ * or micro
+ */
+final class Timeout extends Types {
+	public function __construct($timeout, $in_seconds=TRUE)
+	{
+		$this->timeout = $timeout;
+		$this->in_seconds = $in_seconds;
+	}
+	/* PHP only implements toString
+	 * requests 'must' convert to int
+	 */
+	public function __toString()
+	{
+		$t = ($this->timeout * 1000);
+		return (string) ($this->in_seconds ? $t : $this->timeout);
+	}
+}
+
+/**
+ * A page that satisfies Catapult
+ * api.
+ */
+final class Page extends Types {
+	public function __construct($page=DEFAULTS::PAGE_SIZE)
+	{
+		$this->page = $page;
+	}
+
+	public function __toString()
+	{
+		return (string) $this->page;
+	}
+}
+
+/**
+ * A size that satisfies Catapult API
+ * exceptions
+ */
+final class Size extends Types {
+	public function __construct($size=DEFAULTS::SIZE)
+	{
+		if ($size > DEFAULTS::SIZE_MAX)
+			Throw new \CatapultApiException("Size too large. Size was: " . $size);
+
+		if ($size < DEFAULTS::SIZE_MIN)
+			Throw new \CatapultApiException("Size too small. Size was: " . $size);
+
+		$this->size = $size;
+	}
+	
+	public function __toString()
+	{
+		return (string) ($this->size);		
+	}
+}
+
+/**
+ * represent a catipult
+ * style date
+ * => 2014-11-08T18:54:30Z
+ */
+final class DateStamp extends Types {
+	/* datetime
+	 * or unix stamp
+	 */
+	public function __construct($datetime)
+	{
+		if (is_int($datetime)) {
+			$dt = new DateTime();	
+			$dt->setTimestamp($datetime);
+		} else {
+			$dt = $datetime;
+		}
+
+		$this->date = $dt;
+	}
+	public function __toString()
+	{
+		return $dt->format("Y-M-DTH:I:SZ");	
+	}
+}
+
+/**
+ * Represent a Catapult
+ * type id. Where id 
+ * must be an integer and string seperated
+ * by a dash. Like so:
+ * c-5o5kfc5hzmyshrpkpjnxzjy
+ * first letter representing the entity
+ * the other being the unique
+ */
+final class Id extends Types {
+	public static $prefixes = array(
+		"c",
+		"conf",
+		"b",
+		"rec",	
+		"u"
+	);
+
+	/**
+	 * construct an id object
+	 * throws on error. If not needed for
+	 * exception handling use: valid/1
+	 *
+	 * @param id: valid Catapult Id
+	 */
+	public function __construct($id)
+	{
+		if (!(self::valid($id)))
+			throw new \CatapultApiException("Invalid id, used: $id");
+
+		$this->id = $id;
+	}
+
+	/**
+	 * check if the supplied
+	 * id is valid
+	 * 
+	 * @param id: valid Catapult Id
+	 */
+	public function valid($id)
+	{
+		$valid = FALSE;
+
+		foreach (self::$prefixes as $prefix) {
+			$m = array();
+
+			preg_match("/$prefix-.*/", $id, $m);
+
+			if (sizeof($m))
+				$valid = TRUE;
+		}
+
+		return $valid;
+	}
+
+	public function __toString()
+	{
+		return (string) $this->id;
+	}
+}
+
+/**
+ * A catapult audio tag. 
+ */
+final class Tag extends Types {
+	public function __construct($str)
+	{
+		$this->str = $str;
+	}
+
+	public function __toString()
+	{
+		return (string) $this->str;
+	}
+
+}
+
+/**
+ * A class for the listed
+ * voices in Catapult
+ * list of available voices
+ * defined here: https://catapult.inetwork.com/docs/api-docs/calls/
+ * 
+ * 
+ * TODO: merge voice with gender to  
+ * prevent exception.
+ */
+final class Voice extends Types {
+	public static $available_voices = array(
+		"Jorge" => "male",
+		"Kate" => "female",
+		"Susan" => "female",
+		"Julie" => "female",
+		"Dave" => "male",
+		"Paul" => "male",
+		"Bridget" => "male",
+		"Violeta" => "female",
+		"Jolie" => "female",
+		"Bernard" => "male",
+		"Katrin" => "female",
+		"Stefan" => "male",
+		"Paola" => "male",
+		"Luca" => "male"
+	);
+
+	public $gender = "male";
+
+	public function __construct($voice)
+	{
+		if (!(in_array($voice, array_keys(self::$available_voices))))
+			throw new \CatapultApiException("Voice unrecognized");
+
+
+		$this->voice = $voice;
+		$this->gender = self::$available_voices[$voice];
+	}
+
+	public function __toString()
+	{
+		return (string) $this->voice;
+	}
+
+}
+
+/**
+ * Represent a single
+ * option in the api.
+ * namespace for k,v
+ * based commands that
+ * control flow of all
+ * example: \Catipult\Option("mute", TRUE);
+ */
+final class Option extends Types {
+	public function __construct($key, $val)
+	{
+		
+	}
+
+	public function __toString()
+	{
+
+	}
+}
+
+/**
+ * A one-to-one phone number object
+ * where the object should provide
+ * from => Catapult\PhoneNumber
+ * to => Catapult\PhoneNumber
+ */
+final class PhoneCombo extends Types {
+        public function Make($sender, $receiver)
+        {
+                   return array(
+                        "from" => (string) $sender,
+                        "to" => (string) $receiver
+                   );
+        }
+}
+
+/**
+ * Merge a finite amount
+ * of calls into one structure
+ * accepts:
+ *  **args => (call,call1, .. calln)
+ */
+final class CallCombo extends Types {
+	public function Make($args /* polymorphic */)
+	{
+		$calls = func_get_args();
+
+		$call_ids = array();
+
+		foreach ($calls as $call) {
+
+			if (is_object($call))
+				$call_ids[] = $call->id;
+			else 
+				$call_ids[] = $call;
+		}
+
+		return $call_ids;
+	}
+}
+
+/**
+ * convinience function
+ * for parameters. Serialize
+ * into DataPacket on addition
+ * Usage like:
+ * $params = new Catapult\Parameters();
+ * $params->setParam1("val");
+ * $params->setParam2("val");
+ */
+final class Parameters extends Types {
+	
+	/* Initial construct
+	 * of parameters
+	 *
+         * @param initial -> [Array | DataPacket]
+	 */
+	public function __construct($initial=array())	
+	{
+		$this->data = array();
+	}
+
+	/* set the needed
+	 * parameter as called
+ 	 *  
+	 * must be called with string 'set' 
+         * in function name
+         * @param function -> name of value to set
+	 * @param args -> arg to eval
+	 */
+	public function __call($function, $args /* polymorphic */) 
+	{
+		if ($function == "get")	
+			return;
+		
+		if (!(isset($args[0])))
+			throw new \CatapultApiException("Parameter must be passed to: " . __CLASS__);
+
+		$cmd = substr($function, 0, 3);
+
+		if (!($cmd  == "get" || $cmd == "set"))
+			throw new \CatapultApiException("Unknown command in parameters");
+
+		$key = preg_replace("/set|get/", "", $function);
+		$key = strtolower(substr($key, 0, 1)) . substr($key, 1, strlen($key));
+
+		if ($cmd == "get")
+			if (!(in_array($key, array_keys($this->data))))
+				throw new \CatapultApiException("Key not set in parameters");
+			else
+				return $this->$data[$key];
+
+
+		/* set the key in parameter */
+
+		$this->data[$key] = $args[0];
+	}
+
+	/**
+	 * Serialize the
+	 * object into its
+	 * datapacket reciprocal
+	 *
+	 */
+	public function serialize()
+	{
+		$d = new DataPacket($this->data);
+
+		$this->data = array();
+
+		return $d;
+	}
+
+	/* stub */
+	public function get()
+	{
+		return $this->serialize();
+	}
+}
+
+/** 
+ * small logic
+ * around states
+ */
+final class States extends Types {
+       public function Make($state)
+       {
+              return array("state" => strtolower($state));
+       }
+}
+
+/**
+ * makes sure the url
+ * is an actual
+ * media url before dispatch
+ */
+final class MediaURL extends Types {
+	public function __construct($media)
+	{
+		$this->url = $media;		
+	}
+
+	public function __toString()
+	{
+		return $this->url;
+	}
+}
+
+/* support a SIP. Additionally
+ * prepend protocol if needed
+ * as Catapult takes:
+ * 
+ * sip:someuser@somedomain.com
+ */
+final class SIP extends Types {
+	/* Construct
+	 * a SIP object
+	 * takes a string as
+	 * input HAS to be 
+	 * valid sip
+	 * see: https://www.ietf.org/rfc/rfc3261.txt
+	 */
+	public function __construct($sipurl)
+	{
+		$this->sip = $sipurl;	
+	}
+
+	/* do we already
+	 * have sip in the 
+	 * address?
+	 */
+	public function __toString()
+	{
+		$m = array();	
+		preg_match("/^sip:/", $this->sip, $m);
+	
+		if (sizeof($m) > 0)
+			return $this->sip;
+
+		return "sip:" . $this->sip;
+	}
+}
+
+/**
+ * A sentence ready data
+ * structure.
+ * remove all unprintable characters
+ * according to 
+ */
+final class Sentence extends Types {
+	/**
+	 * Form the sentence
+	 * object version
+	 */
+	public function __construct($sentence)
+	{
+		$this->sentence = $sentence;
+	}
+
+	/**
+	 * Form a sentence. Only
+	 * allow printable characters for
+	 * percision. 
+	 * 
+	 * @param sentence: sentence to speak
+	 * @param singular return as array or scalar
+	 */
+	public function Make($sentence, $singular=false)
+	{
+		if (!($singular)) 
+			return array(
+				"sentence" => $sentence
+			);
+
+		return $sentence;
+	}
+
+	public function __toString()
+	{
+		return $this->Make($this->sentence, TRUE);
+	}
+}
+
+/**
+ * Minimal filehandler
+ * for media types
+ */
+final class FileHandler extends Types {
+	public static function save($as=null, $contents)
+	{
+		if (!self::try_directory($as))
+			return -1;
+
+
+		return file_put_contents(realpath($as) . $as, $contents);
+	}	
+	public static function read($filename)
+	{
+		if (!(is_file(realpath($filename))))
+			throw new \CatipultApiException("File does not exist");
+
+		return file_get_contents(realpath($filename));
+	}
+
+	/**
+	 * make a directory
+	 * if needed 
+         * @param fully qualified path
+	 */
+	public static function try_directory($file)
+	{
+		$matches = array();
+		preg_match("/(.*\/).*$/", $file, $matches);
+		
+		try {
+			if (sizeof($matches) >= 1) {
+				$folder = $matches[1];
+
+				if (!(is_dir($folder))) {
+					mkdir($folder);
+					return 1;
+				}
+			}
+		} catch (Exception $e) {
+			/** do not handle this exception it is low level and will be warned by the caller **/
+
+			return -1;
+		}
+
+		return 1;
+	}
+
+	public function __toString()
+	{
+		return (string) $this->as;
+	}
+}
+
+?>

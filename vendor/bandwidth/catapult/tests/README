@@ -1,0 +1,5 @@
+Run these tests with PHPunit.
+Remember to use: --bootstrap
+i.e:
+
+php phpunit.phar --bootstrap ../source/Catapult.php {any_test}

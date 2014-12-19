@@ -1,0 +1,3 @@
+*.lock
+./source/error_log
+./examples/error_log
