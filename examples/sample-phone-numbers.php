@@ -1,8 +1,9 @@
 <?php
 require_once('../source/Catapult.php');
 
-// below is a sample text message
-// using Catapult's Phone Number alloc 
+// below is a sample getting all your 
+// registered phone numbers, using both
+// PhoneNumbers and NumberInfo service 
 //
 // IMPORTANT: edit credentials.json
 // with your information
