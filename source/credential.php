@@ -169,5 +169,15 @@ final class Credentials {
 		$a = $this->get();
 		$a[$key] = $val;
 	}
+
+	/**
+	 * Sets the path of credentials.json
+	 *
+	 * @param path: path
+	 */
+	public static function path($path)
+	{
+		self::$credentials_opts['path'] = realpath($path);
+	}
 }
 ?>
