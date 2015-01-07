@@ -13,27 +13,32 @@ OR after cloning:
 composer update
 
 
-Always getting a stable copy
+
+Running from source
 ---------------------------------------------------------------
 
-As we test newer releases, functionality may not always
-be identical to a major release, to obtain the mininum stable (currently 0.5.1)
-use:
+You can also use Catapult without composer, you only need
+to include "Catapult.php" from /source/
 
-composer require bandwidth/catapult:0.5.1
+Example:
 
+    require "source/Catapult.php"
 
 
 API keys
 ---------------------------------------------------------------
 
 
-REMEMBER to configure "source/credentials.json" keys with your own.
-You should always set r/w to this file safe incase of using over
-a web server.
+REMEMBER to configure your API keys.
+You can do this in 'one' of two ways:
+
+    1. Update credentials.json
+    with your keys 
+    2. Specify your keys to 
+    the Catapult client.
 
 
-Running unit tests.
+unit tests.
 ---------------------------------------------------------------
 
 In ./tests there are a list of tests to run any
@@ -45,12 +50,15 @@ and to run a rest:
 
 php phpunit.phar --bootstrap ../source/Catapult.php {test_name} 
 
-where test name can be any of the listed tests
+where test name can be any of the listed tests.
 
 
-Using in absense of composer 
+Requirements
 ---------------------------------------------------------------
 
-to use without composer, you only need
-to include "Catapult.php" from /source/
-	
+    needed:
+    php >= 5.3.0
+    libCurl
+
+    optional:
+    openSSL
