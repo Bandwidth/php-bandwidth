@@ -43,7 +43,7 @@ class TypesTest extends PHPUnit_Framework_TestCase {
 	{
 		$url = new Catapult\Callback("http://google.com/");
 
-		$this->assertEquals((string) $url, rawurlencode("http://google.com/"));
+		$this->assertEquals((string) $url, "http://google.com/");
 	}
 
 	public function testDTMF()

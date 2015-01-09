@@ -42,3 +42,11 @@ Continuing from 0.5.0
 
 - Add credentials.json location options. Usage:
   Catapult\Credentials::path("credentials.json");
+
+0.5.4
+-----------------------------------------------------
+
+- BaML support, translation to native BaML verbs,
+  attributes, and containers
+- XML reading, writing support with builtin BaML
+  checks. needs 'xml_parser'

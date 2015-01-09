@@ -84,4 +84,12 @@ interface PATHS {
 	const PATH_TO_RECORDINGS = "recordings";
 }
 
+interface BAML_XML_METHODS {
+   const XML_CHARACTER_DATA_HANDLER = "";
+}
+
+interface BAML_XML_HANDLERS {
+  const  BAML_PARSE_CHARACTER = "";
+}
+
 ?>
