@@ -40,6 +40,10 @@ if (!(function_exists('curl_version'))) {
 	Throw new \Exception("Catapult needs libCURL..");
 }
 
+if (!(function_exists('xml_parse'))) {
+    Throw new \Exception("Catapult BaML needs PHP's XML parser..");
+}
+
 $files = array("constants", "utils", "client", "states", "log", "exception", "collections", "resource", "generic", "types", "model", "credential", "client", "event", "baml");
 foreach ($files as $f)
 	require_once(realpath(__DIR__ . "/$f.php"));

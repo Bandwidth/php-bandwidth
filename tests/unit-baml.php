@@ -77,26 +77,88 @@ class BaMLTest extends PHPUnit_Framework_TestCase {
         $verb->addVerb($verb1);
         $baml->set($verb); 
 
-
         $this->assertEquals((string) $baml, $to); 
     }
 
     public function testParsing() {
         $baml = new Catapult\BaML;
-        $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<Response>
-<Gather requestUrl=\"https://gather.url/nextBaML\" requestUrlTimeout=\"10\" terminatingDigits=\"#\">
-    <SpeakSentence gender=\"female\" locale=\"en\" voice=\"female\">Please, press a digit.</SpeakSentence>
-</Gather>
-</Response>
-";
-
+        $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Gather requestUrl=\"https://gather.url/nextBaML\" requestUrlTimeout=\"10\" terminatingDigits=\"#\"><SpeakSentence gender=\"female\" locale=\"en\" voice=\"female\">Please, press a digit.</SpeakSentence></Gather></Response>"; 
         $baml->parse($xml);
+
+        $this->assertEquals($xml, $baml);
+    }
+
+
+    public function testSendMessage() {
+        $baml = new Catapult\BaML;
+        $verb = new Catapult\BaMLSendMessage;
+        $verb->addAttribute("from", "+12345");
+        $verb->addAttribute("to", "+1234");
+
+
+        $baml->set($verb);
+
+        $this->assertEquals(sizeof($baml->getVerbs()), 1);
+    }
+
+    public function testRedirect() {
+        $baml = new Catapult\BaML;
+        $verb = new Catapult\BaMLRedirect;
+        $verb->addAttribute("requestUrl", __DEFAULT_URL__);
+        
+        $baml->set($verb);
+
+
+        $this->assertEquals(sizeof($baml->getVerbs()), 1);
+    }
+
+    public function testHangup() {
+        $baml = new Catapult\BaML;
+        $verb = new Catapult\BaMLHangup;
+        $baml->set($verb);
+    
+        $this->assertEquals(sizeof($baml->getVerbs()), 1);
+    }
+
+    public function testTransfer() {
+        $baml = new Catapult\BaML;
+        $verb = new Catapult\BaMLTransfer;
+        $verb->addAttribute("transferTo", __DEFAULT_RECEIVER__);
+        $verb->addAttribute("transferCallerId", __DEFAULT_CALLER_ID__);
+        $baml->set($verb);
+
+        $this->assertEquals(sizeof($baml->getVerbs()), 1);
+    }
+
+    public function testPlayAudio() {
+        $baml = new Catapult\BaML;
+        $verb = new Catapult\BaMLPlayAudio;
+        $verb->addAttribute("audioUrl", __MEDIA_UNIT_TEST_FILE__);
+        $verb->addAttribute("digits", "1");
+
+        $baml->set($verb);
+
+        $this->assertEquals(sizeof($baml->getVerbs()), 1);
+    }
+
+    public function testGather() {
+        $baml = new Catapult\BaML;
+        $verb = new Catapult\BaMLGather;
+        $verb->addAttribute("requestUrl", __DEFAULT_URL__);
+        $verb->addAttribute("requestUrlTimeout", 5);
+        $verb->addAttribute("maxDigits", 5);
+        $verb->addAttribute("interDigitTimeout", 5);
+        $verb->addAttribute("bargeable", 1);
+        $verb->addAttribute("bargeable1", 1);
+
+        $baml->set($verb);
+
+        $this->assertEquals(sizeof($baml->getVerbs()), 1);
     }
 
     public function testFromFile() {
         $baml = new Catapult\BaML;
 
-        $baml->setAsStream("test.xml"); 
+        $baml->getAsStream(__BAML_UNIT_TEST_FILE_LOCATION__); 
     }
 }

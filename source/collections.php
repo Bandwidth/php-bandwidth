@@ -3,7 +3,7 @@ namespace Catapult;
 
 /**
  * A collection object. All collection classes must
- * inherit this. It provided methods to lookup, serialize
+ * inherit this. It provides methods to lookup, serialize
  * and put contents in a collection. Collections
  * can represent any extended class where
  * any of those listed in models. does not have an implemention for @class Media
@@ -293,9 +293,9 @@ final class DataPacket extends BaseUtilities {
 		$this->data = array();
 
 		foreach ($args as $k => $arg)
-			if (is_array($arg))
+			if (is_array($arg) || !method_exists($arg, "__toString"))
 				$this->data[$k] = $arg;
-			else
+            else 
 				$this->data[$k] = (string) $arg;
 
 	}

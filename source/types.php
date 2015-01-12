@@ -615,7 +615,7 @@ final class FileHandler extends Types {
 	public static function read($filename)
 	{
 		if (!(is_file(realpath($filename))))
-			throw new \CatipultApiException("File does not exist");
+			throw new \CatapultApiException("File does not exist");
 
 		return file_get_contents(realpath($filename));
 	}

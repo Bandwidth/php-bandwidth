@@ -1,15 +1,18 @@
 <?php
 namespace Catapult;
 
-
 /** these will be used across the unit tests, they have no meaning in the api **/
 define('__DEFAULT_SENDER__', '+14244443192');
 define('__DEFAULT_RECEIVER__', '+14244443192');
+define('__DEFAULT_CALLER_ID__', '+14244443192');
 define('__DEFAULT_URL__', 'http://bandwidth.com/');
 define('__DEFAULT_LOG_PREFIX__', 'catapult_');
 define('__DEFAULT_LOG_PATH__', __DIR__ . DIRECTORY_SEPARATOR . "logs");
 define('__DEFAULT_LOG_USER_PATH__', getcwd() . DIRECTORY_SEPARATOR . "logs");
-define('__APPLICATION_UNIT_TEST__', 'UNIT TEST APPLICATION');
+define('__APPLICATION_UNIT_TEST__', __DIR__ . DIRECTORY_SEPARATOR);
+define('__MEDIA_UNIT_TEST_FILE__', getcwd() . DIRECTORY_SEPARATOR . "files");
+define('__MEDIA_UNIT_TEST_FILE_LOCATION__', getcwd() . DIRECTORY_SEPARATOR . "files");
+define('__BAML_UNIT_TEST_FILE_LOCATION__', getcwd() . DIRECTORY_SEPARATOR . "files" . DIRECTORY_SEPARATOR . "test.xml");
 
 /** runtime settings for debug / production release **/
 interface API_MODE {
@@ -84,12 +87,32 @@ interface PATHS {
 	const PATH_TO_RECORDINGS = "recordings";
 }
 
+/** BAML definitions **/
+interface BAML_VERBS {
+    const BAML_SPEAK_SENTENCE = "SpeakSentence";
+    const BAML_PLAY_AUDIO = "PlayAudio";
+    const BAML_TRANSFER = "Transfer";
+    const BAML_GATHER = "Gather";
+    const BAML_SEND_MESSAGE = "SendMessage";
+    const BAML_REDIRECT = "Redirect";
+    const BAML_HANGUP = "Hangup";
+    const BAML_RECORD = "Record";
+}
+
 interface BAML_XML_METHODS {
-   const XML_CHARACTER_DATA_HANDLER = "";
+   const XML_CHARACTER_DATA_HANDLER = "xml_character_data_handler";
 }
 
 interface BAML_XML_HANDLERS {
   const  BAML_PARSE_CHARACTER = "";
+}
+
+interface BAML_XML_OPTIONS {
+  const  BAML_XML_ENCODING = "UTF-8";
+}
+
+interface BAML_SETTINGS {
+  const BAML_VERSION = "";
 }
 
 ?>

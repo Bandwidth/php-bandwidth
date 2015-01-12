@@ -4,23 +4,25 @@ namespace Catapult;
 /**
  * Support for Catapult's BAMl
  *
+ * This currently supports the following BaML verbs:
+ * SpeakSentence
+ * PlayAudio
+ * Transfer
+ * Record 
+ * Gather 
+ * SendMessage 
+ * Redirect
+ * Hangup
+ *
  * example usage:
- * $bobject = new Catapult\BaML\Message;
- * $bobject->setVerb("Response");
- * $bobject->setText("SpeakSentence", "Paul");
- * $bobject->setParam("voice", "Paul");
- * or 
- * $bobject->setAttribute("voice", "Paul");
- *
- * BaML objects are passed in the interface
- * just as regular arrays, Parameter objects
- *
- * receiving BaML objects
- * $object = new Catapult\BaML("<xml><response><SpeakSentence></SpeakSentence></response>");
- *
- *
+ * $baml = new Catapult\BaML;
+ * $baml->parse(XML_STRING)
+ * 
+ * OR 
+ * $baml = new Catapult\BaML;
+ * $verb = new Catapult\BaMLTransfer;
+ * $baml->set($verb);
  */
-
 
 /**
  * Extend PHP's native SAX 
@@ -28,15 +30,8 @@ namespace Catapult;
  * like interface to it
  */
 abstract class BaMLResource {
-
-    /** methods we need to use when constructing **/
-    public static $methods = array(
-        BAML_XML_METHODS::XML_CHARACTER_DATA_HANDLER
-    );
-
-    /** handlers for methods **/
-    public static $handlers = array(
-        BAML_XML_HANDLERS::BAML_PARSE_CHARACTER,
+    public static $options = array(
+         BAML_XML_OPTIONS::BAML_XML_ENCODING => "UTF-8"
     );
 
 
@@ -50,14 +45,8 @@ abstract class BaMLResource {
     public $data;
    
     /** parsing tree variables **/ 
-    private $last_ch = null;
-    private $last_ch2 = null;
-    private $last_tag = null;
-    private $last_text = "";
-    private $current = null;
-    private $children = 0;
-
-    public $queue = array();
+    /** what level what the element found on **/
+    private $level = 0;
 
     /**
      * Generate the parser object
@@ -76,21 +65,33 @@ abstract class BaMLResource {
      * valid will check if this is valid
      * according to BaML
      *
-     * @param valid: BaML element
+     * @param valid: BaML xml struct item with level, name and attributes
      */
-    public function register($element) {
+    public function register($element, $container=false) {
+            if (in_array($element['tag'], array("Request", "Response")))
+                return new BaMLContainer($element['tag']);
 
-    }
+            if (!(in_array($element['tag'], BaMLVerb::$valid)))
+                throw new \CatapultApiException($element['tag'] . " is not a valid verb..");
 
-    /**
-     * arrange a struct
-     * of xml elements into
-     * trees
-     *
-     * @param data: flat array
-     */
-    public function intoTree($data) {
+            if ($container) 
+                $class = "Catapult\\" . "BaMLVerb" . $element['tag']; 
+            else
+                $class =  "Catapult\\" . "BaMLVerb" . $element['tag']; 
 
+            $class = new $class;
+
+            if (isset($element['attributes'])) {
+               foreach ($element['attributes'] as $k => $attr) {
+                  $class->addAttribute($k, $attr);
+               }
+            }
+            if (isset($element['text']))
+                $class->setText(trim($element['value']));
+
+            $class->level = $element['level'];
+
+            return $class;
     }
 
     /**
@@ -109,25 +110,21 @@ abstract class BaMLResource {
           $this->opened = 0;
 
           xml_set_object($this->parser, $this);
-          //xml_set_default_handler($this->parser, 'parseCdata');
-          //xml_set_element_handler($this->parser, 'parseElementStart', 'parseElementClose');
           xml_parser_set_option($this->parser, XML_OPTION_CASE_FOLDING, 0);
           xml_parser_set_option($this->parser, XML_OPTION_SKIP_WHITE, 1);
-          xml_parse_into_struct($this->parser, $text, $vals, $index); 
 
-          
+          $code = xml_parse_into_struct($this->parser, $text, $vals, $index); 
           /**
            * Parse into bAML
            * type structure
            * 
            */ 
-          
-          if ($code == 0) {
-                return new BaML; 
+          if ($code != 0) {
+                return XMLUtility::Make($this, $vals); 
           }
 
-
-          throw new \CatapultApiException("Provided text was not valid XML..");
+            
+          throw new \CatapultApiException("Provided text was not valid XMLUtility..");
     }
 
     /**
@@ -138,34 +135,6 @@ abstract class BaMLResource {
      */
     public function getAsStream($file) {
          $this->parse(FileHandler::read($file));
-    }
-
-    /**
-     *
-     * opens a tag for
-     * the XML document
-     *
-     * @param attributes: when provided will fill attributes as well
-     */
-    public function openTag($name, $attributes=null) {
-
-         if ($attributes) {
-                $initial = $name;
-
-                $name = XML::open($initial);
-
-                $name .= XML::getAttributesCollection($attributes);
-
-                $name .= ">";
-
-                return $name;
-         } 
-
-         return XML::fullOpen($name);
-    }
-
-    public function closeTag($name) {
-         return XML::fullClose("$name");
     }
 
     /**
@@ -197,33 +166,6 @@ abstract class BaMLResource {
         return $this->data;
     }
 
-    /**
-     * simple xml join tree
-     * sax wrapper around PHP's XML parser does
-     * not provide
-     */
-    public function joinTree($verbs) {
-        $str = '';
-
-        if (sizeof($verbs) > 0) {
-
-                foreach ($verbs as $v) {
-                  
-                    $str .= self::openTag($v->getName(), $v->getAttributes());
-
-                    if ($v->hasVerbs()) {
-                        $str .= $this->joinTree($v->getVerbs());    
-                    }
-
-                    $str .= $v->getText();
-
-
-                    $str .= self::closeTag($v->getName());
-                }
-        }
-
-        return $str;
-    }
 
     /**
      * Things to consider when
@@ -239,45 +181,51 @@ abstract class BaMLResource {
     public function __toString() {
         $str = "";
 
-        $str .= XML::getHeader();
-        $str .= self::openTag($this->data[0]->getType());
+        $start = 1;
+        $str .= XMLUtility::getHeader();
+        $container = $this->data[0];
+
+        /** root element is not a container, add **/
+        if (!($container instanceof BaMLContainer)) {
+            $container = new BaMLContainer;
+            $start = 0;
+        }            
+
+        $container->verbs = array_merge($container->verbs, array_slice($this->data, $start, sizeof($this->data)));
+
+        $str .= XMLUtility::openTag($container->getType());
+
+        /**
+         * if the structure is 
+         * flat we need to take the remaining
+         * pieces and merge with the container
+         */
+
+        $this->data = $container->verbs;
 
         foreach ($this->data as $bamlObj) {
-              switch ($bamlObj) {
-                   case $bamlObj instanceof BaMLVerb:
+            if ($bamlObj instanceof BaMLVerb) {
 
-                        $str .= self::openTag($bamlObj->getName(), $bamlObj->getAttributes());                
-
-                        $str .= self::joinTree($bamlObj->getVerbs());
-
-                        $str .= (string) $bamlObj->getText();
-
-                        /**
-                         * get all the nested
-                         * trees.
-                         */
-                        
-                        $str .= self::closeTag($bamlObj->getName()); 
-
-                   break;
-
-                   default:
-                   break;
-              }
-              
+               $str .= XMLUtility::openTag($bamlObj->getName(), $bamlObj->getAttributes());                
+               $str .= XMLUtility::joinTree($bamlObj->getVerbs());
+               $str .= (string) $bamlObj->getText();
+               $str .= XMLUtility::closeTag($bamlObj->getName()); 
+            }
         }
 
-        $str .= self::closeTag($this->data[0]->getType());
+        $str .= XMLUtility::closeTag($container->getType());
 
-        //return $str;
-        return XML::indent($str);
-
+        return ($str);
     }
 
 
 }
 
 
+/**
+ * generic class for BaML
+ * verbs, and containers
+ */
 abstract class BaMLGeneric { 
     public function setText($text) {
 
@@ -303,8 +251,17 @@ class BaMLContainer extends BaMLGeneric {
             "Request",
             "Response"
         );
+
+        /** full set of root level verbs **/
+        public $verbs = array(
+        );
+
+        /** always found on root level: 0 **/
+        public $level = 0;
+
+        /** either Request or Response **/
         public $type = "";
-        public function __construct($type) {
+        public function __construct($type="Request") {
             if (!(strtolower($type) == "request" || strtolower($type) == "response"))
                 throw new \CatapultApiException("BaML container must be either Request or Response");
 
@@ -322,14 +279,6 @@ class BaMLContainer extends BaMLGeneric {
              $this->type = $type;
         }
 }
-/**
- * general class for checking
- * valid rules in verbs, attributes
- * and texts
- */
-abstract class BaMLAssert { }
-
-
 
 /** 
  * Provide a standard interface
@@ -337,7 +286,7 @@ abstract class BaMLAssert { }
  * to inherit. All verbs 
  * should know their texts and attributes
  */
-abstract class BaMLVerb extends BaMLGeneric {
+class BaMLVerb extends BaMLGeneric {
 
     /** use constants here for clarity, and ability to interchange **/
     public static $valid = array(
@@ -356,24 +305,23 @@ abstract class BaMLVerb extends BaMLGeneric {
 
     );
 
-    public static $valid_attributes = array(
-
+    public static $params = array( 
     );
-
     /** for the parser only **/
     private $parsed = null;
-    public $children = 0;
-    public $am = 0;
 
     /** name as a string **/
     private $name = "";
 
+    /** text of BaML object **/
     public $text = null;
 
+    /** flat array of verbs for this verb **/
     public $verbs = array(
 
     );
 
+    /** attributes for the BaML object **/
     private $attributes = array(
 
     );
@@ -388,15 +336,15 @@ abstract class BaMLVerb extends BaMLGeneric {
      * when we have an invalid
      * verb we should warn
      */
-    public function __construct($params=null) {
-
+    public function __construct() {
+        $params = func_get_args();
         /** this was not initiated implicitly **/
         /** we need to extract the class name **/
-        $verb = preg_replace("/Catapult\\\BaMLVerb/", "", get_class($this));
-        $this->name = preg_replace("/Verb/", "", $verb);
+        $verb = preg_replace("/Verb/", "", preg_replace("/Catapult\\\BaML/", "", get_class($this)));
 
+        $this->name = $verb;
 
-        if (!(in_array($verb, self::$valid)))
+        if (!(in_array($verb, self::$valid) || in_array("Verb" . $verb, self::$valid)))
             Throw new \CatapultApiException($verb . " is not a valid verb in baML v" . BAML_SETTINGS::BAML_VERSION);
 
         if ($params !== null) {
@@ -408,21 +356,72 @@ abstract class BaMLVerb extends BaMLGeneric {
              * first text is verbs second is 
              * attributes
              */
-
-            if (!(is_array($params))) {
-                 throw new \CatapultApiException("You supplied wrong parameters to BaMLVerb. They be an array");
+            $cl = get_class($this);
+            foreach ($params as $cnt => $param) {
+                $this->addAttribute($cl::$params[$cnt], $param);
             }
-
-
-            $this->text = $params[0]; 
-            $this->verbs = $params[1];
-            $this->attributes = $params[2];
-                
-            
+                        
        }
 
     }
 
+    /**
+     * BaML object from a given string
+     * where string is a legal verb name
+     *
+     *
+     */
+    public function fromString($verb) {
+        $verb_class = "Catapult\\BaMLVerb" . $verb;
+        if (!(in_array($verb, self::$valid)))
+            Throw new \CatapultApiException($verb . " is not a valid verb in baML v" . BAML_SETTINGS::BAML_VERSION);
+        return new $verb_class;
+    }
+
+
+    /**
+     * BaML Object in string form
+     */
+    public function __toString() {
+        $name = $this->name . "{";
+
+        foreach ($this->attributes as $attr) {
+            $name .= $attr->getKey() . "='" . $attr->getValue() . "',";
+        }
+
+        return substr($name, 0, strlen($name) - 1) . "}";
+    }
+
+    /**
+     * similar to public api
+     * functions. create takes
+     * accepted input as per (ensureResource)  
+     * and will form the object from it
+
+     * @param data
+     */
+    public function create($arg) {
+        $data = Ensure::Input($arg);
+        $args = $data->get();
+
+        foreach ($args as $k => $arg) {
+            if (is_string($arg)) {
+                $this->addAttribute($k, $arg);
+            }
+
+            if ($arg instanceof BaMLVerb) {
+                $this->addVerb($arg);
+            }
+
+            if ($arg instanceof BaMLAttribute) {
+                $this->addAttribute($arg);
+            }
+
+            if ($arg instanceof BaMLText) {
+                $this->addText($arg);
+            }
+        }
+    }
 
     /**
      * are there nested verbs?
@@ -457,6 +456,19 @@ abstract class BaMLVerb extends BaMLGeneric {
      */
     public function getAttributes() {
             return $this->attributes;
+    }
+
+    /**
+     * get the attributes
+     * in one string
+     */
+    public function getAttributesString() {
+        $str = "";
+        foreach ($this->attributes as $attr) {
+            $str .= $attr->getKey() . "='" . $attr->getValue() . "',";
+        } 
+
+        return substr($str, 0, strlen($str) - 1);
     }
 
     /**
@@ -561,6 +573,7 @@ abstract class BaMLVerb extends BaMLGeneric {
      */
     public function addAttribute($attribute) {
             $args = func_get_args();
+            $cl = get_class($this);
 
             if (is_array($attribute))
                 $attribute = new BaMLAttribute($attribute[0], $attribute[1]);
@@ -571,12 +584,23 @@ abstract class BaMLVerb extends BaMLGeneric {
             if (!($attribute instanceof BaMLAttribute))
                 throw new \CatapultApiException("You can only add type BaMLAttribute or array..");
 
-            /*
-            if (!(in_array($attribute, self::$valid_attributes) && sizeof(self::$valid_attributes) > 0))
-                throw new \CatapultApiException("attribute '" . $attribute->getKey() . "' is not a valid attribute for verb " . $this->getName() . "");
-            */
+            if (isset($cl::$params) && !(in_array($attribute->getKey(), $cl::$params)) && sizeof($cl::$params) > 0)
+                throw new \CatapultApiException("attribute '" . $attribute->getKey() . "' is not a valid attribute for verb " . $this->getName() . "" . " please use any of the following: " . $this->printAttributes());
 
             $this->attributes[] = $attribute;
+    }
+
+
+    public function printAttributes() {
+        $cl = get_class($this);
+        $attrs = $cl::$params;
+        $str = "";
+
+        foreach ($attrs as $attr) {
+            $str.="$attr,";
+        }
+
+        return substr($str, 0, strlen($str) - 1);
     }
 
     /** add attributes in multi form **/
@@ -587,7 +611,10 @@ abstract class BaMLVerb extends BaMLGeneric {
     } 
 
 
-    /** adds an text can only have one **/
+    /**
+     * add text. This will append
+     * @param text
+     */
     public function addText($text) {
             if (is_string($text))
                 $text = new BamlText($text);
@@ -596,6 +623,44 @@ abstract class BaMLVerb extends BaMLGeneric {
                 throw new \CatapultApiException("You can only add type BaMLAttribute or array..");
             
             $this->text = $this->text . $text;
+    }
+
+    /**
+     * counts all the
+     * verbs
+     *
+     */
+    public function countVerbs() {
+           return sizeof($this->verbs);
+    }
+
+    /**
+     * gets a nested
+     * verb
+     *
+     */
+    public function getNestedVerb($index) {
+
+        return $this->verbs[$index];
+    }
+   
+    /**
+     * What level was this verb
+     * found on. It is relative
+     * to the BaML parsed document
+     *
+     */ 
+    public function getLevel() {
+         return $this->level;
+    }
+
+    /**
+     * in some cases, for the
+     * xml generation we need a  
+     * nested verbs nested
+     */
+    public function getNestedNestedVerb($index) {
+        return $this->verbs[$index];
     }
 
     public function setText($text) {
@@ -661,8 +726,6 @@ final class BaML extends BaMLResource {
     public $parameters;
 
     /** keep track of BaML sequentialy **/
-    public $currentText;
-    public $currentVerb;
 
     public function __construct($type='Request') {
         parent::__construct();
@@ -695,9 +758,35 @@ final class BaML extends BaMLResource {
          return true;
     }
 
+    /**
+     *
+     * public API method. Get the data
+     * in the BaML container
+     */
+    public function get() {
+         return $this->data;
+    }
 
+    /**
+     * get all the verbs in this
+     * check if its a flat array or 
+     * has multiple layers
+     */
+    public function getVerbs() {
+       if (sizeof($this->data) > 1)
+            return array_merge($this->data[0]->verbs, array_slice($this->data, 1, sizeof($this->data)));
+
+       return $this->data[0]->verbs;
+    }
+
+
+    /**
+     * parse a line
+     * and add to document
+     * @param line 
+     */
     public function addLine($line) {
-
+        $this->trySet(XMLUtility::parse($line));
     }
 
     /**
@@ -910,13 +999,78 @@ final class BaML extends BaMLResource {
     }
 }
 
-final class BaMLVerbSpeakSentence extends BaMLVerb {}
-final class BaMLVerbTransfer extends BaMLVerb {}
-final class BaMLVerbPlayAudio extends BaMLVerb {}
-final class BaMLVerbRecord extends BaMLVerb {}
-final class BaMLVerbGather extends BaMLVerb {}
-final class BaMLVerbSendMessage extends BaMLVerb {}
-final class BaMLVerbRedirect extends BaMLVerb {}
-final class BaMLVerbHangup extends BaMLVerb {}
+class BaMLVerbSpeakSentence extends BaMLVerb {
+    public static $params = array(
+        "sentence",
+        "voice",
+        "gender",
+        "locale"
+    );
+}
+
+
+class BaMLVerbTransfer extends BaMLVerb {
+    public static $params = array(
+       "transferTo",        
+       "transferCallerId"
+    );
+}
+
+
+class BaMLVerbPlayAudio extends BaMLVerb {
+    public static $params = array(
+       "audioUrl",
+       "digits"
+    );
+}
+
+class BaMLVerbRedirect extends BaMLVerb {
+    public static $params = array(
+       "requestUrl",
+       "timeout"
+    );
+}
+
+
+class BaMLVerbRecord extends BaMLVerb {
+    public static $params = array(
+        "requestUrl",
+        "requestUrlTimeout",
+        "terminatingDigits",
+        "maxDuration",
+        "transcribe",
+        "transcribeCallbackUrl"
+    );
+}
+
+class BaMLVerbGather extends BaMLVerb {
+    public static $params = array(
+        "requestUrl",
+        "requestUrlTimeout",
+        "terminatingDigits",
+        "maxDigits",
+        "interDigitTimeout",
+        "bargeable"
+    );
+}
+class BaMLVerbSendMessage extends BaMLVerb {
+    public static $params = array(
+        "from",
+        "to",
+        "requestUrl",
+        "requestUrlTimeout",
+        "statusCallbackUrl"
+    );
+}
+class BaMLVerbHangup extends BaMLVerb {}
+
+final class BaMLSpeakSentence extends BaMLVerbSpeakSentence {}
+final class BaMLTransfer extends BaMLVerbTransfer {}
+final class BaMLPlayAudio extends BaMLVerbPlayAudio {}
+final class BaMLRedirect extends BaMLVerbRedirect {}
+final class BaMLGather extends BaMLVerbGather {}
+final class BaMLSendMessage extends BaMLVerbSendMessage {}
+final class BaMLHangup extends BaMLVerbHangup {}
+abstract class BaMLAssert {}
 
 ?>

@@ -252,7 +252,16 @@ class GenericResource extends ListResource {
 	 */
 	public function __toString()
 	{
-		return __CLASS__ . "(" . "state=" . $this->id . ")";
+        /** keys to not include **/
+        $not = array("primary_method", "lastUpdate", "client");
+        $keys = get_object_vars($this);
+        $str = str_replace("Catapult\\", "", get_class($this)) . "{";
+        foreach ($keys as $k => $v) {
+            if (is_string($this->$k) && !in_array($k, $not))
+                $str .= $k . "='" . $this->$k . "',";
+        }
+
+        return substr($str, 0, strlen($str) - 1) . "}";
 	}
 
 
@@ -353,7 +362,10 @@ class EnsureResource extends BaseResource {
 		if ($data instanceof Parameters || $data instanceof CollectionObject)
 			return new DataPacket($data);
 
-		if (isset($data[0]) && is_array($data) && is_multidimensional($data) && is_array($data[0]) && sizeof($data) == 1)
+        if ($data instanceof BaML || $data instanceof BaMLAttribute || $data instanceof BaMLVerb)
+            return new DataPacket($data);
+
+		if (isset($data[0]) && is_array($data) && BaseUtilities::is_multidimensional($data) && is_array($data[0]) && sizeof($data) == 1)
 			return new DataPacket($data[0]);
 
 		if (!(is_array($data) || $data instanceof \stdClass))
