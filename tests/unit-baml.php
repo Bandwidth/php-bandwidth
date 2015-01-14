@@ -161,4 +161,16 @@ class BaMLTest extends PHPUnit_Framework_TestCase {
 
         $baml->getAsStream(__BAML_UNIT_TEST_FILE_LOCATION__); 
     }
+
+
+    public function testSelfCopy() {
+        $baml = new Catapult\BaML;
+
+        $verb = new Catapult\BaMLGather;
+
+        /** this should throw a memory error **/
+        $verb->addVerb($verb);
+
+    }
+    
 }

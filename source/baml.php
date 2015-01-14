@@ -502,7 +502,11 @@ class BaMLVerb extends BaMLGeneric {
             }
 
 
-            $this->verbs[] = $verb;
+            /** avoid memory issues by cloning. if needed **/
+            if (BaseUtilities::is_ref($verb, $this))
+                $this->verbs[] = clone $verb;
+            else
+                $this->verbs[] = $verb;
     }
 
 
