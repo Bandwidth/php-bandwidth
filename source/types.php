@@ -211,14 +211,14 @@ final class Size extends Types {
  * style date
  * => 2014-11-08T18:54:30Z
  */
-final class DateStamp extends Types {
+final class Date extends Types {
 	/* datetime
 	 * or unix stamp
 	 */
 	public function __construct($datetime)
 	{
 		if (is_int($datetime)) {
-			$dt = new DateTime();	
+			$dt = new \DateTime();	
 			$dt->setTimestamp($datetime);
 		} else {
 			$dt = $datetime;
@@ -228,7 +228,7 @@ final class DateStamp extends Types {
 	}
 	public function __toString()
 	{
-		return $dt->format("Y-M-DTH:I:SZ");	
+		return $this->date->format(API::API_DATE_FORMAT);	
 	}
 }
 
@@ -246,6 +246,8 @@ final class Id extends Types {
 		"c",
 		"conf",
 		"b",
+        "m",
+        "g",
 		"rec",	
 		"u"
 	);

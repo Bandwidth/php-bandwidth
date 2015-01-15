@@ -9,14 +9,30 @@ namespace Catapult;
  * handling
  */
 class BaseUtilities { 
-    public static function is_multidimensional($array)
+
+    /**
+     * check for multidimensional array, or objects.
+     *
+     * perform a shallow inspection
+     * traversing each object/array, would be too slow
+     * @param context: array or object
+     */
+    public static function is_multidimensional($context, $shallow=true)
     {
-          $rv = array_filter($array,'is_array');
-          if(count($rv)==sizeof($array)) return true;
+          if (!(sizeof($context) > 0))
+               return FALSE;
 
+          if ($shallow && (is_array($context[0]) || is_object($context[0])))
+               return TRUE;
+        
           return false;
-
     }
+
+    /**
+     * camelcase the provided
+     * text. same as default
+     * if already camelized
+     */
     public static function camelcase()
     {
           $c = "";
@@ -27,6 +43,13 @@ class BaseUtilities {
           return $c;
 
     }
+
+    /**
+     * find a particular item 
+     * in a parsed headers array
+     * @param assoc header array
+     * @param term term to get
+     */
 	public static function find($headers, $term)
 	{
 		if (!(isset($headers[$term])))
@@ -35,10 +58,26 @@ class BaseUtilities {
 		return $headers[$term];
 	}
 
+    /**
+     * internal:
+     * are the two Catapult types
+     * the same
+     *
+     * @param var1: array or object
+     * @param var2: array or object
+     */
     public static function same_type(&$var1, &$var2){
         return gettype($var1) === gettype($var2);
     }
 
+    /**
+     * Checks if two objects
+     * are references of each
+     * other
+     *
+     * @param var1: array or object
+     * @param var2: array or object
+     */
     public static function is_ref(&$var1, &$var2) {
         //If a reference exists, the type IS the same
         if(!self::same_type($var1, $var2)) {
@@ -128,6 +167,35 @@ class BaseUtilities {
 
             return $same;
        }
+
+       /**
+        * make a catapult formatted
+        * date a native PHP date or unix
+        * stamp
+        * @param date: Catapult date (2015-01-12T13:49:43Z) format
+        * @param std: Standard PHP dates
+        */
+       function datefromApi($date, $std = false) {
+            $object = \DateTime::createFromFormat(API::API_DATE_FORMAT, $date);
+            
+            if ($std)
+                return getdate($object->getTimestamp());
+
+            return $object;
+       }
+
+       /**
+        * date to Catapult
+        * format. Catapult\Date 
+        * uses this
+        ** deprecate Catapult\DateStamp in place of this
+        * @param date
+        */
+       function dateToApi($date) {
+            $object = new \DateTime;
+
+            return $object(API::API_DATE_FORMAT);
+       }
 }
 
 /**
@@ -191,6 +259,10 @@ class Prepare extends BaseUtilities {
 
 	}
 
+    /**
+     * name convention.
+     * will do same as input. seperated
+     */
 	public function Output($context, $data, $subcontext="all", $strict=FALSE)
 	{
 		return $this->Input($context, $data, $subcontext, $strict);
@@ -293,7 +365,7 @@ final class XMLUtility extends BaseUtilities {
      * will set encoding based
      * on XMLUtility static class
      *
-     *
+     * render using the default encoding
      */
     public static function getHeader() {
         return self::$options['header']; 

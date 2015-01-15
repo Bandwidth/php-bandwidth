@@ -429,7 +429,7 @@ class Constructor {
          * its new properties. New object
          * should be made seperate
          */
-	public static function Make(&$object, $data=array())
+	public static function Make(&$object, $data=array(), $replacements=array())
 	{
                 foreach ($data as $k => $d) {
                        $object->$k = $d;
@@ -448,6 +448,19 @@ class Constructor {
 			if (isset($object->{$field}) && (!($object->{$field} != null || isset($object->{$field})))) {
 				$object = $object->get($object->id);
 			}
+
+
+        /**
+         * add any naming conventions
+         * to the object. this was really
+         * added to prevent 'messageId' from not
+         * being 'id'. Keeps all the ids in uniform access
+         */
+        foreach ($replacements as $k => $r) {
+             if (isset($object->$k))
+                $object->$r = $object->$k;
+        }
+
 
 		return $object;
 	}

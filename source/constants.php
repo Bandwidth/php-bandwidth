@@ -27,6 +27,7 @@ interface API {
 	const API_METHOD_DEL = "DELETE";
 	const API_METHOD_PUT = "PUT";
 	const API_METHOD_GET = "GET";
+    const API_DATE_FORMAT = "Y-m-d\TH:i:s\Z";
 	const API_BANDWIDTH_USER_ID = "BANDWIDTH_USER_ID";
 	const API_BANDWIDTH_TOKEN = "BANDWIDTH_API_TOKEN";
 	const API_BANDWIDTH_SECRET = "BANDWIDTH_API_SECRET";
@@ -35,6 +36,7 @@ interface API {
 	const API_DEFAULT_APPLICATION = "APP-XX";
 	const SDK_VERSION = "0.1";
 	const SDK_USER_AGENT = "catapult-sdk-php";
+    const SDK_DATE_FORMAT = "Y-m-d\TH:i:s\Z";
 }
 
 /* a set of exceptions we need to handle */
@@ -72,6 +74,7 @@ interface WARNINGS {
 interface DEFAULTS {
 	const PAGE = 0;
 	const SIZE = 1000;
+    const SIZE_THRESHOLD = 500;
 	const SIZE_MAX = 1000;
 	const SIZE_MIN = 0;
 	const EXTENSION = ".mp3";

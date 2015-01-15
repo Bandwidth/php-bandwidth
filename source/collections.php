@@ -21,7 +21,7 @@ class CollectionObject {
          *
          * @param data -> initial set of data
          */	 
-	public function __construct($data)
+	public function __construct($data, $quiet = TRUE)
 	{
 		$this->data = array();
 		$this->order = array();
@@ -30,27 +30,34 @@ class CollectionObject {
 			$data = $data->get();
 			$cnt = 0;
 
-                        foreach($data as $d) {
+            foreach($data as $d) {
 			      /* can we find an id? */
 			      if (!(array_key_exists("id", $d)))
-			           $d['id'] = Locator::Find(array("Location" => $d['location']));
+			      $d['id'] = Locator::Find(array("Location" => $d['location']));
 			
-                              if (!(in_array("id", array_keys($d))))
-                                    throw new \CatapultApiException(EXCEPTIONS::EXCEPTION_OBJECT_ID_NOT_PROVIDED);
+                  if (!(in_array("id", array_keys($d))))
+                       throw new \CatapultApiException(EXCEPTIONS::EXCEPTION_OBJECT_ID_NOT_PROVIDED);
 
 
-			      /** is it a quiet load or do we initialize the object **/
-			      /** if loading is not optimal, find better approach **/	
-                              $this->data[$d{'id'}] = $this->get($d{'id'});
-                              //$this->data[$d{'id'}] = $d;
+                  /** is it a quiet load or do we initialize the object **/
+                  /** if loading is not optimal, find better approach **/	
+                  /** when we have more than the threshold warn the user in log **/
+                  /** large shards of data will be very slow to reload and without waring hard to debug **/
+                 if (!($quiet))
+                    $this->data[$d{'id'}] = $this->get($d{'id'});
+                 else
+                    $this->data[$d{'id'}] = $d;
+
 			      $this->order[$cnt] = $d{'id'};
 
 			      $cnt ++;
-                        }
+           }
+
 		} else {
-			foreach ($data as $d) {
-                             $data->data[$d['id']] = $d;
-                        }
+
+			foreach ($data as $d) 
+                 $data->data[$d['id']] = $d;
+
 		}
 	}
 
@@ -411,7 +418,7 @@ final class DataPacketCollection {
 	 * @args -> multidimensional array with either datapackets or array
 	 */
 	public function __construct($args) {
-		if (!is_multidimensional($args))
+		if (!BaseUtilities::is_multidimensional($args))
 			return new DataPacket($args);
 
 		$this->data = array();

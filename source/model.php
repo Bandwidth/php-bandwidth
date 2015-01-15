@@ -1119,6 +1119,8 @@ class Message extends GenericResource {
 	public  $state;
 	public  $id;
 	private $path = "messages";
+    public $primary_init = "id";
+    public $primary_method = "get";
 
 	public static $fields = array(
 		'id', 'direction', 'callbackUrl', 'callbackTimeout',
@@ -1160,8 +1162,7 @@ class Message extends GenericResource {
 		if (!($args->has("size")))
 			$args->add("size", DEFAULTS::SIZE);
 		if (!($args->has("page")))
-			$args->add("page", DEFAULTS::SIZE);
-
+			$args->add("page", DEFAULTS::PAGE);
 
 		$url = URIResource::Make($this->path, array());
 
@@ -1176,9 +1177,9 @@ class Message extends GenericResource {
 	public function get($message_id)
 	{
 		$url = URIResource::Make($this->path, array($message_id));
-                $data = new DataPacket($this->client->get($url));
+        $data = new DataPacket($this->client->get($url));
 
-		return Constructor::Make($this, $data->get()); 
+		return Constructor::Make($this, $data->get(), array("messageId" => "id")); 
 	}
 
 	/* stub for property access by resolver */
@@ -1204,7 +1205,7 @@ class Message extends GenericResource {
 		$message_id = Locator::Find($this->client->post($url, $data->get()));
 		$data->add("id", $message_id);
 
-		return Constructor::Make($this, $data->get());
+		return Constructor::Make($this, $data->get(), array("messageId" => "id"));
 	}
 }
 

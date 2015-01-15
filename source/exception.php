@@ -18,7 +18,8 @@ final class CatapultApiException extends \Exception
       // Rest server style
       $msg = $result['error_msg'];
     } else {
-      $msg = 'Unknown Error. Check getResult()';
+      //$msg = 'Unknown Error. Check getResult()';
+      $msg = $this->result;
     }
 
     /**
