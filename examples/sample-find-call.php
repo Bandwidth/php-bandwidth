@@ -21,7 +21,8 @@ try {
 	$call = new Catapult\Call;
 	$calls = $call->listCalls();
 	$last = $calls->find(array("direction" => "in"))
-	      ->find(array("from" => $argv[1]))->first();
+	      ->find(array("from" => $argv[1]))->
+          ->last();
 
 	if ($last)
 		printf("We've found the last call from: %s. It was at %s", $argv[1], $last->startTime);
