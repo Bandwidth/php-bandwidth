@@ -1,0 +1,6 @@
+## Run any test in this
+## directory using 
+## 
+## ./run "test"
+##
+php phpunit.phar --bootstrap ../source/Catapult.php "$@"

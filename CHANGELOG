@@ -50,3 +50,21 @@ Continuing from 0.5.0
   attributes, and containers
 - XML reading, writing support with builtin BaML
   checks. needs 'xml_parser'
+
+0.7.0
+----------------------------------------------------
+
+- Project refactoring, directory structure, models.
+- Transcription support. 
+  Use Catapult\Transcription
+   * prequisites:
+   needs recording id
+- MMS support, using local and absolute media urls
+  * add field 'media' in Catapult\Message
+
+- Minor:
+  * deprecated Credentials object you 'should' only use Client now.
+  * other sub api functions added to modules.
+  * listAll generic listing function for all lists
+  * MediaURL type added
+  * CallEvents object added

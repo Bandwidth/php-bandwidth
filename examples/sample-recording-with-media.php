@@ -6,8 +6,8 @@ require_once('../source/Catapult.php');
 // IMPORTANT: edit credentials.json
 // with your information
 // or comment out below /w your keys
-$cred = new Catapult\Credentials('BANDWIDTH_USER_ID', 'BANDWIDTH_API_TOKEN', 'BANDWIDTH_API_SECRET');
-//$cred = new Catapult\Credentials;
+//$cred = new Catapult\Credentials('BANDWIDTH_USER_ID', 'BANDWIDTH_API_TOKEN', 'BANDWIDTH_API_SECRET');
+$cred = new Catapult\Credentials;
 // dont forget to comment out the implicit version if using assoc array
 
 
@@ -30,8 +30,8 @@ try {
 	$file = uniqid(true) . ".wav";
 	printf("Fetched the last recording now saving in:  ./out/%s", $file);
 	/**
-         * we can now save this to disk
-         */
+     * we can now save this to disk
+     */
 
 	try {
 		$media->store("./out/$file");

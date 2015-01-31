@@ -21,7 +21,7 @@ class RecordingTest extends PHPUnit_Framework_TestCase {
 	public function testListRecordings()
 	{
 		$r = new Catapult\Recording;
-		$recordings = $r->list_recordings();
+		$recordings = $r->listRecordings();
 
 		$this->assertTrue(sizeof($recordings) > 0);
 	}
@@ -29,7 +29,7 @@ class RecordingTest extends PHPUnit_Framework_TestCase {
 	public function testGet()
 	{
 		$r = new Catapult\Recording;
-		$recs = $r->list_recordings();
+		$recs = $r->listRecordings();
 		$d = $recs->get();
 
 

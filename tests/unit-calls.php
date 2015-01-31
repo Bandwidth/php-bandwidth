@@ -87,7 +87,7 @@ class CallTest extends PHPUnit_Framework_TestCase {
 	public function testAccept()
 	{
 		$call = new Catapult\Call;
-		$calls = $call->list_calls();
+		$calls = $call->listCalls();
 		$last_incoming_call = $calls->find(array("direction" => "in"))->last();
 
 		$last_incoming_call->accept();
@@ -298,7 +298,7 @@ class CallTest extends PHPUnit_Framework_TestCase {
 
 		$call->create($params);
 
-		$call->stop_sentence($params);
+		$call->stopSentence($params);
 	}
 
 	public function testGatherCreate()
@@ -376,6 +376,7 @@ class CallTest extends PHPUnit_Framework_TestCase {
 	public function testBridge()
 	{
 		$call = new Catapult\Call;
+        $params = new Catapult\Parameters;
 
 		$params->setFrom(new Catapult\PhoneNumber(__DEFAULT_SENDER__));
 		$params->setTo(new Catapult\PhoneNumber(__DEFAULT_RECEIVER__));

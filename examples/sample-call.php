@@ -8,8 +8,7 @@ require_once('../source/Catapult.php');
 // or comment out below /w your keys
 //
 
-//$cred = new Catapult\Credentials('BANDWIDTH_USER_ID', 'BANDWIDTH_API_TOKEN', 'BANDWIDTH_API_SECRET');
-$cred = new Catapult\Credentials;
+$cred = new Catapult\Credentials('u-mmuxnl7o2u2ijsdg2hrwdsq', 't-zer7uzfxvsvcbmlkqx6zgsq', 'o5ky4rsoacdd2oqvzl4cy6j3uqv6zpgjs3izbba');
 // dont forget to comment out the implicit version if using assoc array
 
 $client = new Catapult\Client($cred);
@@ -20,7 +19,7 @@ if (!(isset($argv[1]) || isset($argv[2])))
 try {
 	$call = new Catapult\Call(array(
 		"from" => new Catapult\PhoneNumber($argv[1]),
-		"to" => new Catapult\PhoneNumber($argv[2])
+		"to" => new Catapult\PhoneNumber($argv[2]),
 	));
 
 	$call->wait();

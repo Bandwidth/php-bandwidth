@@ -4,6 +4,8 @@
  * this is not a model based test and will not 
  * communicate with the actual API
  *
+ * To run the client test, you need to make sure
+ * the listed defaults will listen for 'GET', 'POST', 'PUT' and 'DELETE'
  * commands tested:
  * get
  * post
@@ -20,7 +22,7 @@ class ClientTest extends PHPUnit_Framework_TestCase {
 	{
 		$client = Catapult\Client::Get();
 
-		$res = $client->get(__DEFAULT_URL__);
+		$res = $client->get(__UNIT_TEST_GET_URL__);
 
 		$this->assertTrue(is_object($res));
 	}
@@ -29,7 +31,7 @@ class ClientTest extends PHPUnit_Framework_TestCase {
 	{
 		$client = Catapult\Client::Get();
 
-		$client->post(__DEFAULT_URL__);
+		$client->post(__UNIT_TEST_POST_URL__);
 
 		$this->assertTrue(is_object($res));
 	}
@@ -38,7 +40,7 @@ class ClientTest extends PHPUnit_Framework_TestCase {
 	{
 		$client = Catapult\Client::Get();
 
-		$client->delete(__DEFAULT_URL__);
+		$client->delete(__UNIT_TEST_DELETE_URL__);
 
 		$this->assertTrue(is_object($res));
 	}
@@ -47,7 +49,7 @@ class ClientTest extends PHPUnit_Framework_TestCase {
 	{
 		$client = Catapult\Client::Get();
 
-		$client->put(__DEFAULT_URL__);
+		$client->put(__UNIT_TEST_PUT_URL__);
 
 		$this->assertTrue(is_object($res));
 	}

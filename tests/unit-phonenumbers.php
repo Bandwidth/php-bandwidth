@@ -8,14 +8,14 @@
  *
  *
  * commands tested:
- * list_numbers/1
+ * listNumbers/1
  * get/1
  * patch/1
  * allocate and create/1
- * list_local
- * list_toll_free
- * batch_allocate_local
- * batch_allocate_tollfree
+ * listLocal
+ * listTollFree
+ * batchAllocateLocal
+ * batchAllocateTollfree
  */
 
 $cred = new Catapult\Credentials;
@@ -86,7 +86,7 @@ class PhoneNumbersTest extends PHPUnit_Framework_TestCase {
 	{
 		$pn = new Catapult\PhoneNumbers;
 		$params = new Catapult\Parameters;
-		$params->setZip("20210"); // couldve done by any mutually exclusive property: ZIP | STATE | AREA_CODE
+		$params->setZip("20210");
 
 		$numbers = $pn->batchAllocateLocal($params); 
 
@@ -97,7 +97,7 @@ class PhoneNumbersTest extends PHPUnit_Framework_TestCase {
 	{
 		$pn = new Catapult\PhoneNumbers;
 		$params = new Catapult\Parameters;
-		$params->setZip("20210"); // couldve done by any mutually exclusive property: ZIP | STATE | AREA_CODE
+		$params->setZip("20210");
 
 		$numbers = $pn->batchAllocateLocal($params); 
 

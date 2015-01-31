@@ -8,7 +8,7 @@
  * one bridge test. Merge here in future
  *
  * commands tested:
- * list_errors/1
+ * listErrors/1
  * get/1
  * patch/1
  */

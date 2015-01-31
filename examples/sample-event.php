@@ -33,7 +33,7 @@ try {
          * event_{time}.log
 	 */
 	 printf("New event, id: %d", $event->id);
-	 file_put_contents(realpath("./logs/") . "/" . $event->time . ".log", json_encode($event));
+	 file_put_contents("./" . $event->time . ".log", json_encode($event));
 
 } catch (\CatapultApiException $e) {
 	echo var_dump($e);	

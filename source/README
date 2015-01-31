@@ -1,7 +1,9 @@
-php ./test.php
-for a quick test.
-or 
-php ./test.php "Written test message"
+Catapult's Source Structure
+====================================================================
 
-Remember to keep credentials.json safe on
-a web server..
+utils -- utilities for doing things
+core -- core communication for REST API 
+resource -- set of functions to augment models, form
+models -- objects defined in Catapult API v1
+types -- types that are helpful in client side use
+baml -- BaML v1 verbs

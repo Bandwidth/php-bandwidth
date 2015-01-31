@@ -8,7 +8,6 @@ require_once('../source/Catapult.php');
 // with your information
 // or comment out below /w your keys
 //
-//$cred = new Catapult\Credentials('BANDWIDTH_USER_ID', 'BANDWIDTH_API_TOKEN', 'BANDWIDTH_API_SECRET');
 $cred = new Catapult\Credentials;
 // dont forget to comment out the implicit version if using assoc array
 
@@ -21,7 +20,7 @@ try {
 	$call = new Catapult\Call;
 	$calls = $call->listCalls();
 	$last = $calls->find(array("direction" => "in"))
-	      ->find(array("from" => $argv[1]))->
+	      ->find(array("from" => $argv[1]))
           ->last();
 
 	if ($last)

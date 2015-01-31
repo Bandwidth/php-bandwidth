@@ -1,5 +1,4 @@
 <?php
-
 /* In place of Composer and 
  * autoloader.
  * to include with composer
@@ -17,6 +16,7 @@
  */
 namespace Catapult;
 
+require_once("Autoload.php");
 error_reporting(E_ALL ^ E_STRICT);
 /** 
  * set timezone to Catapult's default 
@@ -24,29 +24,26 @@ error_reporting(E_ALL ^ E_STRICT);
  * Once all the files are loaded, reset.
  */
 date_default_timezone_set('UTC');
-
 $phpver = explode('.', phpversion());
-
 if (!($phpver[0] == '5' && $phpver[1] >= 3)) {
-	// PHP not above or equal 5.3.0
-	// We need this for namespaces
-	// todo: implement '\' namespaces as '_' for
-	// legacy versions
-	Throw new \Exception("Catapult API supports PHP >= 5.3.0");
+    // PHP not above or equal 5.3.0
+    // We need this for namespaces
+    Throw new \Exception("Catapult API supports PHP >= 5.3.0");
 }
-
 if (!(function_exists('curl_version'))) {
-	//no curl support
-	Throw new \Exception("Catapult needs libCURL..");
+    //no curl support
+    Throw new \Exception("Catapult needs libCURL..");
 }
-
 if (!(function_exists('xml_parse'))) {
     Throw new \Exception("Catapult BaML needs PHP's XML parser..");
 }
+if (!(function_exists('json_encode'))) {
+    Throw new \Exception("Catapult's RESTClient uses JSON, you need to enable json in PHP!");
+}
 
-$files = array("constants", "utils", "client", "states", "log", "exception", "collections", "resource", "generic", "types", "model", "credential", "client", "event", "baml");
-foreach ($files as $f)
-	require_once(realpath(__DIR__ . "/$f.php"));
-
-
+/** v0.7.0 use directories **/
+$dirs = array("utils", "core", "resource", "models", "baml", "types");
+foreach ($dirs as $d) {
+    includeDir(realpath(__DIR__ . "/$d"));
+}
 ?>

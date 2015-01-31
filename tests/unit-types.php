@@ -46,6 +46,13 @@ class TypesTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals((string) $url, "http://google.com/");
 	}
 
+    public function testMediaURL()
+    {
+        $media = new Catapult\MediaUrl(__DEFAULT_MEDIA_URL__);
+
+        $this->assertEquals((string) $media, __DEFAULT_MEDIA_URL__);
+    }
+
 	public function testDTMF()
 	{
 		$dtmf = new Catapult\DTMF("#123");

@@ -9,9 +9,9 @@ require_once('../source/Catapult.php');
 // with your information
 // or comment out below /w your keys
 //
-//$cred = new Catapult\Credentials('BANDWIDTH_USER_ID', 'BANDWIDTH_API_TOKEN', 'BANDWIDTH_API_SECRET');
+$cred = new Catapult\Credentials('u-mmuxnl7o2u2ijsdg2hrwdsq', 't-zer7uzfxvsvcbmlkqx6zgsq', 'o5ky4rsoacdd2oqvzl4cy6j3uqv6zpgjs3izbba');
 
-$cred = new Catapult\Credentials;
+
 // dont forget to comment out the implicit version if using assoc array
 
 // this example is cli based
@@ -22,8 +22,7 @@ $client = new Catapult\Client($cred);
 
 try {
 	$number_service = new Catapult\PhoneNumbers;
-	
-	$numbers = $number_service->listNumbers();
+    $numbers = $number_service->listNumbers();	
 
 	/** get the info for each number listed under this account **/
 
@@ -35,10 +34,10 @@ try {
 		/** get even more information on this number using numberService **/
 
 		$info = new Catapult\NumberInfo;
-		$info->get($number->number);
+		//$info->get($number->number);
 
 
-		printf("Number area: %s\n", $info->name);	
+		//printf("Number area: %s\n", $info->name);	
 	}
 
 } catch (\CatapultApiException $e) {

@@ -8,10 +8,9 @@
  *
  *
  * commands tested:
- * list_messages/2
+ * listMessages/2
  * send/2
- * /1
- * get_members/2
+ * get/1
  */
 
 $cred = new Catapult\Credentials;
@@ -23,13 +22,22 @@ class MessageTest extends PHPUnit_Framework_TestCase {
 	{
 		$params = new Catapult\Parameters;
 		$params->setFrom(new Catapult\PhoneNumber(__DEFAULT_SENDER__));
-		$params->setTo(new Catapult\PhoneNumber(__DEFAULT_RECEIVER__));
+		$params->setTo(new Catapult\PhoneNumber(__DEFAULT_SENDER__));
 		$params->setText(new Catapult\TextMessage("Unit test 1.." . __FUNCTION__));
 
 		$message = new Catapult\Message;
 
-		$message->send($params);
+		$message->create($params);
+
+        $this->assertEquals($message->from, __DEFAULT_SENDER__);
 	}
+
+    public function testGetMessage()
+    {
+        $message = new Catapult\Message("m-xxx");
+
+        $this->assertTrue($message->id != null);
+    }
 
 	public function testListMessages()
 	{
@@ -39,7 +47,13 @@ class MessageTest extends PHPUnit_Framework_TestCase {
 
 		$message = new Catapult\Message;
 
-		$message->list_messages($params);
+		$messages = $message->listMessages($params);
+
+        /** we should atleast have one message by now **/
+        $this->assertTrue(sizeof($messages->get()) > 0);
+
+        /** check also whether the collection is valid **/
+        $this->assertTrue($messages->first()->id != null);
 	}
 		
 	public function testTimeoutMessage()
@@ -56,15 +70,28 @@ class MessageTest extends PHPUnit_Framework_TestCase {
 
 		$message->send($params);
 
+
+        $this->assertEquals($message->callbackTimeout, new Catapult\Timeout(5));
 	}
+
+    public function testMediaText() {
+		$params = new Catapult\Parameters;
+        $params->setFrom(new Catapult\PhoneNumber(__DEFAULT_SENDER__));
+		$params->setTo(new Catapult\PhoneNumber(__DEFAULT_RECEIVER__));
+		$params->setMedia(new Catapult\MediaURL(__MEDIA_UNIT_TEST_FILE__));
+
+        $message = new Catapult\Message;
+
+        $message->send($params);
+
+        $this->assertEquals($message->media[0], __MEDIA_UNIT_TEST_FILE__);
+    }
 
 	public function testMultiple()
 	{
 		/* send multiple
 		 * messages
 		 */
-
-		printf("Testing multiple messages..\n");
 		$msgs = new Catapult\MessageMulti();
 		$from = new Catapult\PhoneNumber(__DEFAULT_SENDER__);
 		$to = new Catapult\PhoneNumber(__DEFAULT_RECEIVER__);
@@ -79,6 +106,8 @@ class MessageTest extends PHPUnit_Framework_TestCase {
 		$msgs->pushMessage($from, $to, $message3, $callback);
 
 		$messages = $msgs->execute();
+
+        $this->assertEquals(count($msgs->messages), 3);
 	}
 
 }
