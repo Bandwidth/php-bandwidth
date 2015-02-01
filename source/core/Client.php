@@ -422,7 +422,7 @@ final class RESTClient {
          * @param -> url [partially qualified]
      * @param -> join boolean
          */
-        public function delete($url, $data)
+        public function delete($url, $data=null)
         {
                 $url = $this->join($url);
                 return $this->request(API::API_METHOD_DEL, $url, $data);

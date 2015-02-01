@@ -42,7 +42,7 @@ if (!(function_exists('json_encode'))) {
 }
 
 /** v0.7.0 use directories **/
-$dirs = array("utils", "core", "resource", "models", "baml", "types");
+$dirs = array("utils", "core", "resource", "models", "baml", "events", "types");
 foreach ($dirs as $d) {
     includeDir(realpath(__DIR__ . "/$d"));
 }

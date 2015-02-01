@@ -27,7 +27,7 @@ final class Application extends GenericResource {
         $data = Ensure::Input($data);
         parent::_init($data, new DependsResource,
          new LoadsResource(
-          array("primary" => "GET", "id" => "id", "silent" => false)
+          array("primary" => "GET", "id" => "id", "silent" => false, "init" => array())
           ),
           new SchemaResource(array(
            "fields" => array(

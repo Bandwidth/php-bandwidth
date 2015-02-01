@@ -8,7 +8,7 @@
  */
 namespace Catapult;
 
-final class Call Extends GenericResource {
+final class Call Extends AudioMixin {
 	/**
 	 * construct the call as initiated  or new
      * each constructor must have a way to call itself's create/1 function with the
@@ -107,9 +107,9 @@ final class Call Extends GenericResource {
 	 */
 	public function hangup()
 	{
-		$url = URIResource::Make($this->path, array($this->call_id));
+		$url = URIResource::Make($this->path, array($this->id));
 
-		$data = new DataPacket(States::Make(CALL_STATES::completed));
+		$data = new DataPacket(array("state" => CALL_STATES::completed));
 		
 		$this->client->post($url, $data->get());
 
@@ -124,9 +124,9 @@ final class Call Extends GenericResource {
      */
      public function accept()
      {
-        $url = URIResource::Make($this->path, array($this->call_id));
+        $url = URIResource::Make($this->path, array($this->id));
 
-		$data = new DataPacket(States::Make(CALL_STATES::active));
+		$data = new DataPacket(array("state" => CALL_STATES::active));
 		
 		$id = Locator::Find($this->client->post($url, $data->get()));
 		$data->add("id", $id);
@@ -142,7 +142,7 @@ final class Call Extends GenericResource {
 	public function reject()
 	{
 		$url = URIResource::Make($this->path, array($this->id));
-		$data = new DataPacket(States::Make(CALL_STATES::rejected));
+		$data = new DataPacket(array("state" => CALL_STATES::rejected));
 
 		$this->client->post($url, $data->get());
 
@@ -203,7 +203,7 @@ final class Call Extends GenericResource {
 	 */
 	public function getAudioUrl()
 	{
-		return URIResource::Make($this->path, array($this->call_id, "audio"));
+		return URIResource::Make($this->path, array($this->id, "audio"));
 	}
 	
 }

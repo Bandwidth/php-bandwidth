@@ -83,7 +83,7 @@ class CatapultApiWarning {
         $this->message = $message;
     }
     public function __toString() {
-        return "CatapultWarning: " . $this->message;
+        return "CatapultWarning: " . $this->message . "\n";
     }
 }
 ?>

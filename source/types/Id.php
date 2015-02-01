@@ -24,9 +24,10 @@ final class Id extends Types {
 		"c",
 		"conf",
 		"b",
-        "m",
-        "g",
+    "m",
+    "g",
 		"rec",	
+	  "transc",
 		"u"
 	);
 

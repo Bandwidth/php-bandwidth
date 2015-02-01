@@ -70,6 +70,7 @@ Continuing from 0.5.0
   * listAll generic listing function for all lists
   * MediaURL type added
   * CallEvents object added
+  * Patches for events
   * Tuple based initialization:
     Gather('call-id', 'gather-id')
     this will automatically get the resource and its parent. 

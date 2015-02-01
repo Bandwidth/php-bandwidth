@@ -1,7 +1,0 @@
-php ./test.php
-for a quick test.
-or 
-php ./test.php "Written test message"
-
-Remember to keep credentials.json safe on
-a web server..

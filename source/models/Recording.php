@@ -44,7 +44,10 @@ final class Recording extends GenericResource {
 	{
 		$content = $this->client->get($this->media, array(), FALSE);
 
-		return new Media($content, $this->media);
+		$media = new Media;
+		$media->setData($content);
+
+		return $media;
 	}
 }
 ?>

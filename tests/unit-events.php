@@ -19,14 +19,14 @@ class EventsTest extends PHPUnit_Framework_TestCase {
 	public function testFactoryIncoming()
 	{
 		$data = json_encode(array(
-			"eventType" => "incomingcall",
+			"eventType" => "incoming",
 			"from" => __DEFAULT_SENDER__,
 			"to" => __DEFAULT_RECEIVER__
 		));
 
 		$event = new Catapult\Event($data);
 
-		$this->assertTrue($event instanceof Catapult\CallEvent);
+		$this->assertTrue($event->eventType, "incoming");
 	}	
 
 	public function testFactoryAnswer()
@@ -39,7 +39,7 @@ class EventsTest extends PHPUnit_Framework_TestCase {
 
 		$event = new Catapult\Event($data);
 
-		$this->assertTrue($event instanceof Catapult\CallEvent);
+		$this->assertEquals($event->eventType, "answer");
 	}
 
 	public function testFactoryHangup()
@@ -75,7 +75,7 @@ class EventsTest extends PHPUnit_Framework_TestCase {
 
 		$event = new Catapult\Event($data);
 
-		$this->assertTrue($event instanceof Catapult\PlaybackCallEvent);
+		$this->assertTrue($event->eventType, "playback");
 	}
 
 	public function testFactoryGather()

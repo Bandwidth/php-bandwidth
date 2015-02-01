@@ -70,11 +70,27 @@ final class Media extends GenericResource {
 		$data = $args->get();
 
 		$url = URIResource::Make($this->path, array($data["mediaName"]));
-		$file = FileHandler::Read($data['file']);
+
+		if (isset($data['file']))
+			$file = FileHandler::Read($data['file']);
+		else
+			$file = $this->data;
     
 		$this->client->put($url, $file);
 
-        return Constructor::Make($this, array_merge(array("url" => $this->client->join($url)), $data));
+    return Constructor::Make($this, array_merge(array("url" => $this->client->join($url)), $data));
+	}
+
+	/**
+	 * Set the data. 
+	 * Input needs raw string
+	 * usually called by recording
+	 *
+	 * @param data: binary contents
+	 */
+  public function setData($data) 
+	{
+		$this->data = $data;
 	}
 
 	/**

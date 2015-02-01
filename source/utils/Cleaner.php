@@ -33,7 +33,7 @@ final class Cleaner extends BaseUtilities {
 				}
 			}
 		}
-				
+
 		return $data;
 	}
 }

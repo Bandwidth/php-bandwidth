@@ -344,27 +344,28 @@ class GenericResource {
 	/**
 	 * delete a media
 	 * file
-     *
-     * @param mediaid
+	 *
+   * TODO: this should not keep the object's 
+   * information. This will not be useful anymore!
+   *
+   * @param id of model 
 	 */
 	public function delete($id=null)
 	{
-        if ($id)
-		    $url = URIResource::Make($this->path, array($id));
-        else
-		    $url = URIResource::Make($this->path, array($this->id));
+     if ($id)
+       $url = URIResource::Make($this->path, array($id));
+     else
+	      $url = URIResource::Make($this->path, array($this->id));
 
 		$this->client->delete($url);
-
-		return Constructor::Make($this);
 	}
 
 	/**
 	 * load the object with static properties
 	 * usually done client side -- or by collections
-     * already holding information on an object
-     * 
-     * @param props -> set of properties to load
+   * already holding information on an object
+   * 
+   * @param props -> set of properties to load
 	 */
 	public function load($props)
 	{
@@ -387,7 +388,7 @@ class GenericResource {
      * url for a resource
      *
      */
-    public function get_audio_url()
+    public function getAudioUrl()
     {
         return URIResource::Make($this->path, array($this->id));
     }
@@ -399,7 +400,7 @@ class GenericResource {
      * fallback: plural lowercased
      *
      */
-    public function get_path($class)
+    public function getPath($class)
     {
         if (in_array($class, array_keys(self::$paths)))
             return self::$paths[$class];
@@ -412,7 +413,7 @@ class GenericResource {
      * get the class for a given path 
      * fallback: singular titlecased
      */
-    public function get_obj_class($path)
+    public function getObjClass($path)
     {
         $cnt = 0;
         foreach (self::$paths as $k => $p)
@@ -423,14 +424,14 @@ class GenericResource {
         return TitleUtility::toTitlecase(TitleUtility::toSingular($path));
     }
 
-    public function get_schema_string($ctx=null) 
+    public function getSchemaString($ctx=null) 
     {
         $str = "";
         if (!$ctx)
             $ctx = $this->schema->fields;
-        
+       echo var_dump($this->schema); 
         foreach ($ctx as $f)
-            $str.=$f['term'] . ",";
+            $str.=$f. ",";
 
         return $str;
     }

@@ -25,7 +25,6 @@ class CollectionObject {
 	{
 		$this->data = array();
 		$this->order = array();
-
 		if ($data instanceof DataPacketCollection) {
 			$data = $data->get();
 			$cnt = 0;
@@ -358,7 +357,7 @@ final class DataPacket extends BaseUtilities {
 	 * array
 	 * @param key -> single key [schema]
 	 */
-	public function val($key, $obj)
+	public function val($key, $obj=null)
 	{
 		if (!(isset($this->data[$key])))
 			Throw new \CatapultApiException("Key not found in data packet");
@@ -375,7 +374,7 @@ final class DataPacket extends BaseUtilities {
 	 */
 	public function add($key, $val)
 	{
-     	        if (is_array($key))
+    if (is_array($key))
 			foreach($key as $k)
 				$this->data[$k] = $val;
 		else
