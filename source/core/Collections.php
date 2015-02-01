@@ -18,9 +18,9 @@ class CollectionObject {
 	/**
 	 * either pass in infomation as array
 	 * or datapacket collection identify each element key by its id
-     *
-     * @param data -> initial set of data
-     */	 
+         *
+         * @param data -> initial set of data
+         */	 
 	public function __construct($data, $quiet = TRUE)
 	{
 		$this->data = array();
@@ -61,7 +61,7 @@ class CollectionObject {
 
 	/**
 	 * Serialize the collection object as a 
-     * JSON object.
+         * JSON object.
 	 */
 	public function __toString()
 	{
@@ -375,7 +375,7 @@ final class DataPacket extends BaseUtilities {
 	 */
 	public function add($key, $val)
 	{
-		if (is_array($key))
+     	        if (is_array($key))
 			foreach($key as $k)
 				$this->data[$k] = $val;
 		else
@@ -388,7 +388,7 @@ final class DataPacket extends BaseUtilities {
 
 	/**
 	 * Is the data packet empty. If it is throw warning
-     * otherwise return false
+         * otherwise return false
 	 */
 	public function is_empty()
 	{
@@ -398,11 +398,30 @@ final class DataPacket extends BaseUtilities {
 		return FALSE;
 	}
 
-    /** is the data one in depth and string **/
-    public function is_string()
-    {
-        return isset($this->data[0]) && sizeof($this->data) == 1 && is_string($this->data[0]);
-    }
+        /** is the data one in depth and string **/
+        public function is_string()
+        {
+            return isset($this->data[0]) && sizeof($this->data) == 1 && is_string($this->data[0]);
+        }
+
+	/**	
+	 * are both arguments strings
+         * this is when we get ('str', 'str') 
+	 * example
+	 * Gather('call-id', 'gather-id')
+         *
+	 * 
+	 * todo: simplify move logic into utilities
+	 * keep it less verbose
+	 */ 
+        public function is_double_string()
+	{
+	    return isset($this->data[0]) 
+		&& isset($this->data[1]) 
+		&& sizeof($this->data) == 2 
+	        && is_string($this->data[0])
+	        && is_string($this->data[1]);
+	}
 
 	/* Check if the given packet has a id. */
 	public function has_id()
@@ -450,8 +469,8 @@ final class DataPacketCollection {
 	 * none have been fetched
 	 * already
 	 * 
-     * @param strict: check for initial dispatch or not
-     * @return multidimensional array
+         * @param strict: check for initial dispatch or not
+         * @return multidimensional array
 	 */
 	public function get($strict=FALSE)
 	{

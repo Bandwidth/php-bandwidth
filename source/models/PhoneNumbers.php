@@ -36,9 +36,9 @@ final class PhoneNumbers extends GenericResource {
         parent::_init($data, new DependsResource,
                 new LoadsResource(array("primary" => "GET", "id" => "number", "init" => array())),
                 new SchemaResource(array("fields" => array(
-                'id', 'application', 'number', 'national_number',
-                'name', 'created_time', 'city', 'state', 'price',
-                'number_state', 'fallback_number', 'pattern_match', 'lata', 'rate_center'
+                'id', 'application', 'number', 'nationalNumber',
+                'name', 'createdTime', 'city', 'state', 'price',
+                'numberState', 'fallbackNumber', 'patternMatch', 'lata', 'rateCenter'
                 ), "needs" => array("id", "number", "name"),
             )));
     }

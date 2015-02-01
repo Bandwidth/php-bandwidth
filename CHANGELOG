@@ -62,9 +62,15 @@ Continuing from 0.5.0
 - MMS support, using local and absolute media urls
   * add field 'media' in Catapult\Message
 
+- Underscores now deprecated please use camelCase in place
+
 - Minor:
   * deprecated Credentials object you 'should' only use Client now.
   * other sub api functions added to modules.
   * listAll generic listing function for all lists
   * MediaURL type added
   * CallEvents object added
+  * Tuple based initialization:
+    Gather('call-id', 'gather-id')
+    this will automatically get the resource and its parent. 
+    * only applies to secondary models

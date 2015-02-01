@@ -112,7 +112,7 @@ class GenericResource {
     public function _init($data, $depends, $loads, $schema, $extras=null) {
         $plain = $data->get();      
         $input_is_str = $data->is_string();
-
+        $double_string = $data->is_double_string();
         /*
          * replace all numerical keys with the ones defined in schema    
          *
@@ -126,7 +126,7 @@ class GenericResource {
          */
 
         /** don't overload a 'GET' which is '1' in arity. This can be 2+ **/
-        if (sizeof($plain) > 1) {
+        if (sizeof($plain) > 1 && !$double_string) {
           foreach ($plain as $k => $p) {
               if (is_numeric($k) && isset($loads->init[$k])) {
                   $plain[$loads->init[$k]] = $p;
@@ -134,7 +134,6 @@ class GenericResource {
               }
           }
         }
-
         /**
          * another backwards compatable thing 
          * arguments were passed as singular and
@@ -152,8 +151,21 @@ class GenericResource {
          * without their main resource's id they cannot
          * do anything.
          */
-        if ($input_is_str && $loads->silent)
+        if ($input_is_str && $loads->silent && !$double_string)
             $plain = array($loads->init[0] => $plain);
+
+
+	/**
+	 * two based arguments
+ 	 * Gather('call_id', 'gather_id')
+         * 
+	 * this is for resources that need there parent
+	 * resource to operate
+	 */
+	if ($double_string) {
+            $plain = array($loads->init[0] => $plain[0], "id" => $plain[1]);
+	}
+		
 
         $pargs = func_get_args();
 
@@ -302,7 +314,7 @@ class GenericResource {
     public function update($args)
     {
         $data = Ensure::Input($args);
-      	$url = URIResource::Make($this->path, array($this->id));
+	$url = URIResource::Make($this->path, array($this->id));
 		$data = Ensure::Input($data);
 		$this->client->post($url, $data->get());
 

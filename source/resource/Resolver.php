@@ -44,7 +44,6 @@ class ResolverResource extends GenericResource {
 
         if ($data->data == null || sizeof($data) == 0)
             return $object;
-
         /**
          * certain objects cannot
          * be resolved without there parents
@@ -53,15 +52,14 @@ class ResolverResource extends GenericResource {
          */
         if ($object->loads->silent && $is_str)
             return $object;
-
 		/**
 		 * if we have a singleton
 		 * treat as primary key then
 	 	 * invoke create call with
 		 * in some cases the primary method can be
-         * create in others get
+                 * create in others get
 	 	 */
-		if ($is_str)
+		if ($is_str && !$object->loads->silent)
 			if ($object->loads->primary == 'create' || !isset($object->loads->primary))
 				return $object->create(array(
 					$object->loads->primary => $data
