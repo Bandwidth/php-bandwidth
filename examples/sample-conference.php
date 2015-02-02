@@ -8,7 +8,7 @@ require_once('../source/Catapult.php');
 // with your information
 // or comment out below /w your keys
 //
-$cred = new Catapult\Credentials('u-mmuxnl7o2u2ijsdg2hrwdsq', 't-zer7uzfxvsvcbmlkqx6zgsq', 'o5ky4rsoacdd2oqvzl4cy6j3uqv6zpgjs3izbba');
+$cred = new Catapult\Credentials('BANDWIDTH_USER_ID', 'BANDWITH_API_TOKEN', 'BANDWIDTH_API_SECRET');
 //$cred = new Catapult\Credentials;
 // dont forget to comment out the implicit version if using assoc array
 $client = new Catapult\Client($cred);
