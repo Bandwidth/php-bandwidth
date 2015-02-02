@@ -25,11 +25,11 @@ final class CatapultApiException extends \Exception
     parent::__construct($msg, $code);
 
     if (Catapult\Log::isOn()) {
-	    $trace = $this->getTrace();
-	    /** get the last line we got an error on, would be the user's file **/
+      $trace = $this->getTrace();
+      /** get the last line we got an error on, would be the user's file **/
 
-	    $line = $trace[sizeof($trace) - 1]['line'];
-    	Catapult\Log::write(time(), "line: " . $line, $this->result);
+      $line = $trace[sizeof($trace) - 1]['line'];
+      Catapult\Log::write(time(), "line: " . $line, $this->result);
     }
   }
 
