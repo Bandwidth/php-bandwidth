@@ -254,7 +254,7 @@ final class Client {
     */
     private function headerHandler($headers)
     {
-            return $headers;
+      return $headers;
     }
 
    /**
