@@ -28,7 +28,7 @@ interface API {
 	const API_METHOD_DEL = "DELETE";
 	const API_METHOD_PUT = "PUT";
 	const API_METHOD_GET = "GET";
-    const API_DATE_FORMAT = "Y-m-d\TH:i:s\Z";
+  const API_DATE_FORMAT = "Y-m-d\TH:i:s\Z";
 	const API_BANDWIDTH_USER_ID = "BANDWIDTH_USER_ID";
 	const API_BANDWIDTH_TOKEN = "BANDWIDTH_API_TOKEN";
 	const API_BANDWIDTH_SECRET = "BANDWIDTH_API_SECRET";
@@ -37,7 +37,7 @@ interface API {
 	const API_DEFAULT_APPLICATION = "APP-XX";
 	const SDK_VERSION = "0.1";
 	const SDK_USER_AGENT = "catapult-sdk-php";
-    const SDK_DATE_FORMAT = "Y-m-d\TH:i:s\Z";
+  const SDK_DATE_FORMAT = "Y-m-d\TH:i:s\Z";
 }
 
 /* a set of exceptions we need to handle */
@@ -73,9 +73,9 @@ interface WARNINGS {
 
 /** defaults used in place of custom parameters **/
 interface DEFAULTS {
-	const PAGE = 0;
+  const PAGE = 0;
 	const SIZE = 10;
-    const SIZE_THRESHOLD = 500;
+  const SIZE_THRESHOLD = 500;
 	const SIZE_MAX = 1000;
 	const SIZE_MIN = 0;
 	const EXTENSION = ".mp3";
@@ -84,23 +84,23 @@ interface DEFAULTS {
 
 /** paths for api endpoints **/
 interface PATHS {
-	const PATH_TO_MESSAGES = "messages";
-	const PATH_TO_CALLS = "calls";
-	const PATH_TO_APPLICATION = "application";
-	const PATH_TO_CONFERENCE = "conference";
-	const PATH_TO_RECORDINGS = "recordings";
+  const PATH_TO_MESSAGES = "messages";
+  const PATH_TO_CALLS = "calls";
+  const PATH_TO_APPLICATION = "application";
+  const PATH_TO_CONFERENCE = "conference";
+  const PATH_TO_RECORDINGS = "recordings";
 }
 
 /** BAML definitions **/
 interface BAML_VERBS {
-    const BAML_SPEAK_SENTENCE = "SpeakSentence";
-    const BAML_PLAY_AUDIO = "PlayAudio";
-    const BAML_TRANSFER = "Transfer";
-    const BAML_GATHER = "Gather";
-    const BAML_SEND_MESSAGE = "SendMessage";
-    const BAML_REDIRECT = "Redirect";
-    const BAML_HANGUP = "Hangup";
-    const BAML_RECORD = "Record";
+  const BAML_SPEAK_SENTENCE = "SpeakSentence";
+  const BAML_PLAY_AUDIO = "PlayAudio";
+  const BAML_TRANSFER = "Transfer";
+  const BAML_GATHER = "Gather";
+  const BAML_SEND_MESSAGE = "SendMessage";
+  const BAML_REDIRECT = "Redirect";
+  const BAML_HANGUP = "Hangup";
+  const BAML_RECORD = "Record";
 }
 
 interface BAML_XML_METHODS {

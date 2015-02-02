@@ -34,23 +34,23 @@ final class XMLUtility extends BaseUtilities {
             $baml->values = $values;
 
         foreach ($baml->values as $el) {
-            $idx = count($elements);
-            if ($el['type'] == "complete" || $el['type'] == "open") {
-                $bobj = $baml->register($el);
-                $elements[$idx] = $bobj;
-    
-                if ($el['type'] == "open") {
-                    $stack[count($stack)] = &$elements;
-                    $texts[$bobj->level] = &$elements[$idx]->text;
-                    $elements = &$elements[$idx]->verbs;
-                }
+          $idx = count($elements);
+           if ($el['type'] == "complete" || $el['type'] == "open") {
+             $bobj = $baml->register($el);
+             $elements[$idx] = $bobj;
+   
+             if ($el['type'] == "open") {
+               $stack[count($stack)] = &$elements;
+               $texts[$bobj->level] = &$elements[$idx]->text;
+               $elements = &$elements[$idx]->verbs;
+              }
             }
             if ($el['type'] == 'cdata') {
-                $texts[$el['level']] .= trim($el['value']);
+              $texts[$el['level']] .= trim($el['value']);
             }
             if ($el['type'] == "close") {
-                $elements = &$stack[count($stack) - 1];
-                unset($stack[count($stack) - 1]);
+              $elements = &$stack[count($stack) - 1];
+              unset($stack[count($stack) - 1]);
             }
         }
 
@@ -67,10 +67,10 @@ final class XMLUtility extends BaseUtilities {
      *
      */
     public function MakePred($xml) {
-        $baml = new BaML;
-        $baml->values = $xml;
+      $baml = new BaML;
+      $baml->values = $xml;
 
-        self::make($baml);
+      self::make($baml);
     }
 
     /**
@@ -81,7 +81,7 @@ final class XMLUtility extends BaseUtilities {
      * render using the default encoding
      */
     public static function getHeader() {
-        return self::$options['header']; 
+      return self::$options['header']; 
     }
 
     /**
@@ -90,10 +90,11 @@ final class XMLUtility extends BaseUtilities {
      * 
      */
     public static function open($tag, $baml=false) {
-        if ($baml && !in_array($tag, BaMLVerb::$valid))
-            throw new \CatapultApiException("This is not a valid baML verb");
+      if ($baml && !in_array($tag, BaMLVerb::$valid)) {
+        throw new \CatapultApiException("This is not a valid baML verb");
+      }
 
-        return "<$tag";
+      return "<$tag";
     }
 
     /**
@@ -102,10 +103,11 @@ final class XMLUtility extends BaseUtilities {
      * optionally checks if its valid
      */
     public static function fullOpen($tag, $baml=false) {
-        if ($baml && !in_array($tag, BaMLVerb::$valid))
-            throw new \CatapultApiException("This is not a valid baML verb");
+      if ($baml && !in_array($tag, BaMLVerb::$valid)) {
+        throw new \CatapultApiException("This is not a valid baML verb");
+      }
 
-        return "<$tag>";
+      return "<$tag>";
     }
 
     /**
@@ -114,7 +116,7 @@ final class XMLUtility extends BaseUtilities {
      * optionally checks if its valid
      */
     public static function close($tag, $baml=false) {
-        return "</$tag>";
+      return "</$tag>";
     }
 
     /** 
@@ -123,7 +125,7 @@ final class XMLUtility extends BaseUtilities {
      * optionally checks if its valid
      */
     public static function fullClose($tag, $baml=false) {
-        return "</$tag>";
+      return "</$tag>";
     } 
 
     /**
@@ -132,13 +134,13 @@ final class XMLUtility extends BaseUtilities {
      * @param attributes: BaMLAttributes [array]
      */
     public static function getAttributesCollection($attributes, $padding=1) {
-        /** one space to seperate namespace **/
-        $attrs = str_repeat(" ", $padding);
-        foreach ($attributes as $attr) {
-            $attrs .= $attr->getKey() . "=" . '"' . $attr->getValue() . '" ';
-        }
+      /** one space to seperate namespace **/
+      $attrs = str_repeat(" ", $padding);
+      foreach ($attributes as $attr) {
+        $attrs .= $attr->getKey() . "=" . '"' . $attr->getValue() . '" ';
+      }
 
-        return substr($attrs, 0, strlen($attrs) - 1);
+      return substr($attrs, 0, strlen($attrs) - 1);
     }
 
     /**
@@ -148,25 +150,25 @@ final class XMLUtility extends BaseUtilities {
      * @param verbs: BaMLVerbs [array]
      */
     public static function joinTree($verbs) {
-        $str = '';
+      $str = '';
 
-        if (sizeof($verbs) > 0) {
+      if (sizeof($verbs) > 0) {
 
-           foreach ($verbs as $v) {
-              $str .= self::openTag($v->getName(), $v->getAttributes());
+        foreach ($verbs as $v) {
+          $str .= self::openTag($v->getName(), $v->getAttributes());
 
-              if ($v->hasVerbs()) {
-                  $str .= self::joinTree($v->getVerbs());    
-              }
+          if ($v->hasVerbs()) {
+            $str .= self::joinTree($v->getVerbs());    
+          }
 
-              $str .= $v->getText();
+          $str .= $v->getText();
 
 
-              $str .= self::closeTag($v->getName());
-           }
+          $str .= self::closeTag($v->getName());
         }
+      }
 
-        return $str;
+      return $str;
     }
 
     /**
@@ -178,18 +180,15 @@ final class XMLUtility extends BaseUtilities {
      */
     public function openTag($name, $attributes=null) {
         if ($attributes) {
-            $initial = $name;
+          $initial = $name;
+          $name = self::open($initial);
+          $name .= self::getAttributesCollection($attributes);
+          $name .= ">";
 
-            $name = self::open($initial);
+          return $name;
+        } 
 
-            $name .= self::getAttributesCollection($attributes);
-
-            $name .= ">";
-
-            return $name;
-         } 
-
-         return self::fullOpen($name);
+      return self::fullOpen($name);
     }
 
     /**
@@ -198,7 +197,7 @@ final class XMLUtility extends BaseUtilities {
      * full close
      */
     public function closeTag($name) {
-         return self::fullClose("$name");
+      return self::fullClose("$name");
     }
 
     /**
@@ -209,50 +208,50 @@ final class XMLUtility extends BaseUtilities {
      * @param xml: xml document 
      */
     public static function indent($xml) {
-        $cnt = 0;
-        $d = 0;
-        $t = 0;
-        $c = 0;
-        while ($cnt != strlen($xml)) {
-            $ch = substr($xml, $cnt, 1);
-            $ch2 = substr($xml, $cnt, 2);
-            $lch = substr($xml, strlen($xml) - 1, 1);
-            $f = strlen($xml);
+      $cnt = 0;
+      $d = 0;
+      $t = 0;
+      $c = 0;
+      while ($cnt != strlen($xml)) {
+        $ch = substr($xml, $cnt, 1);
+        $ch2 = substr($xml, $cnt, 2);
+        $lch = substr($xml, strlen($xml) - 1, 1);
+        $f = strlen($xml);
+        $a = strlen($xml);
+
+          if ($ch == "<" && $ch2 != "</" && $cnt != "0") {
+            $n = "\n";
+              for($i = 0; $i <= ($t - $c); $i ++) {
+                $n .= "\t";
+              }
+
+            $pre = substr($xml, 0, $cnt);
+            $af = substr($xml, $cnt, (max(strlen($xml), $cnt) - min(strlen($xml), $cnt)));
+            $xml = $pre . $n . $af;
+
             $a = strlen($xml);
+            $d ++;
+            $t ++;
+          }
 
-            if ($ch == "<" && $ch2 != "</" && $cnt != "0") {
-                $n = "\n";
-                for($i = 0; $i <= ($t - $c); $i ++) {
-                    $n .= "\t";
-                }
-
-                $pre = substr($xml, 0, $cnt);
-                $af = substr($xml, $cnt, (max(strlen($xml), $cnt) - min(strlen($xml), $cnt)));
-                $xml = $pre . $n . $af;
-
-                $a = strlen($xml);
-                $d ++;
-                $t ++;
+          if ($ch2 == "</") {
+            $n = "\n";
+            for($i = 0; $i <= ($t - $c) - 1; $i ++) {
+              $n .= "\t";
             }
 
-            if ($ch2 == "</") {
-                $n = "\n";
-                for($i = 0; $i <= ($t - $c) - 1; $i ++) {
-                    $n .= "\t";
-                }
+            $pre = substr($xml, 0, $cnt);
+            $af = substr($xml, $cnt, (max(strlen($xml), $cnt) - min(strlen($xml), $cnt)));
+            $xml = $pre . $n . $af;
 
-                $pre = substr($xml, 0, $cnt);
-                $af = substr($xml, $cnt, (max(strlen($xml), $cnt) - min(strlen($xml), $cnt)));
-                $xml = $pre . $n . $af;
+            $a = strlen($xml);
+            $c ++;
+          }
 
-                $a = strlen($xml);
-                $c ++;
-            }
+          $cnt += ($a - $f) > 0 ? ($a-$f)+1:1;         
+      }
 
-            $cnt += ($a - $f) > 0 ? ($a-$f)+1:1;         
-        }
-
-        return $xml;
+      return $xml;
     }
 
     /**
@@ -263,11 +262,11 @@ final class XMLUtility extends BaseUtilities {
      * @param element: XML element
      */
     public static function parse($element) {
-        $space = strpos(" ", $element);
-        $tag = substr($element, 1, $space);
-        $verb = "Catapult\\BaML" . $tag;
+      $space = strpos(" ", $element);
+      $tag = substr($element, 1, $space);
+      $verb = "Catapult\\BaML" . $tag;
 
-        return new $verb; 
+      return new $verb; 
     }
 }
 

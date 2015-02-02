@@ -10,7 +10,7 @@
  */
 namespace Catapult;
 
-final class Conference extends GenericResource {
+final class Conference extends AudioMixin {
 
     /**
      *
@@ -25,25 +25,25 @@ final class Conference extends GenericResource {
      */
 	public function __construct()
 	{
-        $data = Ensure::Input(func_get_args());
+      $data = Ensure::Input(func_get_args());
 
-        parent::_init($data, new DependsResource,
-            new LoadsResource(
-                array("primary" => "GET", "id" => "id", "silent" => false)
-            ),
-            new SchemaResource(
-                array("fields" => array("id", "state", "from", "created_time", "completed_time", "fallback_url"), 
-                "needs" => array(
-                "id", "state", "from"
-                )
-            )),
-            new SubFunctionResource(array(
-                    array("type" => "get", "term" => "members"),
-                    array("type" => "add", "term" => "members"),
-                    array("type" => "update", "term" => "member")
-               )
-            )
-         );        
+      parent::_init($data, new DependsResource,
+        new LoadsResource(
+          array("primary" => "GET", "id" => "id", "silent" => false)
+        ),
+        new SchemaResource(
+          array("fields" => array("id", "state", "from", "created_time", "completed_time", "fallback_url"), 
+              "needs" => array(
+              "id", "state", "from"
+              )
+          )),
+        new SubFunctionResource(array(
+                array("type" => "get", "term" => "members"),
+                array("type" => "add", "term" => "members"),
+                array("type" => "update", "term" => "member")
+           )
+        )
+       );        
 	}
 
 	/**

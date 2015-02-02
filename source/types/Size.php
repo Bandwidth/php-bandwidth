@@ -10,11 +10,13 @@ namespace Catapult;
 final class Size extends Types {
 	public function __construct($size=DEFAULTS::SIZE)
 	{
-		if ($size > DEFAULTS::SIZE_MAX)
+		if ($size > DEFAULTS::SIZE_MAX) {
 			Throw new \CatapultApiException("Size too large. Size was: " . $size);
+    }
 
-		if ($size < DEFAULTS::SIZE_MIN)
+		if ($size < DEFAULTS::SIZE_MIN) {
 			Throw new \CatapultApiException("Size too small. Size was: " . $size);
+    }
 
 		$this->size = $size;
 	}

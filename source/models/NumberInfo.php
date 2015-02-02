@@ -34,9 +34,10 @@ final class NumberInfo extends GenericResource {
      */
     public function get($number)
     {
-        $url = URIResource::Make($this->path, array($number));
-        $data = $this->client->get($url, array(), true, false);
-        return Constructor::Make($this, $data);
+      $url = URIResource::Make($this->path, array($number));
+      $data = $this->client->get($url, array(), true, false);
+
+      return Constructor::Make($this, $data);
     }
 }
 ?>

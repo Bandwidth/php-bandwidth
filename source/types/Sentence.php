@@ -9,37 +9,38 @@
 
 namespace Catapult;
 final class Sentence extends Types {
-	/**
-	 * Form the sentence
-	 * object version
-	 */
-	public function __construct($sentence)
-	{
-		$this->sentence = $sentence;
-	}
+    /**
+     * Form the sentence
+     * object version
+     */
+    public function __construct($sentence)
+    {
+      $this->sentence = $sentence;
+    }
 
-	/**
-	 * Form a sentence. Only
-	 * allow printable characters for
-	 * percision. 
-	 * 
-	 * @param sentence: sentence to speak
-	 * @param singular return as array or scalar
-	 */
-	public function Make($sentence, $singular=false)
-	{
-		if (!($singular)) 
-			return array(
-				"sentence" => $sentence
-			);
+    /**
+     * Form a sentence. Only
+     * allow printable characters for
+     * percision. 
+     * 
+     * @param sentence: sentence to speak
+     * @param singular return as array or scalar
+     */
+    public function Make($sentence, $singular=false)
+    {
+      if (!($singular)) {
+        return array(
+          "sentence" => $sentence
+        );
+      }
 
-		return $sentence;
-	}
+      return $sentence;
+    }
 
-	public function __toString()
-	{
-		return $this->Make($this->sentence, TRUE);
-	}
+    public function __toString()
+    {
+      return $this->Make($this->sentence, TRUE);
+    }
 }
 
 ?>

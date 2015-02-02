@@ -22,18 +22,13 @@ final class CatapultApiException extends \Exception
       $msg = $this->result;
     }
 
-    /**
-     * log the error 
-     * only if logger is on
-     */
-
     parent::__construct($msg, $code);
 
     if (Catapult\Log::isOn()) {
-	$trace = $this->getTrace();
-	/** get the last line we got an error on, would be the user's file **/
+	    $trace = $this->getTrace();
+	    /** get the last line we got an error on, would be the user's file **/
 
-	$line = $trace[sizeof($trace) - 1]['line'];
+	    $line = $trace[sizeof($trace) - 1]['line'];
     	Catapult\Log::write(time(), "line: " . $line, $this->result);
     }
   }
@@ -80,10 +75,10 @@ class CatapultApiWarning {
     /** show output of what happened **/
     /** todo make CatapultApiWarning recognize global constants **/
     public function __construct($message) {
-        $this->message = $message;
+      $this->message = $message;
     }
     public function __toString() {
-        return "CatapultWarning: " . $this->message . "\n";
+      return "CatapultWarning: " . $this->message . "\n";
     }
 }
 ?>

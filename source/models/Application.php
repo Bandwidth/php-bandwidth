@@ -39,16 +39,16 @@ final class Application extends GenericResource {
       );
     }
 
-	/**
-	 * Patch the given
-	 * application with new information
-	 * same as update/1
-     *
-     * @param data: set of application data
-	 */
+  /**
+   * Patch the given
+   * application with new information
+   * same as update/1
+   *
+   * @param data: set of application data
+   */
 	public function patch($data)
 	{
-	    return parent::create($data);	
+	  return parent::create($data);	
 	}
 } 
 

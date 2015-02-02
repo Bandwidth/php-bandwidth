@@ -4,7 +4,7 @@
  * @model Account
  * https://catapult.inetwork.com/docs/api-docs/account/
  *
- * provides access to accont information
+ * provides access to account information
  * and transactions
  *
  * provides: 
@@ -24,13 +24,13 @@ final class Account extends GenericResource {
      *
      */
     public function __construct($data=null) {
-        $data = Ensure::Input($data);
+      $data = Ensure::Input($data);
 
-        parent::_init($data, new DependsResource,
-              new LoadsResource(array("primary" => "GET", "id" => "id", "init" => "", "silent" => false)),
-              new SchemaResource(array("fields" => array( "balance", "account_type"), "needs" => array("balance", "account_type")),
-              new SubFunctionResource(array("term" => "transactions", "type" => "get"))
-            ));
+      parent::_init($data, new DependsResource,
+        new LoadsResource(array("primary" => "GET", "id" => "id", "init" => "", "silent" => false)),
+        new SchemaResource(array("fields" => array( "balance", "account_type"), "needs" => array("balance", "account_type")),
+        new SubFunctionResource(array("term" => "transactions", "type" => "get"))
+      ));
     }
 }
 

@@ -17,10 +17,11 @@ final class TitleUtility extends BaseUtilities {
      * @param term: Catapult term
      */
     public static function ToPlural($term) {
-        if (!preg_match("/s$/", $term, $m))
-            return "{$term}s";
+      if (!preg_match("/s$/", $term, $m)) {
+        return "{$term}s";
+      }
        
-        return $term; 
+      return $term; 
     }
 
     /**
@@ -29,10 +30,11 @@ final class TitleUtility extends BaseUtilities {
      * @param term: Catapult term
      */
     public static function ToSingular($term) {
-        if (preg_match("/s$/", $term, $m))
-            return preg_replace("/s$/", "", $term);
+      if (preg_match("/s$/", $term, $m)) {
+        return preg_replace("/s$/", "", $term);
+      }
 
-        return $term;
+      return $term;
     }
 
     /**
@@ -43,7 +45,7 @@ final class TitleUtility extends BaseUtilities {
      * @param term: Catapult model term
      */
     public static function ToTitlecase($term) {
-        return strtoupper(substr($term, 0, 1)) . strtolower(substr($term, 1, strlen($term)));
+      return strtoupper(substr($term, 0, 1)) . strtolower(substr($term, 1, strlen($term)));
     }
 }
 

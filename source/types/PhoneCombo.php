@@ -11,9 +11,9 @@
 namespace Catapult;
 
 final class PhoneCombo extends Types {
-        public function Make($sender, $receiver)
-        {
-             return array( "from" => (string) $sender, "to" => (string) $receiver);
-        }
+    public function Make($sender, $receiver)
+    {
+      return array( "from" => (string) $sender, "to" => (string) $receiver);
+    }
 }
 ?>

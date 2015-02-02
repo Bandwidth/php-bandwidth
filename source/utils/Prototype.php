@@ -12,7 +12,7 @@ namespace Catapult;
 class PrototypeUtility extends BaseUtilities {
 
     public function get_idx($args, $idx) {
-        return $args[$idx];
+      return $args[$idx];
     }
     /**
      * Get this from a static
@@ -24,7 +24,7 @@ class PrototypeUtility extends BaseUtilities {
      */
     public static function get_this($args) 
     {
-        return self::get_idx($args, sizeof($args) - 1);
+      return self::get_idx($args, sizeof($args) - 1);
     }
 
     /**
@@ -38,7 +38,7 @@ class PrototypeUtility extends BaseUtilities {
      */
     public function get_term($args)
     {
-        return self::get_idx($args, sizeof($args) - 2);
+      return self::get_idx($args, sizeof($args) - 2);
     }
 
     /**
@@ -50,7 +50,7 @@ class PrototypeUtility extends BaseUtilities {
      */
     public function get_id($args)
     {
-        return self::get_idx($args, 0);
+      return self::get_idx($args, 0);
     }
 
     /**
@@ -62,7 +62,7 @@ class PrototypeUtility extends BaseUtilities {
      */
     public function get_is_plural($args)
     {
-        return self::get_idx($args, 1);
+      return self::get_idx($args, 1);
     }
 
 

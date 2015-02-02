@@ -17,14 +17,14 @@ final class Date extends Types {
 	 */
 	public function __construct($datetime)
 	{
-		if (is_int($datetime)) {
-			$dt = new \DateTime();	
-			$dt->setTimestamp($datetime);
-		} else {
-			$dt = $datetime;
-		}
+    if (is_int($datetime)) {
+      $dt = new \DateTime();	
+      $dt->setTimestamp($datetime);
+    } else {
+      $dt = $datetime;
+    }
 
-		$this->date = $dt;
+    $this->date = $dt;
 	}
 	public function __toString()
 	{

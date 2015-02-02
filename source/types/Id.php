@@ -14,64 +14,66 @@
  
 namespace Catapult;
 final class Id extends Types {
+     /**
+      *
+      * A list of known prefixes
+      * TODO: Try to make the type
+      * switch whenever match with prefix below
+      */
+    public static $prefixes = array(
+      "c",
+      "conf",
+      "b",
+      "m",
+      "g",
+      "rec",	
+      "transc",
+      "u"
+    );
+
     /**
+     * construct an id object
+     * throws on error. If not needed for
+     * exception handling use: valid/1
      *
-     * A list of known prefixes
-     * when 
-     *
+     * @param id: valid Catapult Id
      */
-	public static $prefixes = array(
-		"c",
-		"conf",
-		"b",
-    "m",
-    "g",
-		"rec",	
-	  "transc",
-		"u"
-	);
+    public function __construct($id)
+    {
+      if (!(self::valid($id))) {
+        throw new \CatapultApiException("Invalid id, used: $id");
+      }
 
-	/**
-	 * construct an id object
-	 * throws on error. If not needed for
-	 * exception handling use: valid/1
-	 *
-	 * @param id: valid Catapult Id
-	 */
-	public function __construct($id)
-	{
-		if (!(self::valid($id)))
-			throw new \CatapultApiException("Invalid id, used: $id");
+      $this->id = $id;
+    }
 
-		$this->id = $id;
-	}
+    /**
+     * check if the supplied
+     * id is valid
+     * 
+     * @param id: valid Catapult Id
+     */
+    public function valid($id)
+    {
+      $valid = FALSE;
 
-	/**
-	 * check if the supplied
-	 * id is valid
-	 * 
-	 * @param id: valid Catapult Id
-	 */
-	public function valid($id)
-	{
-		$valid = FALSE;
+      foreach (self::$prefixes as $prefix) {
+        $m = array();
 
-		foreach (self::$prefixes as $prefix) {
-			$m = array();
+        preg_match("/$prefix-.*/", $id, $m);
 
-			preg_match("/$prefix-.*/", $id, $m);
+        if (sizeof($m)) {
+          $valid = TRUE;
+        }
+      }
 
-			if (sizeof($m))
-				$valid = TRUE;
-		}
+      return $valid;
+    }
 
-		return $valid;
-	}
-
-	public function __toString()
-	{
-		return (string) $this->id;
-	}
+    public function __toString()
+    {
+      return (string) $this->id;
+    }
 }
 
 ?>

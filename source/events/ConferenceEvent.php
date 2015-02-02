@@ -18,11 +18,11 @@
 namespace Catapult;
 
 class ConferenceEventMixin extends EventType {
-	public function __construct()
-	{
-    $data = Ensure::Input(json_decode("php://input"));
+    public function __construct()
+    {
+      $data = Ensure::Input(json_decode("php://input"));
 
-		return parent::_init($data, new Conference);
-	}
+      return parent::_init($data, new Conference);
+    }
 }
 ?>
