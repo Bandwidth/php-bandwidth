@@ -31,7 +31,7 @@ namespace Catapult;
  */
 abstract class BaMLResource {
     public static $options = array(
-         BAML_XML_OPTIONS::BAML_XML_ENCODING => "UTF-8"
+      BAML_XML_OPTIONS::BAML_XML_ENCODING => "UTF-8"
     );
 
 
@@ -69,25 +69,26 @@ abstract class BaMLResource {
      */
     public function register($element, $container=false) {
       if (in_array($element['tag'], array("Request", "Response")))
-          return new BaMLContainer($element['tag']);
+        return new BaMLContainer($element['tag']);
 
       if (!(in_array($element['tag'], BaMLVerb::$valid)))
-          throw new \CatapultApiException($element['tag'] . " is not a valid verb..");
+        throw new \CatapultApiException($element['tag'] . " is not a valid verb..");
 
-      if ($container) 
-          $class = "Catapult\\" . "BaMLVerb" . $element['tag']; 
-      else
-          $class =  "Catapult\\" . "BaMLVerb" . $element['tag']; 
+      if ($container) {
+        $class = "Catapult\\" . "BaMLVerb" . $element['tag']; 
+      } else {
+        $class =  "Catapult\\" . "BaMLVerb" . $element['tag']; 
+      }
 
       $class = new $class;
 
       if (isset($element['attributes'])) {
          foreach ($element['attributes'] as $k => $attr) {
-            $class->addAttribute($k, $attr);
+           $class->addAttribute($k, $attr);
          }
       }
       if (isset($element['text']))
-          $class->setText(trim($element['value']));
+        $class->setText(trim($element['value']));
 
       $class->level = $element['level'];
 
@@ -120,7 +121,7 @@ abstract class BaMLResource {
        * 
        */ 
       if ($code != 0) {
-            return XMLUtility::Make($this, $vals); 
+        return XMLUtility::Make($this, $vals); 
       }
 
         
@@ -465,7 +466,7 @@ class BaMLVerb extends BaMLGeneric {
     public function getAttributesString() {
       $str = "";
       foreach ($this->attributes as $attr) {
-          $str .= $attr->getKey() . "='" . $attr->getValue() . "',";
+        $str .= $attr->getKey() . "='" . $attr->getValue() . "',";
       } 
 
       return substr($str, 0, strlen($str) - 1);
@@ -490,25 +491,25 @@ class BaMLVerb extends BaMLGeneric {
      */
     public function addVerb($verb) {
       if (is_array($verb)) {
-          $verb = BaMLVerbResource::Make($verb);
+        $verb = BaMLVerbResource::Make($verb);
       }
           
       if (!($verb instanceof BaMLVerb)) {
-          throw new \CatapultApiException("You can only add type BaMLVerb..");
+        throw new \CatapultApiException("You can only add type BaMLVerb..");
       }
 
       /** check for constraints **/
 
       if (isset($this->constraints['verbs']) && sizeof($this->verbs) >= $this->constraints['verbs']) {
-          throw new \CatapultApiException($this->getName() . " verb can only take " . $this->constraints['verbs'] . " verbs");
+        throw new \CatapultApiException($this->getName() . " verb can only take " . $this->constraints['verbs'] . " verbs");
       }
 
 
       /** avoid memory issues by cloning. if needed **/
       if (BaseUtilities::is_ref($verb, $this)) {
-          $this->verbs[] = clone $verb;
+        $this->verbs[] = clone $verb;
       } else {
-          $this->verbs[] = $verb;
+        $this->verbs[] = $verb;
       }
     }
 
@@ -524,7 +525,7 @@ class BaMLVerb extends BaMLGeneric {
      */
     public function addNestedVerb($index, $verb) {
       if (!($index <= sizeof($this->verbs))) {
-          throw new \CatapultApiException("This verb does not have $index nested verbs");
+        throw new \CatapultApiException("This verb does not have $index nested verbs");
       }
 
       
@@ -537,7 +538,7 @@ class BaMLVerb extends BaMLGeneric {
      */
     public function addNestedText($index, $text) {
       if (!($index <= sizeof($this->verbs))) {
-          throw new \CatapultApiException("This verb does not have $index nested verbs");
+        throw new \CatapultApiException("This verb does not have $index nested verbs");
       }
 
       $this->verbs[$index]->addText($text);
@@ -545,7 +546,7 @@ class BaMLVerb extends BaMLGeneric {
 
     public function setNestedText($index, $text) {
       if (!($index <= sizeof($this->verbs))) {
-          throw new \CatapultApiException("This verb does not have $index nested verbs");
+        throw new \CatapultApiException("This verb does not have $index nested verbs");
       }
 
       $this->verbs[$index]->setText($text);
@@ -557,7 +558,7 @@ class BaMLVerb extends BaMLGeneric {
      */
     public function addNestedAttribute($index, $attribute) {
       if (!($index <= sizeof($this->verbs))) {
-          throw new \CatapultApiException("This verb does not have $index nested verbs");
+        throw new \CatapultApiException("This verb does not have $index nested verbs");
       }
 
       $this->verbs[$index]->addAttribute($attribute);
@@ -565,7 +566,7 @@ class BaMLVerb extends BaMLGeneric {
 
     public function addNestedAttributes($index, $attribute) {
       if (!($index <= sizeof($this->verbs))) {
-          throw new \CatapultApiException("This verb does not have $index nested verbs");
+        throw new \CatapultApiException("This verb does not have $index nested verbs");
       }
 
       $this->verbs[$index]->addAttributes($attribute);
@@ -583,16 +584,16 @@ class BaMLVerb extends BaMLGeneric {
       $cl = get_class($this);
 
       if (is_array($attribute))
-          $attribute = new BaMLAttribute($attribute[0], $attribute[1]);
+        $attribute = new BaMLAttribute($attribute[0], $attribute[1]);
 
       if (is_string($attribute))
-          $attribute = new BaMLAttribute($args[0], $args[1]);
+        $attribute = new BaMLAttribute($args[0], $args[1]);
 
       if (!($attribute instanceof BaMLAttribute))
-          throw new \CatapultApiException("You can only add type BaMLAttribute or array..");
+        throw new \CatapultApiException("You can only add type BaMLAttribute or array..");
 
       if (isset($cl::$params) && !(in_array($attribute->getKey(), $cl::$params)) && sizeof($cl::$params) > 0)
-          throw new \CatapultApiException("attribute '" . $attribute->getKey() . "' is not a valid attribute for verb " . $this->getName() . "" . " please use any of the following: " . $this->printAttributes());
+        throw new \CatapultApiException("attribute '" . $attribute->getKey() . "' is not a valid attribute for verb " . $this->getName() . "" . " please use any of the following: " . $this->printAttributes());
 
       $this->attributes[] = $attribute;
     }
@@ -861,21 +862,18 @@ final class BaML extends BaMLResource {
             throw new \CatapultApiException("Not a valid object in BaML schema. Must be either BaMLAttribute, BaMLVerb or BaMLVerb");
           }
 
-
-
-          if (!isset($this->currentVerb))
+          if (!isset($this->currentVerb)) {
             $this->setCurrentVerb($object);
+          }
 
-          if (!isset($this->currentText))
+          if (!isset($this->currentText)) {
             $this->setCurrentText($object);
-
+          }
            
           $this->addData($object);
 
         } else {
             /** for this initialization we need type to be set **/
-          
-
 
           $this->addData($object); 
         }
@@ -941,35 +939,33 @@ final class BaML extends BaMLResource {
 
       /** if we're passed one argument pluck its object **/
       if (sizeof($object) == 1)
-         $object = $object[0];
+        $object = $object[0];
 
-         if (is_array($object)) {
+       if (is_array($object)) {
 
-           /** either its a verb, text or attribute **/
-           /** we need to find type by its name **/
+         /** either its a verb, text or attribute **/
+         /** we need to find type by its name **/
               
 
-           /** create the object and any additional attributes **/
-           /** attributes are set in "attributes" field of array **/
+         /** create the object and any additional attributes **/
+         /** attributes are set in "attributes" field of array **/
 
-                
+         $this->handleAttributes($object); 
 
-           $this->handleAttributes($object); 
+       } elseif (is_object($object)) {
+         
+        /** object based initialization **/       
+        $this->setVerb($object); 
 
-          } elseif (is_object($object)) {
-          
-           /** object based initialization **/       
-           $this->setVerb($object); 
-
-          } elseif (is_string($object)) {
-           /** polymorphic style initialization **/
-           /** first parameter needs to be the name of the instance **/
-           /** following are attributes **/
-           $args = array_slice($object[1], $object[sizeof($object) - 1]);
-             
-          } else {
-              throw new \CatapultApiException("Invalid input for baML must be either string, instance or associative array");
-          }
+       } elseif (is_string($object)) {
+          /** polymorphic style initialization **/
+          /** first parameter needs to be the name of the instance **/
+          /** following are attributes **/
+        $args = array_slice($object[1], $object[sizeof($object) - 1]);
+            
+       } else {
+          throw new \CatapultApiException("Invalid input for baML must be either string, instance or associative array");
+       }
     }
     
 
