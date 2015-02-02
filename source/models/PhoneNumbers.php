@@ -34,13 +34,13 @@ final class PhoneNumbers extends GenericResource {
     public function __construct() {
         $data = Ensure::Input(func_get_args());
         parent::_init($data, new DependsResource,
-                new LoadsResource(array("primary" => "GET", "id" => "number", "init" => array(), "silent" => true)),
-                new SchemaResource(array("fields" => array(
-                'id', 'application', 'number', 'nationalNumber',
-                'name', 'createdTime', 'city', 'state', 'price',
-                'numberState', 'fallbackNumber', 'patternMatch', 'lata', 'rateCenter'
-                ), "needs" => array("id", "number", "name"),
-            )));
+          new LoadsResource(array("primary" => "GET", "id" => "number", "init" => array(), "silent" => true)),
+          new SchemaResource(array("fields" => array(
+            'id', 'application', 'number', 'nationalNumber',
+            'name', 'createdTime', 'city', 'state', 'price',
+            'numberState', 'fallbackNumber', 'patternMatch', 'lata', 'rateCenter'
+             ), "needs" => array("id", "number", "name"),
+         )));
     }
 
     /**

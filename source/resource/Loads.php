@@ -13,10 +13,10 @@ namespace Catapult;
  */
 final class LoadsResource extends BaseResource {
     public function __construct($args) {
-         $this->init = $args['init'];
-         $this->id = $args['id'];
-         $this->primary = $args['primary'];
-         $this->silent = $args['silent'];
+      $this->init = $args['init'];
+      $this->id = $args['id'];
+      $this->primary = $args['primary'];
+      $this->silent = $args['silent'];
     }
 }
 

@@ -23,8 +23,8 @@ final class Conference extends AudioMixin {
      * POST
      * Conference(array)
      */
-	public function __construct()
-	{
+    public function __construct()
+    {
       $data = Ensure::Input(func_get_args());
 
       parent::_init($data, new DependsResource,
@@ -38,23 +38,23 @@ final class Conference extends AudioMixin {
               )
           )),
         new SubFunctionResource(array(
-                array("type" => "get", "term" => "members"),
-                array("type" => "add", "term" => "members"),
-                array("type" => "update", "term" => "member")
-           )
+          array("type" => "get", "term" => "members"),
+          array("type" => "add", "term" => "members"),
+          array("type" => "update", "term" => "member")
+         )
         )
        );        
-	}
+    }
 
-	/**
-	 * Return a partial for
-	 *
-	 * the member selected
-	 */
-	public function member()
-	{
-		return new ConferenceMember($this->id);
-	}
+    /**
+     * Return a partial for
+     *
+     * the member selected
+     */
+    public function member()
+    {
+      return new ConferenceMember($this->id);
+    }
 }
 
 

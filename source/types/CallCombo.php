@@ -17,20 +17,20 @@ final class CallCombo extends Types {
   public function Make($args /* polymorphic */)
 	{
     $calls = func_get_args();
-		$call_ids = array();
+    $call_ids = array();
 
-		foreach ($calls as $call) {
-			if (is_object($call)) {
-				$call_ids[] = $call->id;
-			} else {
-				$call_ids[] = $call;
+    foreach ($calls as $call) {
+      if (is_object($call)) {
+        $call_ids[] = $call->id;
+      } else {
+        $call_ids[] = $call;
       }
-		}
+    }
 
-		return $call_ids;
+    return $call_ids;
 	}
   public function __toString() {
-      return implode(",", $this->$call_ids);
+    return implode(",", $this->$call_ids);
   }
 }
 ?>

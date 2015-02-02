@@ -11,16 +11,16 @@
 namespace Catapult;
 
 class TranscriptionCallEvent extends EventType {
-	/**
-   * TranscriptionCallEvent like GatherEvent
-	 * loads differently we first pass
-   * the recording id. Parent will get the
-   * model.
-	 */
-	public function __construct()
-  {
-		$data = Ensure::Input(json_decode(file_get_contents("php://input")));
-		parent::_init($data, new Transcription($data->val("recordingId")));
-	}
+    /**
+     * TranscriptionCallEvent like GatherEvent
+     * loads differently we first pass
+     * the recording id. Parent will get the
+     * model.
+     */
+    public function __construct()
+    {
+      $data = Ensure::Input(json_decode(file_get_contents("php://input")));
+      parent::_init($data, new Transcription($data->val("recordingId")));
+    }
 }
 ?>

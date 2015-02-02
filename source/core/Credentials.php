@@ -93,11 +93,10 @@ final class Credentials {
     public function get($key=null)
     {
 
-      if ($key == null)
-          return json_decode(file_get_contents(self::$credentials_opts['path']));
+      if ($key == null) {
+        return json_decode(file_get_contents(self::$credentials_opts['path']));
+      }
 
-            
-            
       return $this->getVal($key);
     }
 
@@ -126,28 +125,31 @@ final class Credentials {
      */
     protected function getVal($key, $show=TRUE)
     {
-      if (!($this->credentials instanceof CredentialsUser))
+      if (!($this->credentials instanceof CredentialsUser)) {
         $content = json_decode(file_get_contents(self::$credentials_opts['path']));
-      else
+      } else {
         $content = $this->credentials;
+      }
 
-      if (!array_key_exists($key, get_object_vars($content)))
+      if (!array_key_exists($key, get_object_vars($content))) {
         return false;
+      }
 
-      if (is_array($content->{$key}))
+      if (is_array($content->{$key})) {
         return implode(",", $content->{$key});
+      }
             
       return $content->{$key};
     }
 
-  /**
-   * Gets a number from the provided
-   * set in credentials.json. This
-   * will not have any affect towards
-   * the PhoneNumber service.
-   * 
-   * @param idx: index of number
-   */
+   /**
+    * Gets a number from the provided
+    * set in credentials.json. This
+    * will not have any affect towards
+    * the PhoneNumber service.
+    * 
+    * @param idx: index of number
+    */
     public function getNumber($idx)
     {
       return $content->BANDWIDTH_VALID_NUMBERS[$idx];

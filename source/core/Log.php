@@ -69,16 +69,16 @@ final class Log {
       return FALSE;
     }
 
-    /**
-     * open the current
-     * log. Set by day.
-     * If we cannot open a folder,
-     * file set catapult logging off
-       *
-       * by default this will output in the current
-       * directory. If there is a logs directory in the
-       * folder, it will use that
-     */
+   /**
+    * open the current
+    * log. Set by day.
+    * If we cannot open a folder,
+    * file set catapult logging off
+    *
+    * by default this will output in the current
+    * directory. If there is a logs directory in the
+    * folder, it will use that
+    */
     public static function open()
     {
       $date_of_log = new \DateTime();
@@ -87,13 +87,15 @@ final class Log {
 
       try {
 
-        if (!(is_dir(self::$logger_opts['path'])))
+        if (!(is_dir(self::$logger_opts['path']))) {
           mkdir(self::$logger_opts['path']);
+        }
 
-        if (($pfile = self::find()))
+        if (($pfile = self::find())) {
           $file = realpath(self::$logger_opts['path']) . DIRECTORY_SEPARATOR  . $pfile;
-        else 
+        } else {
           $file = realpath(self::$logger_opts['path']) . DIRECTORY_SEPARATOR  . __DEFAULT_LOG_PREFIX__ . $date_of_log->format("Y-M-D-h-i-s") . ".log";
+        }
 
         self::$log_file = fopen($file, self::$logger_opts['mode']);
 
@@ -115,11 +117,13 @@ final class Log {
      */
     public static function write($time='', $object='CALL', $message='')
     {
-      if (!(self::$on))
-        return;
+      if (!(self::$on)) {
+        return FALSE;
+      }
 
-      if (self::$log_file || !isset(self::$log_file))
+      if (self::$log_file || !isset(self::$log_file)) {
         self::open();
+      }
 
 
       /** who was the logger called from if we are running on a server **/

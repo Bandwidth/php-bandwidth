@@ -17,7 +17,8 @@ namespace Catapult;
 
 final class ConferenceMemberEvent extends ConferenceEventMixin {
 	public function __construct() {
-		return new ConferenceMember(func_get_args());
+    $data = Ensure::Input(json_decode(file_get_contents("php://input"));
+		return new ConferenceMember($data);
 	}
 }
 ?>

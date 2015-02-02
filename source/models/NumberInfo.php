@@ -16,15 +16,15 @@ final class NumberInfo extends GenericResource {
      *
      */
     public function __construct() {
-        $data = Ensure::Input(func_get_args());
-        parent::_init($data, new DependsResource(array(
-            array(
-                "term" => "phoneNumbers",
-                "plural" => true
-            ))),
-        new LoadsResource(array("primary" => "GET", "init" => array(), "id" => "number", "silent" => false)),
-        new SchemaResource(array("needs" => array('name', 'number', 'created', 'updated'), "fields" => array('name', 'number')))
-        );
+      $data = Ensure::Input(func_get_args());
+      parent::_init($data, new DependsResource(array(
+        array(
+          "term" => "phoneNumbers",
+          "plural" => true
+        ))),
+      new LoadsResource(array("primary" => "GET", "init" => array(), "id" => "number", "silent" => false)),
+      new SchemaResource(array("needs" => array('name', 'number', 'created', 'updated'), "fields" => array('name', 'number')))
+      );
     }
 
     /**

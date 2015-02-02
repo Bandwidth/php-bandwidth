@@ -15,8 +15,8 @@ namespace Catapult;
  */
 class SchemaResource extends BaseResource {
     public function __construct($opts) {
-        $this->needs = $opts['needs'];
-        $this->fields = $opts['fields'];
+      $this->needs = $opts['needs'];
+      $this->fields = $opts['fields'];
     }
 }
 ?>

@@ -13,10 +13,10 @@
 namespace Catapult;
 
 final class MessageEvent extends EventType {
-	public function __construct()
-	{
-    $data = Ensure::Input(Converter::toArray(json_decode(file_get_contents("php://input"))));
-		parent::_init($data, new Message); 
-	}
+    public function __construct()
+    {
+      $data = Ensure::Input(Converter::toArray(json_decode(file_get_contents("php://input"))));
+      parent::_init($data, new Message); 
+    }
 }
 ?>

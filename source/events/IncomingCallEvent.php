@@ -10,10 +10,10 @@
 namespace Catapult;
 
 final class IncomingCallEvent extends EventType {
-	public function __construct() {
-		$data = Ensure::Input(json_decode(file_get_contents("php://input")));
+    public function __construct() {
+      $data = Ensure::Input(json_decode(file_get_contents("php://input")));
 
-	  parent::_init($data, new Call);
-	}
+      parent::_init($data, new Call);
+    }
 }
 ?>
