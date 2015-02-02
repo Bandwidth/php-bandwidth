@@ -9,10 +9,10 @@
 namespace Catapult;
 
 final class AnswerCallEvent extends EventType {
-	public function __construct() {
-		$data = Ensure::input(json_decode(file_get_contents("php://input")));
+    public function __construct() {
+      $data = Ensure::input(json_decode(file_get_contents("php://input")));
 
-		parent::_init($data, new Call);
-	}
+      parent::_init($data, new Call);
+    }
 }
 ?>
