@@ -70,10 +70,11 @@ final class Media extends GenericResource {
 
       $url = URIResource::Make($this->path, array($data["mediaName"]));
 
-      if (isset($data['file']))
+      if (isset($data['file'])) {
         $file = FileHandler::Read($data['file']);
-      else
+      } else {
         $file = $this->data;
+      }
       
       $this->client->put($url, $file);
 

@@ -15,26 +15,26 @@ final class Cleaner extends BaseUtilities {
 	public static $keywords = array(
 		"call", "conference", "message"
 	);
-	/* omits the keyword from
-	 * the provided dataset
-	 * where the dataset is a single
-	 * dimensional array. New keywords without
-         * are undercased
-	 * @param data 
-	 */
+ /* omits the keyword from
+  * the provided dataset
+  * where the dataset is a single
+  * dimensional array. New keywords without
+  * are undercased
+  * @param data 
+  */
 	public function Omit($data)
 	{
-		foreach ($data as $k => $d) {
-			foreach (self::$keywords as $key) {
-				if (preg_match("/^$key.*$/", $k, $m)) {
-					$nk = strtolower(preg_replace("/$key/", "", $k));
-					$data[$nk] = $d;
-					unset($data[$k]);
-				}
-			}
-		}
+    foreach ($data as $k => $d) {
+      foreach (self::$keywords as $key) {
+        if (preg_match("/^$key.*$/", $k, $m)) {
+          $nk = strtolower(preg_replace("/$key/", "", $k));
+          $data[$nk] = $d;
+          unset($data[$k]);
+        }
+      }
+    }
 
-		return $data;
+    return $data;
 	}
 }
 

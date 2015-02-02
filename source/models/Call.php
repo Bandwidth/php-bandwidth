@@ -106,31 +106,27 @@ final class Call Extends AudioMixin {
     public function hangup()
     {
       $url = URIResource::Make($this->path, array($this->id));
-
       $data = new DataPacket(array("state" => CALL_STATES::completed));
-      
       $this->client->post($url, $data->get());
 
-          return Constructor::Make($this, $data->get());
+      return Constructor::Make($this, $data->get());
     }
 
-      /**
-     * Accept an incoming
-       * call.
-       *
-       * @return void
-       */
-       public function accept()
-       {
-          $url = URIResource::Make($this->path, array($this->id));
-
+    /**
+    * Accept an incoming
+    * call.
+    *
+    * @return void
+    */
+    public function accept()
+    {
+      $url = URIResource::Make($this->path, array($this->id));
       $data = new DataPacket(array("state" => CALL_STATES::active));
-      
       $id = Locator::Find($this->client->post($url, $data->get()));
       $data->add("id", $id);
 
-          return Constructor::Make($this, $data->get());
-       } 
+      return Constructor::Make($this, $data->get());
+    } 
 
     /**
      * Reject an incoming call. Call id must already be passed
@@ -141,48 +137,46 @@ final class Call Extends AudioMixin {
     {
       $url = URIResource::Make($this->path, array($this->id));
       $data = new DataPacket(array("state" => CALL_STATES::rejected));
-
       $this->client->post($url, $data->get());
 
-          return Constructor::Make($this, $data->get());
+      return Constructor::Make($this, $data->get());
     }
 
-    /**
-     * Sends a string of characters as DTMF on the given call_id
-       * Valid chars are '0123456789*#ABCD'
-     *
-     * @param $dtmf -> {} 
-     */
+   /**
+    * Sends a string of characters as DTMF on the given call_id
+    * Valid chars are '0123456789*#ABCD'
+    *
+    * @param dtmf: dtmf characters 
+    */
     public function sendDtmf($dtmf)
     {
-          $args = Ensure::Input($dtmf);
-          $dtmf = $args->get();
-
+      $args = Ensure::Input($dtmf);
+      $dtmf = $args->get();
       $url = URIResource::Make($this->path, array($this->call_id, "dtmf"));
       $data = new DataPacket(array("dtmfOut" => (string) $dtmf));
 
       $this->client->post($url, $data->get());
     }
 
-      /**
-       * wait for a call to go to any
-       * state other than 'started'
-       * @timeout a default time to wait
-       * THIS WILL BE DEPRECATED 
-       */
-      public function wait($timeout=null)
-      {
-          $delta = time();
-          if ($timeout == null)
-              $timeout = 60 * 2; // two minutes
+    /**
+     * wait for a call to go to any
+     * state other than 'started'
+     * @timeout a default time to wait
+     * THIS WILL BE DEPRECATED 
+     */
+    public function wait($timeout=null)
+    {
+        $delta = time();
+        if ($timeout == null)
+            $timeout = 60 * 2; // two minutes
+        if (!($this->check("state", "started")))
+          Throw new \CatapultApiException("Call already in non 'started' state'");
+        while (true)
           if (!($this->check("state", "started")))
-              Throw new \CatapultApiException("Call already in non 'started' state'");
-          while (true)
-              if (!($this->check("state", "started")))
-                  break;
-              if ((time() - $delta) > $timeout)
-                  break;
-      }
+            break;
+          if ((time() - $delta) > $timeout)
+            break;
+    }
 
     /**
      * Forward to gather

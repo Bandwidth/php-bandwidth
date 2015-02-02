@@ -16,42 +16,39 @@ namespace Catapult;
  * and update
  */
 final class ConferenceMember extends AudioMixin {
-    /**
-	 * CTor for conference memebrs 
-	 *
-     * Init forms:
-     * GET
-     * ConferenceMember('member-id')
-     * ConferenceMember()
-     * 
-     * POST
-     * ConferenceMember('conference-id', array)
-     * ConferenceMember(array)
-	 */
-	public function __construct()
-	{
-        $data = Ensure::Input(func_get_args());
-        parent::_init($data, new DependsResource(
-            array(
-                array("term" => "conference", "plural" => true, "silent" => false)
-            )
+   /**
+    * CTor for conference memebrs 
+    *
+    * Init forms:
+    * GET
+    * ConferenceMember('member-id')
+    * ConferenceMember()
+    * 
+    * POST
+    * ConferenceMember('conference-id', array)
+    * ConferenceMember(array)
+    */
+    public function __construct()
+    {
+      $data = Ensure::Input(func_get_args());
+        parent::_init($data, new DependsResource(array(
+            array("term" => "conference", "plural" => true, "silent" => false))
            ),
-            new LoaderResource(array("primary" => "GET", "init" => array("conferenceId"), "id" => "id")),
-            new SchemaResource(array("fields" => array(
+           new LoaderResource(array("primary" => "GET", "init" => array("conferenceId"), "id" => "id")),
+           new SchemaResource(array("fields" => array(
                 'id', 'state', 'added_time', 'hold', 'mute', 'join_tone', 'leaving_tone'
-            ), "needs" => array("id", "state", "from")
-        
-        ))
+            ), "needs" => array("id", "state", "from"))
+          )
        );
-	}
+    }
 
-	/**
-	 * Get audio url
- 	 * for conference member
-	 */
-	public function getAudioUrl()
-	{
-		return URIResource::Make($this->path, array($this->conference, "members", "audio"));
-	}
+    /**
+     * Get audio url
+     * for conference member
+     */
+    public function getAudioUrl()
+    {
+      return URIResource::Make($this->path, array($this->conference, "members", "audio"));
+    }
 }
 ?>
