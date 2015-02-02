@@ -18,7 +18,7 @@ class EnsureResource extends BaseResource {
     /**
      * Verify the input is of the correct
      * type. Additionally delegate to Collection if needed
-       *
+     *
      * @param data: EnsureInput as listed above
      */
     public static function Input(&$data)
@@ -67,14 +67,14 @@ class EnsureResource extends BaseResource {
       return Input($data);
     }
 
-    /**
-     * If a parameter is not found in the set
-     * throw error. Example:
-       *
-       * Ensure::Strict($this, "id")
-     * @param $data -> set of schema data
-     * @param $key -> key that 'NEEDS' to exist
-     */
+   /**
+    * If a parameter is not found in the set
+    * throw error. Example:
+    *
+    * Ensure::Strict($this, "id")
+    * @param $data -> set of schema data
+    * @param $key -> key that 'NEEDS' to exist
+    */
     public static function Strict(&$data, $key)
     {
       if ($data instanceof DataPacket)
