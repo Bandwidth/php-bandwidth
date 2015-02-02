@@ -24,32 +24,32 @@ final class Application extends GenericResource {
      * Application()
      */
     public function __construct($data=null) {
-        $data = Ensure::Input($data);
+      $data = Ensure::Input($data);
         parent::_init($data, new DependsResource,
-         new LoadsResource(
+        new LoadsResource(
           array("primary" => "GET", "id" => "id", "silent" => false, "init" => array())
-          ),
-          new SchemaResource(array(
-           "fields" => array(
-           'id', 'name', 'incomingCallUrl', 'incomingCallUrlCallbackTimeout',
-           'incomingCallFallbackUrl', 'incomingSmsUrl', 'incomingSmsUrlCallbackTimeout',
-           'incomingSmsFallbackUrl', 'callbackHttpMethod', 'autoAnswer'
-          ),
-         "needs" => array("id", "name")))
+        ),
+        new SchemaResource(array(
+          "fields" => array(
+          'id', 'name', 'incomingCallUrl', 'incomingCallUrlCallbackTimeout',
+          'incomingCallFallbackUrl', 'incomingSmsUrl', 'incomingSmsUrlCallbackTimeout',
+          'incomingSmsFallbackUrl', 'callbackHttpMethod', 'autoAnswer'
+        ),
+       "needs" => array("id", "name")))
       );
     }
 
-  /**
-   * Patch the given
-   * application with new information
-   * same as update/1
-   *
-   * @param data: set of application data
-   */
-	public function patch($data)
-	{
-	  return parent::create($data);	
-	}
+    /**
+    * Patch the given
+    * application with new information
+    * same as update/1
+    *
+    * @param data: set of application data
+    */
+    public function patch($data)
+    {
+      return parent::create($data);	
+    }
 } 
 
 

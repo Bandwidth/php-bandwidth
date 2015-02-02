@@ -59,7 +59,7 @@ class EnsureResource extends BaseResource {
     /**
      * Output version same thing should verify
      * if its a DataPacket before sending back
-       *
+     *
      * @param $data -> [array | multidimensional array]
      */
     public static function Output($data)
