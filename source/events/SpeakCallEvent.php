@@ -12,7 +12,7 @@ namespace Catapult;
 
 final class SpeakCallEvent extends EventType {
     public function __construct() {
-      $data = Ensure::Input(json_decode(file_get_contents("php://input")));
+      $data = Ensure::Input(Converter::toArray(json_decode(file_get_contents("php://input"))));
       parent::_init($data, new Call);
     }
 }

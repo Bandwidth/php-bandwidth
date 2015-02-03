@@ -19,7 +19,7 @@ final class GatherCallEvent extends EventType {
     * parent will call get/1 with the GatherId
     */
     public function __construct() {
-      $data = Ensure::Input(json_decode(file_get_contents("php://input")));
+      $data = Ensure::Input(Converter::toArray(json_decode(file_get_contents("php://input"))));
 
       parent::_init($data, new Gather($data->val("callId"))); 
     }
