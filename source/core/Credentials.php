@@ -174,8 +174,7 @@ final class Credentials {
      */
     public function set($key, $val)
     {
-      $a = $this->get();
-      $a[$key] = $val;
+      $this->credentials->$key = $val;
     }
 
     /**
@@ -183,9 +182,23 @@ final class Credentials {
      *
      * @param path: path
      */
-    public static function path($path)
+    public static function setPath($path)
     {
       self::$credentials_opts['path'] = realpath($path);
     }
+
+    /**
+     * Sets the file 
+     * to find credentials
+     * suitable when the term credentials is not
+     * being used for the credentials file
+     *
+     * @param file: file
+     */
+    public static function setFile($file)
+    {
+      self::$credentials_opts['file'] = realpath($file);
+    }
+
 }
 ?>

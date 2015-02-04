@@ -158,27 +158,42 @@ class CollectionObject {
      * @param id -> id for match
      * @return collectionsequence
      */
-    public function find($terms /* associate array of terms */)
+    public function find($terms /* associate array of terms */, $absolute=TRUE)
     {
       $terms = Ensure::Input($terms);
 
       $terms = $terms->get();
       $out = array();
+      /** when absolute is on, all terms should match **/
+      foreach ($this->data as $d) {
+        $m = 0;
 
-      foreach ($terms as $k => $term) {
-        foreach ($this->data as $d) {
+        foreach ($terms as $k => $term) {
+           if ($absolute) {
+            if (is_object($d)) 
+              if ($d->$k === $term)
+                $m++;
 
-          if (is_object($d)) 
-            if ($d->$k == $term)
+            if (is_array($d)) 
+              if ($d[$k] === $term)
+                $m++;
+
+            if (sizeof($terms) == $m) 
               $out[] = $d;
 
-          if (is_array($d)) 
-            if ($d[$k] == $term)
-              $out[] = $d;
-        
+          } else {
+            /** add if any terms match **/
+            if (is_object($d)) 
+              if ($d->$k === $term)
+                $out[] = $d;
+
+            if (is_array($d)) 
+              if ($d[$k] === $term)
+                $out[] = $d;
+          }
+
         }
       }
-
       return new CollectionSequence($out, $this->getName());
     }
 

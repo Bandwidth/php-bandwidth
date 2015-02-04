@@ -28,9 +28,18 @@ final class Account extends GenericResource {
 
       parent::_init($data, new DependsResource,
         new LoadsResource(array("primary" => "GET", "id" => "id", "init" => "", "silent" => false)),
-        new SchemaResource(array("fields" => array( "balance", "account_type"), "needs" => array("balance", "account_type")),
+        new SchemaResource(array("fields" => array( "balance", "accountType"), "needs" => array("balance", "accountType")),
         new SubFunctionResource(array("term" => "transactions", "type" => "get"))
       ));
+    }
+
+
+    /**
+     * Return the balance
+     * in float
+     */
+    public function getBalance() {
+      return (float) $this->get()->balance();
     }
 }
 

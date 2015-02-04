@@ -169,7 +169,7 @@ final class Client {
      * @param $k -> string
      * @param $t -> mixed
      */
-    protected function set_option($k, $t)
+    protected function setOption($k, $t)
     {
       $this->options{$k} = $t;
     }

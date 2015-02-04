@@ -27,4 +27,16 @@ namespace Catapult;
  * @class Timeout -- Catapult Compilant Timeout
  */
 
-abstract class Types { } 
+abstract class Types { 
+  /**
+   * All Types should supply is Valid
+   * this should be able to called staticly 
+   * or in object form. 
+   *
+   * TODO:
+   * Add spport for other areas needing isValid/1
+   */
+  public function isValid() {
+    return $this->perform(FALSE);
+  }
+} 

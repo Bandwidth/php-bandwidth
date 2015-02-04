@@ -37,13 +37,21 @@ final class Voice extends Types {
 
 	public function __construct($voice)
 	{
-		if (!(in_array($voice, array_keys(self::$available_voices))))
-			throw new \CatapultApiException("Voice unrecognized");
-
-
 		$this->voice = $voice;
 		$this->gender = self::$available_voices[$voice];
 	}
+
+  public function perform($warn=TRUE) 
+  {
+    $in = array_key_exists($this->voice, self::$available_voices); 
+
+  	if (!$in && $warn)
+			throw new \CatapultApiException("Voice unrecognized");
+    if (!$in)
+      return FALSE;
+
+    return TRUE;
+  }
 
 	public function __toString()
 	{

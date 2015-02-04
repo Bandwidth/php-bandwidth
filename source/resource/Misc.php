@@ -14,21 +14,26 @@ namespace Catapult;
  * this needs to be refactored.
  */
 abstract class AudioMixin extends GenericResource { 
-	/**
-     * Plays audio on the given
- 	 * context provided a 'fileUrl'
-	 * in args. If not present. Throw
- 	 * warning
-     *
-     * @param args [assoc array] (needs joinUrl)
-	 */
-	public function play_audio($args = array() /* polymorphic */)
+  /**
+   * Plays audio on the given
+   * context provided a 'fileUrl'
+   * in args. If not present. Throw
+   * warning
+   *
+   * @param args [assoc array] (needs joinUrl)
+   */
+	public function playAudio(/* polymorphic */)
 	{
-		$args = Ensure::Input($args);
-		
-		$url = new URIResource($this->get_audio_url());
-	
+		$args = Ensure::Input(func_get_args());
+		$url = new URIResource($this->getAudioUrl());
 		$data = $args->get();	
+
+    /** update add simplicity. playAudio('audioFile') = playAudio(array('audioFile' => 'audioFile')) **/
+    if ($args->is_string()) {
+      $data = array(
+        "audioFile" => $data[0]
+      );
+    }
 
 		$this->client->post((string) $url, $data);
 	}	
@@ -37,9 +42,9 @@ abstract class AudioMixin extends GenericResource {
 	 * Stops the audio
 	 *
 	 */
-	public function stop_audio()
+	public function stopAudio()
 	{
-		$url = new URIResource($this->get_audio_url()); 
+		$url = new URIResource($this->getAudioUrl()); 
 		$data = new DataPacket(array("fileUrl"=> ""));
 
 		$this->client->post((string) $url, $data->get());
@@ -52,11 +57,11 @@ abstract class AudioMixin extends GenericResource {
 	 * 
 	 * @param args [assoc array]
 	 */
-	public function speak_sentence($args /* polymorphic */)
+	public function speakSentence($args /* polymorphic */)
 	{
-		$data = Ensure::Input($args);
-
-		$url = new URIResource($this->get_audio_url());	
+		$args = Ensure::Input($args);
+		$url = new URIResource($this->getAudioUrl());	
+    $data = $args->get();
 
 		$this->client->post((string) $url, $data->get());		
 	}
@@ -65,9 +70,9 @@ abstract class AudioMixin extends GenericResource {
 	 * Stops a sentence
 	 *
 	 */
-	public function stop_sentence()
+	public function stopSentence()
 	{
-		$url = new URIResource($this->get_audio_url());
+		$url = new URIResource($this->getAudioUrl());
 		$data = new DataPacket(array("sentence" => ""));
 
 		$this->client->post($url, $data->get());
@@ -76,7 +81,7 @@ abstract class AudioMixin extends GenericResource {
 	/**
 	 * Defined in inherited classes.
 	 */
-	public function get_audio_url()
+	public function getAudioUrl()
 	{ }
 }
 

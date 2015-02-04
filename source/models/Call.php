@@ -59,7 +59,7 @@ final class Call Extends AudioMixin {
      */
     public function transfer($phone, $args = array() /* polymorphic */)
     {
-      $url = URIResource::Make($this->path, array($this->call_id));
+      $url = URIResource::Make($this->path, array($this->id));
       $data = Ensure::Input($args);
       $data->add("transferTo", (string) $phone);
       $data->add("state", CALL_STATES::transferring);
@@ -152,7 +152,7 @@ final class Call Extends AudioMixin {
     {
       $args = Ensure::Input($dtmf);
       $dtmf = $args->get();
-      $url = URIResource::Make($this->path, array($this->call_id, "dtmf"));
+      $url = URIResource::Make($this->path, array($this->id, "dtmf"));
       $data = new DataPacket(array("dtmfOut" => (string) $dtmf));
 
       $this->client->post($url, $data->get());

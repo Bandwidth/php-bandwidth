@@ -54,7 +54,6 @@ class GenericResource {
     {
       /** run the subfunctions first **/
       $sub = $this->get_sub_function($function);
-          
       if ($sub) {
         $sargs = array_merge($args, array($sub->plural, $sub->term, &$this));
 
@@ -82,7 +81,6 @@ class GenericResource {
 
       $m = array();
       preg_match_all("/[A-Z]{1,}[a-z]+/", $function, $m);		
-
       if (sizeof($m) > 0) {
         foreach ($m[0] as $m1) {
           $glue .= "_" . strtolower($m1);
