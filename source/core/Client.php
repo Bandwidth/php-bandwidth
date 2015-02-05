@@ -392,8 +392,8 @@ final class Client {
       if ($join && !$users)
         $url = $this->join($url, FALSE);
 
-      $this->set_option('auth', TRUE);
-      $this->set_option('headers', TRUE);
+      $this->setOption('auth', TRUE);
+      $this->setOption('headers', TRUE);
 
       if ($mixed)
         return $this->request(API::API_METHOD_POST, $url, $data, $mixed);
