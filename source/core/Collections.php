@@ -215,6 +215,35 @@ class CollectionObject {
       foreach ($this->data as $idx => $item)
         $this->data[$idx] = $item->reload();
     }
+
+    /**
+     * scenarios where the objects
+     * has not been loaded yet
+     * added: 2/4/2015.
+     * Before:
+     * PhoneNumber = new PhoneNumber
+     * PhoneNUmbers = PhoneNumber->listAll
+     *
+     * Now:
+     * PhoneNumbers = new PhoneNumberCollection
+     * PhoneNumbers->listAll
+     *
+     * This should always make sure we dont
+     * have data already
+     */
+    public function listAll()
+    {
+      if (count($this->data) > 0)
+        throw new \CatapultApiException("Collection has already stored data. To list this way please call right after init");
+      $class = $this->getName();
+      $clname = "Catapult\\" . $class;
+      $proto = new $clname;
+
+      // forward our arguments
+      $protolist = $proto->listAll(func_get_args());
+      
+      $this->data = $protolist->data; 
+    }
   }
 
 

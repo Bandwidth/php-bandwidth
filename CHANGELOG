@@ -83,3 +83,12 @@ Continuing from 0.5.0
     are the same. 
     You should now use PHP's native clone function to keep
     reference to older states
+  * Collections can now be called directly, as a result:
+   PhoneNumbers = new PhoneNumbersCollection
+   PhoneNumbers->listAll
+
+   and
+   PhoneNumber = new PhoneNumbers
+   PhoneNumbers = PhoneNumber->listAll
+
+   is the same. 
