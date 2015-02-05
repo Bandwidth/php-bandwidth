@@ -75,3 +75,11 @@ Continuing from 0.5.0
     Gather('call-id', 'gather-id')
     this will automatically get the resource and its parent. 
     * only applies to secondary models
+  * CollectionSequences, Collections method find/1 will now
+    update the object directly. So:
+    PhoneNumbers->find(array("from" => "__NUMBER__"))
+    PhoneNumbers = PhoneNumbers->find(array("from" => "__NUMBER__"))
+
+    are the same. 
+    You should now use PHP's native clone function to keep
+    reference to older states
