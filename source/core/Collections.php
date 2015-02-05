@@ -194,6 +194,10 @@ class CollectionObject {
 
         }
       }
+
+      /** update adds direct object updating **/
+      $this->data = $out;
+
       return new CollectionSequence($out, $this->getName());
     }
 
