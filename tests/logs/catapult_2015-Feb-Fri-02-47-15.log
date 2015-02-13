@@ -1,1 +1,0 @@
-/var/www/php-bandwidth/tests/phpunit.phar (line: 605) - APPLICATION:__APP_ID__ [Feb/02/15:14:47:15] - attribute 'bargeable1' is not a valid attribute for verb Gather please use any of the following: requestUrl,requestUrlTimeout,terminatingDigits,maxDigits,interDigitTimeout,bargeable
