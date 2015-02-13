@@ -21,7 +21,7 @@ class CollectionObject {
     *
     * @param data -> initial set of data
     */	 
-    public function __construct($data, $quiet = TRUE)
+    public function __construct($data=array(), $quiet = TRUE)
     {
       $this->data = array();
       $this->order = array();
