@@ -131,6 +131,32 @@ class PrototypeUtility extends BaseUtilities {
        return $this->$term($id);
     }
 
+    /**
+     * Prototypal update.
+     * must have sub id to reference
+     * allows mocking
+     * of functions like: 
+     *
+     * Conference->updateMember(array(memberId=1))
+     *
+     * termId should always be
+     * term + Id
+     * make sure it is singular.
+     *
+     */
+    public static function update(/** polymorphic **/)
+    {
+      $args = func_get_args();
+      $that = self::get_this($args);
+      $term = self::get_term($args);
+      $data = Ensure::Input($args);
+      $termId = TitleUtility::ToSingular($term) . "Id";
+
+      $ret = $this->client->post($url, array($term, $data->get($termId)));
+
+      return $this->$term($ret['id']);
+    }
+
 }
 
 ?>

@@ -32,13 +32,12 @@ final class XMLUtility extends BaseUtilities {
 
         if ($values)
             $baml->values = $values;
-
         foreach ($baml->values as $el) {
           $idx = count($elements);
            if ($el['type'] == "complete" || $el['type'] == "open") {
              $bobj = $baml->register($el);
              $elements[$idx] = $bobj;
-   
+
              if ($el['type'] == "open") {
                $stack[count($stack)] = &$elements;
                $texts[$bobj->level] = &$elements[$idx]->text;

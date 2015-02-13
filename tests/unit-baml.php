@@ -82,9 +82,8 @@ class BaMLTest extends PHPUnit_Framework_TestCase {
 
     public function testParsing() {
         $baml = new Catapult\BaML;
-        $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Gather requestUrl=\"https://gather.url/nextBaML\" requestUrlTimeout=\"10\" terminatingDigits=\"#\"><SpeakSentence gender=\"female\" locale=\"en\" voice=\"female\">Please, press a digit.</SpeakSentence></Gather></Response>"; 
+        $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Response><Gather><SpeakSentence gender=\"female\" locale=\"en\" voice=\"female\">Hello this is test text</SpeakSentence></Gather></Response>";
         $baml->parse($xml);
-
         $this->assertEquals($xml, $baml);
     }
 
@@ -149,7 +148,7 @@ class BaMLTest extends PHPUnit_Framework_TestCase {
         $verb->addAttribute("maxDigits", 5);
         $verb->addAttribute("interDigitTimeout", 5);
         $verb->addAttribute("bargeable", 1);
-        $verb->addAttribute("bargeable1", 1);
+        $verb->addAttribute("bargeable", 1);
 
         $baml->set($verb);
 

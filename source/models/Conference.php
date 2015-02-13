@@ -46,10 +46,44 @@ final class Conference extends AudioMixin {
        );        
     }
 
+   /**
+    * Add a member inside
+    * a conference
+    *
+    * @param id: Catapult id
+    * @param params -> List of member parameters
+    *       joinTone
+    *       leavingTone
+    */
+    public function addMember($params) 
+    {
+      $args = Ensure::Input($params);
+      $url = URIResource::Make($this->path, array($this->id, "members"));
+      $memberid = Locator::Find($this->client->post($url, $args->get()));
+    
+      return $this->member($memberid);
+    }
+
+   /**
+    * point to a
+    * member and update
+    *
+    * @param params: set of arguments with
+    * with memberId
+    */ 
+    public function updateMember($params)
+    {
+      $args = Ensure::Input($params);
+      $url = URIResource::Make($this->path, array($this->id, "members", $args->val("memberId")));
+      $member = $this->client->post($url, $args->get());
+
+      return $this->member($member['id']);
+    }
+
     /**
      * Return a partial for
-     *
      * the member selected
+     *
      */
     public function member()
     {

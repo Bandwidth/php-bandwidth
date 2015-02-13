@@ -36,7 +36,7 @@ abstract class BaMLResource {
 
 
     /** primary parser **/
-    public static $parser;
+    public $parser;
 
     public $fileHandler;
 
@@ -87,7 +87,8 @@ abstract class BaMLResource {
            $class->addAttribute($k, $attr);
          }
       }
-      if (isset($element['text']))
+
+      if (isset($element['value']))
         $class->setText(trim($element['value']));
 
       $class->level = $element['level'];
@@ -301,7 +302,7 @@ class BaMLVerb extends BaMLGeneric {
     );
 
     /** constraints should be by objects **/
-    public static $constraints = array(
+    public $constraints = array(
 
     );
 
