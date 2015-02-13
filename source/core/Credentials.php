@@ -60,8 +60,13 @@ final class Credentials {
        API::API_BANDWIDTH_TOKEN
      );
 
+    /** 
+     * credentials should initially be set to 'credentials.json' 
+     * which will be found in the parent directory 
+     *
+     */
     public static $credentials_opts = array(
-      //"path" => realpath(__DIR__ "/../credentials.json")
+      "file" => "credentials.json"
      );
 
     /** set the credentials incase we need JSON **/
@@ -79,9 +84,26 @@ final class Credentials {
               $api_token='',
               $api_secret='') 
     { 
-      /* only consider parameter init if all provided */
-      self::$credentials_opts['path'] = realpath(__DIR__ . "/../") . "/" . "credentials.json";
+      $file = self::$credentials_opts['file'];
 
+      /* only consider parameter init if all provided */
+      if (isset(self::$credentials_opts['path'])) {
+        self::$credentials_opts['path'] = self::$credentials_opts['path'] . DIRECTORY_SEPARATOR . self::$credentials_opts['file'];
+      } else {
+        self::$credentials_opts['path'] = realpath(__DIR__ . "/../") . DIRECTORY_SEPARATOR . self::$credentials_opts['file'];
+      }
+
+      /**
+       * check if the file is accessible
+       * when it is "credentials.json"
+       * this should 
+       *
+       * this needs to only validate the directory
+       */
+      if (!is_file(self::$credentials_opts['path'])) {
+        throw new \CatapultApiException("$file was not found in directory " . self::$credentials_opts['path']);
+      }
+       
       if ($user_token && $api_token && $api_secret)
         $this->credentials = new CredentialsUser($user_token, $api_token, $api_secret);
       else
@@ -184,6 +206,10 @@ final class Credentials {
      */
     public static function setPath($path)
     {
+      $rf = realpath($path);
+      if (is_file($rf))
+        throw new \CatapultApiException("Provided folder does not exist");  
+
       self::$credentials_opts['path'] = realpath($path);
     }
 
@@ -197,6 +223,10 @@ final class Credentials {
      */
     public static function setFile($file)
     {
+      $rf = realpath($file);
+      if (is_file($rf))
+        throw new \CatapultApiException("File provided does not exist..");  
+
       self::$credentials_opts['file'] = realpath($file);
     }
 
