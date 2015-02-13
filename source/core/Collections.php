@@ -151,6 +151,20 @@ class CollectionObject {
         $this->data[$data1['id']] = $this->get($data1['id']);
      }
 
+
+    /**
+     * check if our data structure
+     * is empty or not. should also
+     * retun false when we have a string
+     */
+    public function isEmpty()
+    {
+      if (count($this->data) > 0 || is_string($this->data))
+        return false;
+
+      return true; 
+    }
+
     /**
      * get a specific entity
      * in the collection
