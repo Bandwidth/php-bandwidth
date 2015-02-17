@@ -110,7 +110,7 @@ class CallTest extends PHPUnit_Framework_TestCase {
 
 		$call->wait();
 
-		$call->send_dtmf(new Catapult\DTMF("#123"));
+		$call->sendDtmf(new Catapult\DTMF("#123"));
 	}
 
 	public function testRecordings()

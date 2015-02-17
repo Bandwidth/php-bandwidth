@@ -7,21 +7,36 @@
 function includeDir($path) {
     $dir      = new RecursiveDirectoryIterator($path);
     $iterator = new RecursiveIteratorIterator($dir);
-    
-    $alpha = array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z');
-    $curr = 'a';
-    $loaded = 0;
-    while ($loaded != sizeof($alpha)) {
-    foreach ($iterator as $file) {
-        $fname = $file->getFilename();
-        $t = strtolower(substr($fname, 0, 1));
-        if ($t == $curr) {
-           require_once($file->getPathname());
-        }
+    $loaded = array();
+    $ignore = array("..", ".");
+    $file_len = sizeof(scandir($path));
+    while (sizeof($loaded) != $file_len) {
 
-      }
-      $curr ++;
-      $loaded ++;
-   }
+      foreach ($iterator as $file) {
+        $fname = $file->getFilename();
+        $score = 0;
+
+        if (!in_array($fname, $loaded)) {
+          $files = scandir($path);
+          foreach ($files as $fname1) {
+          
+            if ($fname1 !== $fname 
+            && !in_array($fname1, $loaded)
+            && $fname1 >= $fname) 
+                  $score ++; 
+                
+            }
+          if ($score ==($file_len - 1) - (sizeof($loaded))) {
+            if (!in_array($fname,$ignore)) {
+              require_once($file);
+              $loaded[]=  $fname;
+             } else {
+              $loaded[] = $fname;
+             }
+          }
+        }
+     }
+  }
+
 }
 ?>
