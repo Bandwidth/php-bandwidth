@@ -92,3 +92,9 @@ Continuing from 0.5.0
    PhoneNumbers = PhoneNumber->listAll
 
    is the same. 
+
+  * Important:
+  for credentials.json if you plan on using another directory 
+  please call (statically):
+  Catapult\Credentials::setPath("./some_external_path/");
+  When not using this credentials.json will default to the source directory
