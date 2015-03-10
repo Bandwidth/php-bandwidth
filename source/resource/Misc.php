@@ -61,7 +61,6 @@ abstract class AudioMixin extends GenericResource {
 	{
 		$args = Ensure::Input($args);
 		$url = new URIResource($this->getAudioUrl());	
-    $data = $args->get();
 
 		$this->client->post((string) $url, $data->get());		
 	}
