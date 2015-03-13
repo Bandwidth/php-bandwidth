@@ -1,0 +1,14 @@
+Catapult PHP SDK TODO list
+===========================================================
+
+This is an active list of features Catapult may or may not
+add to its PHP code. You are free to commit to these
+changes by following the GitHub repository.
+
+- consider using (array) casting in place
+of built in Converter::toArray. Benchmark results
+in demos.
+(array)$json
+
+Converter::toArray($json)
+
