@@ -8,7 +8,12 @@ changes by following the GitHub repository.
 - consider using (array) casting in place
 of built in Converter::toArray. Benchmark results
 in demos.
-(array)$json
 
+to add:
+(array)$json
+current:
 Converter::toArray($json)
 
+- maybe add support for 0.5.0 underscored
+functions. Note: functions can be mocked using GenericResource's
+init. get_transcriptions becomes getTranscriptions 
