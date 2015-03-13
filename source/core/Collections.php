@@ -257,6 +257,8 @@ class CollectionObject {
       $protolist = $proto->listAll(func_get_args());
       
       $this->data = $protolist->data; 
+
+      return $protolist;
     }
   }
 

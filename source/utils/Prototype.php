@@ -84,17 +84,17 @@ class PrototypeUtility extends BaseUtilities {
        $plural = self::get_is_plural($args);
 
        if ($plural) {
-         $url = URIResource::Make($that->path, array($that->id, GenericResource::get_path($term)));
+         $url = URIResource::Make($that->path, array($that->id, GenericResource::getPath($term)));
          $dp = new DataPacketCollection($that->client->get($url));
-         $cl = GenericResource::get_obj_class($term);
+         $cl = GenericResource::getObjClass($term);
          $pobjcl = "Catapult\\" . $cl . "Collection";
          $pobj = new $pobjcl($dp);
                
          return $pobj;
        } else {
-         $url = URIResource::Make($that->path, array($that->id, GenericResource::get_path($term)));
+         $url = URIResource::Make($that->path, array($that->id, GenericResource::getPath($term)));
          $dp = new DataPacket($that->client->get($url));
-         $cl = GenericResource::get_obj_class($term);
+         $cl = GenericResource::getObjClass($term);
          $pobjcl = "Catapult\\" . $cl;
          $pobj = new $pobjcl;
 

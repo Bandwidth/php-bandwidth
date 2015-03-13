@@ -14,14 +14,13 @@ namespace Catapult;
 abstract class MetaResource extends BaseResource {
     public function __construct($depends=null) {
         $this->terms = array();
-
+        $checks = array("plural", "mandatory");
         if (!is_array($depends))
             return;
 
         foreach ($depends as $k => $d) {
             $this->terms[$k] = new SubFunctionObject($d);
         }
-
     }
 }
 

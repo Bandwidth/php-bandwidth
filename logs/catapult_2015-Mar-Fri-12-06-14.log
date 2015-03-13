@@ -1,0 +1,3 @@
+/var/www/current/php-bandwidth/test.php (line: 6) - APPLICATION: [Mar/03/15:00:06:14] - function: get_recordings not found in Catapult\Call
+/var/www/current/php-bandwidth/test.php (line: 6) - APPLICATION: [Mar/03/15:00:06:46] - function: get_recordings not found in Catapult\Call
+/var/www/current/php-bandwidth/test.php (line: 6) - APPLICATION: [Mar/03/15:00:10:50] - function: get_recordings not found in Catapult\Call

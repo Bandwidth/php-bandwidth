@@ -87,10 +87,29 @@ class GenericResource {
         }
       }
 
-      if (method_exists($this, $glue))
+      if (method_exists($this, $glue)) {
         return $this->{$glue}($args);
-      else
+      } else {
+
+        /**
+         * TODO
+         * resolve v0.5.0 underscored
+         * functions
+         * i.e
+         * get_recordings is now getRecordings
+         * however we should still check
+         * when this exists recall __call with it
+         * as our subfunctions may need not be matched
+         */
+       
+ 
+        /**
+         * when this happens 
+         * neither the function is
+         * a subresource nor is it listed
+         */
         throw new \CatapultApiException("function: $function not found in " . get_class($this));
+      }
     }
 
     /**
@@ -217,9 +236,19 @@ class GenericResource {
     {
       if (!isset($this->subfunctions))
         return false;
-
+      /** 
+       * turn off some things given
+       * i.e plural, not always inputted
+       */
+      $opts = array("plural");
       foreach ($this->subfunctions->terms as $sfn) {
         $pred = $sfn->type . TitleUtility::toTitleCase($sfn->term);
+
+        foreach ($opts as $opt) {
+          if (!isset($sfn->$opt)) {
+            $sfn->$opt = false; 
+          }
+        }
 
         if ($pred == $fn)
           return $sfn;
@@ -288,7 +317,6 @@ class GenericResource {
     public function _list($args=null) 
     {
       $data = Ensure::Input($args);
-
       if (!($data->has("size"))) {
         $data->add("size", DEFAULTS::SIZE);			
       }
@@ -301,6 +329,8 @@ class GenericResource {
       $class = get_class($this) . "Collection";
 
       return new $class(new DataPacketCollection($this->client->get($url, $data->get())));
+     
+
     }
 
 
