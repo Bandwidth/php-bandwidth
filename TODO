@@ -5,6 +5,8 @@ This is an active list of features Catapult may or may not
 add to its PHP code. You are free to commit to these
 changes by following the GitHub repository.
 
+Each item is rated by its priority level
+
 - consider using (array) casting in place
 of built in Converter::toArray. Benchmark results
 in demos.
@@ -12,3 +14,24 @@ in demos.
 
 Converter::toArray($json)
 
+- add 0.5.0 features backwards compatability. '_' functions
+can be easily mocked by recalling the GenericResource's
+__call function. 
+
+- more documentation
+
+- Statuses and eventTypes need more constants
+as when they are left untreated they are hard to
+debug
+
+current:
+"inter-digit-timeout" 
+
+should be rendered as:
+GATHER_REASONS::interDigitTimeout
+
+or
+
+CONFERENCE_MEMBER_STATE::done
+
+- states need to checked agaisnt lowercase. 

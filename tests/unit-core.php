@@ -53,8 +53,6 @@ class CoreTest extends PHPUnit_Framework_TestCase {
     // this should be a post
     Resolver::Find($model, array( "param1" => "value1" )); 
   }
-
-
 }
 
 ?>
