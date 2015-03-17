@@ -98,3 +98,14 @@ Continuing from 0.5.0
   please call (statically):
   Catapult\Credentials::setPath("./some_external_path/");
   When not using this credentials.json will default to the source directory
+
+
+0.7.1
+---------------------------------------------------------
+
+- Media object needed urgent patch.
+  previously media objects preserved headers,
+  this has been deprecated and media objects will
+  only keep Catapult Media Info and content.
+  Please update
+

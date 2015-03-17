@@ -319,7 +319,8 @@ final class Client {
       $raw = curl_exec($this->hndl);
       $hlen = curl_getinfo($this->hndl, CURLINFO_HEADER_SIZE);
       $header =substr($raw, 0, $hlen);
-      $content = json_decode(substr($raw, $hlen));
+      $noformat = substr($raw, $hlen, strlen($raw) - $hlen);
+      $content = json_decode($noformat);
       $headers = array();
 
       /* take the headers out */
@@ -336,14 +337,15 @@ final class Client {
 
       /* in some cases we need the raw content (Media Files) */
 
-      if (isset($headers['Content-Type']) && in_array($headers['Content-Type'], self::$media_formats)) 
-        return $raw;
+      if (isset($headers['Content-Type']) && in_array($headers['Content-Type'], self::$media_formats)) {
+        return $noformat;
+      }
 
-
-      if (is_object($content) || is_array($content))
+      if (is_object($content) || is_array($content)) {
         $res = $content;
-      else
+      } else {
         $res = $headers;
+      }
 
       $code = (int) curl_getinfo($this->hndl, CURLINFO_HTTP_CODE);
 
