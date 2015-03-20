@@ -36,7 +36,7 @@ class CollectionObject {
           */
 
            $primary = ResolverResource::key($d);
-           
+
            /**
             * by default don't fetch the contents
             * of the model. This is useful when loading large lists
@@ -262,7 +262,6 @@ class CollectionObject {
     }
   }
 
-
 /**
  * provide functions
  * for last/1 and first/1
@@ -387,10 +386,30 @@ final class DataPacket extends BaseUtilities {
       }
 
       foreach ($args as $k => $arg)
-        if (is_array($arg) || !method_exists($arg, "__toString"))
+        if (is_array($arg) || !method_exists($arg, "__toString")) {
           $this->data[$k] = $arg;
-        else 
-          $this->data[$k] = (string) $arg;
+
+        } elseif (isset($arg->merge) && $arg->merge) {
+          /**
+           * treats a merge
+           * all mergers need to
+           * provide toArray/1
+           */
+          $this->data = array_merge($this->data,$arg->toArray());
+        } else {
+          /**
+           * some may serialize later
+           * as we don't need to double
+           * encode
+           */
+          if (isset($arg->serialize) 
+              && !$arg->serialize) {
+
+            $this->data[$k] = $arg;
+          } else {
+            $this->data[$k] = (string) $arg;
+          }
+        }
     }
 
     /**
@@ -413,10 +432,21 @@ final class DataPacket extends BaseUtilities {
       return $this->data;
     }
 
-    /** we need this since get only can be called once */
+    /** 
+     * check for membership in the data
+     * additionally chekc both data and data[0]
+     * as arguments can be polymorphic
+     *
+     * @param key -> a key in the data
+     */
     public function has($key)
     {
-      return isset($this->data[$key]) ? TRUE : FALSE;
+      if (isset($this->data[$key])
+         || isset($this->data[0][$key])) {
+        return true;
+      }
+
+      return  FALSE;
     }
 
     /**

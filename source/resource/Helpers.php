@@ -82,6 +82,19 @@ class SubFunctionResource extends MetaResource {
     );
 }
 
+/**
+ * remove properties when
+ * done with computation needed
+ * in certain areas
+ */
+class RemoveResource {
+  public function __construct(&$object, $terms) {
+    foreach ($terms as $v) {
+      unset($object->$v);
+    }
+  }
+}
+
 
 /**
  * Depends resource, these

@@ -23,6 +23,24 @@ final class SIP extends Types {
       $this->sip = $sipurl;	
     }
 
+
+    /**
+     * checks if the SIP
+     * URI is valid according
+     * to rfc3261
+     * 
+     * where input should follow
+     * sip:user@domain.com
+     * 
+     */
+    public function isValid()
+    {
+      if (preg_match("/(sip:)?(.*)\@(.*)\.(.*)/", $this->sip)) {
+        return true;
+      }
+      return false; 
+    }
+
     /* do we already
      * have sip in the 
      * address?

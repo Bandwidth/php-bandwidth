@@ -109,3 +109,44 @@ Continuing from 0.5.0
   only keep Catapult Media Info and content.
   Please update
 
+
+0.7.2
+  * New event format
+   - new event format:
+   answerCallEvent = new AnswerCallEvent; 
+   incomingCallEvent = new IncomingCallEvent;
+
+  Catapult will now look at these two objects and provide data
+  to the activated one. So you can use: isActive/0 to acheive this. 
+  answerCallEvent->isActive() will be switch on when eventType is "answer"
+
+  * Adds domains & endpoints 
+   
+  * New Models:
+    Domains: Support for Catapult domains
+    Endpoints: Support for Catapult endpoints
+    EndpointsMulti: a class to make endpoints in batch for one domain
+
+  * New Types:
+    SIP: SIP address validation (RFC3261)
+    SIPRealm: four dot validation of a SIP realm,
+    EndpointsCredentials: An endpoints credentials object
+     * needs: 
+       username, password and realm
+     * returns a serializable object for Endpoints
+
+  * Event: 
+    HangupCallEvent is now supported. Previously only available with eventType
+
+  * Tests:
+    Domains 
+    Endpoints
+    expand on Transcription tests
+
+  * Minor bug fixes / additions:
+  * adds toArray/1 which works on CollectionObject and GenericResources
+    will provide an array version of object
+  * Collections objects will now return list on listAll/1 
+  * Public TODO list of internal things that can be updated,
+   none of these changes being marked as a guarentee
+   more in ./TODO

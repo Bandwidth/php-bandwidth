@@ -24,6 +24,7 @@ class GenericResource {
         "Application" => "applications",
         "Call" => "calls",
         "Conference" => "conferences",
+        "ConferenceMember" => "members",
         "UserError" => "errors",
         "Message" => "messages",
         "PhoneNumbers" => "phoneNumbers",
@@ -33,6 +34,8 @@ class GenericResource {
         "Bridge" => "bridges",
         "NumberInfo" => "numberInfo",
         "Transactions" => "transactions",
+        "Domains" => "domains",
+        "Endpoints" => "endpoints",
         "Media" => "media",
         "CallEvents" => "events",
         "Gather" => "gather"
@@ -87,29 +90,10 @@ class GenericResource {
         }
       }
 
-      if (method_exists($this, $glue)) {
+      if (method_exists($this, $glue))
         return $this->{$glue}($args);
-      } else {
-
-        /**
-         * TODO
-         * resolve v0.5.0 underscored
-         * functions
-         * i.e
-         * get_recordings is now getRecordings
-         * however we should still check
-         * when this exists recall __call with it
-         * as our subfunctions may need not be matched
-         */
-       
- 
-        /**
-         * when this happens 
-         * neither the function is
-         * a subresource nor is it listed
-         */
+      else
         throw new \CatapultApiException("function: $function not found in " . get_class($this));
-      }
     }
 
     /**
@@ -236,19 +220,9 @@ class GenericResource {
     {
       if (!isset($this->subfunctions))
         return false;
-      /** 
-       * turn off some things given
-       * i.e plural, not always inputted
-       */
-      $opts = array("plural");
+
       foreach ($this->subfunctions->terms as $sfn) {
         $pred = $sfn->type . TitleUtility::toTitleCase($sfn->term);
-
-        foreach ($opts as $opt) {
-          if (!isset($sfn->$opt)) {
-            $sfn->$opt = false; 
-          }
-        }
 
         if ($pred == $fn)
           return $sfn;
@@ -317,20 +291,20 @@ class GenericResource {
     public function _list($args=null) 
     {
       $data = Ensure::Input($args);
-      if (!($data->has("size"))) {
-        $data->add("size", DEFAULTS::SIZE);			
+      $data = $data->get();
+      if (isset($data[0])) {
+        $data = $data[0];
       }
-      if (!($data->has("page"))) {
-        $data->add("page", DEFAULTS::PAGE);			
+      if (!(isset($data["size"]))) {
+        $data["size"] = DEFAULTS::SIZE;			
       }
-
+      if (!(isset($data["page"]))) {
+        $data["page"] = DEFAULTS::PAGE;
+      }
       $url = URIResource::Make($this->path);
-      $res = $this->client->get($url, $data->get());
       $class = get_class($this) . "Collection";
 
-      return new $class(new DataPacketCollection($this->client->get($url, $data->get())));
-     
-
+      return new $class(new DataPacketCollection($this->client->get($url, $data)));
     }
 
 
@@ -478,6 +452,24 @@ class GenericResource {
 
       return $str;
     }
+
+   /**
+    * make all 
+    * properties an array
+    *
+    */
+   public function toArray()
+   {
+      $proto = Converter::toArray($this);
+      // we only need key value
+      foreach ($proto as $k => $p) {
+        if (is_object($p)) {
+          unset($proto[$k]);
+        }
+      }
+
+      return $proto;
+   }
 }
 
 ?>

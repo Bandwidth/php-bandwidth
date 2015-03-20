@@ -11,6 +11,28 @@ namespace Catapult;
  */
 class PathResource extends BaseResource {
 
+
+    /**
+     * constructor
+     * should allow basic PathResource
+     * which would structure based on key value
+     * 
+     * @param object: Catapult Model
+     * @param data: Ensured Data
+     */
+    public function __construct(&$object, $data) {
+      $object->path = "";
+
+      foreach ($data as $k => $d) {
+        if ($d == "") {
+          $object->path .= "/$k";
+        } else {
+          $object->path .= "$k/$d";
+        }
+      }
+    }
+
+  
     /**
      * path should be build once
      * the object has been
@@ -28,7 +50,6 @@ class PathResource extends BaseResource {
      */
     public static function Make(&$object, &$data=null) {
         $path = "";
-
         foreach($object->depends->terms as $dep) {
             if ($dep->plural)
                 $path .= TitleUtility::toPlural($dep->term) . "/";
@@ -40,7 +61,7 @@ class PathResource extends BaseResource {
                 $depid = $data[$term];
                 $path .= $depid . "/"; 
                 $object->{$dep->term} = $depid; 
-                
+               
                 unset($data[$term]);
             }
 
