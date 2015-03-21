@@ -111,8 +111,9 @@ Continuing from 0.5.0
 
 
 0.7.2
-  * New event format
-   - new event format:
+
+   Event format:
+
    answerCallEvent = new AnswerCallEvent; 
    incomingCallEvent = new IncomingCallEvent;
 

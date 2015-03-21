@@ -76,6 +76,9 @@ final class Endpoints extends GenericResource {
   public function create() {
     $data = Ensure::Input(func_get_args());
     $data = $data->get();
+    if (!isset($data['domainId'])) {
+      $data['domainId'] = '';
+    }
 
     return parent::create($data, 
       new RemoveResource($this, array("domainId"),
@@ -85,7 +88,6 @@ final class Endpoints extends GenericResource {
           )
       ))
     );
-  
   }
 
   /** 
