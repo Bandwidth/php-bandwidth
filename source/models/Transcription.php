@@ -46,6 +46,45 @@ final class Transcription extends GenericResource {
             )
         );
     }
+
+    /**
+     * Patch for collection
+     * based objects we need the
+     * path to be loaded seperatly
+     * and make sure the recordingId
+     * is preserved
+     */
+    public function load() {
+      $data = Ensure::Input(func_get_args());
+      $data = $data->get();
+      return parent::load($data, new PathResource($this, array(
+        "recordings" => $data['recordingId'],
+        "transcriptions" => "" 
+      )));
+    }
+
+    /**
+     *
+     * treat transcriptions
+     * create/0 different 
+     * as we need the path
+     */
+    public function create() {
+      $data = Ensure::Input(func_get_args());
+      $data = $data->get();
+      if (!isset($data['recordingId'])) {
+        $data['recordingId'] = "";
+      }
+  
+      return parent::create($data,
+        new RemoveResource($this,array("recordingId"),
+        new PathResource($this, array(
+          "recordings" => $data['recordingId'],
+          "transcriptions" => ""
+        )
+       )
+      ));
+    }
 }
 
 

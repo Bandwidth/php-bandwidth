@@ -111,8 +111,9 @@ Continuing from 0.5.0
 
 
 0.7.2
-  * New event format
-   - new event format:
+
+   Event format:
+
    answerCallEvent = new AnswerCallEvent; 
    incomingCallEvent = new IncomingCallEvent;
 
@@ -148,5 +149,3 @@ Continuing from 0.5.0
     will provide an array version of object
   * Collections objects will now return list on listAll/1 
   * Public TODO list of internal things that can be updated,
-   none of these changes being marked as a guarentee
-   more in ./TODO

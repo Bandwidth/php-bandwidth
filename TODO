@@ -16,7 +16,6 @@ to add:
 current:
 Converter::toArray($json)
 
-<<<<<<< HEAD
 - add 0.5.0 features backwards compatability. '_' functions
 can be easily mocked by recalling the GenericResource's
 __call function. 
@@ -42,4 +41,3 @@ CONFERENCE_MEMBER_STATE::done
 - maybe add support for 0.5.0 underscored
 functions. Note: functions can be mocked using GenericResource's
 init. get_transcriptions becomes getTranscriptions 
->>>>>>> 320683f8c1f2ba3d8aad08159fa133377537ac98

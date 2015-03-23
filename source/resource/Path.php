@@ -21,13 +21,14 @@ class PathResource extends BaseResource {
      * @param data: Ensured Data
      */
     public function __construct(&$object, $data) {
-      $object->path = "";
-
-      foreach ($data as $k => $d) {
-        if ($d == "") {
-          $object->path .= "/$k";
-        } else {
-          $object->path .= "$k/$d";
+      if (!isset($object->hasPath) || !$object->hasPath) {
+        $object->path = "";
+        foreach ($data as $k => $d) {
+          if ($d == "") {
+            $object->path .= "/$k";
+          } else {
+            $object->path .= "$k/$d";
+          }
         }
       }
     }
@@ -49,25 +50,28 @@ class PathResource extends BaseResource {
      * @param data: EnsureResource input or Array
      */
     public static function Make(&$object, &$data=null) {
-        $path = "";
-        foreach($object->depends->terms as $dep) {
-            if ($dep->plural)
-                $path .= TitleUtility::toPlural($dep->term) . "/";
-            else
-                $path .= $dep->term . "/";
-            /** represent a term in singular form **/
-            $term = TitleUtility::toSingular($dep->term) . "Id";
-            if (is_array($data) && array_key_exists($term, $data)) {
-                $depid = $data[$term];
-                $path .= $depid . "/"; 
-                $object->{$dep->term} = $depid; 
-               
-                unset($data[$term]);
-            }
-
+      $path = "";
+      foreach($object->depends->terms as $dep) {
+        if ($dep->plural) {
+          $path .= TitleUtility::toPlural($dep->term) . "/";
+        } else {
+          $path .= $dep->term . "/";
         }
+        /** represent a term in singular form **/
+        $term = TitleUtility::toSingular($dep->term) . "Id";
+        if (is_array($data) && array_key_exists($term, $data)) {
+          $depid = $data[$term];
+          $path .= $depid . "/"; 
+          $object->{$dep->term} = $depid; 
+           
+          unset($data[$term]);
 
-        $object->path = $path . $object->path;
+          /** only set when we're given data **/
+          $object->hasPath = true;
+        }
+      }
+
+      $object->path = $path . $object->path;
     }
 }
 
