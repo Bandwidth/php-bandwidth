@@ -7,7 +7,7 @@ require_once("../source/Catapult.php");
 // This example uses 0.7.0
 // please note Credentials object is not herew
 // and odes not need to be used anymore
-$client = new Catapult\Client('u-mmuxnl7o2u2ijsdg2hrwdsq', 't-thsxslcecyzkljcxaaidyci', '76s5qr5l2zzt4fvwgm4ykropbpvashznc6z3bea');
+$client = new Catapult\Client('BANDWIDTH_USER_ID', 'BANDWIDTH_API_TOKEN', 'BANDWIDTH_API_SECRET');
 // comment out if using credentials.json
 //$client = new Catapult\Client;
 
