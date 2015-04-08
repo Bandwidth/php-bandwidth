@@ -21,8 +21,15 @@ class EnsureResource extends BaseResource {
      *
      * @param data: EnsureInput as listed above
      */
-    public static function Input(&$data)
+    public static function Input($data)
     {
+
+      /** handle a multiple ensure **/
+     
+      $args = func_get_args();
+      if (count($args) > 1) {
+          return EnsureResource::InputTwo($args); 
+      }
 
       if ($data instanceof DataPacket || $data instanceof DataPacketCollection)
           return $data;
@@ -82,6 +89,26 @@ class EnsureResource extends BaseResource {
 
       if (!(in_array($key, array_keys($data))))
         Throw New \CatapultApiException("You must add $key to call this function");
+    }
+
+    /**
+     * handles a two arity
+     * where the split becomes
+     *
+     * [0] => array 1
+     * [1] => array 2
+     *
+     * Input should not be insured yet..
+     */
+    public static function InputTwo($args) 
+    {
+      $one = Ensure::Input($args[0]);
+      $two = Ensure::Input($args[1]);
+
+      return array(
+        0 => $one,
+        1 => $two
+      );
     }
 }
 
