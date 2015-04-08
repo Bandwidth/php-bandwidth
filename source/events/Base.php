@@ -193,7 +193,6 @@ class EventType extends Event {
       $this->model = $class;
       $cons = $proto[0]->get();	
       $args = $proto[1]->get();
-      $args = Cleaner::Omit($args);
       /** make sure our constraints match **/
 
       foreach ($cons as $k => $v) {

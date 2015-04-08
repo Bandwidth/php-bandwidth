@@ -18,7 +18,11 @@ Converter::toArray($json)
 
 - add 0.5.0 features backwards compatability. '_' functions
 can be easily mocked by recalling the GenericResource's
+
 __call function. 
+
+
+- remove Cleaner in event objects
 
 - more documentation
 
@@ -41,3 +45,6 @@ CONFERENCE_MEMBER_STATE::done
 - maybe add support for 0.5.0 underscored
 functions. Note: functions can be mocked using GenericResource's
 init. get_transcriptions becomes getTranscriptions 
+
+
+

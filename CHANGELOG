@@ -149,3 +149,4 @@ Continuing from 0.5.0
     will provide an array version of object
   * Collections objects will now return list on listAll/1 
   * Public TODO list of internal things that can be updated,
+ 
