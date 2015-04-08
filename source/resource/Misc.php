@@ -22,11 +22,11 @@ abstract class AudioMixin extends GenericResource {
    *
    * @param args [assoc array] (needs joinUrl)
    */
-	public function playAudio(/* polymorphic */)
-	{
-		$args = Ensure::Input(func_get_args());
-		$url = new URIResource($this->getAudioUrl());
-		$data = $args->get();	
+  public function playAudio(/* polymorphic */)
+  {
+    $args = Ensure::Input(func_get_args());
+    $url = new URIResource($this->getAudioUrl());
+    $data = $args->get(); 
 
     /** update add simplicity. playAudio('audioFile') = playAudio(array('audioFile' => 'audioFile')) **/
     if ($args->is_string()) {
@@ -35,54 +35,54 @@ abstract class AudioMixin extends GenericResource {
       );
     }
 
-		$this->client->post((string) $url, $data);
-	}	
+    $this->client->post((string) $url, $data);
+  } 
 
-	/**
-	 * Stops the audio
-	 *
-	 */
-	public function stopAudio()
-	{
-		$url = new URIResource($this->getAudioUrl()); 
-		$data = new DataPacket(array("fileUrl"=> ""));
+  /**
+   * Stops the audio
+   *
+   */
+  public function stopAudio()
+  {
+    $url = new URIResource($this->getAudioUrl()); 
+    $data = new DataPacket(array("fileUrl"=> ""));
 
-		$this->client->post((string) $url, $data->get());
-	}
+    $this->client->post((string) $url, $data->get());
+  }
 
-	/**
-	 * Speak a sentence.
-	 * where voice in args has to be a 
-	 * valid voice
-	 * 
-	 * @param args [assoc array]
-	 */
-	public function speakSentence($args /* polymorphic */)
-	{
-		$args = Ensure::Input($args);
-		$url = new URIResource($this->getAudioUrl());	
+  /**
+   * Speak a sentence.
+   * where voice in args has to be a 
+   * valid voice
+   * 
+   * @param args [assoc array]
+   */
+  public function speakSentence($args /* polymorphic */)
+  {
+    $args = Ensure::Input($args);
+    $url = new URIResource($this->getAudioUrl()); 
     $data = $args->get();
 
-		$this->client->post((string) $url, $data);		
-	}
+    $this->client->post((string) $url, $data);    
+  }
 
-	/**
-	 * Stops a sentence
-	 *
-	 */
-	public function stopSentence()
-	{
-		$url = new URIResource($this->getAudioUrl());
-		$data = new DataPacket(array("sentence" => ""));
+  /**
+   * Stops a sentence
+   *
+   */
+  public function stopSentence()
+  {
+    $url = new URIResource($this->getAudioUrl());
+    $data = new DataPacket(array("sentence" => ""));
 
-		$this->client->post($url, $data->get());
-	}
+    $this->client->post($url, $data->get());
+  }
 
-	/**
-	 * Defined in inherited classes.
-	 */
-	public function getAudioUrl()
-	{ }
+  /**
+   * Defined in inherited classes.
+   */
+  public function getAudioUrl()
+  { }
 }
 
 
