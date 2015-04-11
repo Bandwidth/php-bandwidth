@@ -1,7 +1,7 @@
 <?php
 /**
  * @Application 
- * https://catapult.inetwork.com/docs/api-docs/applications/
+ * http://ap.bandwidth.com/docs/rest-api/applications/
  *
  * provides:
  * patch/1
