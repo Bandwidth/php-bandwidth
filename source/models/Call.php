@@ -1,7 +1,7 @@
 <?php
 /**
  * @model Call
- * https://catapult.inetwork.com/docs/api-docs/calls/ 
+ * http://ap.bandwidth.com/docs/rest-api/calls/
  *
  *
  * Provides call functionality
