@@ -1,7 +1,7 @@
 <?php
 /** 
  * @model UserErrors
- * https://catapult.inetwork.com/docs/api-docs/errors/
+ * http://ap.bandwidth.com/docs/rest-api/errors/
  *
  * Provides server error logs for your account
  */
