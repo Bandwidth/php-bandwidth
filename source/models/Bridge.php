@@ -2,7 +2,7 @@
 /**
  *
  * @model Bridge
- * https://catapult.inetwork.com/docs/api-docs/bridges/
+ * http://ap.bandwidth.com/docs/rest-api/bridges/
  *
  *
  * Joins calls in one bridge
