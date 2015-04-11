@@ -1,7 +1,7 @@
 <?php
 /**
  * @model Transaction
- * https://catapult.inetwork.com/docs/api-docs/account/#GET-/v1/users/{userId}/account/transactions
+ * http://ap.bandwidth.com/docs/rest-api/account/#resource94
  *
  * For account transactions
  * 
