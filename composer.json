@@ -16,7 +16,8 @@
     "require": {
 	"ext-curl": "*",
 	"ext-json": "*",
-	"php": ">=5.3.0"
+	"php": ">=5.3.0",
+	"bandwidth/catapult": "0.7.*"
     },
     "require-dev": {
 	"ext-curl": "*",
