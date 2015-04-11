@@ -1,7 +1,7 @@
 <?php
 /**
  * @model NumberInfo
- * https://catapult.inetwork.com/docs/api-docs/cnam/
+ * http://ap.bandwidth.com/docs/rest-api/numberinfo/
  *
  * Provides access to CNAM phone number information.
  */
