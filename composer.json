@@ -4,8 +4,7 @@
     "description": "Bandwidth's Catapult SDK for PHP",
     "keywords": ["bandwidth","catapult","sdk","php"],
     "homepage": "http://github.com/bandwidthcom/php-bandwidth",
-    "mininum-stability": "0.7.*",
-    "reference": "0.7.2",
+    "reference": "0.7.2@dev",
     "license": "MIT",
     "authors": [
         {
