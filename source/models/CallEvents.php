@@ -2,7 +2,7 @@
 
 /**
  * @model CallEvents
- * https://catapult.inetwork.com/docs/api-docs/calls/#GET-/v1/users/{userId}/calls/{callId}/events
+ * http://ap.bandwidth.com/docs/rest-api/calls/#resource408
  *
  * Provides call event information.
  */
