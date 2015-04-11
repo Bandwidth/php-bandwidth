@@ -1,7 +1,7 @@
 <?php
 /**
  * @model Message
- * https://catapult.inetwork.com/docs/api-docs/messages/
+ * http://ap.bandwidth.com/docs/rest-api/messages/
  *
  *
  * This provides SMS and MMS interface for Catapult
