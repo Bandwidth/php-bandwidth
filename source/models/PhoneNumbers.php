@@ -2,7 +2,7 @@
 
 /**
  * @model PhoneNumbers
- * https://catapult.inetwork.com/docs/api-docs/phonenumbers/
+ * http://ap.bandwidth.com/docs/rest-api/phonenumbers/
  *
  * Interface to manage account numbers.
  *
