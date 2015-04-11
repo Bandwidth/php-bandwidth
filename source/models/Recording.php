@@ -1,7 +1,7 @@
 <?php
 /**
  * @model Recording
- * https://catapult.inetwork.com/docs/api-docs/recording/
+ * http://ap.bandwidth.com/docs/rest-api/recordings/
  *
  * Recordings for calls.
  */
