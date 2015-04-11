@@ -1,7 +1,7 @@
 <?php
 /**
  * @model Transcriptions
- * https://catapult.inetwork.com/docs/api-docs/recording/
+ * http://ap.bandwidth.com/docs/rest-api/recordingsidtranscriptions/
  * under Transcriptions
  *
  * 
