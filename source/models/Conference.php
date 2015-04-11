@@ -2,7 +2,7 @@
 
 /**
  * @model Conference
- * https://catapult.inetwork.com/docs/api-docs/conferences/
+ * http://ap.bandwidth.com/docs/rest-api/conferences/
  *  
  * Creates conferences through
  * Catapult.
