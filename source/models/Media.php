@@ -1,7 +1,7 @@
 <?php
 /**
  * @model Media
- * https://catapult.inetwork.com/docs/api-docs/media/
+ * http://ap.bandwidth.com/docs/rest-api/media/
  *
  *
  * Storage for Catapult API. 
