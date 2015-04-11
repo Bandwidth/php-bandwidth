@@ -2,7 +2,7 @@
 
 /**
  * @model Gather
- * https://catapult.inetwork.com/docs/api-docs/calls/#POST-/v1/users/{userId}/calls/{callId}/gather
+ * http://ap.bandwidth.com/docs/rest-api/calls/#resource413
  *
  *
  * Provides Gathers, through calls
