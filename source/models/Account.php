@@ -2,7 +2,7 @@
 
 /**
  * @model Account
- * https://catapult.inetwork.com/docs/api-docs/account/
+ * http://ap.bandwidth.com/docs/rest-api/account/
  *
  * provides access to account information
  * and transactions
