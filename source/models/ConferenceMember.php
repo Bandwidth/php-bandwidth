@@ -2,7 +2,7 @@
 
 /**
  * @model ConferenceMember
- * https://catapult.inetwork.com/docs/api-docs/conferences/
+ * http://ap.bandwidth.com/docs/rest-api/conferences/#resource427
  * 
  * Functions to create, update and delete
  * conference members
