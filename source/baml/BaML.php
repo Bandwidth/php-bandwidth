@@ -178,7 +178,7 @@ abstract class BaMLResource {
 final class BaML extends BaMLResource {
     public $parameters;
     /** keep track of BaML sequentialy **/
-    public function __construct($type='Request') {
+    public function __construct($type='Response') {
       parent::__construct();
       $this->generateData($type);
       $this->generateParameters();
