@@ -231,6 +231,19 @@ class CollectionObject {
     }
 
     /**
+     * Collection based ToArray
+     * should serialize each model into its
+     * array
+     */
+    public function toArray() {
+      $collectionArray = array();
+      foreach ($this->data as $data) {
+        $collectionArray[] = $data->toArray();
+      }
+      return $collectionArray;
+    }
+
+    /**
      * scenarios where the objects
      * has not been loaded yet
      * added: 2/4/2015.
