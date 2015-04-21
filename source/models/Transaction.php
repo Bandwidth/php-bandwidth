@@ -17,9 +17,9 @@ final class Transaction extends GenericResource {
      * GET
      * Transaction('transaction-id') 
      */
-    public function __construct($data=null)
+    public function __construct()
     {
-       $data = Ensure::Input($data);
+       $data = Ensure::Input(func_get_args());
        parent::_init($data, new DependsResource(
         array(
           array( "term" => "account", "plural" => false))
@@ -28,7 +28,8 @@ final class Transaction extends GenericResource {
           array("primary" => "GET", "id" => "id", "init" => "id", "silent" => false)
         ),
         new SchemaResource(
-          array("fields" => array("id"), "needs" => array("id"))
+          array("fields" => array("id", "time", "units", "type", "amount", "productType"), 
+          "needs" => array("id"))
         )
       );
     }
