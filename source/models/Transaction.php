@@ -24,7 +24,7 @@ final class Transaction extends GenericResource {
         array(
           array( "term" => "account", "plural" => false))
         ),
-        new LoaderResource(
+        new LoadsResource(
           array("primary" => "GET", "id" => "id", "init" => "id", "silent" => false)
         ),
         new SchemaResource(
