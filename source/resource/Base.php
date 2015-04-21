@@ -33,7 +33,7 @@ class GenericResource {
         "Transcription" => "transcriptions",
         "Bridge" => "bridges",
         "NumberInfo" => "numberInfo",
-        "Transactions" => "transactions",
+        "Transaction" => "transactions",
         "Domains" => "domains",
         "Endpoints" => "endpoints",
         "Media" => "media",
