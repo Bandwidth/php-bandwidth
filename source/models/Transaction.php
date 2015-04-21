@@ -22,13 +22,13 @@ final class Transaction extends GenericResource {
        $data = Ensure::Input($data);
        parent::_input($data, new DependsResource(
         array(
-          array( "term" => "accounts", "plural" => false))
+          array( "term" => "account", "plural" => false))
         ),
         new LoaderResource(
-          array("primary" => "GET", "id" => "id", "silent" => false)
+          array("primary" => "GET", "id" => "id", "init" => "id", "silent" => false)
         ),
         new SchemaResource(
-          array("fields" => array("id"))
+          array("fields" => array("id"), "needs" => array("id"))
         )
       );
     }
