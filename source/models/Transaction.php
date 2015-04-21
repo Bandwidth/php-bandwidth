@@ -20,7 +20,7 @@ final class Transaction extends GenericResource {
     public function __construct($data=null)
     {
        $data = Ensure::Input($data);
-       parent::_input($data, new DependsResource(
+       parent::_init($data, new DependsResource(
         array(
           array( "term" => "account", "plural" => false))
         ),
