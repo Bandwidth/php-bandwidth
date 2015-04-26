@@ -75,6 +75,7 @@ interface WARNINGS {
 interface DEFAULTS {
   const PAGE = 0;
   const SIZE = 10;
+  const MAX_SIZE = 1000;
   const SIZE_THRESHOLD = 500;
   const SIZE_MAX = 1000;
   const SIZE_MIN = 0;

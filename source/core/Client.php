@@ -18,9 +18,10 @@ namespace Catapult;
  * also be referenced by it. This should be maintained
  * by function Get/1
  */
-$CLIENT = NULL;
 
 final class Client {
+   /** client moves to Client **/
+   public static $CLIENT;
    /**
     * Construct a client based on Credential object.
     * delegate to env when no args
@@ -68,8 +69,6 @@ final class Client {
      */
     protected function make($ctx)
     {
-      global $CLIENT;
-
       // ENV or raw args      
       if (!is_object($ctx)) {
         $this->user_id = $ctx['BANDWIDTH_USER_ID'];
@@ -90,7 +89,7 @@ final class Client {
 
       $this->started = TRUE;
 
-      return ($CLIENT = new RESTClient($this->user_id, array($this->token, $this->secret), $this->application_id));
+      return (self::$CLIENT = new RESTClient($this->user_id, array($this->token, $this->secret), $this->application_id));
     }
 
     /**
@@ -101,8 +100,7 @@ final class Client {
      */
     public static function get($descriptor=__FILE__)
     {
-      global $CLIENT;
-      return $CLIENT;
+      return self::$CLIENT;
     }       
 
     /**
@@ -111,8 +109,7 @@ final class Client {
      */
     public function set($client_)
     {
-      global $CLIENT;
-      $CLIENT = $client_;
+      self::$CLIENT = $client_;
     }
   }
 

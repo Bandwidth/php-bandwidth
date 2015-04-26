@@ -244,6 +244,21 @@ class CollectionObject {
     }
 
     /**
+     * iterator over the listing
+     * object
+     * @return a CollectionIterator
+     */
+    public function listIterator()
+    {
+      $args = Ensure::input(func_get_args()); 
+      /**
+       * collection
+       * iterator should point
+       * to our collection
+       */ 
+      return new CollectionIterator($this, $args->get());
+    }
+    /**
      * scenarios where the objects
      * has not been loaded yet
      * added: 2/4/2015.
@@ -260,8 +275,6 @@ class CollectionObject {
      */
     public function listAll()
     {
-      if (count($this->data) > 0)
-        throw new \CatapultApiException("Collection has already stored data. To list this way please call right after init");
       $class = $this->getName();
       $clname = "Catapult\\" . $class;
       $proto = new $clname;
@@ -274,6 +287,61 @@ class CollectionObject {
       return $protolist;
     }
   }
+
+class CollectionIterator extends CollectionObject {
+  /**
+   * get a collection iterator
+   * preserve the options from out
+   * our initial collection
+   *
+   * @param collection: a collection object
+   * @param standardOptions: options used for our first listIterator call
+   * these will be used throughout our iteration
+   * 
+   */ 
+  public function __construct(&$collection, $standardOptions=array()) {
+    $this->currentPage = 0;
+    if (isset($standardOptions['size'])) {
+      $this->pageSize = $standardOptions['size'];
+    } else {
+      // default to 1000
+      $this->pageSize = DEFAULTS::MAX_SIZE;
+    }
+    $this->collection = $collection;
+    $this->standardOptions = $standardOptions;
+  }
+
+  /**
+   * return either a null or
+   * set of data
+   *
+   * @return: CollectionSequence
+   */
+  public function __invoke($isPrevious=FALSE) {
+    $data = $this->collection->listAll(array_merge($this->standardOptions, array(
+      "page" => $this->currentPage,
+      "size" => $this->pageSize
+        
+    )))->get(); 
+    $this->currentPage += !$isPrevious ? 1 : -1;
+
+    return sizeof($data)>0 ? $data : null;
+  }
+  /**
+   * same as __invoke
+   * will get our next set of collection
+   */
+  public function next() {
+    return $this->__invoke();
+  }
+  /** 
+   * get a previous sequence
+   *
+   */
+  public function previous() {
+    return $this->__invoke(true);
+  }
+}
 
 /**
  * provide functions

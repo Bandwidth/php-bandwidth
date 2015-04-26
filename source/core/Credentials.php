@@ -90,7 +90,7 @@ final class Credentials {
       if (isset(self::$credentials_opts['path'])) {
         self::$credentials_opts['path'] = self::$credentials_opts['path'] . DIRECTORY_SEPARATOR . self::$credentials_opts['file'];
       } else {
-        self::$credentials_opts['path'] = realpath(__DIR__ . "/../") . DIRECTORY_SEPARATOR . self::$credentials_opts['file'];
+        self::$credentials_opts['path'] = realpath(getcwd()) . DIRECTORY_SEPARATOR . self::$credentials_opts['file'];
       }
 
       /**

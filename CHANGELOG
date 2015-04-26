@@ -150,4 +150,13 @@ Continuing from 0.5.0
   * Collections objects will now return list on listAll/1 
   * Public TODO list of internal things that can be updated,
   * php-bandwidth-examples requires toArray/0 added to collections 
+
+ 0.8.0 RC1
+----------------------------------------------------- 
+
+- add listBased iterator example and tests in source
+- minor fixes to 0.7.5
+- default credentials directory now current directory
+
+
  
