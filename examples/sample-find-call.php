@@ -17,11 +17,14 @@ if (!(isset($argv[1]) || isset($argv[2])))
 	die ("\nPlease provide command line input like: \n php ./sample-find-call.php 'from'\n\n");
 
 try {
-	$call = new Catapult\Call;
-	$calls = $call->listCalls();
-	$last = $calls->find(array("direction" => "in"))
+	$calls = new Catapult\CallCollection;
+  $callIterator = $calls->listIterator();
+  while ($calls = $callIterator()) {
+	  $last = $calls->find(array("direction" => "in"))
 	      ->find(array("from" => $argv[1]))
           ->last();
+   }
+
 
 	if ($last)
 		printf("We've found the last call from: %s. It was at %s", $argv[1], $last->startTime);
