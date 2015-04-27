@@ -47,12 +47,8 @@ init. get_transcriptions becomes getTranscriptions
 
 
 04/25/15
-Collections need iterator, using page and size options
-Client object needs to be renamed in preventing conflicts
-events need minor change for better use case
-currently:
-event = event
-event->isActive
+Collections need iterator, using page and size options [x]
+Client object needs to be renamed in preventing conflicts [x]
 
 should also validate as boolean using php5 __call
 
