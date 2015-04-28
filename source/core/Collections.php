@@ -322,7 +322,7 @@ class CollectionIterator extends CollectionObject {
       "page" => $this->currentPage,
       "size" => $this->pageSize
         
-    )))->get(); 
+    ))); 
     $this->currentPage += !$isPrevious ? 1 : -1;
 
     return sizeof($data)>0 ? $data : null;

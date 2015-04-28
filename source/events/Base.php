@@ -260,6 +260,17 @@ class EventType extends Event {
       return $this->active;
     }
 
+    /**
+     * calling the event should be
+     * the same as using isActive/0, 
+     * as a result: 
+     *
+     * answerCallEvent->isActive() = answerCallEvent
+     */
+    public function __invoke() {
+      return $this->isActive();
+    }
+
    /**
     * Event calls should be forwaded
     * to their models

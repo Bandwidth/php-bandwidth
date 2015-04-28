@@ -2,3 +2,5 @@
 /var/www/php-bandwidth/test.php (line: 7) - APPLICATION: [Apr/04/15:04:53:41] - Request was unproperly configured
 /var/www/php-bandwidth/test.php (line: 8) - APPLICATION: [Apr/04/15:04:56:15] - Could not set up object data for: 
 /var/www/php-bandwidth/test.php (line: 8) - APPLICATION: [Apr/04/15:04:58:51] - Request was brought back with error => {"category":"not-found","code":"resource-not-found","message":"The requested resource could not be found.","details":[{"name":"requestMethod","value":"GET"},{"name":"remoteAddress","value":"159.100.186.106"},{"name":"requestPath","value":"users\/u-mmuxnl7o2u2ijsdg2hrwdsq\/voice-mail-17196401056-Apr-09_21-12.wav"}]}
+/var/www/php-bandwidth/test.php (line: 5) - APPLICATION: [Apr/04/15:14:41:54] - You have not initialized the client yet. Please use: Catapult\Client(params..)
+/var/www/php-bandwidth/test.php (line: 5) - APPLICATION: [Apr/04/15:14:42:06] - credentials.json was not found in directory /var/www/php-bandwidth/credentials.json
