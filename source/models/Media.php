@@ -29,8 +29,8 @@ final class Media extends GenericResource {
     * Media(array)
     *
     */
-    public function __construct($args=null) {
-      $data = Ensure::Input($args);
+    public function __construct() {
+      $data = Ensure::Input(func_get_args());
       parent::_init($data, new DependsResource,
         new LoadsResource(
           array("primary" => "GET", "id" => "content", "init" => "", "silent" => true)
@@ -49,9 +49,11 @@ final class Media extends GenericResource {
       return $this->upload($args);
     }
 
-
     /**
      * get the media contents
+     *
+     * TODO get/0 needs reimplementation
+     * see: http://ap.bandwidth.com/docs/rest-api/media/#resource441
      *
      * @param mediaName a media you uploaded
      * @return the media content either wav/mp3
