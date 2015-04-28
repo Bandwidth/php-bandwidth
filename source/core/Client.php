@@ -305,10 +305,12 @@ final class Client {
 
       /* branch seperatly as POST may need GET parameters */
       if ($method == "GET" || $mixed) {
-        $params = "?" . http_build_query($data);
+        $params = "";
+        if (sizeof($data)>0) {
+         $params = "?" . http_build_query($data);
+        }
         $url .= $params;
       }
-
       curl_setopt($this->hndl, CURLOPT_URL, $url);
 
       /* setup auth */
@@ -331,9 +333,7 @@ final class Client {
       }
 
       /* add support for header only responses where information is only found in "location" */
-
       /* in some cases we need the raw content (Media Files) */
-
       if (isset($headers['Content-Type']) && in_array($headers['Content-Type'], self::$media_formats)) {
         return $noformat;
       }

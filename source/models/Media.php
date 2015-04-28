@@ -51,6 +51,20 @@ final class Media extends GenericResource {
 
 
     /**
+     * get the media contents
+     *
+     * @param mediaName a media you uploaded
+     * @return the media content either wav/mp3
+     */
+    public function getMediaContents($mediaName) {
+      $content = $this->client->get($this->path . "/" . $mediaName, array());
+       
+      $this->setData($content); 
+
+      // return the content
+      return $content;
+    }
+    /**
      * Upload new media.  
      * 
      * 
