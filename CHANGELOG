@@ -159,6 +159,6 @@ Continuing from 0.5.0
 - default credentials directory now current directory
 - fix getMediaContents as function for getting media objects
 - listIterator will return a collection object
-- application:patch/1 should reload the application with the new properties
+- application:patch/1 will now reload the application with the new properties
 
  
