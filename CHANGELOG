@@ -157,6 +157,6 @@ Continuing from 0.5.0
 - add listBased iterator example and tests in source
 - minor fixes to 0.7.5
 - default credentials directory now current directory
-
+- fix getMediaContents as function for getting media objects
 
  

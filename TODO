@@ -52,5 +52,5 @@ Client object needs to be renamed in preventing conflicts [x]
 
 should also validate as boolean using php5 __call
 
-
-
+Media Object
+get/1 needs to be replaced by the content setting
