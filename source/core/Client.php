@@ -351,7 +351,7 @@ final class Client {
 
       /* a 200s status for a succesful request */     
       if (!($code >= 200 && $code <= 299))
-        throw new \CatapultApiException("Request was brought back with error => " . json_encode($res));
+        throw new \CatapultApiException(json_encode($res));
 
       /* should be either blank (when a successful post) or a json object */
       if (!(is_object($res) || is_array($res) || $res == ""))
