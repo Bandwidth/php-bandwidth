@@ -461,7 +461,7 @@ class GenericResource {
    public function toArray()
    {
       $proto = Converter::toArray($this);
-      $not = array('primary_method', 'lastUpdate', 'subfunctions', 'client');
+      $not = array('primary_method', 'lastUpdate', 'subfunctions', 'client', 'path');
       // we only need key value
       foreach ($proto as $k => $p) {
         if (is_object($p) || in_array($k, $not)) {
