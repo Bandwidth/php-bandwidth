@@ -93,21 +93,14 @@ final class Credentials {
         self::$credentials_opts['path'] = realpath(getcwd()) . DIRECTORY_SEPARATOR . self::$credentials_opts['file'];
       }
 
-      /**
-       * check if the file is accessible
-       * when it is "credentials.json"
-       * this should 
-       *
-       * this needs to only validate the directory
-       */
-      if (!is_file(self::$credentials_opts['path'])) {
-        throw new \CatapultApiException("$file was not found in directory " . self::$credentials_opts['path']);
-      }
-       
-      if ($user_token && $api_token && $api_secret)
+      if ($user_token && $api_token && $api_secret) {
         $this->credentials = new CredentialsUser($user_token, $api_token, $api_secret);
-      else
+      } else {
+        if (!is_file(self::$credentials_opts['path'])) {
+          throw new \CatapultApiException("$file was not found in directory " . self::$credentials_opts['path']);
+        }
         $this->credentials = file_get_contents(self::$credentials_opts['path']);
+      }
     } 
 
 

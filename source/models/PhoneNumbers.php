@@ -75,9 +75,11 @@ final class PhoneNumbers extends GenericResource {
     /* Deletes an allocated
      * number. this cannot be undone
      * 
+     * update: make arguments compatable with
+     * genericResource
      * @param id in place of initialized
      */
-    public function delete()
+    public function delete($data=null)
     {
         $url = URIResource::Make($this->path, array($this->id)); 
         return $this->client->delete($url);

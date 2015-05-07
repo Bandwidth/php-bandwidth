@@ -50,6 +50,16 @@ final class Media extends GenericResource {
     }
 
     /**
+     * get/1 should find the
+     * media contents and set in the contents
+     *
+     * see getMediaContents for the file fetching
+     */
+    public function get($mediaName) {
+      $contents = $this->getMediaContents($mediaName);
+      $this->setData($content);
+    }
+    /**
      * get the media contents
      *
      * TODO get/0 needs reimplementation

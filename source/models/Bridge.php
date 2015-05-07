@@ -37,7 +37,7 @@ final class Bridge Extends GenericResource {
           "primary" => "get", "id" => "id", "init" => "", "silent" => false,
         )),
         new SchemaResource(array(
-          "fields" => array('audio', 'completed_time', 'created_time', 'activated_time'),
+          "fields" => array('audio', 'completedTime', 'createdTime', 'activatedTime', 'callIds'),
           "needs" => array("id")
           )
         ),

@@ -322,11 +322,25 @@ class CollectionIterator extends CollectionObject {
       "page" => $this->currentPage,
       "size" => $this->pageSize
         
-    ))); 
+    )))->get(); 
     $this->currentPage += !$isPrevious ? 1 : -1;
 
     return sizeof($data)>0 ? $data : null;
   }
+  /**
+   * fetch all the contents
+   *
+   */
+  public function fetchAll() {
+    $results = array();
+    $result = $this->next();
+    while($result !== null) {
+      $results = array_merge($results,$result);
+      $result = $this->next();
+    }
+    return $results;
+  }
+
   /**
    * same as __invoke
    * will get our next set of collection
