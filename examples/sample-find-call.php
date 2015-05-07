@@ -18,18 +18,16 @@ if (!(isset($argv[1]) || isset($argv[2])))
 
 try {
 	$calls = new Catapult\CallCollection;
-  $callIterator = $calls->listIterator();
-  while ($calls = $callIterator()) {
-	  $last = $calls->find(array("direction" => "in"))
-	      ->find(array("from" => $argv[1]))
-          ->last();
-   }
+  $callIterator = $calls->listIterator(array("direction" => "in",  "from" => $argv[1]));
+  $allCalls = $callIterator->fetchAll();
+  foreach ($calls as $call) {
+    if ($call->direction == "in" && $call->from == $argv[1]) {
+       printf("We've found the last call from %s. It was at %s", $argv[1], $call->startTime);
+       die;
+    }
+  }
 
-
-	if ($last)
-		printf("We've found the last call from: %s. It was at %s", $argv[1], $last->startTime);
-	else
-		printf("We couldnt find that call.");
+printf("We couldnt find that call.");
 
 } catch (\CatapultApiException $e) {
 	echo var_dump($e);	
