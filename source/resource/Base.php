@@ -314,9 +314,9 @@ class GenericResource {
      * @param args for model's create
      * see object for more
      */
-    public function create($args)
+    public function create()
     {
-      $data = Ensure::Input($args);
+      $data = Ensure::Input(func_get_args());
       $url = URIResource::Make($this->path);
       $id = Locator::Find($this->client->post($url, $data->get()));
       $data->add("id", $id);
@@ -324,11 +324,10 @@ class GenericResource {
       return Constructor::Make($this, $data->get(), TRUE);
     }
 
-    public function update($args)
+    public function update()
     {
-      $data = Ensure::Input($args);
+      $data = Ensure::Input(func_get_args());
       $url = URIResource::Make($this->path, array($this->id));
-      $data = Ensure::Input($data);
       $this->client->post($url, $data->get());
 
       return Constructor::Make($this, $data->get(), TRUE);
@@ -380,8 +379,10 @@ class GenericResource {
      * 
      * @param props -> set of properties to load
      */
-    public function load($props)
+    public function load()
     {
+      $args = Ensure::Input(func_get_args());
+      $props = $args->get();
       foreach ($props as $k => $prop)
         $this->{$k} = $prop;
     }

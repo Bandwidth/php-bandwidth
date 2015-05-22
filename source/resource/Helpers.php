@@ -74,7 +74,7 @@ final class DependsObject extends Multi {
  * 
  */
 class SubFunctionResource extends MetaResource {
-    public static $terms = array(
+    public $terms = array(
         "term",
         "type",
         "id",
@@ -106,7 +106,7 @@ class RemoveResource {
  */
 
 final class DependsResource extends BaseResource {
-    public static $terms = array(
+    public static $keywords = array(
         "plural",
         "term",
         "mandatoryId"
@@ -128,7 +128,7 @@ final class DependsResource extends BaseResource {
             return;
 
         foreach ($depends as $k => $d) {
-            if (!in_array($k, $this::$terms))
+            if (!in_array($k, $this::$keywords))
                 throw new \CatapultApiException("Fields were built improperly for " . __CLASS__);
 
             $this->terms[$k] = new DependsObject($d);
@@ -149,9 +149,11 @@ final class DependsResource extends BaseResource {
  */
 class ClientResource extends BaseResource {
     public static function attach(&$object) {
-        $object->client = &Client::Get();
-        if ($object->client == null)
+        $client = Client::Get();
+        $object->client = &$client;
+        if ($object->client == null) {
             throw new \CatapultApiException("You have not initialized the client yet. Please use: Catapult\Client(params..)");
+        }
     }
 }
 

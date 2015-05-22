@@ -44,8 +44,8 @@ class Message extends GenericResource {
     /* stub for property access by resolver */
     public function create()
     {
-      $args = func_get_args();
-      return $this->send($args);
+      $args = Ensure::Input(func_get_args());
+      return $this->send($args->get());
     }
 
     /**

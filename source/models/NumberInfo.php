@@ -32,7 +32,7 @@ final class NumberInfo extends GenericResource {
      * 
      * @param number: CNAM number
      */
-    public function get($number)
+    public function get($number=null)
     {
       $url = URIResource::Make($this->path, array($number));
       $data = $this->client->get($url, array(), true, false);

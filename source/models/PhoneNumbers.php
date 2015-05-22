@@ -89,9 +89,10 @@ final class PhoneNumbers extends GenericResource {
      * get new numbers
      * @param args: see allocate
      */
-    public function create($args)
+    public function create()
     {
-        return $this->allocate($args);
+        $input = Ensure::Input(func_get_args());
+        return $this->allocate($input->get());
     }
     /**
      * allocate a new number

@@ -17,7 +17,7 @@
 namespace Catapult;
 
 require_once("Autoload.php");
-error_reporting(E_ALL ^ E_STRICT);
+error_reporting(E_ALL);
 /** 
  * set timezone to Catapult's default 
  * this may or not be needed, depending on local setups. 

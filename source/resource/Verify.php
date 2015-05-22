@@ -15,7 +15,7 @@ namespace Catapult;
  * or optional. TODO
  */
 final class VerifyResource  {
-    public function verify(&$object, &$data) {
+    public static function verify(&$object, &$data) {
       $schema = $object->schema->fields;
       if (count($data) == 0 || !is_array($data))
         return $object;

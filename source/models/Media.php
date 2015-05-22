@@ -44,9 +44,10 @@ final class Media extends GenericResource {
     /**
      * @param args: same as upload
      */
-    public function create($args)
+    public function create()
     { 
-      return $this->upload($args);
+      $input  = Ensure::Input(func_get_args());
+      return $this->upload($input->get());
     }
 
     /**
@@ -55,7 +56,7 @@ final class Media extends GenericResource {
      *
      * see getMediaContents for the file fetching
      */
-    public function get($mediaName) {
+    public function get($mediaName=null) {
       $contents = $this->getMediaContents($mediaName);
       $this->setData($content);
     }
