@@ -161,10 +161,19 @@ Continuing from 0.5.0
 - listIterator will return a collection object
 - application:patch/1 will now reload the application with the new properties
 
-0.8.0 RC2
+0.8.0 RC
+
 -----------------------------------------------------
 
 - fix Media objects get/0
 - add fetchAll to listIterator
 - credentials bug fixed, credentials will default to current working directory
 as per 0.8.0 RC1
+
+0.8.0
+----------------------------------------------------
+
+- fix E_STRICT warnings
+- readd sample-call.php without deprecated feature
+- fix for credentials.json config
+- default error mode now E_ALL
