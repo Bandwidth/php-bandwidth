@@ -33,9 +33,12 @@ REMEMBER to configure your API keys.
 You can do this in 'one' of two ways:
 
     1. Update credentials.json
-    with your keys 
+    with your keys. If you use this method, use this constructor:
+    $cred = new Catapult\Credentials;
     2. Specify your keys to 
-    the Catapult client.
+    the Catapult client. If you use this method, use this constructor:
+    $cred = new Catapult\Credentials('your Bandwidth App Platform user-id here', 'your bandwidth app platform token here', 'your bandwidth api secret here');
+
 
 
 unit tests.
