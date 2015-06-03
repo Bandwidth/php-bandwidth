@@ -15,46 +15,31 @@ $client = new Catapult\Client('BANDWIDTH_USER_ID', 'BANDWIDTH_API_TOKEN', 'BANDW
 // uncomment if you are using 
 // credentials.json
 //$client = new Catapult\Client;
-
+define("ARGS_NEEDED", 4);
+define("ARGS_DESC", "To use this example, supply arguments as follows: php ./sample-mms.php {my_media_title} {my_media_file} {from} {to}" . PHP_EOL);
 try { 
-    // we can either use our own
-    // media, uploaded to Catapult
-    // or any media url
-    // parameter can be either an anchor '@'
 
+    if (sizeof($argv) !== ARGS_NEEDED) {
+      print(ARGS_DESC);
 
-    // first do a media file from catapult
-    // we will try to find the last one
-    // uploaded
+    } else {
+      $text1 = "Catapult Media example using your Catapult library";
 
-    $text1 = "Catapult Media example using your Catapult library";
-    $text2 = "Catapult Media example using absolute url";
-    $text3 = "Catapult Media example using anchors";
+      $media = new Catapult\Media;
+      $media->upload(array(
+        "mediaName" => $argv[1],
+        "file" => $argv[2]
+      ));
 
-    $media = new Catapult\Media;
-    $last = $media->listMedia()->last();
+      $message1 = new Catapult\Message(array(
+          "from" => $argv[3],
+          "to" => $argv[4],
+          "text" => $text1,
+          "media" => $media->url
+      ));  
 
-    $message1 = new Catapult\Message(array(
-        "from" => $argv[1],
-        "to" => $argv[1],
-        "text" => $text1,
-        "media" => $last->content
-    ));  
-
-
-    // try an media text from any domain.
-    // note: this will not make the file accessible
-    // later by Catapult. Will only be used once
-
-    $message2 = new Catapult\Message(array(
-       "from" => $argv[1],
-       "to" => $argv[1],
-       "text" => $text2,
-       "media" => "http://upload.wikimedia.org/wikipedia/commons/c/c1/PHP_Logo.png"
-    ));
-
-
-    printf("\nWe've MMSd this number, with your media, and ours!\n", $argv[2], $argv[3]);
+      printf("\nWe've MMSd this number, using newly created media: %s!\n", $argv[1]);
+  }
 
 } catch (CatapultApiException $e) {
     echo var_dump($e);
