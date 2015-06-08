@@ -16,4 +16,3 @@ abstract class BaMLGeneric {
         return (string) $this->text;
     }
 }
-?>

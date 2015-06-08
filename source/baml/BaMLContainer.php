@@ -35,4 +35,3 @@ class BaMLContainer extends BaMLGeneric {
         $this->type = $type;
       }
 }
-?>

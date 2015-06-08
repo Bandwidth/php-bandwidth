@@ -54,8 +54,3 @@ final class Application extends GenericResource {
       return Constructor::make($this, array("id" => $this->id), TRUE);
     }
 } 
-
-
-
-
-?>

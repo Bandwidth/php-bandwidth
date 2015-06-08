@@ -15,4 +15,3 @@ final class ConferencePlaybackEvent extends EventType {
 		parent::_init($data, new Conference);
 	}
 }
-?>

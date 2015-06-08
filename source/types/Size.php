@@ -26,5 +26,3 @@ final class Size extends Types {
       return (string) ($this->size);		
     }
 }
-
-?>

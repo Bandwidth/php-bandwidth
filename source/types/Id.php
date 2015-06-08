@@ -75,5 +75,3 @@ final class Id extends Types {
       return (string) $this->id;
     }
 }
-
-?>

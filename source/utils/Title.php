@@ -48,6 +48,3 @@ final class TitleUtility extends BaseUtilities {
       return strtoupper(substr($term, 0, 1)) . strtolower(substr($term, 1, strlen($term)));
     }
 }
-
-
-?>

@@ -19,5 +19,3 @@ final class LoadsResource extends BaseResource {
       $this->silent = $args['silent'];
     }
 }
-
-?>

@@ -54,5 +54,3 @@ final class DTMF extends Types {
       return urlencode($this->dtmf);
     }
 }
-
-?>

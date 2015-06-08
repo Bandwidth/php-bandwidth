@@ -21,4 +21,3 @@ final class Page extends Types {
       return (string) $this->page;
     }
 }
-?>

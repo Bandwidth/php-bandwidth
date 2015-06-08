@@ -158,5 +158,3 @@ class PrototypeUtility extends BaseUtilities {
     }
 
 }
-
-?>

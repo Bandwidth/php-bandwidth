@@ -27,5 +27,3 @@ final class Timeout extends Types {
       return (string) ($this->in_seconds ? $t : $this->timeout);
     }
 }
-
-?>

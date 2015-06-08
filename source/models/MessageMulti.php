@@ -104,5 +104,3 @@ class MessageMulti extends GenericResource {
       return $messages;
     }
 }
-
-?>

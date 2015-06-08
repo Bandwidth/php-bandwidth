@@ -34,6 +34,3 @@ final class Transaction extends GenericResource {
       );
     }
 }
-
-
-?>

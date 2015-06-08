@@ -24,4 +24,3 @@ final class GatherCallEvent extends EventType {
       parent::_init($data, new Gather);
     }
 }
-?>

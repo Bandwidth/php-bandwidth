@@ -71,4 +71,3 @@ class Message extends GenericResource {
       return Constructor::Make($this, $data->get(), array("messageId" => "id"));
     }
 }
-?>

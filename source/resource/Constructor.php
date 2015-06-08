@@ -82,5 +82,3 @@ class Constructor {
       return $class;
     }
 }
-
-?>

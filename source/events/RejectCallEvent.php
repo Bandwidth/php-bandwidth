@@ -14,4 +14,3 @@ final class RejectCallEvent extends EventType {
       parent::_init($data, new Call);
     }
 }
-?>

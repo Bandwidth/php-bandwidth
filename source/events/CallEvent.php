@@ -32,5 +32,3 @@ class CallEvent extends EventType {
       return parent::_init($data, new Call);
     }	
 }
-
-?>

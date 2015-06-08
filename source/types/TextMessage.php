@@ -20,4 +20,3 @@ final class TextMessage extends Types {
       return strlen($this->message) >= 160 ? (substr($this->message, 0, 157) . "...") : $this->message;
     }
 } 
-?>

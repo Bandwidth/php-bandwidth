@@ -36,5 +36,3 @@ final class PhoneNumber extends Types {
       return (string) $this->number;
     }
 }
-
-?>

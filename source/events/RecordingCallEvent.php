@@ -21,5 +21,3 @@ class RecordingCallEvent extends EventType {
       parent::_init($data, new Recording);
     }	
 }
-
-?>

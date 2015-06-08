@@ -25,4 +25,3 @@ class ConferenceEventMixin extends EventType {
       return parent::_init($data, new Conference);
     }
 }
-?>

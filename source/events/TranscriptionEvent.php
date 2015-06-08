@@ -23,4 +23,3 @@ class TranscriptionCallEvent extends EventType {
       parent::_init($data, new Transcription);
     }
 }
-?>

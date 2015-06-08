@@ -37,4 +37,3 @@ class Locator extends BaseUtilities {
     return $header;
     }	
 }
-?>

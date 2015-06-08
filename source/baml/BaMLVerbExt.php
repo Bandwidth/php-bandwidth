@@ -72,5 +72,3 @@ final class BaMLRedirect extends BaMLVerbRedirect {}
 final class BaMLGather extends BaMLVerbGather {}
 final class BaMLSendMessage extends BaMLVerbSendMessage {}
 final class BaMLHangup extends BaMLVerbHangup {}
-
-?>

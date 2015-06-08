@@ -42,5 +42,3 @@ final class Sentence extends Types {
       return $this->Make($this->sentence, TRUE);
     }
 }
-
-?>

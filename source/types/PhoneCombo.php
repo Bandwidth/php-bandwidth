@@ -16,4 +16,3 @@ final class PhoneCombo extends Types {
       return array( "from" => (string) $sender, "to" => (string) $receiver);
     }
 }
-?>

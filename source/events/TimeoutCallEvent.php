@@ -15,4 +15,3 @@ final class TimeoutCallEvent extends EventType {
       parent::_init($data, new Call);
     }
 }
-?>

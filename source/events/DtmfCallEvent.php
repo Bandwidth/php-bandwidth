@@ -20,4 +20,3 @@ final class DtmfCallEvent extends EventType {
     parent::_init($data, new Call);
   }
 }
-?>

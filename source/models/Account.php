@@ -42,6 +42,3 @@ final class Account extends GenericResource {
       return (float) $this->get()->balance();
     }
 }
-
-
-?>

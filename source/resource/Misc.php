@@ -84,6 +84,3 @@ abstract class AudioMixin extends GenericResource {
   public function getAudioUrl()
   { }
 }
-
-
-?>

@@ -135,4 +135,3 @@ final class Media extends GenericResource {
       return FileHandler::save($filename, $this->data);
     }
 }
-?>

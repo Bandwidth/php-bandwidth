@@ -10,5 +10,3 @@
  */
 namespace Catapult;
 abstract class BaMLAssert {}
-
-?>
