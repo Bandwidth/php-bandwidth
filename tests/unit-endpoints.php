@@ -22,7 +22,7 @@ $client = new Catapult\Client($cred);
 
 final class EndpointsTest extends PHPUnit_Framework_TestCase {
   public function setUp() {
-    $this->toDelete = array(); 
+    $this->toDelete = $this->toDeleteEP = array();
   }
   public function testEndpointsCreate() {
     $params = new Catapult\Parameters;
@@ -38,12 +38,11 @@ final class EndpointsTest extends PHPUnit_Framework_TestCase {
     $params1->setName("A-e-1"); 
     $params1->setDescription("a endpoints description");
     $params1->setCredentials(array( 
-      "username" => "endpointsUser",
-      "password" => "endpointsPassword",
-      "realm" => "domainname.app.bwapp.io"
+      "password" => "endpointsPassword"
     ));
     $params1->setDomainId($domain->id);
     $endpoint->create($params1);
+    $this->toDeleteEP[] = $endpoint;
   }
 
   public function testEndpointsGet() {
@@ -59,12 +58,11 @@ final class EndpointsTest extends PHPUnit_Framework_TestCase {
     $params1->setName("A-e-2");
     $params1->setDescription("an endpoints description");
     $params1->setCredentials(array(
-      "username"=>" endpointsUser", 
-      "password" => "endpointsPassword", 
-      "realm" => "domainanme.applicationname.bwapp.io"
+      "password" => "endpointsPassword"
     ));
     $params1->setDomainId($domain->id);
-    $endpoint->create($params1); 
+    $endpoint->create($params1);
+    $this->toDeleteEP[] = $endpoint;
     $id = $endpoint->id;
 
     $endpointsGet = new Catapult\Endpoints($domain->id, $endpoint->id);
@@ -89,13 +87,12 @@ final class EndpointsTest extends PHPUnit_Framework_TestCase {
         "name" => "A-e-m-" . $i,
         "description" => "a description",
         "credentials" => array(
-          "username" => "endpointsUsername" . $i, 
-          "password" => "endpointsPassword" . $i,
-          "realm" => "endpointsRealm" . $i
+          "password" => "endpointsPassword" . $i
         )
       ));
     }
-    $endpointMulti->execute();
+    $created = $endpointMulti->execute();
+    $this->toDeleteEP = $created;
 
     $this->assertEquals($endpointMulti->done, true);
   }
@@ -115,13 +112,12 @@ final class EndpointsTest extends PHPUnit_Framework_TestCase {
     $params1->setName("A-d-e-5");
     $params1->setDescription("a endpoints description");
     $params1->setCredentials(array(
-      "username" => "anEndpointsUser",
-      "password" => "anEndpointsPassword",
-      "realm" => "anEndpointsRealm"
+      "password" => "anEndpointsPassword"
     ));
     $params1->setDomainId($domain->id);
 
     $endpoints->create($params1);
+    $this->toDeleteEP[] = $endpoints;
    
     $endpoint = new Catapult\Endpoints($domain->id, $endpoints->id); 
     $creds = $endpoint->getCredentials();
@@ -147,15 +143,14 @@ final class EndpointsTest extends PHPUnit_Framework_TestCase {
     $params2->setDescription("An endpoints description");
 
     $params2->setCredentials(array(
-        "username" => "endpointsUser",
-        "password" => "endpointsPassword",
-        "realm" => "endpointsSipRealm"
+        "password" => "endpointsPassword"
      ));
 
     $params2->setDomainId($domain->id);
     
 
     $endpoint->create($params2);
+    $this->toDeleteEP[] = $endpoint;
 
     $params3->setDescription("Updated endpoints description");
     $endpoint->update( $params3 );
@@ -180,9 +175,7 @@ final class EndpointsTest extends PHPUnit_Framework_TestCase {
     $params1->setName("A-e-7");
     $params1->setDescription("an endpoints description");
     $params1->setCredentials(array(
-      "username" => "aUsername",
-      "password" => "aPassword",
-      "realm" => "aRealm"
+      "password" => "aPassword"
     ));
     $params1->setDomainId($domain->id);
 
@@ -196,13 +189,69 @@ final class EndpointsTest extends PHPUnit_Framework_TestCase {
     $this->assertTrue($endpoints->isEmpty());
   }
 
+  public function testEndpointsCreateAuthToken() {
+    $params = new Catapult\Parameters;
+    $params1 = new Catapult\Parameters;
+    $domain = new Catapult\Domains;
+    $endpoints = new Catapult\Endpoints;
+
+    $params->setName("A-d-8");
+    $params->setDescription("A domains description");
+    $domain->create($params);
+
+    $this->toDelete[] = $domain;
+
+    $params1->setName("A-d-e-8");
+    $params1->setDescription("a endpoints description");
+    $params1->setCredentials(array(
+      "password" => "anEndpointsPassword"
+    ));
+    $params1->setDomainId($domain->id);
+
+    $endpoints->create($params1);
+    $this->toDeleteEP[] = $endpoints;
+
+    $endpoint = new Catapult\Endpoints($domain->id, $endpoints->id);
+    $token = $endpoint->createAuthToken();
+    $this->assertTrue($token instanceof Catapult\EndpointsToken);
+	$this->assertTrue(!empty($token->token));
+	$this->assertTrue(!empty($token->expires));
+  }
+
+  public function testEndpointsDeleteAuthToken() {
+    $params = new Catapult\Parameters;
+    $params1 = new Catapult\Parameters;
+    $domain = new Catapult\Domains;
+    $endpoints = new Catapult\Endpoints;
+
+    $params->setName("A-d-9");
+    $params->setDescription("A domains description");
+    $domain->create($params);
+
+    $this->toDelete[] = $domain;
+
+    $params1->setName("A-d-e-9");
+    $params1->setDescription("a endpoints description");
+    $params1->setCredentials(array(
+      "password" => "anEndpointsPassword"
+    ));
+    $params1->setDomainId($domain->id);
+
+    $endpoints->create($params1);
+    $this->toDeleteEP[] = $endpoints;
+
+    $endpoint = new Catapult\Endpoints($domain->id, $endpoints->id);
+    $token = $endpoint->createAuthToken();
+    $delete = $endpoint->deleteAuthToken($token);
+	$this->assertTrue(!empty($delete));
+  }
+
   public function tearDown() {
+    foreach ($this->toDeleteEP as $endpoint) {
+      $endpoint->delete();
+    }
+
     foreach ($this->toDelete as $domain) {
-      $endpoints = $domain->listEndpoints();
-      foreach ($endpoints->get() as $e) {
-        $e->delete();
-      }
-  
       $domain->delete();
     }
   }
