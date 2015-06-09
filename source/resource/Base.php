@@ -473,5 +473,3 @@ class GenericResource {
       return $proto;
    }
 }
-
-?>

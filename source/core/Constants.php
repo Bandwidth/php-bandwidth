@@ -123,5 +123,3 @@ interface BAML_XML_OPTIONS {
 interface BAML_SETTINGS {
   const BAML_VERSION = "";
 }
-
-?>

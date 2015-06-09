@@ -23,6 +23,3 @@ final class Converter extends BaseUtilities {
 		return get_object_vars($json);
 	}
 }
-
-
-?>

@@ -108,5 +108,3 @@ final class EndpointsCollection extends CollectionObject {
     return "Endpoints";
   }
 }
-
-?>

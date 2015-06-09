@@ -21,4 +21,3 @@ final class ConferenceMemberEvent extends ConferenceEventMixin {
       return new ConferenceMember($data);
     }
 }
-?>

@@ -166,5 +166,3 @@ final class Log {
       return self::$on = $on;
     }
   }
-
-?>

@@ -103,5 +103,3 @@ final class Bridge Extends GenericResource {
       return URIResource::Make($this->path, array($this->id, "audio"));
     }
 }
-
-?>

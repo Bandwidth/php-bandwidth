@@ -91,5 +91,3 @@ final class Parameters extends Types {
       return $this->serialize();
     }
 }
-
-?>

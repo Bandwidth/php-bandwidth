@@ -304,5 +304,3 @@ class EventType extends Event {
       return $this->model->$prop;
     }
 }
-
-?>

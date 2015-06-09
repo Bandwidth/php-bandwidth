@@ -61,5 +61,3 @@ final class EventResource extends BaseResource {
       throw new \CatapultApiException("EventType was not found in list of events");
     }
   }
-
-?>

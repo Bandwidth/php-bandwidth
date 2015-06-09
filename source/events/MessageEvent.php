@@ -19,4 +19,3 @@ final class MessageEvent extends EventType {
       parent::_init($data, new Message); 
     }
 }
-?>

@@ -31,5 +31,3 @@ final class Date extends Types {
       return $this->date->format(API::API_DATE_FORMAT);	
     }
 }
-
-?>

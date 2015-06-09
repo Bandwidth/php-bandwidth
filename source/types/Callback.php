@@ -20,6 +20,3 @@ final class Callback extends Types {
       return $this->callback;
     }
 }
-
-
-?>

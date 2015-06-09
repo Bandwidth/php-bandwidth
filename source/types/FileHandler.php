@@ -59,4 +59,3 @@ final class FileHandler extends Types {
       return (string) $this->as;
     }
 }
-?>

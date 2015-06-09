@@ -81,4 +81,3 @@ class CatapultApiWarning {
       return "CatapultWarning: " . $this->message . "\n";
     }
 }
-?>

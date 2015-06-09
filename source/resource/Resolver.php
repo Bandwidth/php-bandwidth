@@ -82,5 +82,3 @@ class ResolverResource extends GenericResource {
 
 }
 final class Resolver extends ResolverResource {}
-
-?>

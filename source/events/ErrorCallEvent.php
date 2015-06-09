@@ -24,4 +24,3 @@ final class ErrorCallEvent extends EventType {
       parent::_init($data, new Call);
     }
 }
-?>

@@ -40,4 +40,3 @@ final class NumberInfo extends GenericResource {
       return Constructor::Make($this, $data);
     }
 }
-?>

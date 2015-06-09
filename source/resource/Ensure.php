@@ -113,4 +113,3 @@ class EnsureResource extends BaseResource {
 }
 
 final class Ensure extends EnsureResource {}
-?>

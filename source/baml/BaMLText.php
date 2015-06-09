@@ -13,4 +13,3 @@ final class BaMLText extends BaMLAssert {
         return $this->text;
     }
 }
-?>

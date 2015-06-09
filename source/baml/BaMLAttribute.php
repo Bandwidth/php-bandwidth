@@ -22,4 +22,3 @@ final class BaMLAttribute extends BaMLAssert {
       return $this->key;
     }
 }
-?>

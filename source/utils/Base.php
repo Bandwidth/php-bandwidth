@@ -236,5 +236,3 @@ class BaseUtilities {
         return $object(API::API_DATE_FORMAT);
       } 
 }
-
-?>

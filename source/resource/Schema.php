@@ -19,4 +19,3 @@ class SchemaResource extends BaseResource {
       $this->fields = $opts['fields'];
     }
 }
-?>

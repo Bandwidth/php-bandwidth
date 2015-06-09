@@ -74,6 +74,3 @@ class PathResource extends BaseResource {
       $object->path = $path . $object->path;
     }
 }
-
-
-?>

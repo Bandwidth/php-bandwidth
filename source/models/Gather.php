@@ -58,5 +58,3 @@ class Gather extends GenericResource {
       return Constructor::Make($this, $data->get());
     }
 }
-
-?>

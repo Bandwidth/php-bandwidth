@@ -14,4 +14,3 @@ final class PlaybackCallEvent extends EventType {
       parent::_init($data, new Call);
     }
 }
-?>

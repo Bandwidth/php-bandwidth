@@ -91,4 +91,3 @@ class StringifyResource extends BaseResource {
 		return self::Make($this->class, $this->options);
 	}
 }
-?>

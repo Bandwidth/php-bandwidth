@@ -70,5 +70,3 @@ final class MediaURL extends Types {
       return $this->url;
     }
 }
-
-?>

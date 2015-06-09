@@ -50,4 +50,3 @@ final class Recording extends GenericResource {
       return $media;
     }
 }
-?>

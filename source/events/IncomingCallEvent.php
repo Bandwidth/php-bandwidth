@@ -16,4 +16,3 @@ final class IncomingCallEvent extends EventType {
       parent::_init($data, new Call);
     }
 }
-?>

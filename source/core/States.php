@@ -99,5 +99,3 @@ interface TRANSCRIPTION_STATES {
   const complete = "complete";
   const error = "error";
 }
-
-?>

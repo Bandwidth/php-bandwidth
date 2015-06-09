@@ -690,5 +690,3 @@ final class DataPacketCollection {
       return $data;
     }
 }
-
-?>

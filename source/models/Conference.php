@@ -90,6 +90,3 @@ final class Conference extends AudioMixin {
       return new ConferenceMember($this->id);
     }
 }
-
-
-?>

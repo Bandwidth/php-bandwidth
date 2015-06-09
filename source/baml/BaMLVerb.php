@@ -339,5 +339,3 @@ class BaMLVerb extends BaMLGeneric {
       $this->text = $text;
     }
 }
-
-?>

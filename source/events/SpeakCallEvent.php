@@ -16,4 +16,3 @@ final class SpeakCallEvent extends EventType {
       parent::_init($data, new Call);
     }
 }
-?>

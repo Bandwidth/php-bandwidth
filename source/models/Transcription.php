@@ -86,6 +86,3 @@ final class Transcription extends GenericResource {
       ));
     }
 }
-
-
-?>

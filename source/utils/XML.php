@@ -268,5 +268,3 @@ final class XMLUtility extends BaseUtilities {
       return new $verb; 
     }
 }
-
-?>
