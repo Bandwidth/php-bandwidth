@@ -76,18 +76,16 @@ final class Endpoints extends GenericResource {
   public function create() {
     $data = Ensure::Input(func_get_args());
     $data = $data->get();
-    if (!isset($data['domainId'])) {
-      $data['domainId'] = '';
+
+    if (isset($data['domainId'])) {
+      new PathResource($this, array(
+         "domains" => $data['domainId'],
+         "endpoints" => ""
+          )
+      );
     }
 
-    return parent::create($data, 
-      new RemoveResource($this, array("domainId"),
-      new PathResource($this, array( 
-         "domains" => $data['domainId'],
-         "endpoints" => ""       
-          )
-      ))
-    );
+    return parent::create($data);
   }
 
   /** 
@@ -99,5 +97,30 @@ final class Endpoints extends GenericResource {
    */
   public function getCredentials() {
     return new EndpointsCredentials($this->credentials);
+  }
+
+  /**
+   * create an auth token
+   * and return it as a EndpointsToken
+   * object more on this in types
+   *
+   * @returns EndpointsToken
+   */
+  public function createAuthToken() {
+    $url = URIResource::Make($this->path, array($this->id, 'tokens'));
+    $token = $this->client->post($url, null);
+    return new EndpointsToken($token);
+  }
+
+  /**
+   * delete an auth token
+   * given as a EndpointsToken
+   * object more on this in types
+   *
+   * @returns boolean
+   */
+  public function deleteAuthToken(EndpointsToken $Token) {
+    $url = URIResource::Make($this->path, array($this->id, 'tokens', $Token->token));
+    return $this->client->delete($url);
   }
 }

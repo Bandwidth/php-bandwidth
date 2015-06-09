@@ -51,13 +51,15 @@ final class EndpointsMulti extends CollectionObject {
     if ($this->done) {
       throw new CatapultApiException("You've already done this.");
     }
-    foreach ($this->data as $d) {
+    $created = array();
+    foreach ($this->data as $k => $d) {
       $endpoint = new Endpoints;
       $d['domainId'] = $this->domain;
-      $endpoint->create($d);
+      $created[$k] = $endpoint->create($d);
 
       $this->queued --;
     }
     $this->done = true;
+    return $created;
   }
 }
