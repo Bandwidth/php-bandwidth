@@ -171,11 +171,12 @@ final class Call Extends AudioMixin {
             $timeout = 60 * 2; // two minutes
         if (!($this->check("state", "started")))
           Throw new \CatapultApiException("Call already in non 'started' state'");
-        while (true)
+        while (true) {
           if (!($this->check("state", "started")))
             break;
           if ((time() - $delta) > $timeout)
             break;
+        }
     }
 
     /**
