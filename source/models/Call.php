@@ -80,9 +80,21 @@ final class Call Extends AudioMixin {
      * @param calls: list of calls
      * @param args: additional data to pass
      */
-    public function bridge($calls, $args)
+    public static function bridge($calls, $args)
     {
       return Bridge::Create($calls, $args);
+    }
+
+	/**
+     * Bridge this call with another call
+     * forward to object bridge
+     *
+     * @param calls: call to bridge with
+     * @param args: additional data to pass
+     */
+    public function bridgeWith($call, $args)
+    {
+      return self::bridge(array($this, $call), $args);
     }
 
     /**
