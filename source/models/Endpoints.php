@@ -56,13 +56,13 @@ final class Endpoints extends GenericResource {
   public function load() {
     $data = Ensure::Input(func_get_args());
     $data = $data->get();
-
-    return parent::load($data,  
-      new PathResource($this,array(
-        "domains" => $data['domainId'], 
+    $Endpoint = parent::load($data);
+    $Endpoint->path = new PathResource($this,array(
+        "domains" => $data['domainId'],
         "endpoints" => ""
-      )
-    ));
+      ));
+
+    return $Endpoint;
   }
  
   /**
