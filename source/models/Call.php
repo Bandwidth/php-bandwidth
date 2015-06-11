@@ -80,9 +80,21 @@ final class Call Extends AudioMixin {
      * @param calls: list of calls
      * @param args: additional data to pass
      */
-    public function bridge($calls, $args)
+    public static function bridge($calls, $args)
     {
       return Bridge::Create($calls, $args);
+    }
+
+	/**
+     * Bridge this call with another call
+     * forward to object bridge
+     *
+     * @param calls: call to bridge with
+     * @param args: additional data to pass
+     */
+    public function bridgeWith($call, $args)
+    {
+      return self::bridge(array($this, $call), $args);
     }
 
     /**
@@ -171,11 +183,12 @@ final class Call Extends AudioMixin {
             $timeout = 60 * 2; // two minutes
         if (!($this->check("state", "started")))
           Throw new \CatapultApiException("Call already in non 'started' state'");
-        while (true)
+        while (true) {
           if (!($this->check("state", "started")))
             break;
           if ((time() - $delta) > $timeout)
             break;
+        }
     }
 
     /**

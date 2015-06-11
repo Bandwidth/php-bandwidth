@@ -130,9 +130,10 @@ final class Client {
    
     /** settings for SSL. **/       
     public static $standard_opts = array(
+      "endpoint" => null,
       "ssl" => TRUE,
       "ssl_key" => FALSE,
-      "verify" =>FALSE 
+      "verify" =>FALSE
      );
 
     /**
@@ -146,7 +147,10 @@ final class Client {
      */
     public function __construct($user_id='', $auth=array(), $app_id=API::API_DEFAULT_APPLICATION, $endpoint=API::API_ENDPOINT, $interop=API::APPLICATION_JSON)
     {
-      $this->endpoint = $endpoint;
+      if (!empty(self::$standard_opts['endpoint']))
+        $this->endpoint = self::$standard_opts['endpoint'];
+      else
+        $this->endpoint = $endpoint;
       $this->interop = $interop; 
       $this->uid = $user_id;
       $this->application_id = $app_id;
@@ -182,6 +186,20 @@ final class Client {
     protected function options($k)
     {
       return $this->options{$k};
+    }
+
+
+    /**
+     * Set the Catapult endpoint to be used
+     *
+     * To reset to the default use:
+     * Catapult\RESTClient::endpoint();
+     *
+     * @param endpoint: endpoint to use
+     */
+    public static function endpoint($endpoint=API::API_ENDPOINT)
+    {
+      self::$standard_opts['endpoint'] = $endpoint;
     }
 
 
