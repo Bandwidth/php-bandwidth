@@ -333,7 +333,7 @@ class BaMLVerb extends BaMLGeneric {
     }
     public function setText($text) {
       if (is_string($text))
-          $text = new BamlText($text);
+          $text = new BaMLText($text);
       if (!($text instanceof BaMLText)) 
           throw new \CatapultApiException("You can only add type BaMLAttribute or array..");
       $this->text = $text;
