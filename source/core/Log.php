@@ -147,6 +147,9 @@ final class Log {
 
       $cli = Client::get();
 
+	  if (!is_object($cli))
+		return false;
+
       $fulltext = "$file ($object) - APPLICATION:" . $cli->application_id . " [$time] - $message" . "\n";
 
       fwrite(self::$log_file, $fulltext); 
