@@ -89,8 +89,8 @@ final class Credentials {
       /* only consider parameter init if all provided */
       if (isset(self::$credentials_opts['path'])) {
         /** do not load path twice **/
-        if (!preg_match("/credentials\.json/", $credentials_opts['path'])) {
-        self::$credentials_opts['path'] = self::$credentials_opts['path'] . DIRECTORY_SEPARATOR . self::$credentials_opts['file'];
+        if (!preg_match("/credentials\.json/", self::$credentials_opts['path'])) {
+          self::$credentials_opts['path'] = self::$credentials_opts['path'] . DIRECTORY_SEPARATOR . self::$credentials_opts['file'];
         }
       } else {
         self::$credentials_opts['path'] = realpath(getcwd()) . DIRECTORY_SEPARATOR . self::$credentials_opts['file'];
