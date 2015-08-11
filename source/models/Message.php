@@ -34,7 +34,7 @@ class Message extends GenericResource {
           array("fields" => array(
           'id', 'direction', 'callbackUrl', 'callbackTimeout',
           'fallbackUrl', 'from', 'to', 'state', 'time', 'text',
-          'errorMessage', 'tag', 'media'
+          'errorMessage', 'tag', 'media', 'receiptRequested'
            ), "needs" => array("id", "from", "to", "state"))
          ),
          new SubFunctionResource
