@@ -56,16 +56,16 @@ final class PhoneNumbers extends GenericResource {
      * Make the needed changes to 
      * the PhoneNumber. Where
      * set of params can be:
-     * application, 
+     * applicationId, 
      * fallback_number,
      *  
      * @param data: set of valid patching options
      */
     public function patch($data)
     {
-        $app = $data['application'];
+        $app = $data['applicationId'];
         if ($app instanceof Application)
-            $data['application'] = $app->id; 
+            $data['applicationId'] = $app->id; 
         $data = Ensure::Input($data);
         $url = URIResource::Make($this->path, array($this->id));
     
