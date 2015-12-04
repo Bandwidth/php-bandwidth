@@ -3,10 +3,9 @@
 SDK for [Bandwidth's App Platform](ap.bandwidth.com/?utm_medium=social&utm_source=github&utm_campaign=dtolb&utm_content=)
 [PHP Bandwidth Code Examples](https://github.com/bandwidthcom/php-bandwidth-examples)
 
-=========================================================
+
 
 # Installing:
-----------------------------------------------------------------
 
 to install, with composer
 
@@ -25,7 +24,7 @@ to include "Catapult.php" from /source/
 
 Example:
 
-    ```require "source/Catapult.php"```
+```require "source/Catapult.php"```
 
 
 # API keys
