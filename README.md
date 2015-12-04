@@ -1,6 +1,6 @@
 # PHP-bandwidth
 
-SDK for [Bandwidth's App Platform](ap.bandwidth.com/?utm_medium=social&utm_source=github&utm_campaign=dtolb&utm_content=)
+SDK for [Bandwidth's App Platform](http://ap.bandwidth.com/?utm_medium=social&utm_source=github&utm_campaign=dtolb&utm_content=)
 
 [PHP Bandwidth Code Examples](https://github.com/bandwidthcom/php-bandwidth-examples)
 
