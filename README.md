@@ -1,7 +1,8 @@
-Bandwidth SDK for PHP
+SDK for [Bandwidth's App Platform](ap.bandwidth.com/?utm_medium=social&utm_source=github&utm_campaign=dtolb&utm_content=)
+
 =========================================================
 
-Installing:
+# Installing:
 ----------------------------------------------------------------
 
 to install, with composer
