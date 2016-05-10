@@ -63,3 +63,5 @@ where test name can be any of the listed tests.
 
 optional:
 * openSSL
+
+[![Analytics](https://ga-beacon.appspot.com/UA-77533031-1/welcome-page)](https://github.com/igrigorik/ga-beacon)
