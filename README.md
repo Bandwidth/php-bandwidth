@@ -159,5 +159,5 @@ To initialize the client object, provide your API credentials which can be found
 ### Tooling and Patterns
 Inspired by and borrowed from:
 
-	* [Dropbox SDK](https://github.com/dropbox/dropbox-sdk-php)
-	* [Strip SDK](https://github.com/stripe/stripe-php)
+* [Dropbox SDK](https://github.com/dropbox/dropbox-sdk-php)
+* [Strip SDK](https://github.com/stripe/stripe-php)
