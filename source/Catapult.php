@@ -1,8 +1,8 @@
 <?php
-/* In place of Composer and 
+/* In place of Composer and
  * autoloader.
  * to include with composer
- * we need 
+ * we need
  * require "vendor/autoload.php"
  * conversly to include this
  * use:
@@ -18,9 +18,9 @@ namespace Catapult;
 
 require_once("Autoload.php");
 error_reporting(E_ALL);
-/** 
- * set timezone to Catapult's default 
- * this may or not be needed, depending on local setups. 
+/**
+ * set timezone to Catapult's default
+ * this may or not be needed, depending on local setups.
  * Once all the files are loaded, reset.
  */
 date_default_timezone_set('UTC');

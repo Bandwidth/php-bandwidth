@@ -4,13 +4,13 @@ namespace Catapult;
 
 /**
  * RESTful client for Bandwidth. These contain
- * components for all HTTP requests 
+ * components for all HTTP requests
  * made with Bandwidth.
- * 
+ *
  *
  * @object Client -- A direct interface to get, and reset clients
  * all models, types and generics point to 'only' one client
- * per file descriptor. 
+ * per file descriptor.
  *
  * @object RESTclient -- HTTP manager for requests
  *
@@ -25,12 +25,12 @@ final class Client {
    /**
     * Construct a client based on Credential object.
     * delegate to env when no args
-    *  
-    * 1/30/2015 
+    *
+    * 1/30/2015
     * update supports with or without credential
     * object. when none is provided construct based on
-    * arguments. Add Credentials object implicitly 
-    * 
+    * arguments. Add Credentials object implicitly
+    *
     * previously:
     * $credetials = new Catapult\Credentials(params..)
     * client($credentials)
@@ -45,12 +45,12 @@ final class Client {
       $args = func_get_args();
 
       /** only needs 3 parameters **/
-      if (isset($args[0]) && is_string($args[0])) 
+      if (isset($args[0]) && is_string($args[0]))
         $this->make(new Credentials($args[0], $args[1], $args[2]));
-        
+
       /** no parameters means implicit credentials no passing **/
       /** this is when the user has loaded the json credentials **/
-      elseif (sizeof($args) == 0) 
+      elseif (sizeof($args) == 0)
         $this->make(new Credentials);
 
       /** backwards compatability here **/
@@ -69,7 +69,7 @@ final class Client {
      */
     protected function make($ctx)
     {
-      // ENV or raw args      
+      // ENV or raw args
       if (!is_object($ctx)) {
         $this->user_id = $ctx['BANDWIDTH_USER_ID'];
         $this->token = $ctx['BANDWIDTH_API_TOKEN'];
@@ -101,7 +101,7 @@ final class Client {
     public static function get($descriptor=__FILE__)
     {
       return self::$CLIENT;
-    }       
+    }
 
     /**
      * Reset the client
@@ -127,8 +127,8 @@ final class Client {
       "audio/wav",
       "audio/mp3"
      );
-   
-    /** settings for SSL. **/       
+
+    /** settings for SSL. **/
     public static $standard_opts = array(
       "endpoint" => null,
       "ssl" => TRUE,
@@ -151,7 +151,7 @@ final class Client {
         $this->endpoint = self::$standard_opts['endpoint'];
       else
         $this->endpoint = $endpoint;
-      $this->interop = $interop; 
+      $this->interop = $interop;
       $this->uid = $user_id;
       $this->application_id = $app_id;
       $this->auth = $auth;
@@ -214,18 +214,18 @@ final class Client {
      *
      * To turn off (use no ssl):
      * Catapult\RESTClient::ssl(FALSE);
-     *      
+     *
      * @param on: TRUE|FALSE
      */
     public static function ssl($on=TRUE)
     {
-      self::$standard_opts['ssl'] = $on;              
+      self::$standard_opts['ssl'] = $on;
     }
 
     /**
      * Set the SSL key file
      * used in CURL requests.
-     * 
+     *
      * @param file: partial or fully qualified file path
      */
     public static function sslKey($file)
@@ -258,7 +258,7 @@ final class Client {
       if ($users)
         return $this->endpoint . "/v1/users/" . $this->uid . "/" . $url;
 
-      return $this->endpoint . "/v1/". $url; 
+      return $this->endpoint . "/v1/". $url;
     }
 
    /**
@@ -274,7 +274,7 @@ final class Client {
 
    /**
     * This will try a request, when a request is returned
-    * parse and when an empty string is encountered return headers 
+    * parse and when an empty string is encountered return headers
     * when we have content return it as either raw or a json object -- this
     * varies with the Content-Type received in response
     *
@@ -291,7 +291,7 @@ final class Client {
       curl_setopt($this->hndl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
       curl_setopt($this->hndl, CURLOPT_HEADER, TRUE);
 
-      /** if we're using an ssl key include it. **/   
+      /** if we're using an ssl key include it. **/
       /** also verify the host in addition to the peer **/
       if (self::$standard_opts['ssl_key'] && self::$standard_opts['ssl']) {
         curl_setopt($this->hndl, CURLOPT_CAINFO, self::$standard_opts['ssl_key']);
@@ -299,7 +299,7 @@ final class Client {
         curl_setopt($this->hndl, CURLOPT_VERIFYHOST, 2);
       }
 
-      if ($method == "POST") { 
+      if ($method == "POST") {
         if (!is_string($data))
                 $pure = json_encode($data);
         else
@@ -344,10 +344,10 @@ final class Client {
       /* if we're left with nothing. return headers and dont encode */
       $lines = explode("\n", $header);
       foreach ($lines as $l) {
-        $h = explode(": ", $l, 2); 
+        $h = explode(": ", $l, 2);
 
         if (isset($h[1]))
-          $headers[$h[0]] = trim(str_replace("\r\n", "", str_replace("\n", "", $h[1]))); 
+          $headers[$h[0]] = trim(str_replace("\r\n", "", str_replace("\n", "", $h[1])));
       }
 
       /* add support for header only responses where information is only found in "location" */
@@ -367,7 +367,7 @@ final class Client {
       if (curl_errno($this->hndl) != 0)
         throw new \CatapultApiException("Request was unproperly configured");
 
-      /* a 200s status for a succesful request */     
+      /* a 200s status for a succesful request */
       if (!($code >= 200 && $code <= 299))
         throw new \CatapultApiException(json_encode($res));
 
@@ -381,8 +381,8 @@ final class Client {
     /**
      * Perform get requests
      * against Catapult API.
-     * 
-     * 
+     *
+     *
      * @param -> url string [partially qualified]
      * @param -> join bool
      */
@@ -426,7 +426,7 @@ final class Client {
      * @param -> join boolean
      */
     public function put($url, $data)
-    {       
+    {
       $url = $this->join($url);
       return $this->request(API::API_METHOD_PUT, $url, $data);
     }
@@ -442,5 +442,5 @@ final class Client {
       $url = $this->join($url);
       return $this->request(API::API_METHOD_DEL, $url, $data);
     }
-          
+
 }

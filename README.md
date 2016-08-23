@@ -80,7 +80,7 @@ To initialize the client object, provide your API credentials which can be found
         * [ ] List
         * [ ] Get individual info
     * [ ] List Recordings
-    * [ ] List Transactions
+    * [ ] List Transciptions
     * [ ] Gather
         * [ ] Create Gather
         * [ ] Get Gather info
@@ -126,8 +126,7 @@ To initialize the client object, provide your API credentials which can be found
     * [ ] List all messages
     * [ ] Send Message
     * [ ] Get single message
-	* [ ] [Batch Messages](http://ap.bandwidth.com/docs/rest-api/messages/#resourcePOSTv1usersuserIdmessages) (single request, multiple messages)
-
+    * [ ] [Batch Messages](http://ap.bandwidth.com/docs/rest-api/messages/#resourcePOSTv1usersuserIdmessages) (single request, multiple messages)
 * [Number Info](http://ap.bandwidth.com/docs/rest-api/numberinfo/)
     * [ ] Get number info
 * [Phone Numbers](http://ap.bandwidth.com/docs/rest-api/phonenumbers/)
@@ -143,3 +142,21 @@ To initialize the client object, provide your API credentials which can be found
     * [ ] Create
     * [ ] Get info for single transcrption
     * [ ] Get all transcrptions for a recording
+* [BXML](http://ap.bandwidth.com/docs/xml/)
+    * [ ] Call
+    * [ ] Conference
+    * [ ] Gather
+    * [ ] Hangup
+    * [ ] Media
+    * [ ] Pause
+    * [ ] PlayAudio
+    * [ ] Record
+    * [ ] Reject
+    * [ ] SendMessage
+    * [ ] SpeakSentence
+    * [ ] Transfer
+
+### Tooling and Patterns
+Inspired by and borrowed from:
+	* [Dropbox SDK](https://github.com/dropbox/dropbox-sdk-php)
+	* [Strip SDK](https://github.com/stripe/stripe-php)

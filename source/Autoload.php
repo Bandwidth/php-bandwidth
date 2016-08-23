@@ -19,12 +19,12 @@ function includeDir($path) {
         if (!in_array($fname, $loaded)) {
           $files = scandir($path);
           foreach ($files as $fname1) {
-          
-            if ($fname1 !== $fname 
+
+            if ($fname1 !== $fname
             && !in_array($fname1, $loaded)
-            && $fname1 >= $fname) 
-                  $score ++; 
-                
+            && $fname1 >= $fname)
+                  $score ++;
+
             }
           if ($score ==($file_len - 1) - (sizeof($loaded))) {
             if (!in_array($fname,$ignore)) {
