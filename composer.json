@@ -1,16 +1,16 @@
 {
-    "name": "bandwidth/catapult",
+    "name": "bandwidth/php-bandwidth",
     "type": "library",
-    "description": "Bandwidth's Catapult SDK for PHP",
+    "description": "Bandwidth's SDK for PHP",
     "keywords": ["bandwidth","catapult","sdk","php"],
     "homepage": "http://github.com/bandwidthcom/php-bandwidth",
-    "reference": "v0.8.1",
+    "reference": "v2.0.0",
     "license": "MIT",
     "require": {
-	"php": ">=5.3.0"
+	"php": ">=5.6.0"
     },
     "require-dev": {
-	"php": ">=5.3.0",
+	"php": ">=5.6.0",
 	"phpunit/phpunit": "3.7.*"
     },
     "autoload": {
