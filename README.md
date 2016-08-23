@@ -4,6 +4,9 @@ SDK for [Bandwidth's App Platform](http://ap.bandwidth.com/?utm_medium=social&ut
 
 [PHP Bandwidth Code Examples](https://github.com/bandwidthcom/php-bandwidth-examples)
 
+## [Doucmentation](http://bwdemos.com/php-bandwidth/namespace-Catapult.html)
+
+
 # Developer Preview
 Work has started on a new version of the SDK. Track progress [on github](https://github.com/bandwidthcom/php-bandwidth/tree/v2-preview)
 
@@ -66,5 +69,3 @@ where test name can be any of the listed tests.
 
 optional:
 * openSSL
-
-[![Analytics](https://ga-beacon.appspot.com/UA-77533031-1/welcome-page)](https://github.com/igrigorik/ga-beacon)
