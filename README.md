@@ -1,5 +1,5 @@
 # PHP-bandwidth
-[![Build Status](https://travis-ci.org/bandwidthcom/php-bandwidth.svg?branch=v2-preview)](https://travis-ci.org/bandwidthcom/php-bandwidth)[![Latest Stable Version](https://poser.pugx.org/bandwidth/catapult/version)](https://packagist.org/packages/bandwidth/catapult)[![Latest Unstable Version](https://poser.pugx.org/bandwidth/catapult/v/unstable)](//packagist.org/packages/bandwidth/catapult)[![License](https://poser.pugx.org/bandwidth/catapult/license)](https://packagist.org/packages/bandwidth/catapult)
+[![Build Status](https://travis-ci.org/bandwidthcom/php-bandwidth.svg?branch=v2-preview)](https://travis-ci.org/bandwidthcom/php-bandwidth) [![Latest Stable Version](https://poser.pugx.org/bandwidth/catapult/version)](https://packagist.org/packages/bandwidth/catapult) [![Latest Unstable Version](https://poser.pugx.org/bandwidth/catapult/v/unstable)](//packagist.org/packages/bandwidth/catapult) [![License](https://poser.pugx.org/bandwidth/catapult/license)](https://packagist.org/packages/bandwidth/catapult)
 
 
 SDK for [Bandwidth's App Platform](http://ap.bandwidth.com/?utm_medium=social&utm_source=github&utm_campaign=dtolb&utm_content=)
@@ -158,5 +158,6 @@ To initialize the client object, provide your API credentials which can be found
 
 ### Tooling and Patterns
 Inspired by and borrowed from:
+
 	* [Dropbox SDK](https://github.com/dropbox/dropbox-sdk-php)
 	* [Strip SDK](https://github.com/stripe/stripe-php)
