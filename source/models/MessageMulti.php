@@ -68,7 +68,7 @@ class MessageMulti extends GenericResource {
       if ($this->complete)
         Throw new \CatapultApiException("You\'ve already done this");
 
-      $msgs = $this->post_messages();
+      $msgs = $this->postMessages();
       $smsgs = array();
 
       foreach ($msgs as $msg) {
