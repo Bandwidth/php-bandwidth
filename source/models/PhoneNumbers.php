@@ -8,7 +8,7 @@
  *
  * provides:
  * getNumberInfo
- * batchAllocateLocal 
+ * batchAllocateLocal
  * batchAllocateTollFree
  * validateSearchQuery
  *
@@ -19,12 +19,12 @@ final class PhoneNumbers extends GenericResource {
     private $availablePath = "availableNumbers";
 
     /**
-     * CTor for phone numbers 
+     * CTor for phone numbers
      * use PhoneNumbers path primary,
-     * availableNumbers secondary 
+     * availableNumbers secondary
      *
      * Init Forms
-     * GET 
+     * GET
      * PhoneNumbers('number-id')
      * PhoneNumbers
      *
@@ -53,39 +53,39 @@ final class PhoneNumbers extends GenericResource {
         return $this->get($number);
     }
     /**
-     * Make the needed changes to 
+     * Make the needed changes to
      * the PhoneNumber. Where
      * set of params can be:
-     * applicationId, 
+     * applicationId,
      * fallback_number,
-     *  
+     *
      * @param data: set of valid patching options
      */
     public function patch($data)
     {
         $app = $data['applicationId'];
         if ($app instanceof Application)
-            $data['applicationId'] = $app->id; 
+            $data['applicationId'] = $app->id;
         $data = Ensure::Input($data);
         $url = URIResource::Make($this->path, array($this->id));
-    
-        $this->client->post($url, $data->get());    
+
+        $this->client->post($url, $data->get());
         return Constructor::Make($this, $data->get());
     }
     /* Deletes an allocated
      * number. this cannot be undone
-     * 
+     *
      * update: make arguments compatable with
      * genericResource
      * @param id in place of initialized
      */
     public function delete($data=null)
     {
-        $url = URIResource::Make($this->path, array($this->id)); 
+        $url = URIResource::Make($this->path, array($this->id));
         return $this->client->delete($url);
     }
     /**
-     * stub for allocate 
+     * stub for allocate
      * get new numbers
      * @param args: see allocate
      */
@@ -99,7 +99,7 @@ final class PhoneNumbers extends GenericResource {
      * number must be available
      * or warning will be thrown
      * @param args
-     *   number, 
+     *   number,
      *   application (one you want to associate this number with)
      *   fallback a fallback option if this isnt available
      */
@@ -108,7 +108,7 @@ final class PhoneNumbers extends GenericResource {
         $data = Ensure::Input($args);
         $url = URIResource::Make($this->path);
         $id = Locator::Find($this->client->post($url, $data->get()));
-    
+
         $data->add("id", $id);
         return Constructor::Make($this, $data->get());
     }
@@ -138,7 +138,7 @@ final class PhoneNumbers extends GenericResource {
     /**
      * List the local numbers
      * according to the provided numbers
-     * 
+     *
      * @param params
      */
     public function listLocal($params)
@@ -182,7 +182,7 @@ final class PhoneNumbers extends GenericResource {
      */
     public function batchAllocateLocal($params)
     {
-        $this->validate_search_query($params);
+        $this->validateSearchQuery($params);
         $args = Ensure::Input($params);
         $url = URIResource::Make($this->availablePath, array("local"));
         $data = $this->client->post($url, $args->get(), true, false, true /* mixed uses GET parameters */);
@@ -195,8 +195,8 @@ final class PhoneNumbers extends GenericResource {
      */
     public function batchAllocateTollFree($params)
     {
-        $url = URIResource::Make($this->availablePath, array("tollFree"));  
-        
+        $url = URIResource::Make($this->availablePath, array("tollFree"));
+
         $args = Ensure::Input($params);
         $data = $this->client->post($url, $args->get(), true, false, true /* mixed use GET parameters */);
         return new PhoneNumbersCollection(new DataPacketCollection($data));
