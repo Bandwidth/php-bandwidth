@@ -54,6 +54,8 @@ final class Conference extends AudioMixin {
     * @param params -> List of member parameters
     *       joinTone
     *       leavingTone
+    *
+    * @return ConferenceMember
     */
     public function addMember($params) 
     {
@@ -70,7 +72,7 @@ final class Conference extends AudioMixin {
     *
     * @param params: set of arguments with
     * with memberId
-    */ 
+    */
     public function updateMember($params)
     {
       $args = Ensure::Input($params);
@@ -80,13 +82,16 @@ final class Conference extends AudioMixin {
       return $this->member($member['id']);
     }
 
-    /**
-     * Return a partial for
-     * the member selected
-     *
-     */
-    public function member()
+  /**
+   * Return a partial for
+   * the member selected
+   *
+   * @param $memberid
+   * @return ConferenceMember
+   *
+   */
+    public function member($memberid)
     {
-      return new ConferenceMember($this->id);
+      return new ConferenceMember($this->id, $memberid);
     }
 }
