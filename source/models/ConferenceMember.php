@@ -48,6 +48,6 @@ final class ConferenceMember extends AudioMixin {
      */
     public function getAudioUrl()
     {
-      return URIResource::Make($this->path, array($this->conference, "members", "audio"));
+      return URIResource::Make($this->path, array($this->id, "audio"));
     }
 }
