@@ -108,3 +108,10 @@ final class EndpointsCollection extends CollectionObject {
     return "Endpoints";
   }
 }
+
+final class ConferenceMemberCollection extends CollectionObject {
+  public function getName()
+  {
+    return "ConferenceMember";
+  }
+}
