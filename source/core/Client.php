@@ -82,9 +82,9 @@ final class Client {
         $this->application_id = $ctx->get('BANDWIDTH_APPLICATION_ID');
       }
 
-      if (!isset($this->user_id)
-         ||!isset($this->token)
-         ||!isset($this->secret))
+      if (empty($this->user_id)
+         ||empty($this->token)
+         ||empty($this->secret))
               throw new \CatapultApiException("Credentials were improperly configured");
 
       $this->started = TRUE;
