@@ -4,7 +4,7 @@ SDK for [Bandwidth's App Platform](http://ap.bandwidth.com/?utm_medium=social&ut
 
 [PHP Bandwidth Code Examples](https://github.com/bandwidthcom/php-bandwidth-examples)
 
-## [Documentation](http://bwdemos.com/php-bandwidth/namespace-Catapult.html)
+## [Documentation](http://bandwidthcom.github.io/php-bandwidth/index.html)
 
 
 # Developer Preview
