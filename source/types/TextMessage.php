@@ -9,7 +9,7 @@ namespace Catapult;
 final class TextMessage extends Types {
     public function __construct($message='', $warn=TRUE)
     {
-      if ($warn && strlen($message) > 160) {
+      if ($warn && strlen($message) > 2048) {
         throw new \CatapultApiException("Text message was too long. use: warn[FALSE] to omit. Text: " . $message);
       }
 
@@ -17,6 +17,6 @@ final class TextMessage extends Types {
     }
     public function __toString()
     {
-      return strlen($this->message) >= 160 ? (substr($this->message, 0, 157) . "...") : $this->message;
+      return strlen($this->message) >= 2048 ? (substr($this->message, 0, 2048)) : $this->message;
     }
 } 
