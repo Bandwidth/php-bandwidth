@@ -23,7 +23,7 @@ final class Cleaner extends BaseUtilities {
   * are undercased
   * @param data 
   */
-	public function Omit($data)
+	public static function Omit($data)
 	{
     $runLevel = 0;
     foreach ($data as $k => $d) {
