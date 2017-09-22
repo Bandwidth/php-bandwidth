@@ -1,5 +1,5 @@
 Old CHANGELOG was erased. If you have a version, please report it to me
-at: matrix.nad@gmail.com
+at: dtolb@bandwidth.com
 
 Continuing from 0.5.0
 
@@ -9,7 +9,7 @@ Continuing from 0.5.0
   Catapult\Log. Static class used with
   all exception handling. Provides information of
   the error line, time and application id. Logs
-  are generated in ./logs of the working directory. 
+  are generated in ./logs of the working directory.
   Individual files are prefixed (changable) with 'catapult_'
 
 - Fixes to match PHP standards, omit warnings.
@@ -55,7 +55,7 @@ Continuing from 0.5.0
 ----------------------------------------------------
 
 - Project refactoring, directory structure, models.
-- Transcription support. 
+- Transcription support.
   Use Catapult\Transcription
    * prequisites:
    needs recording id
@@ -73,14 +73,14 @@ Continuing from 0.5.0
   * Patches for events
   * Tuple based initialization:
     Gather('call-id', 'gather-id')
-    this will automatically get the resource and its parent. 
+    this will automatically get the resource and its parent.
     * only applies to secondary models
   * CollectionSequences, Collections method find/1 will now
     update the object directly. So:
     PhoneNumbers->find(array("from" => "__NUMBER__"))
     PhoneNumbers = PhoneNumbers->find(array("from" => "__NUMBER__"))
 
-    are the same. 
+    are the same.
     You should now use PHP's native clone function to keep
     reference to older states
   * Collections can now be called directly, as a result:
@@ -91,10 +91,10 @@ Continuing from 0.5.0
    PhoneNumber = new PhoneNumbers
    PhoneNumbers = PhoneNumber->listAll
 
-   is the same. 
+   is the same.
 
   * Important:
-  for credentials.json if you plan on using another directory 
+  for credentials.json if you plan on using another directory
   please call (statically):
   Catapult\Credentials::setPath("./some_external_path/");
   When not using this credentials.json will default to the source directory
@@ -114,15 +114,15 @@ Continuing from 0.5.0
 
    Event format:
 
-   answerCallEvent = new AnswerCallEvent; 
+   answerCallEvent = new AnswerCallEvent;
    incomingCallEvent = new IncomingCallEvent;
 
   Catapult will now look at these two objects and provide data
-  to the activated one. So you can use: isActive/0 to acheive this. 
+  to the activated one. So you can use: isActive/0 to acheive this.
   answerCallEvent->isActive() will be switch on when eventType is "answer"
 
-  * Adds domains & endpoints 
-   
+  * Adds domains & endpoints
+
   * New Models:
     Domains: Support for Catapult domains
     Endpoints: Support for Catapult endpoints
@@ -132,27 +132,27 @@ Continuing from 0.5.0
     SIP: SIP address validation (RFC3261)
     SIPRealm: four dot validation of a SIP realm,
     EndpointsCredentials: An endpoints credentials object
-     * needs: 
+     * needs:
        username, password and realm
      * returns a serializable object for Endpoints
 
-  * Event: 
+  * Event:
     HangupCallEvent is now supported. Previously only available with eventType
 
   * Tests:
-    Domains 
+    Domains
     Endpoints
     expand on Transcription tests
 
   * Minor bug fixes / additions:
   * adds toArray/1 which works on CollectionObject and GenericResources
     will provide an array version of object
-  * Collections objects will now return list on listAll/1 
+  * Collections objects will now return list on listAll/1
   * Public TODO list of internal things that can be updated,
-  * php-bandwidth-examples requires toArray/0 added to collections 
+  * php-bandwidth-examples requires toArray/0 added to collections
 
  0.8.0 RC1
------------------------------------------------------ 
+-----------------------------------------------------
 
 - add listBased iterator example and tests in source
 - minor fixes to 0.7.5
