@@ -49,14 +49,12 @@ final class EventResource extends BaseResource {
         $class = "Catapult\\" . "Conference" . $g . "Event";
         return $object->model = new Conference($args['id']);
       }
-      /** sms is singular and does not use any other term, use Message here **/
-      if ($type == "sms") {
+      // differentiate between messaging and calling
+      if (in_array($type, array("sms","mms"))) {
         return $object->model = new Message($args['id']);
-      }
-      if (in_array($type, array("incoming", "hangup", "answer", "speak", "recording", "dtmf", "gather"))) {
-        $cl =  "Catapult\\" . ucwords($type) . "CallEvent";
+      } else {
         return $object->model = new Call($args['id']);
-      }	
+      }
 
       throw new \CatapultApiException("EventType was not found in list of events");
     }
