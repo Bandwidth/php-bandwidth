@@ -1,0 +1,12 @@
+{
+    "name": "bandwidth/iris-php-examples",
+    "authors": [
+        {
+            "name": "Ivan Selchenkov",
+            "email": "ivan.selchenkov@ontarget-group.com"
+        }
+    ],
+    "require": {
+        "bandwidth-temp/iris": "0.0.9"
+    }
+}

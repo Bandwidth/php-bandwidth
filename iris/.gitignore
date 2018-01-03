@@ -1,0 +1,7 @@
+*~
+vendor/
+selftests/
+config.php
+/bin
+composer.lock
+.idea/

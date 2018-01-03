@@ -1,0 +1,9 @@
+<?php
+
+class Config {
+    const LOGIN = "";
+    const PASSWORD = "";
+    const ACCOUNT = "";
+    const SITE = "";
+    const SIPPEER = "";
+}
