@@ -4,7 +4,7 @@
  *
  */
 
-namespace Iris;
+namespace Bandwidth;
 
 use GuzzleHttp\Exception\ClientException;
 use SimpleXMLElement;
@@ -23,105 +23,38 @@ abstract class iClient
     abstract function put($url, $base_node, $data);
 
     abstract function delete($url);
+}
 
-    protected function xml2object($xmlObject)
+final class CatapultClient extends iClient
+{
+    public function __construct($user_id, $token, $secret, $options = [])
     {
-        /* snippet: http://stackoverflow.com/questions/1869091/how-to-convert-an-array-to-object-in-php */
-
-        $arr = $this->xml2array($xmlObject);
-        $object = json_decode(json_encode($arr), false);
-
-        return $object;
-    }
-
-    protected function xml2array($xml)
-    {
-        $arr = [];
-        foreach ($xml as $element)
+        if (empty($user_id) || empty($token) || empty($secret))
         {
-            $tag = $element->getName();
-            $e = get_object_vars($element);
-            if (!empty($e))
-            {
-                $res = $element instanceof \SimpleXMLElement ? $this->xml2array($element) : $e;
-            }
-            else
-            {
-                $res = trim($element);
-            }
-
-            if (isset($arr[$tag]))
-            {
-                if (!is_array($arr[$tag]) || $this->isAssoc($arr[$tag]))
-                {
-                    $tmp = $arr[$tag];
-                    $arr[$tag] = [];
-                    $arr[$tag][] = $tmp;
-                }
-                $arr[$tag][] = $res;
-            }
-            else
-            {
-                $arr[$tag] = $res;
-            }
-
+            throw new \Exception("Provide user_id, token, secret");
         }
 
-        return $arr;
-    }
+        $options['auth'] = [$token, $secret];
+        $options['base_uri'] = $options['url'] ?: 'https://api.catapult.inetwork.com/v1';
+        unset($options['url']);
+        $options['base_uri'] = rtrim($options['base_uri'], '/') . '/';
 
-    protected function isAssoc($array)
-    {
-        $array = array_keys($array);
-
-        return ($array !== array_keys($array));
-    }
-
-    protected function array2xml($arr, &$xml)
-    {
-        /* snippet:  http://stackoverflow.com/questions/1397036/how-to-convert-array-to-simplexml */
-        foreach ($arr as $key => $value)
-        {
-            if (is_array($value) && $this->isAssoc($value))
-            {
-                if (!is_numeric($key))
-                {
-                    $subnode = $xml->addChild("$key");
-                    $this->array2xml($value, $subnode);
-                }
-                else
-                {
-                    $subnode = $xml->addChild("item$key");
-                    $this->array2xml($value, $subnode);
-                }
-            }
-            else
-            {
-                if (is_array($value) && !$this->isAssoc($value))
-                {
-                    foreach ($value as $item)
-                    {
-                        if (is_array($item))
-                        {
-                            $subnode = $xml->addChild("$key");
-                            $this->array2xml($item, $subnode);
-                        }
-                        else
-                        {
-                            $xml->addChild("$key", htmlspecialchars("$item"));
-                        }
-                    }
-                }
-                else
-                {
-                    $xml->addChild("$key", htmlspecialchars("$value"));
-                }
-            }
+        $client_options = array();
+        if(isset($options['handler'])) {
+            $client_options['handler'] = $options['handler'];
         }
+
+        $this->client = new \GuzzleHttp\Client($options);
+
+        $options['base_uri'] = $options['v2_url'] ?: 'https://api.catapult.inetwork.com/v2';
+        unset($options['v2_url']);
+        $options['base_uri'] = rtrim($options['base_uri'], '/') . '/';
+
+        $this->v2_client = new \GuzzleHttp\Client($options);
     }
 }
 
-final class Client extends iClient
+final class IrisClient extends iClient
 {
     public function __construct($login, $password, $options = [])
     {
@@ -380,5 +313,101 @@ final class Client extends iClient
         }
 
         throw new ResponseException($body, $e->getResponse()->getStatusCode());
+    }
+
+    protected function xml2object($xmlObject)
+    {
+        /* snippet: http://stackoverflow.com/questions/1869091/how-to-convert-an-array-to-object-in-php */
+
+        $arr = $this->xml2array($xmlObject);
+        $object = json_decode(json_encode($arr), false);
+
+        return $object;
+    }
+
+    protected function xml2array($xml)
+    {
+        $arr = [];
+        foreach ($xml as $element)
+        {
+            $tag = $element->getName();
+            $e = get_object_vars($element);
+            if (!empty($e))
+            {
+                $res = $element instanceof \SimpleXMLElement ? $this->xml2array($element) : $e;
+            }
+            else
+            {
+                $res = trim($element);
+            }
+
+            if (isset($arr[$tag]))
+            {
+                if (!is_array($arr[$tag]) || $this->isAssoc($arr[$tag]))
+                {
+                    $tmp = $arr[$tag];
+                    $arr[$tag] = [];
+                    $arr[$tag][] = $tmp;
+                }
+                $arr[$tag][] = $res;
+            }
+            else
+            {
+                $arr[$tag] = $res;
+            }
+
+        }
+
+        return $arr;
+    }
+
+    protected function isAssoc($array)
+    {
+        $array = array_keys($array);
+
+        return ($array !== array_keys($array));
+    }
+
+    protected function array2xml($arr, &$xml)
+    {
+        /* snippet:  http://stackoverflow.com/questions/1397036/how-to-convert-array-to-simplexml */
+        foreach ($arr as $key => $value)
+        {
+            if (is_array($value) && $this->isAssoc($value))
+            {
+                if (!is_numeric($key))
+                {
+                    $subnode = $xml->addChild("$key");
+                    $this->array2xml($value, $subnode);
+                }
+                else
+                {
+                    $subnode = $xml->addChild("item$key");
+                    $this->array2xml($value, $subnode);
+                }
+            }
+            else
+            {
+                if (is_array($value) && !$this->isAssoc($value))
+                {
+                    foreach ($value as $item)
+                    {
+                        if (is_array($item))
+                        {
+                            $subnode = $xml->addChild("$key");
+                            $this->array2xml($item, $subnode);
+                        }
+                        else
+                        {
+                            $xml->addChild("$key", htmlspecialchars("$item"));
+                        }
+                    }
+                }
+                else
+                {
+                    $xml->addChild("$key", htmlspecialchars("$value"));
+                }
+            }
+        }
     }
 }
