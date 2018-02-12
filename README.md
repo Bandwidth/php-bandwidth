@@ -6,10 +6,6 @@ SDK for [Bandwidth's App Platform](http://ap.bandwidth.com/?utm_medium=social&ut
 
 ## [Documentation](http://bandwidthcom.github.io/php-bandwidth/index.html)
 
-
-# Developer Preview
-Work has started on a new version of the SDK. Track progress [on github](https://github.com/bandwidthcom/php-bandwidth/tree/v2-preview)
-
 # Installing:
 
 to install, with composer
