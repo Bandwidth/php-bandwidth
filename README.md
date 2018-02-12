@@ -2,9 +2,7 @@
 
 SDK for [Bandwidth's App Platform](http://ap.bandwidth.com/?utm_medium=social&utm_source=github&utm_campaign=dtolb&utm_content=)
 
-[PHP Bandwidth Code Examples](https://github.com/bandwidthcom/php-bandwidth-examples)
-
-## [Documentation](http://bandwidthcom.github.io/php-bandwidth/index.html)
+## [Documentation](http://dev.bandwidth.com/php-bandwidth/index.html)
 
 # Installing:
 
