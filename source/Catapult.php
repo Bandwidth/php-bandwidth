@@ -25,7 +25,7 @@ error_reporting(E_ALL);
  */
 date_default_timezone_set('UTC');
 $phpver = explode('.', phpversion());
-if (!($phpver[0] == '5' && $phpver[1] >= 3)) {
+if (($phpver[0] <= 5 && $phpver[1] < 3)) {
     // PHP not above or equal 5.3.0
     // We need this for namespaces
     Throw new \Exception("Catapult API supports PHP >= 5.3.0");
