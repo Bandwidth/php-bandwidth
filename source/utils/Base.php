@@ -53,6 +53,8 @@ class BaseUtilities {
        */
       public static function find($headers, $term)
       {
+        //Internal headers are always lowercase
+        $term = strtolower($term);
         if (!(isset($headers[$term]))) {
           throw new \CatapultApiException("No header found as $term:");
         }

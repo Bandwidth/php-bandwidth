@@ -26,16 +26,7 @@ class Locator extends BaseUtilities {
     */
     public static function find($headers,$id=true)
     {
-      //Fix for incompatibility with php >= 7.2 "Location" must be "location" for php >= 7.2
-      $header = null;
-      $phpver = explode('.', phpversion());
-
-      if ($phpver[0] >= 7 && $phpver[1] >= 2) {
-        $header = parent::find($headers, "location");
-      }
-      else {
-        $header = parent::find($headers, "Location");
-      }
+      $header = parent::find($headers, "Location");
 
       if ($id) {
         $match = array();
@@ -43,6 +34,6 @@ class Locator extends BaseUtilities {
         return str_replace("\r", "", str_replace("\n", "", $pieces[sizeof($pieces) - 1]));
       }
 
-    return $header;
+      return $header;
     }	
 }
