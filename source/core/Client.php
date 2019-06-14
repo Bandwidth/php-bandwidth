@@ -258,18 +258,7 @@ final class Client {
       if ($users)
         return $this->endpoint . "/v1/users/" . $this->uid . "/" . $url;
 
-      return $this->endpoint . "/v1/". $url; 
-    }
-
-   /**
-    * Handle the headers given
-    * successful response
-    *
-    * @param headers -> string ":" seperated headers
-    */
-    private function headerHandler($headers)
-    {
-      return $headers;
+      return $this->endpoint . "/v1/". $url;
     }
 
    /**
@@ -350,9 +339,13 @@ final class Client {
           $headers[$h[0]] = trim(str_replace("\r\n", "", str_replace("\n", "", $h[1]))); 
       }
 
+      /* HTTP headers are case-insensitive so let's convert them to lowercase */
+      /* for internal consistency when working with them */
+      $headers = array_change_key_case($headers, CASE_LOWER);
+
       /* add support for header only responses where information is only found in "location" */
       /* in some cases we need the raw content (Media Files) */
-      if (isset($headers['Content-Type']) && in_array($headers['Content-Type'], self::$media_formats)) {
+      if (isset($headers['content-type']) && in_array($headers['content-type'], self::$media_formats)) {
         return $noformat;
       }
 
