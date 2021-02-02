@@ -1,6 +1,7 @@
 # PHP-bandwidth
 
-This projected is archived. Please go to https://github.com/Bandwidth/php-sdk
+> Deprecation Notice
+> This projected is deprecated. Please go to https://github.com/Bandwidth/php-sdk
 
 SDK for [Bandwidth's App Platform](http://ap.bandwidth.com/?utm_medium=social&utm_source=github&utm_campaign=dtolb&utm_content=)
 
