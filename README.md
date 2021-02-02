@@ -1,5 +1,7 @@
 # PHP-bandwidth
 
+This projected is archived. Please go to https://github.com/Bandwidth/php-sdk
+
 SDK for [Bandwidth's App Platform](http://ap.bandwidth.com/?utm_medium=social&utm_source=github&utm_campaign=dtolb&utm_content=)
 
 ## [Documentation](http://dev.bandwidth.com/php-bandwidth/index.html)
